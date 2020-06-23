@@ -41,15 +41,15 @@ h1 {
 
 .map {
   height: 100%;
-  width: 70%;
+  width: 80%;
   background-color: #77dd77;
   float: left;
 }
 
 .right-stats-display {
   height: 100%;
-  width: 30%;
-  background-color: #d6e3f2;
+  width: 20%;
+  background-color: white;
   float: right;
   color: #565656;
   font-family: "Raleway", sans-serif;
@@ -58,10 +58,21 @@ h1 {
 h2 {
   margin: 0;
   padding 0.5rem;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   color: #303030;
 }
 
+ul {
+  margin-top: 0.5rem;
+}
+
+.stats-divider {
+  background-color: #D3D3D3;
+  width: 100%;
+  height: 1%;
+  padding: 0;
+  margin: 0;
+}
 
 .associations {
   width: 100%;
@@ -74,7 +85,7 @@ h2 {
 
 .second-stats {
   width: 100%;
-  height: 30%;
+  height: 29%;
   border: black;
   border-width: thin;
   margin: 0;
@@ -83,7 +94,7 @@ h2 {
 
 .third-stats {
   width: 100%;
-  height: 30%;
+  height: 29%;
   border: black;
   border-width: thin;
   margin: 0;
