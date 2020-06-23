@@ -14,6 +14,7 @@
 
 package com.google.sps.servlets;
 
+import com.google.sps.servlets.Car;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +28,7 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello world!</h1>");
+    Car test = new Car("test", true);
+    response.getWriter().println(test);
   }
 }
