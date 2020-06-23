@@ -1,9 +1,95 @@
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: block;
+  overflow: hidden;
 }
 
-#greeting-container {
-  margin-top: 20px;
+.header {
+  background-color: #19B3B1;
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  bottom: 5rem;
+  color: white;
+}
+
+h1 {
+  font-size: 2rem;
+  text-justify: left;
+  margin: 1rem;
+  padding: 0;
+  font-family: "Oswald", sans-serif;
+}
+
+.content {
+  position: absolute;
+  bottom: 0px;
+  top: 5rem;
+  overflow: hidden;
+  width: 100%;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.map {
+  height: 100%;
+  width: 70%;
+  background-color: #77dd77;
+  float: left;
+}
+
+.right-stats-display {
+  height: 100%;
+  width: 30%;
+  background-color: #d6e3f2;
+  float: right;
+  color: #565656;
+  font-family: "Raleway", sans-serif;
+}
+
+h2 {
+  margin: 0;
+  padding 0.5rem;
+  font-size: 1.25rem;
+  color: #303030;
+}
+
+
+.associations {
+  width: 100%;
+  height: 30%;
+  border: black;
+  border-width: thin;
+  margin: 0;
+  padding: 1rem;
+}
+
+.second-stats {
+  width: 100%;
+  height: 30%;
+  border: black;
+  border-width: thin;
+  margin: 0;
+  padding: 1rem;
+}
+
+.third-stats {
+  width: 100%;
+  height: 30%;
+  border: black;
+  border-width: thin;
+  margin: 0;
+  padding: 1rem;
+}
+
+.clear {
+  clear: both;
 }
