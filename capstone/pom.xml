@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.google.sps</groupId>
-  <artifactId>portfolio</artifactId>
+  <artifactId>step-402-2020</artifactId>
   <version>1</version>
   <packaging>war</packaging>
 
@@ -23,14 +23,30 @@
       <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.6</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.appengine</groupId>
+      <artifactId>appengine-api-1.0-sdk</artifactId>
+      <version>1.9.59</version>
+    </dependency>
   </dependencies>
 
   <build>
     <plugins>
+      <!-- Provides `mvn package appengine:run` for local testing
+           and `mvn package appengine:deploy` for deploying. -->
       <plugin>
-        <groupId>com.google.appengine</groupId>
+        <groupId>com.google.cloud.tools</groupId>
         <artifactId>appengine-maven-plugin</artifactId>
-        <version>1.9.71</version>
+        <version>2.2.0</version>
+        <configuration>
+          <deploy.projectId>step-402-2020</deploy.projectId>
+          <deploy.version>1</deploy.version>
+        </configuration>
       </plugin>
     </plugins>
   </build>
