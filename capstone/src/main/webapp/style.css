@@ -77,8 +77,6 @@ ul {
 .associations {
   width: 100%;
   height: 30%;
-  border: black;
-  border-width: thin;
   margin: 0;
   padding: 1rem;
 }
@@ -86,8 +84,6 @@ ul {
 .second-stats {
   width: 100%;
   height: 29%;
-  border: black;
-  border-width: thin;
   margin: 0;
   padding: 1rem;
 }
@@ -95,8 +91,6 @@ ul {
 .third-stats {
   width: 100%;
   height: 29%;
-  border: black;
-  border-width: thin;
   margin: 0;
   padding: 1rem;
 }
