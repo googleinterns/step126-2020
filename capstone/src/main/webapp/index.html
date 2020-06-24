@@ -36,11 +36,16 @@
 	    <li>Thing 3</li>
           </ul>
         </div>
-        <div id="sentiment-pie-stats" class="container sentiment-pie-chart">
+        <div id="second-stats" class="container second-stats">
           <h2>Sentiment Percentages</h2>
+          <script src="https://www.gstatic.com/charts/loader.js"></script>
+          <script>
+            google.charts.load('current', {packages: ['corechart']});
+            google.charts.setOnLoadCallback(loadCharts);
+          </script>
           <div id="sentiment-pie-chart"></div>
         </div>
-        <div id="response-bar-stats" class="container response-bar-chart">
+        <div id="third-stats" class="container third-stats">
           <h2>Survey Responses</h2>
           <div id="response-bar-chart"></div>
         </div>
