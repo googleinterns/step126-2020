@@ -29,8 +29,8 @@ import javax.servlet.http.HttpServletResponse;
 public class AssociationServlet extends HttpServlet {
 
   private static final String OUTPUT_TYPE = "applications/json;";
-  private static final ArrayList<String> positive = new ArrayList(Arrays.asList("test 1", "test 2", "test 3"));
-  private static final ArrayList<String> negative = new ArrayList(Arrays.asList("yeet 1", "yeet 2", "yeet 3"));
+  private final ArrayList<String> positive = new ArrayList(Arrays.asList("hi", "test1", "test2"));
+  private final ArrayList<String> negative = new ArrayList(Arrays.asList("yeet", "hi", "think"));
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
