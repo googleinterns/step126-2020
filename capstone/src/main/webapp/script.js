@@ -18,3 +18,37 @@ function addListElement(list, contents) {
 }
 
 window.addEventListener('load', associationUpdateDisplay)
+
+function loadCharts(){
+    let stats = new google.visualization.DataTable();
+    
+    stats.addColumn('string', 'Sentiment');
+    stats.addColumn('number', 'Percentage');
+    stats.addRows([
+        ['Positive', 0.7],
+        ['Neutral', 0.1],
+        ['Negative', 0.2],
+    ]);
+
+    // Instantiate and draw the chart.
+    let chart = new google.visualization.PieChart(document.getElementById('sentiment-pie-chart'));
+    chart.draw(stats, null);
+
+    loadReponseChart();
+}
+
+function loadReponseChart(){
+    let stats = new google.visualization.DataTable();
+    
+    stats.addColumn('string', 'Period');
+    stats.addColumn('number', 'Number of Responses');
+
+    stats.addRows([
+        ['Daily', 4],
+        ['Weekly', 15]
+    ]);
+
+    // Instantiate and draw the chart.
+    let chart = new google.visualization.BarChart(document.getElementById('response-bar-chart'));
+    chart.draw(stats, null);
+}

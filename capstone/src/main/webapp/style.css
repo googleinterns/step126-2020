@@ -47,9 +47,11 @@ h1 {
 }
 
 .right-stats-display {
+  flex-wrap: wrap;
+  flex-direction: column;
   height: 100%;
   width: 20%;
-  background-color: white;
+  background-color: #EEECEC;
   float: right;
   color: #565656;
   font-family: "Raleway", sans-serif;
@@ -66,33 +68,41 @@ ul {
   margin-top: 0.5rem;
 }
 
-.stats-divider {
-  background-color: #D3D3D3;
-  width: 100%;
-  height: 1%;
-  padding: 0;
-  margin: 0;
-}
-
 .associations {
+  background-color: white;
   width: 100%;
   height: 30%;
   margin: 0;
   padding: 1rem;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
 }
 
 .second-stats {
+  background-color: white;
   width: 100%;
   height: 29%;
   margin: 0;
+  margin-top: 16px;
   padding: 1rem;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+#sentiment-pie-chart {
+  margin: 8 auto;
 }
 
 .third-stats {
+  background-color: white;
   width: 100%;
   height: 29%;
   margin: 0;
+  margin-top: 16px;
   padding: 1rem;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+#response-bar-chart {
+  margin: 8 auto;
 }
 
 .clear {
