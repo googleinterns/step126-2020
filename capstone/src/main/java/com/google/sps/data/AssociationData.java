@@ -12,4 +12,12 @@ public final class AssociationData {
     this.positive = positive;
     this.negative = negative;
   }
+
+  public ArrayList<String> getPositive() {
+    return positive;
+  }
+
+  public ArrayList<String> getNegative() {
+    return negative;
+  }
 }
