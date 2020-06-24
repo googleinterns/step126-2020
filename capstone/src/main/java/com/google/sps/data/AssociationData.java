@@ -8,8 +8,8 @@ public final class AssociationData {
   private ArrayList<String> positive;
   private ArrayList<String> negative;
 	      
-  public AssociationData(ArrayList<String> positiveAssociations, ArrayList<String> negativeAssociations) {
-    this.positive = positiveAssociations;
-    this.negative = negativeAssociations;
+  public AssociationData(ArrayList<String> positive, ArrayList<String> negative) {
+    this.positive = positive;
+    this.negative = negative;
   }
 }
