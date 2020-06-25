@@ -26,8 +26,25 @@ function createMap() {
     {lat: 37.826897, lng: -122.379137}
   ];
 
+  var precinctSix = [
+    {lat: 37.793779, lng: -122.392673},
+    {lat: 37.790398, lng: -122.388557},
+    {lat: 37.790492, lng: -122.384992},
+    {lat: 37.779179, lng: -122.384883},
+    {lat: 37.769055, lng: -122.408311},
+    {lat: 37.765934, lng: -122.408140},
+    {lat: 37.765120, lng: -122.422551},
+    {lat: 37.769055, lng: -122.422381},
+    {lat: 37.775004, lng: -122.419242},
+    {lat: 37.785672, lng: -122.421428},
+    {lat: 37.787355, lng: -122.408318},
+    {lat: 37.784468, lng: -122.407637},
+    {lat: 37.784061, lng: -122.408281},
+    {lat: 37.782876, lng: -122.406493}
+  ];
+
   /**drawing precinct 6 */
-  var precincts = new google.maps.Polygon({
+  var precinctIsland = new google.maps.Polygon({
     paths: precinct6,
     strokeColor: '#FF0000',
     strokeOpacity: 0.8,
@@ -35,5 +52,15 @@ function createMap() {
     fillColor: '#FF0000',
     fillOpacity: 0.35
   });
-  precincts.setMap(map);
+  var precinctSix = new google.maps.Polygon({
+    paths: precinctSix,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35
+  });
+
+  precinctSix.setMap(map);
+  precinctIsland.setMap(map);
 }
