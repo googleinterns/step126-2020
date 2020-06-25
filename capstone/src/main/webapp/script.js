@@ -1,12 +1,12 @@
 async function associationUpdateDisplay() {
-  let response = await fetch('/associations');
-  let associations = await response.json();
+  const response = await fetch('/associations');
+  const associations = await response.json();
   
-  let positive = document.getElementById('pos-associations');
+  const positive = document.getElementById('pos-associations');
   positive.innerHTML = '';
   associations.positive.forEach(elem => addListElement(positive, elem));
 
-  let negative = document.getElementById('neg-associations');
+  const negative = document.getElementById('neg-associations');
   negative.innerHTML = '';
   associations.negative.forEach(elem => addListElement(negative, elem));
 }
