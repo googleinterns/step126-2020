@@ -1,0 +1,22 @@
+{
+  "name": "step126-2020",
+  "version": "1.0.0",
+  "description": "## Overview A web application that displays opinions over time surrounding the police and law enforcement.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive capstone"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/googleinterns/step126-2020.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/googleinterns/step126-2020/issues"
+  },
+  "homepage": "https://github.com/googleinterns/step126-2020#readme",
+  "dependencies": {
+    "mocha": "^8.0.1"
+  }
+}
