@@ -5,6 +5,11 @@
     <title>Enforcer</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(loadCharts);
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Raleway&display=swap" rel="stylesheet">
   </head>
   <body>
@@ -33,11 +38,6 @@
         </div>
         <div id="second-stats" class="container second-stats">
           <h2>Sentiment Percentages</h2>
-          <script src="https://www.gstatic.com/charts/loader.js"></script>
-          <script>
-            google.charts.load('current', {packages: ['corechart']});
-            google.charts.setOnLoadCallback(loadCharts);
-          </script>
           <div id="sentiment-pie-chart"></div>
         </div>
         <div id="third-stats" class="container third-stats">

@@ -59,7 +59,7 @@ h1 {
 
 h2 {
   margin: 0;
-  padding 0.5rem;
+  padding: 0.5rem;
   font-size: 1.1rem;
   color: #303030;
 }
@@ -88,7 +88,7 @@ ul {
 }
 
 #sentiment-pie-chart {
-  margin: 8 auto;
+  margin: 24 auto;
 }
 
 .third-stats {
@@ -102,7 +102,7 @@ ul {
 }
 
 #response-bar-chart {
-  margin: 8 auto;
+  margin: 24 auto;
 }
 
 .clear {
