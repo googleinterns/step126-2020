@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Enforcer</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtX12dX0EUC2BdYADIIxZ8IRFvlz9VUfI"></script>
     <script src="script.js"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
@@ -12,6 +13,7 @@
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Raleway&display=swap" rel="stylesheet">
   </head>
+  <body onload="createMap();">
   <body>
     <div id="header" class="header">
       <h1>Enforcer</h1>
@@ -26,12 +28,23 @@
           <h2>Top Positive Associations:</h2>
           <ul id="pos-associations">
             <li>Thing 1</li>
+	    <li>Thing 2</li>
+	    <li>Thing 3</li>
             <li>Thing 2</li>
             <li>Thing 3</li>
           </ul>
           <h2>Top Negative Associations:</h2>
           <ul id="neg-associations">
             <li>Thing 1</li>
+	    <li>Thing 2</li>
+	    <li>Thing 3</li>
+          </ul>
+        </div>
+	<div class="stats-divider"></div>
+        <div id="second-stats" class="container second-stats">
+          <p>Something here about stats</p>
+        </div>
+	<div class="stats-divider"></div>
             <li>Thing 2</li>
             <li>Thing 3</li>
           </ul>
