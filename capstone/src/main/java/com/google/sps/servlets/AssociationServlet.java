@@ -14,19 +14,30 @@
 
 package com.google.sps.servlets;
 
+import com.google.gson.Gson;
+import com.google.sps.data.AssociationData;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
+/** Servlet to fetch association data with most positive and negative associations */
+@WebServlet("/associations")
+public class AssociationServlet extends HttpServlet {
+
+  private static final String OUTPUT_TYPE = "applications/json;";
+  private final ArrayList<String> positive = new ArrayList(Arrays.asList("hi", "test1", "test2"));
+  private final ArrayList<String> negative = new ArrayList(Arrays.asList("yeet", "hi", "think"));
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello world!</h1>");
+    response.setContentType(OUTPUT_TYPE);
+
+    AssociationData output = new AssociationData(positive, negative);
+    Gson gson = new Gson();
+    response.getWriter().println(gson.toJson(output));
   }
 }
