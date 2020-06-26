@@ -27,7 +27,7 @@ class CloudNLPAssociation implements AutoCloseable {
 
   private static LanguageServiceClient language;
 
-  public CloudNLPAssociation(LanguageServiceClient language) throws IOException {
+  public CloudNLPAssociation(LanguageServiceClient language) {
     this.language = language;
   }
 
