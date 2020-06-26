@@ -21,4 +21,9 @@ class AssociationResult {
   public void updateScore(float newScore) {
     score = newScore;
   }
+
+  @Override
+  public String toString() {
+    return content + "(" + Float.toString(score) + ")";
+  }
 }

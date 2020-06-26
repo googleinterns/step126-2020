@@ -16,8 +16,10 @@ public class UpdateAssociationServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
     AssociationAnalysis association = new AssociationAnalysis();
-    ArrayList<AssociationResult> res = association.calculateScores(CloudNLPAssociation.analyzeAssociations(getComments()));
+    CloudNLPAssociation nlp = new CloudNLPAssociation();
+    ArrayList<AssociationResult> res = association.calculateScores(nlp.analyzeAssociations(getComments()));
     response.getWriter().println(res);
+    nlp.closeLanguageClient();
   }
 
   private ArrayList<String> getComments() {
