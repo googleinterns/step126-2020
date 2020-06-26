@@ -1,6 +1,7 @@
 package com.google.sps;
 
 import com.google.sps.AssociationResult;
+import com.google.cloud.language.v1.LanguageServiceClient;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,10 +17,10 @@ public class UpdateAssociationServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
     AssociationAnalysis association = new AssociationAnalysis();
-    CloudNLPAssociation nlp = new CloudNLPAssociation();
+    CloudNLPAssociation nlp = new CloudNLPAssociation(LanguageServiceClient.create());
     ArrayList<AssociationResult> res = association.calculateScores(nlp.analyzeAssociations(getComments()));
     response.getWriter().println(res);
-    nlp.closeLanguageClient();
+    nlp.close();
   }
 
   private ArrayList<String> getComments() {

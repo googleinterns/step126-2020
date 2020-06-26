@@ -19,15 +19,16 @@ import com.google.cloud.language.v1.LanguageServiceClient;
 import com.google.cloud.language.v1.Sentiment;
 import com.google.cloud.language.v1.Token;
 import java.io.IOException;
+import java.lang.AutoCloseable;
 import java.util.ArrayList;
 import java.util.List;
 
-class CloudNLPAssociation {
+class CloudNLPAssociation implements AutoCloseable {
 
   private static LanguageServiceClient language;
 
-  public CloudNLPAssociation() throws IOException {
-    language = LanguageServiceClient.create();
+  public CloudNLPAssociation(LanguageServiceClient language) throws IOException {
+    this.language = language;
   }
 
   private ArrayList<EntitySentiment> extractEntityMentions(Entity entity) {
@@ -64,10 +65,10 @@ class CloudNLPAssociation {
     return res;
   }
 
-  public void closeLanguageClient() {
+  @Override
+  public void close() {
     if (language != null) {
       language.close();
     }
-    language = null;
   }
 }
