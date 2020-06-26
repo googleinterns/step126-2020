@@ -20,24 +20,27 @@ import com.google.cloud.language.v1.Sentiment;
 import com.google.cloud.language.v1.Token;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.stream.Stream;
+import java.util.List;
 
 class CloudNLPAssociation {
 
   private static LanguageServiceClient language;
 
-  private static Stream<EntitySentiment> extractSingleEntityMentions(Entity entity) {
-    Stream<EntityMention> mentions = entity.getMentionsList().stream();
-    return mentions.map(mention -> {
-        return new EntitySentiment(entity.getName(), mention.getSentiment().getMagnitude(), mention.getSentiment().getScore());
-      });
+  public CloudNLPAssociation() throws IOException {
+    language = LanguageServiceClient.create();
   }
 
-  private static Stream<EntitySentiment> extractEntityMentions(Stream<Entity> entities) {
-    return entities.flatMap(entity -> extractSingleEntityMentions(entity)); 
+  private ArrayList<EntitySentiment> extractEntityMentions(Entity entity) {
+    List<EntityMention> mentions = entity.getMentionsList();
+    ArrayList<EntitySentiment> res = new ArrayList<EntitySentiment>();
+    for (EntityMention mention : mentions) {
+      res.add(new EntitySentiment(entity.getName(), mention.getSentiment().getMagnitude(), 
+                                  mention.getSentiment().getScore()));
+    }
+    return res;
   }
 
-  private static Stream<EntitySentiment> entitySentimentAnalysis(String message) {
+  private ArrayList<EntitySentiment> entitySentimentAnalysis(String message) {
     Document doc = Document.newBuilder().setContent(message).setType(Type.PLAIN_TEXT).build();
     AnalyzeEntitySentimentRequest request = AnalyzeEntitySentimentRequest.newBuilder()
           .setDocument(doc)
@@ -45,15 +48,26 @@ class CloudNLPAssociation {
           .build();
     // detect entity sentiments in the given string
     AnalyzeEntitySentimentResponse response = language.analyzeEntitySentiment(request);
-    Stream<Entity> entities = response.getEntitiesList().stream();
-    return entities.flatMap(entity -> extractEntityMentions(entities));
+    List<Entity> entities = response.getEntitiesList();
+    ArrayList<EntitySentiment> res = new ArrayList<EntitySentiment>();
+    for (Entity entity : entities) {
+      res.addAll(extractEntityMentions(entity));
+    }
+    return res;
   }
 
-  public static Stream<EntitySentiment> analyzeAssociations(ArrayList<String> messages) throws IOException {
-    Stream<String> messageStream = messages.stream();
-    language = LanguageServiceClient.create();
-    Stream<EntitySentiment> result = messageStream.flatMap(message -> entitySentimentAnalysis(message));
-    language.close();
-    return result;
+  public ArrayList<EntitySentiment> analyzeAssociations(ArrayList<String> messages) {
+    ArrayList<EntitySentiment> res = new ArrayList<EntitySentiment>();
+    for (String message : messages) {
+      res.addAll(entitySentimentAnalysis(message));
+    }
+    return res;
+  }
+
+  public void closeLanguageClient() {
+    if (language != null) {
+      language.close();
+    }
+    language = null;
   }
 }

@@ -33,4 +33,9 @@ class EntitySentiment {
       return a.getContent().compareTo(b.getContent());
     }
   };
+
+  @Override
+  public String toString() {
+    return content + "(" + Float.toString(significance) + ", " + Float.toString(sentiment) + ")";
+  }
 }
