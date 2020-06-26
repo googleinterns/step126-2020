@@ -159,4 +159,4 @@ function addListElement(list, contents) {
   list.appendChild(elem);
 }
 
-window.addEventListener('load', associationUpdateDisplay)
+window.addEventListener('load', associationUpdateDisplay);
