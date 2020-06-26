@@ -8,6 +8,35 @@ function createMap() {
         map.data.setStyle({visible: false});
 
     //**cordinates for shapes */
+    var cityLimits = [
+        {lat: 37.708305, lng: -122.502691},
+        {lat: 37.708229, lng: -122.393322}
+    ]
+
+    var precinctTen = [
+        {lat: 37.708263, lng: -122.428442},
+        {lat: 37.708702, lng: -122.428171},
+        {lat: 37.709288, lng: -122.428418},
+        {lat: 37.709606, lng: -122.429271},
+        {lat: 37.710596, lng: -122.431476},
+        {lat: 37.712300, lng: -122.429680},
+        {lat: 37.711408, lng: -122.427353},
+        {lat: 37.714243, lng: -122.425809},
+        {lat: 37.714991, lng: -122.426999},
+        {lat :37.722815, lng: -122.424100},
+        {lat: 37.722860, lng: -122.426518},
+        {lat: 37.724393, lng: -122.425343},
+        {lat: 37.725659, lng: -122.421427},
+        {lat: 37.724466, lng: -122.420893},
+        {lat: 37.724703, lng: -122.419927},
+        {lat: 37.723493, lng: -122.419458},
+        {lat: 37.723781, lng: -122.418436},
+        {lat: 37.722576, lng: -122.417942},
+        {lat: 37.722821, lng: -122.416941},
+        {lat: 37.721932, lng: -122.416552},
+
+    ]
+
   var precinct6 = [
     {lat: 37.826890, lng: -122.379144},
     {lat: 37.830382, lng: -122.377603},
@@ -35,6 +64,8 @@ function createMap() {
     {lat: 37.790398, lng: -122.388557},
     {lat: 37.790492, lng: -122.384992},
     {lat: 37.779179, lng: -122.384883},
+    {lat: 37.770441, lng: -122.400091},
+    {lat: 37.771775, lng: -122.401804},
     {lat: 37.769055, lng: -122.408311},
     {lat: 37.765934, lng: -122.408140},
     {lat: 37.765120, lng: -122.422551},
@@ -57,10 +88,28 @@ function createMap() {
     {lat: 37.798490, lng: -122.423753},
     {lat: 37.785666, lng: -122.421475},
     {lat: 37.787377, lng: -122.408272},
-    {lat: 37.784577, lng: -122.407559}
+    {lat: 37.784577, lng: -122.407559},
+    {lat: 37.783999, lng: -122.408385},
+	{lat: 37.782885, lng: -122.406537}
   ];
 
-  /**drawing precinct 6 */
+  /**drawing precincts */
+ var cityLimits = new google.maps.Polygon({
+    paths: cityLimits,
+    strokeColor: 'black',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: 'black',
+    fillOpacity: 0.35
+  });
+  var precinctTen = new google.maps.Polygon({
+    paths: precinctTen,
+    strokeColor: '#FFCF00',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FFFC00',
+    fillOpacity: 0.35
+  });
   var precinctIsland = new google.maps.Polygon({
     paths: precinct6,
     strokeColor: '#FF0000',
@@ -85,10 +134,11 @@ function createMap() {
     fillColor: '#FFC000',
     fillOpacity: 0.35
   });
-
+  cityLimits.setMap(map);
   precinctThree.setMap(map);
   precinctSix.setMap(map);
   precinctIsland.setMap(map);
+  precinctTen.setMap(map);
 }
 async function associationUpdateDisplay() {
   const response = await fetch('/associations');
