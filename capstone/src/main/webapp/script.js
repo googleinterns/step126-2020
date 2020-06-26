@@ -1,7 +1,11 @@
 function createMap() {
   const map = new google.maps.Map(
       document.getElementById('map-container'),
-      {center: {lat: 37.422, lng: -122.084}, zoom: 16});
+      {center: {lat: 37.7749, lng: -122.4194}, zoom: 10});
+
+	    //**adding zipcode overlay */
+        map.data.loadGeoJson('zipcode-data.json');
+        map.data.setStyle({visible: false});
 
     //**cordinates for shapes */
   var precinct6 = [
@@ -43,6 +47,19 @@ function createMap() {
     {lat: 37.782876, lng: -122.406493}
   ];
 
+  var precinctThree = [
+    {lat: 37.793723, lng: -122.392156},
+    {lat: 37.804667, lng: -122.402254},
+    {lat: 37.808092, lng: -122.408730},
+    {lat: 37.808514, lng: -122.421306},
+    {lat: 37.801774, lng: -122.412559},
+    {lat: 37.800146, lng: -122.412473},
+    {lat: 37.798490, lng: -122.423753},
+    {lat: 37.785666, lng: -122.421475},
+    {lat: 37.787377, lng: -122.408272},
+    {lat: 37.784577, lng: -122.407559}
+  ];
+
   /**drawing precinct 6 */
   var precinctIsland = new google.maps.Polygon({
     paths: precinct6,
@@ -60,7 +77,16 @@ function createMap() {
     fillColor: '#FF0000',
     fillOpacity: 0.35
   });
+  var precinctThree = new google.maps.Polygon({
+    paths: precinctThree,
+    strokeColor: '#FFC000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FFC000',
+    fillOpacity: 0.35
+  });
 
+  precinctThree.setMap(map);
   precinctSix.setMap(map);
   precinctIsland.setMap(map);
 }
