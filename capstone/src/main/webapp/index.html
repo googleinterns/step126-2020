@@ -2,14 +2,19 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>INSERT TITLE HERE</title>
+    <title>Enforcer</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(loadCharts);
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Raleway&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="header" class="header">
-      <h1>INSERT TITLE HERE</h1>
+      <h1>Enforcer</h1>
     </div>
     <div class="clear"></div>
     <div id="content" class="content">
@@ -31,13 +36,13 @@
             <li>Thing 3</li>
           </ul>
         </div>
-        <div class="stats-divider"></div>
-        <div id="second-stats" class="container second-stats">
-          <p>Something here about stats</p>
+        <div id="sentiment-pie-stats" class="container sentiment-pie-chart">
+          <h2>Sentiment Percentages</h2>
+          <div id="sentiment-pie-chart"></div>
         </div>
-        <div class="stats-divider"></div>
-        <div id="third-stats" class="container third-stats">
-          <p>Something else here about stats</p>
+        <div id="response-bar-stats" class="container response-bar-chart">
+          <h2>Survey Responses</h2>
+          <div id="response-bar-chart"></div>
         </div>
       </div>
       <div class="clear"></div>
