@@ -3,7 +3,7 @@ package com.google.sps;
 import java.util.Comparator;
 
 /** Represents data for sentiment around a word/phrase */
-class EntitySentiment {
+public class EntitySentiment {
 
   private String content;
   private float significance;
@@ -27,12 +27,13 @@ class EntitySentiment {
     return sentiment;
   }
 
-  public static final Comparator<EntitySentiment> ORDER_BY_CONTENT = new Comparator<EntitySentiment>() {
-    @Override
-    public int compare(EntitySentiment a, EntitySentiment b) {
-      return a.getContent().compareTo(b.getContent());
-    }
-  };
+  public static final Comparator<EntitySentiment> ORDER_CONTENT = 
+    new Comparator<EntitySentiment>() {
+      @Override
+      public int compare(EntitySentiment a, EntitySentiment b) {
+        return a.getContent().compareTo(b.getContent());
+      }
+    };
 
   @Override
   public String toString() {

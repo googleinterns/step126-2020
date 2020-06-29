@@ -23,7 +23,7 @@ import java.lang.AutoCloseable;
 import java.util.ArrayList;
 import java.util.List;
 
-class CloudNLPAssociation implements AutoCloseable {
+public class CloudNLPAssociation implements AutoCloseable {
 
   private static LanguageServiceClient language;
 
@@ -67,8 +67,6 @@ class CloudNLPAssociation implements AutoCloseable {
 
   @Override
   public void close() {
-    if (language != null) {
-      language.close();
-    }
+    language.close();
   }
 }

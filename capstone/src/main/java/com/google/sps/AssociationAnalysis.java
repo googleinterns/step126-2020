@@ -2,7 +2,7 @@ package com.google.sps;
 
 import java.util.ArrayList;
 
-class AssociationAnalysis {
+public class AssociationAnalysis {
 
   public ArrayList<AssociationResult> calculateScores(ArrayList<EntitySentiment> sentiments) {
     ArrayList<AssociationResult> res = new ArrayList<AssociationResult>();
