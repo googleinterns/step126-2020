@@ -1,7 +1,7 @@
 function createMap() {
   const map = new google.maps.Map(
       document.getElementById('map-container'),
-      {center: {lat: 37.7749, lng: -122.4194}, zoom: 13});
+      {center: {lat: 37.7749, lng: -122.4194}, zoom: 12});
 
 	    //**adding zipcode overlay */
         map.data.loadGeoJson('zipcode-data.json');
@@ -23,10 +23,33 @@ function createMap() {
         {lat: 37.722576, lng: -122.417942},
         {lat: 37.722821, lng: -122.416941},
         {lat: 37.721932, lng: -122.416552},
-        {lat: 37.722230, lng: -122.415586},
-        {lat: 37.723092, lng: -122.415967},
-        {lat :37.722815, lng: -122.424100},
-        {lat: 37.722860, lng: -122.426518}
+        {lat: 37.720022, lng:-122.414610},
+        {lat: 37.718043, lng: -122.414166},
+        {lat: 37.718925, lng: -122.419941},
+        {lat: 37.717123, lng: -122.424374},
+        {lat: 37.718592, lng: -122.426423},
+        {lat: 37.715007, lng: -122.426996},
+        {lat: 37.714219, lng: -122.425830},
+        {lat: 37.711473, lng: -122.427400},
+        {lat: 37.712253, lng: -122.429527},
+        {lat: 37.710645, lng: -122.431434},
+        {lat: 37.709217, lng: -122.4284},
+        {lat: 37.708685, lng: -122.428169},
+        {lat: 37.708261, lng: -122.428410},
+        {lat: 37.708415, lng: -122.469266},
+        {lat: 37.711267, lng: -122.462738},
+        {lat:37.712727, lng: -122.470941},
+        {lat: 37.719708, lng: -122.472445},
+        {lat: 37.720048, lng: -122.462697},
+        {lat: 37.720048, lng: -122.462697},
+        {lat: 37.723285, lng: -122.453190},
+        {lat: 37.723111, lng: -122.447711},
+        {lat: 37.729496, lng: -122.442412},
+        {lat: 37.731774, lng: -122.434805},
+        {lat: 37.731978, lng: -122.421318},
+        {lat: 37.729016, lng: -122.419892},
+        {lat: 37.728725, lng: -122.423536}
+
     ]
 
     var precinctTen = [
@@ -45,8 +68,59 @@ function createMap() {
         {lat: 37.718040, lng: -122.414321},
         {lat: 37.721717, lng: -122.400485},
         {lat: 37.738258, lng: -122.408128},
-        {lat: 37.769080, lng: -122.408275}
-    ]
+        {lat: 37.769080, lng: -122.408275},
+        {lat: 37.771836, lng: -122.401828},
+        {lat: 37.770490, lng: -122.400050},
+        {lat: 37.776670, lng: -122.389031},
+        {lat: 37.728694, lng: -122.356974},
+        {lat: 37.716326, lng: -122.365777},
+        {lat: 37.708643, lng: -122.374460}
+    ];
+
+    var precinctNine = [
+        {lat: 37.718009, lng: -122.414431},
+        {lat: 37.721729, lng: -122.400479},
+        {lat: 37.738321, lng: -122.408232},
+        {lat: 37.765959, lng: -122.408102},
+        {lat: 37.765091, lng: -122.422886},
+        {lat: 37.748021, lng: -122.422540},
+        {lat: 37.737624, lng: -122.425339},
+        {lat: 37.731719, lng: -122.435269},
+        {lat: 37.732016, lng: -122.421451},
+        {lat: 37.729011, lng: -122.419875},
+        {lat: 37.728731, lng: -122.423613},
+        {lat: 37.724444, lng: -122.425323},
+        {lat: 37.725624, lng: -122.421419},
+        {lat: 37.724438, lng: -122.420921},
+        {lat: 37.724692, lng: -122.419935},
+        {lat: 37.723524, lng: -122.419434},
+        {lat: 37.723762, lng: -122.418407},
+        {lat: 37.722588, lng: -122.417908},
+        {lat: 37.722809, lng: -122.416975},
+        {lat: 37.721861, lng: -122.416546},
+        {lat: 37.719947, lng: -122.414504}
+    ];
+
+    var precinctEight = [
+        {lat: 37.731765, lng: -122.434810},
+        {lat: 37.731630, lng: -122.442059},
+        {lat: 37.735412, lng: -122.441989},
+        {lat: 37.745703, lng: -122.451726},
+        {lat: 37.758982, lng: -122.448584},
+        {lat: 37.758664, lng: -122.451429},
+        {lat: 37.761446, lng: -122.452140},
+        {lat:37.761790, lng: -122.446842},
+        {lat: 37.767584, lng: -122.443981},
+        {lat: 37.765990, lng: -122.442307},
+        {lat: 37.769077, lng: -122.438528},
+        {lat: 37.769103, lng: -122.422355},
+        {lat: 37.747991, lng: -122.422512},
+        {lat: 37.737651, lng: -122.425347}
+    ];
+
+    var precinctSeven = [
+        {lat: 37.737651, lng: -122.425347}
+    ];
 
   var precinct6 = [
     {lat: 37.826890, lng: -122.379144},
@@ -113,12 +187,44 @@ function createMap() {
     fillColor: 'black',
     fillOpacity: 0.35
   });
+   var precinctEleven = new google.maps.Polygon({
+    paths: precinctEleven,
+    strokeColor: '#00FF00',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#00FF00',
+    fillOpacity: 0.35
+  });
   var precinctTen = new google.maps.Polygon({
     paths: precinctTen,
     strokeColor: '#FFCF00',
     strokeOpacity: 0.8,
     strokeWeight: 2,
     fillColor: '#FFFC00',
+    fillOpacity: 0.35
+  });
+  var precinctNine = new google.maps.Polygon({
+    paths: precinctNine,
+    strokeColor: '#00FFFF',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#00FFFF',
+    fillOpacity: 0.35
+  });
+  var precinctEight = new google.maps.Polygon({
+    paths: precinctEight,
+    strokeColor: '#FF00FF',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF00FF',
+    fillOpacity: 0.35
+  });
+  var precinctSeven = new google.maps.Polygon({
+    paths: precinctSeven,
+    strokeColor: '#FDFBA4',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#DFBA4F',
     fillOpacity: 0.35
   });
   var precinctIsland = new google.maps.Polygon({
@@ -149,7 +255,11 @@ function createMap() {
   precinctThree.setMap(map);
   precinctSix.setMap(map);
   precinctIsland.setMap(map);
+  precinctSeven.setMap(map);
+  precinctEight.setMap(map);
+  precinctNine.setMap(map);
   precinctTen.setMap(map);
+  precinctEleven.setMap(map);
 }
 async function associationUpdateDisplay() {
   const response = await fetch('/associations');
