@@ -1,6 +1,7 @@
 package com.google.sps;
 
 import java.lang.Math;
+import java.util.Comparator;
 
 /** Stores the content of an entity along with it association score */
 public class AssociationResult {
@@ -43,6 +44,15 @@ public class AssociationResult {
     score = newScore;
   }
 
+  public static final Comparator<AssociationResult> ORDER_BY_SCORE = 
+    new Comparator<AssociationResult>() {
+      @Override
+      public int compare(AssociationResult a, AssociationResult b) {
+        return Float.compare(a.getScore(), b.getScore());
+      }
+    };
+
+
   @Override
   public String toString() {
     return content + "(" + Float.toString(score) + ")";
@@ -50,9 +60,7 @@ public class AssociationResult {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj == null) {
-      return false;
-    } else if (!AssociationResult.class.isAssignableFrom(obj.getClass())) {
+    if (obj == null || !AssociationResult.class.isAssignableFrom(obj.getClass())) {
       return false;
     }
     AssociationResult x = (AssociationResult) obj;

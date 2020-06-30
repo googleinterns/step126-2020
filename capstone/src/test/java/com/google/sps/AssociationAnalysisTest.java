@@ -22,7 +22,7 @@ public class AssociationAnalysisTest extends Mockito{
   }
 
   @Test
-  public void allDistinct() {
+  public void testAllDistinct() {
     ArrayList<EntitySentiment> input = new ArrayList<EntitySentiment>(
         Arrays.asList(new EntitySentiment("test1", 0.5f, 0.5f),
                       new EntitySentiment("test2", 0.9f, -0.6f),
@@ -30,13 +30,13 @@ public class AssociationAnalysisTest extends Mockito{
     AssociationAnalysis analysis = new AssociationAnalysis();
     ArrayList<AssociationResult> res = analysis.calculateScores(input);
     assertEquals(res, new ArrayList(
-        Arrays.asList(new AssociationResult("test1", 0.25f),
-                      new AssociationResult("test2", -0.54f),
-                      new AssociationResult("test3", 0f))));
+        Arrays.asList(new AssociationResult("test2", -0.54f),
+                      new AssociationResult("test3", -0f),
+                      new AssociationResult("test1", 0.25f))));
   }
 
   @Test
-  public void combineTogether() {
+  public void testCombineTogether() {
     ArrayList<EntitySentiment> input = new ArrayList<EntitySentiment>(
         Arrays.asList(new EntitySentiment("test1", 0.5f, 0.5f),
                       new EntitySentiment("test1", 0.9f, 0.6f),
@@ -45,12 +45,12 @@ public class AssociationAnalysisTest extends Mockito{
     AssociationAnalysis analysis = new AssociationAnalysis();
     ArrayList<AssociationResult> res = analysis.calculateScores(input);
     assertEquals(res, new ArrayList(
-        Arrays.asList(new AssociationResult("test1", 0.79f),
-                      new AssociationResult("test2", -1.0f))));
+        Arrays.asList(new AssociationResult("test2", -1.0f),
+                      new AssociationResult("test1", 0.79f))));
   }
 
   @Test
-  public void combineSpreadOut() {
+  public void testCombineSpreadOut() {
     ArrayList<EntitySentiment> input = new ArrayList<EntitySentiment>(
         Arrays.asList(new EntitySentiment("test1", 0.5f, 0.5f),
                       new EntitySentiment("test2", 0.9f, 0.6f),
@@ -65,7 +65,7 @@ public class AssociationAnalysisTest extends Mockito{
   }
 
   @Test
-  public void allSame() {
+  public void testAllSame() {
     ArrayList<EntitySentiment> input = new ArrayList<EntitySentiment>(
         Arrays.asList(new EntitySentiment("test1", 0.5f, 0.5f),
                       new EntitySentiment("test1", 0.9f, 0.6f),
@@ -80,7 +80,7 @@ public class AssociationAnalysisTest extends Mockito{
   }
 
   @Test
-  public void mixedSentiments() {
+  public void testMixedSentiments() {
     ArrayList<EntitySentiment> input = new ArrayList<EntitySentiment>(
         Arrays.asList(new EntitySentiment("test1", 0.5f, -0.5f),
                       new EntitySentiment("test2", 0.9f, 0.6f),
@@ -90,14 +90,14 @@ public class AssociationAnalysisTest extends Mockito{
     AssociationAnalysis analysis = new AssociationAnalysis();
     ArrayList<AssociationResult> res = analysis.calculateScores(input);
     assertEquals(res, new ArrayList(
-        Arrays.asList(new AssociationResult("test1", -0.25f),
-                      new AssociationResult("test2", -0.46f),
+        Arrays.asList(new AssociationResult("test2", -0.46f),
+                      new AssociationResult("test1", -0.25f),
                       new AssociationResult("test3", 0.04f))));
 
   }
 
   @Test(expected=NullPointerException.class)
-  public void nullExceptionThrown() {
+  public void testNullExceptionThrown() {
     AssociationAnalysis analysis = new AssociationAnalysis();
     analysis.calculateScores(null);
   }
