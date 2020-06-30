@@ -23,14 +23,24 @@ import java.lang.AutoCloseable;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Extracts sentiments per entity mentions from open text */
 public class CloudNLPAssociation implements AutoCloseable {
 
   private static LanguageServiceClient language;
 
+  /** 
+   * Creates a new CloudNLPAssociation object
+   * @param language the CloudNLP language server
+   */
   public CloudNLPAssociation(LanguageServiceClient language) {
     this.language = language;
   }
 
+  /**
+   * Calculates the different entity sentiments in a single entity
+   * @param entity the entity to be analyzed
+   * @return an arraylist of the different entity sentiments in the entity
+   */
   private ArrayList<EntitySentiment> extractEntityMentions(Entity entity) {
     List<EntityMention> mentions = entity.getMentionsList();
     ArrayList<EntitySentiment> res = new ArrayList<EntitySentiment>();
@@ -41,6 +51,11 @@ public class CloudNLPAssociation implements AutoCloseable {
     return res;
   }
 
+  /**
+   * Calculates all the entity mentions in a single message
+   * @param message the messaged to be analyzed
+   * @return an arraylist of all the entity sentiments in the message
+   */
   private ArrayList<EntitySentiment> entitySentimentAnalysis(String message) {
     Document doc = Document.newBuilder().setContent(message).setType(Type.PLAIN_TEXT).build();
     AnalyzeEntitySentimentRequest request = AnalyzeEntitySentimentRequest.newBuilder()
@@ -57,6 +72,11 @@ public class CloudNLPAssociation implements AutoCloseable {
     return res;
   }
 
+  /**
+   * Analyzes the entity sentiment in all the messages in the input
+   * @param messages the open text to be analyzed
+   * @return an arraylist of all the entity sentiments in the messages
+   */
   public ArrayList<EntitySentiment> analyzeAssociations(ArrayList<String> messages) {
     ArrayList<EntitySentiment> res = new ArrayList<EntitySentiment>();
     for (String message : messages) {
@@ -65,6 +85,9 @@ public class CloudNLPAssociation implements AutoCloseable {
     return res;
   }
 
+  /**
+   * Closes the language server and CloudNLPAssociations object
+   */
   @Override
   public void close() {
     language.close();
