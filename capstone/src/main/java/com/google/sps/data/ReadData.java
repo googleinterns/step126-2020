@@ -3,6 +3,9 @@ package com.google.sps.data;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.EntityNotFoundException;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.sps.data.SurveyResponse;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -11,12 +14,11 @@ import java.io.IOException;
 import java.lang.NullPointerException;
 
 public class ReadData {
-
     public void readCSV() {
         SurveyResponse response;
         BufferedReader reader;
         FileReader file;
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
         final String DELIMITER = ",";
 
         try {
@@ -26,7 +28,6 @@ public class ReadData {
             String line = "";
 
             while ((line = reader.readLine()) != null) {
-                Entity entity = new Entity("Response");
                 String[] values = line.split(DELIMITER); 
                 String id = values[0];
                 double score = Double.parseDouble(values[2]);
@@ -34,15 +35,19 @@ public class ReadData {
                 String ageRange = values[4];
                 long responseTime = Long.parseLong(values[5]);
                 String date = values[6];
+                
+                Entity entity = new Entity("Response", id);
 
-                entity.setProperty("id", id);
-                entity.setProperty("score", score);
-                entity.setProperty("gender", gender);
-                entity.setProperty("ageRange", ageRange);
-                entity.setProperty("responseTime", responseTime);
-                entity.setProperty("date", date);
+                if (datastoreService.get(entity.getKey()) == null) {
+                    entity.setProperty("id", id);
+                    entity.setProperty("score", score);
+                    entity.setProperty("gender", gender);
+                    entity.setProperty("ageRange", ageRange);
+                    entity.setProperty("responseTime", responseTime);
+                    entity.setProperty("date", date);
 
-                datastore.put(entity);
+                    datastoreService.put(entity);
+                }
             }
 
             reader.close();
@@ -51,6 +56,8 @@ public class ReadData {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (EntityNotFoundException e) {
             e.printStackTrace();
         }
     }
