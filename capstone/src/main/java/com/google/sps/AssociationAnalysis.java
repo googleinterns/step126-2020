@@ -21,8 +21,8 @@ public class AssociationAnalysis {
     float scoreDiff = sentiment.getSentiment() * sentiment.getSignificance();
     for (AssociationResult association : res) {
       if (association.getContent().equals(sentiment.getContent())) {
-	association.updateScore(association.getScore() + scoreDiff);
-	return;
+        association.updateScore(association.getScore() + scoreDiff);
+        return;
       }
     }
     res.add(new AssociationResult(sentiment.getContent(), scoreDiff));
