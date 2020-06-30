@@ -1,0 +1,14 @@
+name: JavaScript Lint
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install npm packages
+        run: npm install
+      - name: Lint with ESLint
+        run: ./node_modules/.bin/eslint .
