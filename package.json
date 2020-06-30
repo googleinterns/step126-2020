@@ -18,5 +18,9 @@
   "homepage": "https://github.com/googleinterns/step126-2020#readme",
   "dependencies": {
     "mocha": "^8.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.3.1",
+    "eslint-config-google": "^0.14.0"
   }
 }
