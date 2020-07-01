@@ -11,12 +11,12 @@ function createMap() {
     map.data.loadGeoJson('neighborhoods.json');
     map.data.setStyle({visible: false});
 
-    var cityLimits = [
+    const cityLimits = [
         {lat: 37.708305, lng: -122.502691},
         {lat: 37.708229, lng: -122.393322}
     ]
 
-    var cityLimits = new google.maps.Polygon({
+    let cityLimits = new google.maps.Polygon({
         paths: cityLimits,
         strokeColor: 'black',
         strokeOpacity: 0.8,
