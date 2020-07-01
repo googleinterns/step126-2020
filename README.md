@@ -25,4 +25,5 @@ locally from the root directory of the project.
 - JavaScript Lint:
   - One time setup: run `npm install`
   - Run `./node_modules/.bin/eslint capstone/src/.
-- All tests`can be run using ./run-all-linter-tests
+- All tests`can be run using ./lint or ./lint-replace if you want to automatically fix
+  the errors found

@@ -1,5 +1,4 @@
 /* global google */
-/* eslint no-undef: "error"*/
 
 function createMap() {
   const map = new google.maps.Map(
@@ -140,6 +139,8 @@ function createMap() {
   precinctTen.setMap(map);
 }
 
+window.addEventListener('load', createMap);
+
 async function associationUpdateDisplay() {
   const response = await fetch('/associations');
   const associations = await response.json();
@@ -196,3 +197,6 @@ function loadReponseChart() {
       document.getElementById('response-bar-chart'));
   chart.draw(stats, null);
 }
+
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(loadCharts);
