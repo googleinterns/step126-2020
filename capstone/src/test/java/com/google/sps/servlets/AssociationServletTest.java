@@ -27,8 +27,7 @@ public class AssociationServletTest extends Mockito{
     when(response.getWriter()).thenReturn(writer);
 
     new AssociationServlet().doGet(request, response);
-
-    writer.flush(); // it may not have been flushed yet...
+    writer.flush();
 
     Gson gson = new Gson();
     ArrayList<String> positiveExpected = new ArrayList(Arrays.asList("hi", "test1", "test2"));
