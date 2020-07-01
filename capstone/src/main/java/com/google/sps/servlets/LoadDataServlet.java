@@ -35,8 +35,9 @@ public class LoadDataServlet extends HttpServlet
         String ageRange = (String) e.getProperty("ageRange");
         long responseTime = (long) e.getProperty("responseTime");
         String date = (String) e.getProperty("date");
-
-        surveyResponses.add(new SurveyResponse(id, score, gender, ageRange, responseTime, date));
+        long day = (long) e.getProperty("day");
+        
+        surveyResponses.add(new SurveyResponse(id, score, gender, ageRange, responseTime, date, day));
     }
 
     Gson gson = new Gson();

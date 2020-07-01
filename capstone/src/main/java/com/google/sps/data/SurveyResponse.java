@@ -7,25 +7,30 @@ public class SurveyResponse {
     private String ageRange;
     private long responseTime;
     private String date; 
+    private long day;
     
-    public SurveyResponse(String id, double score, String gender, String ageRange, long responseTime, String date) {
+    /* This object represents each response a user submits */
+    public SurveyResponse(String id, double score, String gender, String ageRange, long responseTime, String date, long day) {
         this.id = id;
         this.score = score;
         this.gender = gender;
         this.ageRange = ageRange;
         this.responseTime = responseTime;
         this.date = date;
+        this.day = day;
     }
 
-    public String getId(){return this.id;}
+    public String getId() {return id;}
 
-    public double getScore(){return this.score;}
+    public double getScore() {return score;}
 
-    public String gender(){return this.gender;}
+    public String getGender() {return gender;}
 
-    public String ageRange(){return this.ageRange;}
+    public String getAgeRange() {return ageRange;}
 
-    public long getResponseTime(){return this.responseTime;}
+    public long getResponseTime() {return responseTime;}
 
-    public String getDate(){return this.date;}
+    public String getDate() {return date;}
+
+    public long getDay() {return day;}
 }

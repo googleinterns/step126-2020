@@ -35,16 +35,25 @@ public class ReadData {
                 String ageRange = values[4];
                 long responseTime = Long.parseLong(values[5]);
                 String date = values[6];
+                long day = Long.parseLong(values[7]);
                 
                 Entity entity = new Entity("Response", id);
+                Entity inStore; // Entity that may or may not exist in Datastore
 
-                if (datastoreService.get(entity.getKey()) == null) {
+                try {
+                    inStore = datastoreService.get(entity.getKey());
+                } catch (EntityNotFoundException e) {
+                    inStore = null;
+                }
+
+                if (inStore == null) {
                     entity.setProperty("id", id);
                     entity.setProperty("score", score);
                     entity.setProperty("gender", gender);
                     entity.setProperty("ageRange", ageRange);
                     entity.setProperty("responseTime", responseTime);
                     entity.setProperty("date", date);
+                    entity.setProperty("day", day);
 
                     datastoreService.put(entity);
                 }
@@ -56,8 +65,6 @@ public class ReadData {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
-            e.printStackTrace();
-        } catch (EntityNotFoundException e) {
             e.printStackTrace();
         }
     }
