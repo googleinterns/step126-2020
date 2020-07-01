@@ -1,3 +1,6 @@
+/* global google */
+/* eslint no-undef: "error"*/
+
 function createMap() {
   const map = new google.maps.Map(
       document.getElementById('map-container'),
@@ -11,22 +14,6 @@ function createMap() {
   const cityLimitsCoordinates = [
     {lat: 37.708305, lng: -122.502691},
     {lat: 37.708229, lng: -122.393322},
-  ];
-
-  const precinctElevenCoordinates = [
-    {lat: 37.724393, lng: -122.425343},
-    {lat: 37.725659, lng: -122.421427},
-    {lat: 37.724466, lng: -122.420893},
-    {lat: 37.724703, lng: -122.419927},
-    {lat: 37.723493, lng: -122.419458},
-    {lat: 37.723781, lng: -122.418436},
-    {lat: 37.722576, lng: -122.417942},
-    {lat: 37.722821, lng: -122.416941},
-    {lat: 37.721932, lng: -122.416552},
-    {lat: 37.722230, lng: -122.415586},
-    {lat: 37.723092, lng: -122.415967},
-    {lat: 37.722815, lng: -122.424100},
-    {lat: 37.722860, lng: -122.426518},
   ];
 
   const precinctTenCoordinates = [
