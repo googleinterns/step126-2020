@@ -11,13 +11,13 @@ function createMap() {
     map.data.loadGeoJson('neighborhoods.json');
     map.data.setStyle({visible: false});
 
-    const cityLimits = [
+    const cityBorder = [
         {lat: 37.708305, lng: -122.502691},
         {lat: 37.708229, lng: -122.393322}
     ]
 
-    let cityLimits = new google.maps.Polygon({
-        paths: cityLimits,
+    let cityLimit = new google.maps.Polygon({
+        paths: cityBorder,
         strokeColor: 'black',
         strokeOpacity: 0.8,
         strokeWeight: 2,
@@ -25,7 +25,7 @@ function createMap() {
         fillOpacity: 0.35
     });
   
-  cityLimits.setMap(map);
+  cityLimit.setMap(map);
 }
 
 async function associationUpdateDisplay() {
