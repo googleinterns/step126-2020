@@ -14,12 +14,13 @@ import java.io.IOException;
 import java.lang.NullPointerException;
 
 public class ReadData {
+    final String DELIMITER = ",";
+
     public void readCSV() {
         SurveyResponse response;
         BufferedReader reader;
         FileReader file;
         DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
-        final String DELIMITER = ",";
 
         try {
             file = new FileReader("assets/surveyresponse.csv");
