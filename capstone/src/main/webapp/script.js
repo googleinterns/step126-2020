@@ -6,17 +6,17 @@ function createMap() {
   
     //**adding zipcode overlay */
     map.data.loadGeoJson('zipcode-data.json');
-    map.data.setStyle({visible: false});
     //**adding precinct overlay */
     map.data.loadGeoJson('neighborhoods.json');
+    
     map.data.setStyle({visible: false});
 
-    let cityBorder = [
+    const cityBorder = [
         {lat: 37.708305, lng: -122.502691},
         {lat: 37.708229, lng: -122.393322}
     ]
 
-    let cityLimit = new google.maps.Polygon({
+    const cityLimit = new google.maps.Polygon({
         paths: cityBorder,
         strokeColor: 'black',
         strokeOpacity: 0.8,
