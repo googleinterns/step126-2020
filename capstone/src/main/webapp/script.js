@@ -1,32 +1,30 @@
 function createMap() {
-  const map = new google.maps.Map(
-      document.getElementById('map-container'),
-      {center: {lat: 37.7749, lng: -122.4194}, zoom: 12});
+    const map = new google.maps.Map(
+        document.getElementById('map-container'),
+        {center: {lat: 37.7749, lng: -122.4194}, zoom: 12}
+    );
   
-	    //**adding zipcode overlay */
-        map.data.loadGeoJson('zipcode-data.json');
-        map.data.setStyle({visible: false});
-      //**adding precinct overlay */
-        map.data.loadGeoJson('neighborhoods.json');
-        map.data.setStyle({visible: false});
-      {center: {lat: 37.7749, lng: -122.4194}, zoom: 13});
+    //**adding zipcode overlay */
+    map.data.loadGeoJson('zipcode-data.json');
+    map.data.setStyle({visible: false});
+    //**adding precinct overlay */
+    map.data.loadGeoJson('neighborhoods.json');
+    map.data.setStyle({visible: false});
 
     var cityLimits = [
         {lat: 37.708305, lng: -122.502691},
         {lat: 37.708229, lng: -122.393322}
     ]
 
- var cityLimits = new google.maps.Polygon({
-    paths: cityLimits,
-    strokeColor: 'black',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: 'black',
-    fillOpacity: 0.35
-  });
+    var cityLimits = new google.maps.Polygon({
+        paths: cityLimits,
+        strokeColor: 'black',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: 'black',
+        fillOpacity: 0.35
+    });
   
-  cityLimits.setMap(map);
- 
   cityLimits.setMap(map);
 }
 
