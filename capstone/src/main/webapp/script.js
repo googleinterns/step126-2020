@@ -1,13 +1,13 @@
 function createMap() {
-    const map = new google.maps.Map(
-        document.getElementById('map-container'),
-        {center: {lat: 37.7749, lng: -122.4194}, zoom: 12});
-
-    //**adding zipcode overlay */
-    //map.data.loadGeoJson('zipcode-data.json');
-    map.data.loadGeoJson('neighborhoods.json');
-    //map.data.setStyle({visible: false});
-
+  const map = new google.maps.Map(
+      document.getElementById('map-container'),
+      {center: {lat: 37.7749, lng: -122.4194}, zoom: 12});
+        //**adding precinct overlay */
+        map.data.loadGeoJson('neighborhoods.json');
+        map.data.setStyle({visible: true});
+        //**adding zipcode overlay */
+        map.data.loadGeoJson('zipcode-data.json');
+        map.data.setStyle({visible: false});
 
     var cityLimits = [
         {lat: 37.708305, lng: -122.502691},
@@ -22,10 +22,10 @@ function createMap() {
         fillColor: 'black',
         fillOpacity: 0.35
     });
-   
-    cityLimits.setMap(map);
-  
+
+  cityLimits.setMap(map);
 }
+
 async function associationUpdateDisplay() {
   const response = await fetch('/associations');
   const associations = await response.json();
