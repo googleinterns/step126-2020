@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Enforcer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(getSurveyResponses);
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Raleway&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <div id="header" class="header">
+      <h1>Enforcer</h1>
+    </div>
+    <div class="clear"></div>
+    <div id="content" class="content">
+    <div id = "stats-area" class="stats-area">
+      <div id="prediction-panel" class="prediction-panel"></div>
+
+      <div class="stats-grid">
+        <div id="donut-sentiment" class="grid-item"></div>
+        <div id="sentiment-v-response-time" class="grid-item"></div>
+        <div id="age-column-chart" class="grid-item"></div>
+        <div id="gender-bar-chart" class="grid-item"></div>
+        <div id="age-pie-chart" class="grid-item"></div>
+        <div id="sentiment-v-days" class="grid-item"></div>
+      </div>
+    </div>
+    </div>
+  </body>
+</html>
