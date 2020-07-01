@@ -11,7 +11,7 @@ function createMap() {
     map.data.loadGeoJson('neighborhoods.json');
     map.data.setStyle({visible: false});
 
-    const cityBorder = [
+    let cityBorder = [
         {lat: 37.708305, lng: -122.502691},
         {lat: 37.708229, lng: -122.393322}
     ]
