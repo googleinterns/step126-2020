@@ -51,23 +51,26 @@ function addListElement(list, contents) {
 
 window.addEventListener('load', associationUpdateDisplay);
 
-function loadCharts() {
-  const stats = new google.visualization.DataTable();
+async function postSurveyResponses(){
+    let response = await fetch('/data', {method: "POST"});
+}
 
-  stats.addColumn('string', 'Sentiment');
-  stats.addColumn('number', 'Percentage');
-  stats.addRows([
-    ['Positive', 0.7],
-    ['Neutral', 0.1],
-    ['Negative', 0.2],
-  ]);
+function loadCharts(){
+    let stats = new google.visualization.DataTable();
+    
+    stats.addColumn('string', 'Sentiment');
+    stats.addColumn('number', 'Percentage');
+    stats.addRows([
+        ['Positive', 0.7],
+        ['Neutral', 0.1],
+        ['Negative', 0.2],
+    ]);
 
-  // Instantiate and draw the chart.
-  const chart = new google.visualization.PieChart(
-      document.getElementById('sentiment-pie-chart'));
-  chart.draw(stats, null);
+    // Instantiate and draw the chart.
+    const chart = new google.visualization.PieChart(document.getElementById('sentiment-pie-chart'));
+    chart.draw(stats, null);
 
-  loadReponseChart();
+    loadReponseChart();
 }
 
 function loadReponseChart() {
@@ -76,16 +79,94 @@ function loadReponseChart() {
   stats.addColumn('string', 'Period');
   stats.addColumn('number', 'Number of Responses');
 
-  stats.addRows([
-    ['Daily', 4],
-    ['Weekly', 15],
-  ]);
-
-  // Instantiate and draw the chart.
-  const chart = new google.visualization.BarChart(
-      document.getElementById('response-bar-chart'));
-  chart.draw(stats, null);
+    // Instantiate and draw the chart.
+    const chart = new google.visualization.BarChart(document.getElementById('response-bar-chart'));
+    chart.draw(stats, null);
 }
 
-google.charts.load('current', {packages: ['corechart']});
-google.charts.setOnLoadCallback(loadCharts);
+/* below are methods for the statistics page */
+
+async function getSurveyResponses(){
+    let response = await fetch('/load-data');
+    let list = await response.json(); //list of entities from datastore
+    let scores = new Array();
+    let sentimentCount = [0,0,0,0,0]; // Very positive, positive, neutral, negative, and very negative
+    let genderCount = [0,0,0]; // Male, female, and unknown
+    let responseTimes = new Array();
+    let dates = new Array();
+    let ages = new Array();
+    
+    for (let i = 0; i < list.length; i++) {
+        scores.push(list[i].score);
+        responseTimes.push(list[i].responseTime);
+        dates.push(list[i].date);
+        ages.push(list[i].ageRange);
+
+        const gender = list[i].gender;
+        if (gender === 'M') {
+            genderCount[0] += 1;
+        } else if (gender === 'F') {
+            genderCount[1] += 1;
+        } else {
+            genderCount[2] += 1;
+        }
+
+        const sentiment = list[i].score;
+        if (sentiment >= 0.5) {
+            sentimentCount[0] += 1;
+        } else if (sentiment > 0.05) {
+            sentimentCount[1] += 1;
+        } else if (sentiment >= -0.05) {
+            sentimentCount[2] += 1;
+        } else if (sentiment > -0.5) {
+            sentimentCount[3] += 1;
+        } else { 
+            sentimentCount[4] += 1;
+        }
+    }
+
+    loadPieSentimentChart(sentimentCount);
+    loadGenderBarChart(genderCount);
+}
+
+function loadPieSentimentChart(list){
+    let stats = new google.visualization.DataTable();
+    
+    stats.addColumn('string', 'Sentiment');
+    stats.addColumn('number', 'Percentage');
+    stats.addRows([
+        ['Very Positive', list[0]],
+        ['Positive', list[1]],
+        ['Neutral', list[2]],
+        ['Negative', list[3]],
+        ['Very Negative', list[4]],
+    ]);
+
+    let options = {
+        title: 'Sentiment Percentages',
+        pieHole: 0.3,
+    };
+
+    // Instantiate and draw the chart.
+    const chart = new google.visualization.PieChart(document.getElementById('donut-sentiment'));
+    chart.draw(stats, options);
+}
+
+function loadGenderBarChart(list){
+    let stats = new google.visualization.DataTable();
+    
+    stats.addColumn('string', 'Gender');
+    stats.addColumn('number', 'Number');
+    stats.addRows([
+        ['Male', list[0]],
+        ['Female', list[1]],
+        ['Unknown', list[2]],
+    ]);
+
+    // Instantiate and draw the chart.
+    const chart = new google.visualization.BarChart(document.getElementById('gender-bar-chart'));
+    chart.draw(stats, null);
+
+    loadReponseChart();
+}
+
