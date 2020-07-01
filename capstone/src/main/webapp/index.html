@@ -9,8 +9,7 @@
     <script src="script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Raleway&display=swap" rel="stylesheet">
   </head>
-  <body>
-  <body>
+  <body onload="postSurveyResponses();createMap()">
     <div id="header" class="header">
       <h1>Enforcer</h1>
     </div>
@@ -38,12 +37,9 @@
         </div>
         <div id="second-stats" class="container second-stats">
           <h2>Sentiment Percentages</h2>
-          <script src="https://www.gstatic.com/charts/loader.js"></script>
-          <script>
-            google.charts.load('current', {packages: ['corechart']});
-            google.charts.setOnLoadCallback(loadCharts);
-          </script>
+          <a href="statistics.html">
           <div id="sentiment-pie-chart"></div>
+          </a>
         </div>
         <div id="third-stats" class="container third-stats">
           <h2>Survey Responses</h2>
