@@ -1,3 +1,6 @@
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(getSurveyResponses);
+
 async function getSurveyResponses(){
     const response = await fetch('/load-data');
     const list = await response.json(); //list of entities from datastore
