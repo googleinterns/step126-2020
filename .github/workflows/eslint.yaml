@@ -11,4 +11,4 @@ jobs:
       - name: Install npm packages
         run: npm install
       - name: Lint with ESLint
-        run: ./node_modules/.bin/eslint .
+        run: ./node_modules/.bin/eslint capstone/src/.
