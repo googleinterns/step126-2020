@@ -1,6 +1,5 @@
 package com.google.sps.servlets;
 
-<<<<<<< HEAD:capstone/src/main/java/com/google/sps/servlets/AssociationServlet.java
 import com.google.gson.Gson;
 import com.google.sps.data.AssociationData;
 import java.io.IOException;
