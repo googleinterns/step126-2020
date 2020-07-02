@@ -24,6 +24,6 @@ locally from the root directory of the project.
   or run all tests together as shown below.
 - JavaScript Lint:
   - One time setup: run `npm install`
-  - Run `./node_modules/.bin/eslint capstone/src/.
-- All tests`can be run using ./lint or ./lint-replace if you want to automatically fix
+  - Run `./node_modules/.bin/eslint capstone/src/.`
+- All tests can be run using `./lint` or `./lint-replace` if you want to automatically fix
   the errors found
