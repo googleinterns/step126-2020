@@ -1,3 +1,6 @@
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(loadCharts);
+
 function createMap() {
     const map = new google.maps.Map(
         document.getElementById('map-container'),
