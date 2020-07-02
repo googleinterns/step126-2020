@@ -3,9 +3,21 @@ async function getSurveyResponses(){
     const list = await response.json(); //list of entities from datastore
     let scores = new Array();
     let sentimentCount = [0,0,0,0,0]; // Very positive, positive, neutral, negative, and very negative
-    const refGender = ['M','F','U'];
+    const refGender = {
+        'M': 0,
+        'F': 1,
+        'U': 2
+    };
     let genderCount = [0,0,0]; // Male, female, and unknown
-    const refAge = ['18-24','25-34','35-44','45-54','55-64','65+','Unknown'];
+    const refAge = {
+       '18-24': 0,
+       '25-34': 1,
+       '35-44': 2,
+       '45-54': 3,
+       '55-64': 4,
+       '65+': 5,
+       'Unknown': 6 
+    };
     let ageCount = [0,0,0,0,0,0,0]; // 18-24, 25-34, 35-44, 45-54, 55-64, 65+, or Unknown
     let genders = new Array();
     let responseTimes = new Array();
@@ -19,7 +31,7 @@ async function getSurveyResponses(){
         ages.push(list[i].ageRange);
         days.push(list[i].day);
 
-        genderCount[refGender.indexOf(list[i].gender)] += 1;
+        genderCount[refGender[list[i].gender]] += 1;
 
         const sentiment = list[i].score;
         if (sentiment >= 0.5) {
@@ -34,7 +46,7 @@ async function getSurveyResponses(){
             sentimentCount[4] += 1;
         }
 
-        ageCount[refAge.indexOf(list[i].ageRange)] += 1;
+        ageCount[refAge[list[i].ageRange]] += 1;
     }
 
     loadBubbleChart(days, scores, genders, responseTimes);

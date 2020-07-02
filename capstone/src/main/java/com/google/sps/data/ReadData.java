@@ -18,7 +18,7 @@ public class ReadData {
 
     public void readCSV() {
         SurveyResponse response;
-        BufferedReader reader;
+        BufferedReader reader = null;
         FileReader file;
         DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
 
@@ -59,14 +59,20 @@ public class ReadData {
                     datastoreService.put(entity);
                 }
             }
-
-            reader.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
             e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }
