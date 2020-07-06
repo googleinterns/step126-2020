@@ -19,8 +19,11 @@ locally from the root directory of the project.
 
 - Java Continuous Integration: Run `mvn package`
 - Java Format: Follow the instructions at
-  https://github.com/google/google-java-format. Note that this formats your code
-  without telling you the changes first.
+  https://github.com/google/google-java-format to download the .jar. You can then
+  run it seperately with instructions from the the formatter README (must use java 11)
+  or run all tests together as shown below.
 - JavaScript Lint:
   - One time setup: run `npm install`
-  - Run `./node_modules/.bin/eslint .`
+  - Run `./node_modules/.bin/eslint capstone/src/.`
+- All tests can be run using `./lint` or `./lint-replace` if you want to automatically fix
+  the errors found
