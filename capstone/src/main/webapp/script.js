@@ -1,33 +1,35 @@
+/* global google */
+
 google.charts.load('current', {packages: ['corechart']});
 google.charts.setOnLoadCallback(loadCharts);
 
 function createMap() {
-    const map = new google.maps.Map(
-        document.getElementById('map-container'),
-        {center: {lat: 37.7749, lng: -122.4194}, zoom: 12}
-    );
-  
-    //**adding zipcode overlay */
-    map.data.loadGeoJson('zipcode-data.json');
-    //**adding precinct overlay */
-    map.data.loadGeoJson('neighborhoods.json');
-    
-    map.data.setStyle({visible: false});
+  const map = new google.maps.Map(
+      document.getElementById('map-container'),
+      {center: {lat: 37.7749, lng: -122.4194}, zoom: 12},
+  );
 
-    const cityBorder = [
-        {lat: 37.708305, lng: -122.502691},
-        {lat: 37.708229, lng: -122.393322}
-    ]
+  //* *adding zipcode overlay */
+  map.data.loadGeoJson('zipcode-data.json');
+  //* *adding precinct overlay */
+  map.data.loadGeoJson('neighborhoods.json');
 
-    const cityLimit = new google.maps.Polygon({
-        paths: cityBorder,
-        strokeColor: 'black',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: 'black',
-        fillOpacity: 0.35
-    });
-  
+  map.data.setStyle({visible: false});
+
+  const cityBorder = [
+    {lat: 37.708305, lng: -122.502691},
+    {lat: 37.708229, lng: -122.393322},
+  ];
+
+  const cityLimit = new google.maps.Polygon({
+    paths: cityBorder,
+    strokeColor: 'black',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: 'black',
+    fillOpacity: 0.35,
+  });
+
   cityLimit.setMap(map);
 }
 
@@ -54,26 +56,26 @@ function addListElement(list, contents) {
 
 window.addEventListener('load', associationUpdateDisplay);
 
-async function postSurveyResponses(){
-   await fetch('/data', {method: "POST"});
+async function postSurveyResponses() {
+  await fetch('/data', {method: 'POST'});
 }
 
-function loadCharts(){
-    let stats = new google.visualization.DataTable();
-    
-    stats.addColumn('string', 'Sentiment');
-    stats.addColumn('number', 'Percentage');
-    stats.addRows([
-        ['Positive', 0.7],
-        ['Neutral', 0.1],
-        ['Negative', 0.2],
-    ]);
+function loadCharts() {
+  const stats = new google.visualization.DataTable();
 
-    // Instantiate and draw the chart.
-    const chart = new google.visualization.PieChart(document.getElementById('sentiment-pie-chart'));
-    chart.draw(stats, null);
+  stats.addColumn('string', 'Sentiment');
+  stats.addColumn('number', 'Percentage');
+  stats.addRows([
+    ['Positive', 0.7],
+    ['Neutral', 0.1],
+    ['Negative', 0.2],
+  ]);
 
-    loadReponseChart();
+  // Instantiate and draw the chart.
+  const chart = new google.visualization.PieChart(document.getElementById('sentiment-pie-chart'));
+  chart.draw(stats, null);
+
+  loadReponseChart();
 }
 
 function loadReponseChart() {
@@ -82,7 +84,7 @@ function loadReponseChart() {
   stats.addColumn('string', 'Period');
   stats.addColumn('number', 'Number of Responses');
 
-    // Instantiate and draw the chart.
-    const chart = new google.visualization.BarChart(document.getElementById('response-bar-chart'));
-    chart.draw(stats, null);
+  // Instantiate and draw the chart.
+  const chart = new google.visualization.BarChart(document.getElementById('response-bar-chart'));
+  chart.draw(stats, null);
 }
