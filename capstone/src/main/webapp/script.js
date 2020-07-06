@@ -37,22 +37,22 @@ function createMap() {
 
   //* *button for centering map*/
   const centerControlDiv = document.createElement('div');
-  var centerControl = new CenterControl(centerControlDiv, map);
+  centerControl(centerControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER].push(centerControlDiv);
 
   //* *button for zipcode data layer */
   const zipControlDiv = document.createElement('div');
-  var zipControl = new ZipControl(zipControlDiv, map);
+  zipControl(zipControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER].push(zipControlDiv);
 
   //* *button for zipcode data layer */
   const precinctControlDiv = document.createElement('div');
-  var precinctControl = new PrecinctControl(precinctControlDiv, map);
+  precinctControl(precinctControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER]
       .push(precinctControlDiv);
 }
 
-function CenterControl(controlDiv, map) {
+function centerControl(controlDiv, map) {
   //* *button creation and positioning*/
   const controlUI = document.createElement('div');
   controlUI.style.backgroundColor = '#fff';
@@ -83,7 +83,7 @@ function CenterControl(controlDiv, map) {
 }
 
 let zipClicks = 0;
-function ZipControl(controlDiv, map) {
+function zipControl(controlDiv, map) {
   //* *adding zipcode overlay*/
   const zipcodeLayer = new google.maps.Data({map: map});
   zipcodeLayer.loadGeoJson('zipcode-data.json');
@@ -124,7 +124,7 @@ function ZipControl(controlDiv, map) {
 }
 
 let precinctClicks = 0;
-function PrecinctControl(controlDiv, map) {
+function precinctControl(controlDiv, map) {
   //* *adding precinct overlay */
   const precinctLayer = new google.maps.Data({map: map});
   precinctLayer.loadGeoJson('neighborhoods.json');
