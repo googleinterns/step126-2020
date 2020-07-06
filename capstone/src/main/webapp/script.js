@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* global google */
+
 function createMap() {
   const map = new google.maps.Map(document.getElementById('map-container'),
       {
