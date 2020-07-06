@@ -172,10 +172,8 @@ function addListElement(list, contents) {
 }
 
 window.addEventListener('load', associationUpdateDisplay);
-
 function loadCharts() {
   const stats = new google.visualization.DataTable();
-
   stats.addColumn('string', 'Sentiment');
   stats.addColumn('number', 'Percentage');
   stats.addRows([
@@ -185,7 +183,8 @@ function loadCharts() {
   ]);
 
   // Instantiate and draw the chart.
-  const chart = new google.visualization.PieChart(document.getElementById('sentiment-pie-chart'));
+  const chart = new google.visualization.PieChart(
+      document.getElementById('sentiment-pie-chart'));
   chart.draw(stats, null);
 
   loadReponseChart();
@@ -203,6 +202,10 @@ function loadReponseChart() {
   ]);
 
   // Instantiate and draw the chart.
-  const chart = new google.visualization.BarChart(document.getElementById('response-bar-chart'));
+  const chart = new google.visualization.BarChart(
+      document.getElementById('response-bar-chart'));
   chart.draw(stats, null);
 }
+
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(loadCharts);
