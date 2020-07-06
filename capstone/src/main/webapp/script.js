@@ -33,8 +33,6 @@ function createMap() {
   cityLimit.setMap(map);
 }
 
-window.addEventListener('load', createMap);
-
 async function associationUpdateDisplay() {
   const response = await fetch('/associations');
   const associations = await response.json();
@@ -54,7 +52,9 @@ function addListElement(list, contents) {
   list.appendChild(elem);
 }
 
+window.addEventListener('load', createMap);
 window.addEventListener('load', associationUpdateDisplay);
+window.addEventListener('load', postSurveyResponses);
 
 async function postSurveyResponses() {
   await fetch('/data', {method: 'POST'});
@@ -72,7 +72,8 @@ function loadCharts() {
   ]);
 
   // Instantiate and draw the chart.
-  const chart = new google.visualization.PieChart(document.getElementById('sentiment-pie-chart'));
+  const chart = new google.visualization.PieChart(
+      document.getElementById('sentiment-pie-chart'));
   chart.draw(stats, null);
 
   loadReponseChart();
@@ -85,6 +86,7 @@ function loadReponseChart() {
   stats.addColumn('number', 'Number of Responses');
 
   // Instantiate and draw the chart.
-  const chart = new google.visualization.BarChart(document.getElementById('response-bar-chart'));
+  const chart = new google.visualization.BarChart(
+      document.getElementById('response-bar-chart'));
   chart.draw(stats, null);
 }

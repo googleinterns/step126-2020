@@ -6,14 +6,16 @@ google.charts.setOnLoadCallback(getSurveyResponses);
 async function getSurveyResponses() {
   const response = await fetch('/load-data');
   const list = await response.json(); // list of entities from datastore
-  const scores = new Array();
-  const sentimentCount = [0, 0, 0, 0, 0]; // Very positive, positive, neutral, negative, and very negative
+  const scores = [];
+  /* sentimentCount: Very positive, positive, neutral, negative, and very neg.*/
+  const sentimentCount = [0, 0, 0, 0, 0];
   const refGender = {
     'M': 0,
     'F': 1,
     'U': 2,
   };
-  const genderCount = [0, 0, 0]; // Male, female, and unknown
+  /* genderCount: Male, female, and unknown */
+  const genderCount = [0, 0, 0];
   const refAge = {
     '18-24': 0,
     '25-34': 1,
@@ -23,11 +25,12 @@ async function getSurveyResponses() {
     '65+': 5,
     'Unknown': 6,
   };
-  const ageCount = [0, 0, 0, 0, 0, 0, 0]; // 18-24, 25-34, 35-44, 45-54, 55-64, 65+, or Unknown
-  const genders = new Array();
-  const responseTimes = new Array();
-  const ages = new Array();
-  const days = new Array();
+  /* ageCount: 18-24, 25-34, 35-44, 45-54, 55-64, 65+, or Unknown */
+  const ageCount = [0, 0, 0, 0, 0, 0, 0];
+  const genders = [];
+  const responseTimes = [];
+  const ages = [];
+  const days = [];
 
   for (let i = 0; i < list.length; i++) {
     scores.push(list[i].score);
@@ -65,7 +68,7 @@ async function getSurveyResponses() {
 
 function loadBubbleChart(listA, listB, listC, listD) {
   const stats = new google.visualization.DataTable();
-    
+
   stats.addColumn('string', 'ID');
   stats.addColumn('number', 'Days');
   stats.addColumn('number', 'Sentiment Score');
@@ -73,20 +76,23 @@ function loadBubbleChart(listA, listB, listC, listD) {
   stats.addColumn('number', 'Response time (in milliseconds)');
 
   const listLength = listA.length;
+  const res = 'Response #';
+
   for (let i = 0; i < listLength; i++) {
     stats.addRows([
-      ['Response #' + i.toString(10), listA[i], listB[i], listC[i], listD[i]],
+      [res + i.toString(10), listA[i], listB[i], listC[i], listD[i]],
     ]);
   }
 
   const options = {
-    title: 'Correlation between sentiment score, response time, gender, and days',
+    title: 'Correlation between sentiment, response time, gender, and days',
     hAxis: {title: 'Days'},
     vAxis: {title: 'Sentiment Score'},
     bubble: {textStyle: {fontSize: 11}},
     legend: 'left'};
 
-  const chart = new google.visualization.BubbleChart(document.getElementById('prediction-panel'));
+  const chart = new google.visualization.BubbleChart(
+      document.getElementById('prediction-panel'));
   chart.draw(stats, options);
 }
 
@@ -109,7 +115,8 @@ function loadPieSentimentChart(list) {
   };
 
   // Instantiate and draw the chart.
-  const chart = new google.visualization.PieChart(document.getElementById('donut-sentiment'));
+  const chart = new google.visualization.PieChart(
+      document.getElementById('donut-sentiment'));
   chart.draw(stats, options);
 }
 
@@ -133,7 +140,8 @@ function loadAgeColumnChart(list) {
   };
 
   // Instantiate and draw the chart.
-  const chart = new google.visualization.ColumnChart(document.getElementById('age-column-chart'));
+  const chart = new google.visualization.ColumnChart(
+      document.getElementById('age-column-chart'));
   chart.draw(stats, options);
 }
 
@@ -155,7 +163,8 @@ function loadGenderBarChart(list) {
   };
 
   // Instantiate and draw the chart.
-  const chart = new google.visualization.BarChart(document.getElementById('gender-bar-chart'));
+  const chart = new google.visualization.BarChart(
+      document.getElementById('gender-bar-chart'));
   chart.draw(stats, options);
 }
 
@@ -182,7 +191,8 @@ function loadSentimentVResponseTimeScatterChart(listA, listB) {
   };
 
   // Instantiate and draw the chart.
-  const chart = new google.visualization.ScatterChart(document.getElementById('sentiment-v-response-time'));
+  const chart = new google.visualization.ScatterChart(
+      document.getElementById('sentiment-v-response-time'));
   chart.draw(stats, options);
 }
 
@@ -209,7 +219,8 @@ function loadSentimentVDaysScatterChart(listA, listB) {
   };
 
   // Instantiate and draw the chart.
-  const chart = new google.visualization.ScatterChart(document.getElementById('sentiment-v-days'));
+  const chart = new google.visualization.ScatterChart(
+      document.getElementById('sentiment-v-days'));
   chart.draw(stats, options);
 }
 
@@ -233,6 +244,7 @@ function loadAgePieChart(list) {
   };
 
   // Instantiate and draw the chart.
-  const chart = new google.visualization.PieChart(document.getElementById('age-pie-chart'));
+  const chart = new google.visualization.PieChart(
+      document.getElementById('age-pie-chart'));
   chart.draw(stats, options);
 }
