@@ -56,8 +56,8 @@ public class ReadData {
       }
     } catch (FileNotFoundException e) {
       System.out.println("No File Found error");
-    } catch (IOException e){
-      System.out.println("IO error");    
+    } catch (IOException e) {
+      System.out.println("IO error");
     } finally {
       if (reader != null) {
         try {
