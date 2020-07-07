@@ -1,34 +1,37 @@
+/* global google */
+
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(loadCharts);
+
 function createMap() {
-    const map = new google.maps.Map(
-        document.getElementById('map-container'),
-        {center: {lat: 37.7749, lng: -122.4194}, zoom: 12}
-    );
-  
-    //**adding zipcode overlay */
-    map.data.loadGeoJson('zipcode-data.json');
-    //**adding precinct overlay */
-    map.data.loadGeoJson('neighborhoods.json');
-    
-    map.data.setStyle({visible: false});
+  const map = new google.maps.Map(
+      document.getElementById('map-container'),
+      {center: {lat: 37.7749, lng: -122.4194}, zoom: 12},
+  );
 
-    const cityBorder = [
-        {lat: 37.708305, lng: -122.502691},
-        {lat: 37.708229, lng: -122.393322}
-    ]
+  /* adding zipcode overlay */
+  map.data.loadGeoJson('zipcode-data.json');
+  /* adding precinct overlay */
+  map.data.loadGeoJson('neighborhoods.json');
 
-    const cityLimit = new google.maps.Polygon({
-        paths: cityBorder,
-        strokeColor: 'black',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: 'black',
-        fillOpacity: 0.35
-    });
-  
+  map.data.setStyle({visible: false});
+
+  const cityBorder = [
+    {lat: 37.708305, lng: -122.502691},
+    {lat: 37.708229, lng: -122.393322},
+  ];
+
+  const cityLimit = new google.maps.Polygon({
+    paths: cityBorder,
+    strokeColor: 'black',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: 'black',
+    fillOpacity: 0.35,
+  });
+
   cityLimit.setMap(map);
 }
-
-window.addEventListener('load', createMap);
 
 async function associationUpdateDisplay() {
   const response = await fetch('/associations');
@@ -49,7 +52,13 @@ function addListElement(list, contents) {
   list.appendChild(elem);
 }
 
+window.addEventListener('load', createMap);
 window.addEventListener('load', associationUpdateDisplay);
+window.addEventListener('load', postSurveyResponses);
+
+async function postSurveyResponses() {
+  await fetch('/data', {method: 'POST'});
+}
 
 function loadCharts() {
   const stats = new google.visualization.DataTable();
@@ -76,16 +85,8 @@ function loadReponseChart() {
   stats.addColumn('string', 'Period');
   stats.addColumn('number', 'Number of Responses');
 
-  stats.addRows([
-    ['Daily', 4],
-    ['Weekly', 15],
-  ]);
-
   // Instantiate and draw the chart.
   const chart = new google.visualization.BarChart(
       document.getElementById('response-bar-chart'));
   chart.draw(stats, null);
 }
-
-google.charts.load('current', {packages: ['corechart']});
-google.charts.setOnLoadCallback(loadCharts);
