@@ -54,8 +54,6 @@ public class ReadData {
           datastoreService.put(entity);
         }
       }
-    } catch (FileNotFoundException e) {
-      System.out.println("No File Found error");
     } catch (IOException e) {
       System.out.println("IO error");
     } finally {
