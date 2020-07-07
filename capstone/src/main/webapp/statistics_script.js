@@ -9,24 +9,20 @@ async function getSurveyResponses() {
   const scores = [];
   /* sentimentCount: Very positive, positive, neutral, negative, and very neg.*/
   const sentimentCount = [0, 0, 0, 0, 0];
-  const refGender = {
+  const genderCount = {
     'M': 0,
-    'F': 1,
-    'U': 2,
+    'F': 0,
+    'U': 0,
   };
-  /* genderCount: Male, female, and unknown */
-  const genderCount = [0, 0, 0];
-  const refAge = {
+  const ageCount = {
     '18-24': 0,
-    '25-34': 1,
-    '35-44': 2,
-    '45-54': 3,
-    '55-64': 4,
-    '65+': 5,
-    'Unknown': 6,
+    '25-34': 0,
+    '35-44': 0,
+    '45-54': 0,
+    '55-64': 0,
+    '65+': 0,
+    'Unknown': 0,
   };
-  /* ageCount: 18-24, 25-34, 35-44, 45-54, 55-64, 65+, or Unknown */
-  const ageCount = [0, 0, 0, 0, 0, 0, 0];
   const genders = [];
   const responseTimes = [];
   const ages = [];
@@ -39,7 +35,7 @@ async function getSurveyResponses() {
     ages.push(list[i].ageRange);
     days.push(list[i].day);
 
-    genderCount[refGender[list[i].gender]] += 1;
+    genderCount[list[i].gender] += 1;
 
     const sentiment = list[i].score;
     if (sentiment >= 0.5) {
@@ -54,7 +50,7 @@ async function getSurveyResponses() {
       sentimentCount[4] += 1;
     }
 
-    ageCount[refAge[list[i].ageRange]] += 1;
+    ageCount[list[i].ageRange] += 1;
   }
 
   loadBubbleChart(days, scores, genders, responseTimes);
@@ -120,19 +116,19 @@ function loadPieSentimentChart(list) {
   chart.draw(stats, options);
 }
 
-function loadAgeColumnChart(list) {
+function loadAgeColumnChart(obj) {
   const stats = new google.visualization.DataTable();
 
   stats.addColumn('string', 'Age');
   stats.addColumn('number', 'People in each age group');
   stats.addRows([
-    ['18-24', list[0]],
-    ['25-34', list[1]],
-    ['35-44', list[2]],
-    ['45-54', list[3]],
-    ['55-64', list[4]],
-    ['65+', list[5]],
-    ['Unknown', list[6]],
+    ['18-24', obj['18-24']],
+    ['25-34', obj['25-34']],
+    ['35-44', obj['35-44']],
+    ['45-54', obj['45-54']],
+    ['55-64', obj['55-64']],
+    ['65+', obj['65+']],
+    ['Unknown', obj['Unknown']],
   ]);
 
   const options = {
@@ -145,15 +141,15 @@ function loadAgeColumnChart(list) {
   chart.draw(stats, options);
 }
 
-function loadGenderBarChart(list) {
+function loadGenderBarChart(obj) {
   const stats = new google.visualization.DataTable();
 
   stats.addColumn('string', 'Gender');
   stats.addColumn('number', 'People of each gender');
   stats.addRows([
-    ['Male', list[0]],
-    ['Female', list[1]],
-    ['Unknown', list[2]],
+    ['Male', obj['M']],
+    ['Female', obj['F']],
+    ['Unknown', obj['U']],
   ]);
 
   const options = {
@@ -224,19 +220,19 @@ function loadSentimentVDaysScatterChart(listA, listB) {
   chart.draw(stats, options);
 }
 
-function loadAgePieChart(list) {
+function loadAgePieChart(obj) {
   const stats = new google.visualization.DataTable();
 
   stats.addColumn('string', 'Age');
   stats.addColumn('number', 'Percentage');
   stats.addRows([
-    ['18-24', list[0]],
-    ['25-34', list[1]],
-    ['35-44', list[2]],
-    ['45-54', list[3]],
-    ['55-64', list[4]],
-    ['65+', list[5]],
-    ['Unknown', list[6]],
+    ['18-24', obj['18-24']],
+    ['25-34', obj['25-34']],
+    ['35-44', obj['35-44']],
+    ['45-54', obj['45-54']],
+    ['55-64', obj['55-64']],
+    ['65+', obj['65+']],
+    ['Unknown', obj['Unknown']],
   ]);
 
   const options = {
