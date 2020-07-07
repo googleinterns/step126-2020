@@ -55,15 +55,15 @@ public class ReadData {
         }
       }
     } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
+      System.out.println("No File Found error");
+    } catch (IOException e){
+      System.out.println("IO error");    
     } finally {
       if (reader != null) {
         try {
           reader.close();
         } catch (IOException e) {
-          e.printStackTrace();
+          System.out.println("Error closing the reader");
         }
       }
     }
