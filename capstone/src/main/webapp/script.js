@@ -57,24 +57,12 @@ function createMap() {
 function centerControl(controlDiv, map) {
   //* *button creation and positioning*/
   const controlUI = document.createElement('div');
-  controlUI.style.backgroundColor = '#fff';
-  controlUI.style.border = '2px solid #fff';
-  controlUI.style.borderRadius = '3px';
-  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-  controlUI.style.cursor = 'pointer';
-  controlUI.style.marginBottom = '22px';
-  controlUI.style.textAlign = 'center';
+  controlUI.classList.add("button");
   controlUI.title = 'Click to recenter the map';
   controlDiv.appendChild(controlUI);
 
   //* *css for interior of all buttons*/
   const text = document.createElement('div');
-  text.style.color = 'rgb(25,25,25)';
-  text.style.fontFamily = 'Roboto,Arial,sans-serif';
-  text.style.fontSize = '16px';
-  text.style.lineHeight = '38px';
-  text.style.paddingLeft = '5px';
-  text.style.paddingRight = '5px';
   text.innerHTML = 'Center Map';
   controlUI.appendChild(text);
 
@@ -93,24 +81,12 @@ function zipControl(controlDiv, map) {
 
   //* *button creation and positioning*/
   const controlUI = document.createElement('div');
-  controlUI.style.backgroundColor = '#fff';
-  controlUI.style.border = '2px solid #fff';
-  controlUI.style.borderRadius = '3px';
-  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-  controlUI.style.cursor = 'pointer';
-  controlUI.style.marginBottom = '22px';
-  controlUI.style.textAlign = 'center';
+  controlUI.classList.add("button");
   controlUI.title = 'Click to show San Fransisco zip codes';
   controlDiv.appendChild(controlUI);
 
   //* *css for interior of all buttons*/
   const text = document.createElement('div');
-  text.style.color = 'rgb(25,25,25)';
-  text.style.fontFamily = 'Roboto,Arial,sans-serif';
-  text.style.fontSize = '16px';
-  text.style.lineHeight = '38px';
-  text.style.paddingLeft = '5px';
-  text.style.paddingRight = '5px';
   text.innerHTML = 'Show Zipcodes';
   controlUI.appendChild(text);
 
@@ -134,24 +110,12 @@ function precinctControl(controlDiv, map) {
 
   //* *button creation and positioning*/
   const dataUI = document.createElement('div');
-  dataUI.style.backgroundColor = '#fff';
-  dataUI.style.border = '2px solid #fff';
-  dataUI.style.borderRadius = '3px';
-  dataUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-  dataUI.style.cursor = 'pointer';
-  //   dataUI.style.marginBottom = "22px";
-  dataUI.style.textAlign = 'center';
+  dataUI.classList.add("button");
   dataUI.title = 'Click to show San Fransisco precincts';
   controlDiv.appendChild(dataUI);
 
   //* *css for interior of all buttons*/
   const buttonText = document.createElement('div');
-  buttonText.style.color = 'rgb(25,25,25)';
-  buttonText.style.fontFamily = 'Roboto,Arial,sans-serif';
-  buttonText.style.fontSize = '16px';
-  buttonText.style.lineHeight = '38px';
-  buttonText.style.paddingLeft = '5px';
-  buttonText.style.paddingRight = '5px';
   buttonText.innerHTML = 'Show Precincts';
   dataUI.appendChild(buttonText);
 
