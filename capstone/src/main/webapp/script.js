@@ -9,9 +9,9 @@ function createMap() {
       {center: {lat: 37.7749, lng: -122.4194}, zoom: 12},
   );
 
-  //* *adding zipcode overlay */
+  /* adding zipcode overlay */
   map.data.loadGeoJson('zipcode-data.json');
-  //* *adding precinct overlay */
+  /* adding precinct overlay */
   map.data.loadGeoJson('neighborhoods.json');
 
   map.data.setStyle({visible: false});

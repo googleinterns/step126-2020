@@ -13,9 +13,8 @@ public class ReadData {
   final String DELIMITER = ",";
 
   public void readCSV() {
-    SurveyResponse response;
     BufferedReader reader = null;
-    FileReader file;
+    FileReader file = null;
     DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
 
     try {
@@ -58,8 +57,6 @@ public class ReadData {
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     } catch (IOException e) {
-      e.printStackTrace();
-    } catch (NullPointerException e) {
       e.printStackTrace();
     } finally {
       if (reader != null) {
