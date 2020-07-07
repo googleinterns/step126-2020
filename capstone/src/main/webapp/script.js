@@ -57,7 +57,7 @@ function createMap() {
 function centerControl(controlDiv, map) {
   //* *button creation and positioning*/
   const controlUI = document.createElement('div');
-  controlUI.classList.add('button');
+  controlUI.classList.add("button");
   controlUI.title = 'Click to recenter the map';
   controlDiv.appendChild(controlUI);
 
@@ -81,7 +81,7 @@ function zipControl(controlDiv, map) {
 
   //* *button creation and positioning*/
   const controlUI = document.createElement('div');
-  controlUI.classList.add('button');
+  controlUI.classList.add("button");
   controlUI.title = 'Click to show San Fransisco zip codes';
   controlDiv.appendChild(controlUI);
 
@@ -110,7 +110,7 @@ function precinctControl(controlDiv, map) {
 
   //* *button creation and positioning*/
   const dataUI = document.createElement('div');
-  dataUI.classList.add('button');
+  dataUI.classList.add("button");
   dataUI.title = 'Click to show San Fransisco precincts';
   controlDiv.appendChild(dataUI);
 
