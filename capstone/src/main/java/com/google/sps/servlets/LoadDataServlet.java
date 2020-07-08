@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.google.sps.data.SurveyResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date; 
+import java.util.Date;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +34,7 @@ public class LoadDataServlet extends HttpServlet {
       String ageRange = (String) e.getProperty("ageRange");
       String answerOne = (String) e.getProperty("answerOne");
       String answerTwo = (String) e.getProperty("answerTwo");
-      double score = (double) e.getProperty("score"); 
+      double score = (double) e.getProperty("score");
       long responseTimeOne = (long) e.getProperty("responseTimeOne");
       long responseTimeTwo = (long) e.getProperty("responseTimeTwo");
       long responseTimeThree = (long) e.getProperty("responseTimeThree");

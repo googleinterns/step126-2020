@@ -13,11 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
+
 /** Servlet that adds comments to datastore */
-@WebServlet("/delete-data") 
-public class DeleteDataServlet extends HttpServlet 
-{ 
+@WebServlet("/delete-data")
+public class DeleteDataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -25,8 +24,8 @@ public class DeleteDataServlet extends HttpServlet
     PreparedQuery results = datastore.prepare(query);
     List<Key> removeEntires = new ArrayList<Key>();
 
-    for (Entity e: results.asIterable()) {
-       removeEntires.add(e.getKey());
+    for (Entity e : results.asIterable()) {
+      removeEntires.add(e.getKey());
     }
     datastore.delete(removeEntires);
 

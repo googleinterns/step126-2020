@@ -5,12 +5,11 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.text.ParseException;  
-import java.util.Date;  
+import java.util.Date;
 
 public class ReadData {
   final String DELIMITER = ",";
@@ -29,13 +28,13 @@ public class ReadData {
       while ((line = reader.readLine()) != null) {
         String[] values = line.split(DELIMITER);
         String id = values[0] + "-" + values[1];
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date;
 
-        try { 
-            date = formatter.parse(values[2]);
+        try {
+          date = formatter.parse(values[2]);
         } catch (ParseException e) {
-            date = null;
+          date = null;
         }
         String completion = values[3];
         String gender = values[5];
@@ -47,7 +46,6 @@ public class ReadData {
         long responseTimeTwo = Long.parseLong(values[12]);
         long responseTimeThree = Long.parseLong(values[13]);
 
-        System.out.println(date.toString());
         Entity entity = new Entity("Response", id);
         Entity inStore; // Entity that may or may not exist in Datastore
 
@@ -69,7 +67,6 @@ public class ReadData {
           entity.setProperty("responseTimeOne", responseTimeOne);
           entity.setProperty("responseTimeTwo", responseTimeTwo);
           entity.setProperty("responseTimeThree", responseTimeThree);
-         
 
           datastoreService.put(entity);
         }

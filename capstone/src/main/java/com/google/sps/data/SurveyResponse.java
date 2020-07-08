@@ -1,6 +1,6 @@
 package com.google.sps.data;
 
-import java.util.Date; 
+import java.util.Date;
 
 /* This object represents each response a user submits */
 public class SurveyResponse {
@@ -15,8 +15,6 @@ public class SurveyResponse {
   private long responseTimeOne;
   private long responseTimeTwo;
   private long responseTimeThree;
-
-
 
   public void setId(String id) {
     this.id = id;
