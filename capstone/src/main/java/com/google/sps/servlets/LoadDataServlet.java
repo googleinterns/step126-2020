@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.sps.data.SurveyResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date; 
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,21 +28,29 @@ public class LoadDataServlet extends HttpServlet {
 
     for (Entity e : results.asIterable()) {
       String id = (String) e.getProperty("id");
-      double score = (double) e.getProperty("score");
+      Date date = (Date) e.getProperty("date");
+      String completion = (String) e.getProperty("completion");
       String gender = (String) e.getProperty("gender");
       String ageRange = (String) e.getProperty("ageRange");
-      long responseTime = (long) e.getProperty("responseTime");
-      String date = (String) e.getProperty("date");
-      long day = (long) e.getProperty("day");
+      String answerOne = (String) e.getProperty("answerOne");
+      String answerTwo = (String) e.getProperty("answerTwo");
+      double score = (double) e.getProperty("score"); 
+      long responseTimeOne = (long) e.getProperty("responseTimeOne");
+      long responseTimeTwo = (long) e.getProperty("responseTimeTwo");
+      long responseTimeThree = (long) e.getProperty("responseTimeThree");
 
       SurveyResponse surveyResponse = new SurveyResponse();
       surveyResponse.setId(id);
-      surveyResponse.setScore(score);
+      surveyResponse.setDate(date);
+      surveyResponse.setCompletion(completion);
       surveyResponse.setGender(gender);
       surveyResponse.setAgeRange(ageRange);
-      surveyResponse.setResponseTime(responseTime);
-      surveyResponse.setDate(date);
-      surveyResponse.setDay(day);
+      surveyResponse.setAnswerOne(answerOne);
+      surveyResponse.setAnswerTwo(answerTwo);
+      surveyResponse.setScore(score);
+      surveyResponse.setResponseTimeOne(responseTimeOne);
+      surveyResponse.setResponseTimeTwo(responseTimeTwo);
+      surveyResponse.setResponseTimeThree(responseTimeThree);
 
       surveyResponses.add(surveyResponse);
     }

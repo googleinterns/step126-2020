@@ -1,17 +1,37 @@
 package com.google.sps.data;
 
+import java.util.Date; 
+
 /* This object represents each response a user submits */
 public class SurveyResponse {
   private String id;
-  private double score;
+  private Date date;
+  private String completion;
   private String gender;
   private String ageRange;
-  private long responseTime;
-  private String date;
-  private long day;
+  private String answerOne;
+  private String answerTwo;
+  private double score;
+  private long responseTimeOne;
+  private long responseTimeTwo;
+  private long responseTimeThree;
+
+
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public void setCompletion(String completion) {
+    this.completion = completion;
+  }
+
+  public void setAnswerOne(String answerOne) {
+    this.answerOne = answerOne;
+  }
+
+  public void setAnswerTwo(String answerTwo) {
+    this.answerTwo = answerTwo;
   }
 
   public void setScore(double score) {
@@ -26,20 +46,28 @@ public class SurveyResponse {
     this.ageRange = ageRange;
   }
 
-  public void setResponseTime(long responseTime) {
-    this.responseTime = responseTime;
+  public void setResponseTimeOne(long responseTime) {
+    this.responseTimeOne = responseTime;
   }
 
-  public void setDate(String date) {
+  public void setResponseTimeTwo(long responseTime) {
+    this.responseTimeTwo = responseTime;
+  }
+
+  public void setResponseTimeThree(long responseTime) {
+    this.responseTimeThree = responseTime;
+  }
+
+  public void setDate(Date date) {
     this.date = date;
-  }
-
-  public void setDay(long day) {
-    this.day = day;
   }
 
   public String getId() {
     return id;
+  }
+
+  public String getCompletion() {
+    return completion;
   }
 
   public double getScore() {
@@ -54,15 +82,27 @@ public class SurveyResponse {
     return ageRange;
   }
 
-  public long getResponseTime() {
-    return responseTime;
+  public String getAnswerOne() {
+    return answerOne;
   }
 
-  public String getDate() {
+  public String getAnswerTwo() {
+    return answerTwo;
+  }
+
+  public long getResponseTimeOne() {
+    return responseTimeOne;
+  }
+
+  public long getResponseTimeTwo() {
+    return responseTimeTwo;
+  }
+
+  public long getResponseTimeThree() {
+    return responseTimeThree;
+  }
+
+  public Date getDate() {
     return date;
-  }
-
-  public long getDay() {
-    return day;
   }
 }
