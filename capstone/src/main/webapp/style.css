@@ -20,7 +20,7 @@ body {
 
 h1 {
   font-size: 2rem;
-  text-justify: left;
+  text-align: center;
   margin: 1rem;
   padding: 0;
   font-family: "Oswald", sans-serif;
@@ -109,6 +109,21 @@ ul {
   clear: both;
 }
 
+.button {
+  background-color: #19B3B1;
+  border: double;
+  border-radius: 5px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 19px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: "Oswald", sans-serif;
+}
+
 /* Statistics page style rules */
 .stats-area {
   height: 100vh;
@@ -136,4 +151,3 @@ ul {
   width: 500px;
   height:500px;
 }
-
