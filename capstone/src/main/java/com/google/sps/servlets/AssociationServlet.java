@@ -1,5 +1,13 @@
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions; 
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.QueryResultList;
 import com.google.gson.Gson;
 import com.google.sps.data.AssociationData;
 import java.io.IOException;
@@ -15,15 +23,34 @@ import javax.servlet.http.HttpServletResponse;
 public class AssociationServlet extends HttpServlet {
 
   private static final String OUTPUT_TYPE = "applications/json;";
+  public static final int LIMIT = 3;
   private final ArrayList<String> positive = new ArrayList(Arrays.asList("hi", "test1", "test2"));
   private final ArrayList<String> negative = new ArrayList(Arrays.asList("yeet", "hi", "think"));
+  private final String RESULT_ENTITY_KIND = "AssociationResult";
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(OUTPUT_TYPE);
 
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    FetchOptions fetchOptions = FetchOptions.Builder.withLimit(LIMIT);
+
+    Query posQuery = new Query(RESULT_ENTITY_KIND).addSort("score", SortDirection.DESCENDING);
+    ArrayList<String> positive = new ArrayList<String>();
+    extractContent(datastore.prepare(posQuery).asQueryResultList(fetchOptions), positive);
+    
+    Query negQuery = new Query(RESULT_ENTITY_KIND).addSort("score", SortDirection.ASCENDING);
+    ArrayList<String> negative = new ArrayList<String>();
+    extractContent(datastore.prepare(negQuery).asQueryResultList(fetchOptions), negative);
+    
     AssociationData output = new AssociationData(positive, negative);
     Gson gson = new Gson();
     response.getWriter().println(gson.toJson(output));
+  }
+
+  private void extractContent(QueryResultList<Entity> query, ArrayList<String> output) {
+    for (Entity entity : query) {
+      output.add((String) entity.getProperty("name"));
+    }
   }
 }
