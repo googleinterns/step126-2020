@@ -9,7 +9,6 @@ import com.google.appengine.api.datastore.Query;
 import com.google.cloud.language.v1.LanguageServiceClient;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,6 @@ public class UpdateAssociationServlet extends HttpServlet {
 
   public static final String SURVEY_ENTITY_KIND = "Actual";
   public static final String COMMENT_PROPERTY = "text";
-  public static final String RESULT_ENTITY_KIND = "AssociationResult";
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -42,7 +40,7 @@ public class UpdateAssociationServlet extends HttpServlet {
   private ArrayList<String> getComments(DatastoreService datastore) {
     Query query = new Query(SURVEY_ENTITY_KIND);
     PreparedQuery results = datastore.prepare(query);
-    
+
     ArrayList<String> comments = new ArrayList<String>();
     for (Entity e : results.asIterable()) {
       comments.add((String) e.getProperty(COMMENT_PROPERTY));
@@ -51,9 +49,9 @@ public class UpdateAssociationServlet extends HttpServlet {
   }
 
   private void clearPreviousResults(DatastoreService datastore) {
-    Query query = new Query(RESULT_ENTITY_KIND);
+    Query query = new Query(AssociationResult.ENTITY_KIND);
     PreparedQuery results = datastore.prepare(query);
-    
+
     ArrayList<Key> toDelete = new ArrayList<Key>();
     for (Entity entity : results.asIterable()) {
       toDelete.add(entity.getKey());
@@ -64,7 +62,7 @@ public class UpdateAssociationServlet extends HttpServlet {
 
   private void storeResults(DatastoreService datastore, ArrayList<AssociationResult> res) {
     for (AssociationResult association : res) {
-      Entity entity = new Entity(RESULT_ENTITY_KIND);
+      Entity entity = new Entity(AssociationResult.ENTITY_KIND);
       entity.setProperty("name", association.getContent());
       entity.setProperty("score", association.getScore());
       datastore.put(entity);
