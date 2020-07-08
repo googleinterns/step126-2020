@@ -21,7 +21,7 @@ public class UpdateAssociationServlet extends HttpServlet {
   public static final String COMMENT_PROPERTY = "text";
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
     response.setContentType("text/html;");
