@@ -57,7 +57,7 @@ function createMap() {
 function centerControl(controlDiv, map) {
   //* *button creation and positioning*/
   const controlUI = document.createElement('div');
-  controlUI.classList.add("button");
+  controlUI.classList.add('button');
   controlUI.title = 'Click to recenter the map';
   controlDiv.appendChild(controlUI);
 
@@ -72,7 +72,7 @@ function centerControl(controlDiv, map) {
   });
 }
 
-let zipClicks = 0;
+let zipClicked = false;
 function zipControl(controlDiv, map) {
   //* *adding zipcode overlay*/
   const zipcodeLayer = new google.maps.Data({map: map});
@@ -81,7 +81,7 @@ function zipControl(controlDiv, map) {
 
   //* *button creation and positioning*/
   const controlUI = document.createElement('div');
-  controlUI.classList.add("button");
+  controlUI.classList.add('button');
   controlUI.title = 'Click to show San Fransisco zip codes';
   controlDiv.appendChild(controlUI);
 
@@ -92,8 +92,8 @@ function zipControl(controlDiv, map) {
 
   //* *button functionality */
   controlUI.addEventListener('click', function() {
-    zipClicks++;
-    if (zipClicks%2==1) {
+    zipClicked = !zipClicked;
+    if (zipClicked) {
       zipcodeLayer.setStyle({visible: true});
     } else {
       zipcodeLayer.setStyle({visible: false});
@@ -101,7 +101,7 @@ function zipControl(controlDiv, map) {
   });
 }
 
-let precinctClicks = 0;
+let precinctButtonOn= false;
 function precinctControl(controlDiv, map) {
   //* *adding precinct overlay */
   const precinctLayer = new google.maps.Data({map: map});
@@ -110,7 +110,7 @@ function precinctControl(controlDiv, map) {
 
   //* *button creation and positioning*/
   const dataUI = document.createElement('div');
-  dataUI.classList.add("button");
+  dataUI.classList.add('button');
   dataUI.title = 'Click to show San Fransisco precincts';
   controlDiv.appendChild(dataUI);
 
@@ -121,8 +121,8 @@ function precinctControl(controlDiv, map) {
 
   //* *button functionality */
   dataUI.addEventListener('click', function() {
-    precinctClicks++;
-    if (precinctClicks%2==0) {
+    precinctButtonOn = !precinctButtonOn;
+    if (precinctButtonOn) {
       precinctLayer.setStyle({visible: false});
     } else {
       precinctLayer.setStyle({visible: true});
