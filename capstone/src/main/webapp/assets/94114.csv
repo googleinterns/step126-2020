@@ -1,0 +1,11 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1578319757,2020-07-06 06:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,no reason,no reason,51894,11297,17585
+1597480868,2020-07-04 00:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,5,No,No,4695,2645,4798
+1657246752,2020-07-05 22:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,No,3,Don't have enough information,Don't have enough information,25376,6313,9584
+17039864,2020-07-05 20:00:00,Complete,Other,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,not many interactions,not many interactions,6942,15690,18451
+171309299,2020-07-03 02:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,Prefer not to answer,4,God,God,1656,2004,10533
+1738023734,2020-07-02 04:00:00,Complete,News,Female,65+,US-WEST-CA-San Francisco,,No,3,Bias,Bias,10176,8255,11887
+1834092604,2020-07-06 06:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,5,They are well tempered and seem to care.,They are well tempered and seem to care.,20667,4723,25952
+1998283349,2020-07-04 02:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,2,Would rather avoid police interaction. Too much power coupled with not enough training,Would rather avoid police interaction. Too much power coupled with not enough training,4541,9348,76974
+2116205142,2020-07-02 15:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,friendly folks,friendly folks,15977,5040,7226
+523854954,2020-07-03 06:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,1,"in SF, they exist to harass homeless people. I've literally never seen them do anything else on patrol","in SF, they exist to harass homeless people. I've literally never seen them do anything else on patrol",102654,16047,44341

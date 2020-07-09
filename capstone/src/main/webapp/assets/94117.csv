@@ -1,0 +1,11 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1629167647,2020-07-03 16:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,Positive out reach events and observed interactions with homeless,Positive out reach events and observed interactions with homeless,8873,7265,36794
+1636911447,2020-07-03 15:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,Yes,5,Helpful,Helpful,9476,4143,13797
+1668130165,2020-07-02 21:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,5,You can trust some of them that are on the force!,You can trust some of them that are on the force!,30683,6647,31340
+1890660154,2020-07-03 16:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,3,Prefer not to,Prefer not to,242605,5435,27560
+271170859,2020-07-03 19:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,5,They share donuts with me.,They share donuts with me.,4840,5313,21714
+278752945,2020-07-02 20:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,2,BLM,BLM,26231,4656,5988
+365720850,2020-06-30 23:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,ummmm,ummmm,38396,6159,8557
+476402987,2020-07-02 16:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,news incidents,news incidents,7721,5083,11296
+774295968,2020-07-02 22:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,Yes,1,they lost my report and gave me wrong info,they lost my report and gave me wrong info,8878,3507,10268
+875623472,2020-07-03 16:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,Yes,3,The are overreactive and involved in situations they are not trained for like 51/50,The are overreactive and involved in situations they are not trained for like 51/50,8017,8637,40029
