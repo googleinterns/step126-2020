@@ -14,12 +14,21 @@
 
 /* global google */
 
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(loadCharts);
+
 function createMap() {
-  const map = new google.maps.Map(document.getElementById('map-container'),
-      {
-        center: {lat: 37.7749, lng: -122.4194},
-        zoom: 12,
-      });
+  const map = new google.maps.Map(
+      document.getElementById('map-container'),
+      {center: {lat: 37.7749, lng: -122.4194}, zoom: 12},
+  );
+
+  /* adding zipcode overlay */
+  map.data.loadGeoJson('zipcode-data.json');
+  /* adding precinct overlay */
+  map.data.loadGeoJson('neighborhoods.json');
+
+  map.data.setStyle({visible: false});
 
   const cityBorder = [
     {lat: 37.708305, lng: -122.502691},
@@ -144,7 +153,81 @@ function precinctControl(controlDiv, map) {
   });
 }
 
-window.addEventListener('load', createMap);
+function centerControl(controlDiv, map) {
+  //* *button creation and positioning*/
+  const controlUI = document.createElement('div');
+  controlUI.classList.add('button');
+  controlUI.title = 'Click to recenter the map';
+  controlDiv.appendChild(controlUI);
+
+  //* *css for interior of all buttons*/
+  const text = document.createElement('div');
+  text.innerHTML = 'Center Map';
+  controlUI.appendChild(text);
+
+  //* *button functionality */
+  controlUI.addEventListener('click', function() {
+    map.setCenter({lat: 37.7749, lng: -122.4194});
+  });
+}
+
+let zipClicked = false;
+function zipControl(controlDiv, map) {
+  //* *adding zipcode overlay*/
+  const zipcodeLayer = new google.maps.Data({map: map});
+  zipcodeLayer.loadGeoJson('zipcode-data.json');
+  zipcodeLayer.setStyle({visible: false});
+
+  //* *button creation and positioning*/
+  const controlUI = document.createElement('div');
+  controlUI.classList.add('button');
+  controlUI.title = 'Click to show San Fransisco zip codes';
+  controlDiv.appendChild(controlUI);
+
+  //* *css for interior of all buttons*/
+  const text = document.createElement('div');
+  text.innerHTML = 'Show Zipcodes';
+  controlUI.appendChild(text);
+
+  //* *button functionality */
+  controlUI.addEventListener('click', function() {
+    zipClicked = !zipClicked;
+    if (zipClicked) {
+      zipcodeLayer.setStyle({visible: true});
+    } else {
+      zipcodeLayer.setStyle({visible: false});
+    }
+  });
+}
+
+let precinctButtonOn= false;
+function precinctControl(controlDiv, map) {
+  //* *adding precinct overlay */
+  const precinctLayer = new google.maps.Data({map: map});
+  precinctLayer.loadGeoJson('neighborhoods.json');
+  precinctLayer.setStyle({visible: false});
+
+  //* *button creation and positioning*/
+  const dataUI = document.createElement('div');
+  dataUI.classList.add('button');
+  dataUI.title = 'Click to show San Fransisco precincts';
+  controlDiv.appendChild(dataUI);
+
+  //* *css for interior of all buttons*/
+  const buttonText = document.createElement('div');
+  buttonText.innerHTML = 'Show Precincts';
+  dataUI.appendChild(buttonText);
+
+  //* *button functionality */
+  dataUI.addEventListener('click', function() {
+    precinctButtonOn = !precinctButtonOn;
+    if (precinctButtonOn) {
+      precinctLayer.setStyle({visible: false});
+    } else {
+      precinctLayer.setStyle({visible: true});
+    }
+  });
+}
 
 async function associationUpdateDisplay() {
   const response = await fetch('/associations');
@@ -165,7 +248,14 @@ function addListElement(list, contents) {
   list.appendChild(elem);
 }
 
+window.addEventListener('load', createMap);
 window.addEventListener('load', associationUpdateDisplay);
+window.addEventListener('load', postSurveyResponses);
+
+async function postSurveyResponses() {
+  await fetch('/data', {method: 'POST'});
+}
+
 function loadCharts() {
   const stats = new google.visualization.DataTable();
   stats.addColumn('string', 'Sentiment');
@@ -190,16 +280,8 @@ function loadReponseChart() {
   stats.addColumn('string', 'Period');
   stats.addColumn('number', 'Number of Responses');
 
-  stats.addRows([
-    ['Daily', 4],
-    ['Weekly', 15],
-  ]);
-
   // Instantiate and draw the chart.
   const chart = new google.visualization.BarChart(
       document.getElementById('response-bar-chart'));
   chart.draw(stats, null);
 }
-
-google.charts.load('current', {packages: ['corechart']});
-google.charts.setOnLoadCallback(loadCharts);

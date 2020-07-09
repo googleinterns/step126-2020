@@ -4,12 +4,13 @@ body {
   margin: 0;
   padding: 0;
   display: block;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .header {
   background-color: #19B3B1;
   width: 100%;
+  height: min-content;
   margin: 0;
   position: absolute;
   top: 0;
@@ -29,7 +30,6 @@ h1 {
   position: absolute;
   bottom: 0px;
   top: 5rem;
-  overflow: hidden;
   width: 100%;
 }
 
@@ -77,7 +77,7 @@ ul {
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
 }
 
-#sentiment-pie-stats {
+.second-stats {
   background-color: white;
   width: 100%;
   height: 29%;
@@ -88,10 +88,10 @@ ul {
 }
 
 #sentiment-pie-chart {
-  margin: 24 auto;
+  margin: 8 auto;
 }
 
-#response-bar-stats {
+.third-stats {
   background-color: white;
   width: 100%;
   height: 29%;
@@ -102,7 +102,7 @@ ul {
 }
 
 #response-bar-chart {
-  margin: 24 auto;
+  margin: 8 auto;
 }
 
 .clear {
@@ -123,3 +123,34 @@ ul {
   cursor: pointer;
   font-family: "Oswald", sans-serif;
 }
+<<<<<<< HEAD
+=======
+
+/* Statistics page style rules */
+.stats-area {
+  height: 100vh;
+  width: 100vw;
+}
+
+.prediction-panel {
+    height: 50vh;
+    margin: 24 auto;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+
+.grid-item {
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 10px;
+  font-size: 30px;
+  text-align: center;
+  width: 500px;
+  height:500px;
+}
+>>>>>>> 373da457cd89d25f59ac527525c6ac121d213100
