@@ -6,7 +6,8 @@ google.charts.setOnLoadCallback(getSurveyResponses);
 async function getSurveyResponses() {
   const response = await fetch('/load-data');
   const list = await response.json(); // list of entities from datastore
-
+  
+  // Sentiment category for the user's survey response
   const sentimentCount = {
     'Very Positive': 0,
     'Positive': 0,
@@ -20,6 +21,8 @@ async function getSurveyResponses() {
     'Female': 0,
     'Unknown': 0,
   };
+
+  // Numbers of users in each age group
   const ageCount = {
     '18-24': 0,
     '25-34': 0,
@@ -30,42 +33,49 @@ async function getSurveyResponses() {
     'Unknown': 0,
   };
 
+  // Track how many users had direct experience with police
   const directExpCount = {
     'Prefer not to answer': 0,
     'Yes': 0,
     'No': 0,
   };
-
+  
+  // Number of users who partially or fully completed the survey
   const completionCount = {
     'Partial': 0,
     'Complete': 0,
   };
 
+  // The response times in millis for each of the three survey questions
   const responseTimeAverage = {
     'Response One': 0,
     'Response Two': 0,
     'Response Three': 0,
   };
 
-  /* Stores a respective field in each object of the list */
+  // Stores a respective field in each object of the list 
   const scores = [];
   const genders = [];
-  const responseTimesThree = [];
+  const responseTimesThree = []; // Third question, sentiment based on this
   const ages = [];
   const days = [];
 
   for (let i = 0; i < list.length; i++) {
+    
+    // Store the respective fields of each object for the charts
     scores.push(list[i].score);
     responseTimesThree.push(list[i].responseTimeThree);
     genders.push(list[i].gender);
     ages.push(list[i].ageRange);
-
+    
+    // Extract the day from the full date string
     const date = list[i].date;
     const day = parseInt(date.substring(date.indexOf(' '), date.indexOf(',')));
     days.push(day);
 
     genderCount[list[i].gender] += 1;
-
+    
+    // Categorize the sentiment score (-1 to 1)
     const sentiment = list[i].score;
     if (sentiment >= 0.5) {
       sentimentCount['Very Positive'] += 1;
@@ -89,11 +99,13 @@ async function getSurveyResponses() {
     responseTimeAverage['Response Two'] += list[i].responseTimeTwo;
     responseTimeAverage['Response Three'] += list[i].responseTimeThree;
   }
-
+  
+  // Compute the averages for each response time
   responseTimeAverage['Response One'] /= list.length;
   responseTimeAverage['Response Two'] /= list.length;
   responseTimeAverage['Response Three'] /= list.length;
-
+  
+  // Begin loading each of the charts with the necessary data
   loadBubbleChart(days, scores, genders, responseTimesThree);
   loadCompletionPieChart(completionCount);
   loadResponseTimeAverageBarChart(responseTimeAverage);
@@ -106,7 +118,7 @@ async function getSurveyResponses() {
   loadAgePieChart(ageCount);
 }
 
-function loadBubbleChart(listA, listB, listC, listD) {
+function loadBubbleChart(days, scores, genders, responseTimeSThree) {
   const stats = new google.visualization.DataTable();
 
   stats.addColumn('string', 'ID');
@@ -114,13 +126,15 @@ function loadBubbleChart(listA, listB, listC, listD) {
   stats.addColumn('number', 'Sentiment Score');
   stats.addColumn('string', 'Gender');
   stats.addColumn('number', 'Response time (in milliseconds)');
-
-  const listLength = listA.length;
+  
+  // All parameters are the same length
+  const listLength = days.length;
   const res = 'Response #';
 
   for (let i = 0; i < listLength; i++) {
     stats.addRows([
-      [res + i.toString(10), listA[i], listB[i], listC[i], listD[i]],
+      [res + i.toString(10), 
+      days[i], scores[i], genders[i], responseTimeSThree[i]],
     ]);
   }
 
@@ -136,14 +150,14 @@ function loadBubbleChart(listA, listB, listC, listD) {
   chart.draw(stats, options);
 }
 
-function loadCompletionPieChart(obj) {
+function loadCompletionPieChart(completionCount) {
   const stats = new google.visualization.DataTable();
 
   stats.addColumn('string', 'Status');
   stats.addColumn('number', 'Percentage');
   stats.addRows([
-    ['Partial', obj['Partial']],
-    ['Complete', obj['Complete']],
+    ['Partial', completionCount['Partial']],
+    ['Complete', completionCount['Complete']],
   ]);
 
   const options = {
@@ -156,15 +170,15 @@ function loadCompletionPieChart(obj) {
   chart.draw(stats, options);
 }
 
-function loadResponseTimeAverageBarChart(obj) {
+function loadResponseTimeAverageBarChart(averages) {
   const stats = new google.visualization.DataTable();
 
   stats.addColumn('string', 'Response Number');
   stats.addColumn('number', 'Time (milliseconds)');
   stats.addRows([
-    ['Response One', obj['Response One']],
-    ['Response Two', obj['Response Two']],
-    ['Response Three', obj['Response Three']],
+    ['Response One', averages['Response One']],
+    ['Response Two', averages['Response Two']],
+    ['Response Three', averages['Response Three']],
   ]);
 
   const options = {
@@ -179,15 +193,15 @@ function loadResponseTimeAverageBarChart(obj) {
   chart.draw(stats, options);
 }
 
-function loadDirectExperiencePieChart(obj) {
+function loadDirectExperiencePieChart(directExpCount) {
   const stats = new google.visualization.DataTable();
 
   stats.addColumn('string', 'Status');
   stats.addColumn('number', 'Percentage');
   stats.addRows([
-    ['Prefer not to answer', obj['Prefer not to answer']],
-    ['Yes', obj['Yes']],
-    ['No', obj['No']],
+    ['Prefer not to answer', directExpCount['Prefer not to answer']],
+    ['Yes', directExpCount['Yes']],
+    ['No', directExpCount['No']],
   ]);
 
   const options = {
@@ -200,17 +214,17 @@ function loadDirectExperiencePieChart(obj) {
   chart.draw(stats, options);
 }
 
-function loadPieSentimentChart(obj) {
+function loadPieSentimentChart(sentimentCount) {
   const stats = new google.visualization.DataTable();
 
   stats.addColumn('string', 'Sentiment');
   stats.addColumn('number', 'Percentage');
   stats.addRows([
-    ['Very Positive', obj['Very Positive']],
-    ['Positive', obj['Positive']],
-    ['Neutral', obj['Neutral']],
-    ['Negative', obj['Negative']],
-    ['Very Negative', obj['Very Negative']],
+    ['Very Positive', sentimentCount['Very Positive']],
+    ['Positive', sentimentCount['Positive']],
+    ['Neutral', sentimentCount['Neutral']],
+    ['Negative', sentimentCount['Negative']],
+    ['Very Negative', sentimentCount['Very Negative']],
   ]);
 
   const options = {
@@ -224,19 +238,19 @@ function loadPieSentimentChart(obj) {
   chart.draw(stats, options);
 }
 
-function loadAgeColumnChart(obj) {
+function loadAgeColumnChart(ageCount) {
   const stats = new google.visualization.DataTable();
 
   stats.addColumn('string', 'Age');
   stats.addColumn('number', 'People in each age group');
   stats.addRows([
-    ['18-24', obj['18-24']],
-    ['25-34', obj['25-34']],
-    ['35-44', obj['35-44']],
-    ['45-54', obj['45-54']],
-    ['55-64', obj['55-64']],
-    ['65+', obj['65+']],
-    ['Unknown', obj['Unknown']],
+    ['18-24', ageCount['18-24']],
+    ['25-34', ageCount['25-34']],
+    ['35-44', ageCount['35-44']],
+    ['45-54', ageCount['45-54']],
+    ['55-64', ageCount['55-64']],
+    ['65+', ageCount['65+']],
+    ['Unknown', ageCount['Unknown']],
   ]);
 
   const options = {
@@ -249,15 +263,15 @@ function loadAgeColumnChart(obj) {
   chart.draw(stats, options);
 }
 
-function loadGenderBarChart(obj) {
+function loadGenderBarChart(genderCount) {
   const stats = new google.visualization.DataTable();
 
   stats.addColumn('string', 'Gender');
   stats.addColumn('number', 'People of each gender');
   stats.addRows([
-    ['Male', obj['Male']],
-    ['Female', obj['Female']],
-    ['Unknown', obj['Unknown']],
+    ['Male', genderCount['Male']],
+    ['Female', genderCount['Female']],
+    ['Unknown', genderCount['Unknown']],
   ]);
 
   const options = {
@@ -273,16 +287,16 @@ function loadGenderBarChart(obj) {
 }
 
 
-function loadSentimentVResponseTimeScatterChart(listA, listB) {
+function loadSentimentVResponseTimeScatterChart(responseTimes, scores) {
   const stats = new google.visualization.DataTable();
 
   stats.addColumn('number', 'Sentiment Score');
   stats.addColumn('number', 'Response Time');
 
-  const listLength = listA.length;
+  const listLength = responseTimes.length;
   for (let i = 0; i < listLength; i++) {
     stats.addRows([
-      [listA[i], listB[i]],
+      [responseTimes[i], scores[i]],
     ]);
   }
 
@@ -299,16 +313,16 @@ function loadSentimentVResponseTimeScatterChart(listA, listB) {
   chart.draw(stats, options);
 }
 
-function loadSentimentVDaysScatterChart(listA, listB) {
+function loadSentimentVDaysScatterChart(days, scores) {
   const stats = new google.visualization.DataTable();
 
   stats.addColumn('number', 'Sentiment Score');
   stats.addColumn('number', 'Day in July');
 
-  const listLength = listA.length;
+  const listLength = days.length;
   for (let i = 0; i < listLength; i++) {
     stats.addRows([
-      [listA[i], listB[i]],
+      [days[i], scores[i]],
     ]);
   }
 
@@ -326,19 +340,19 @@ function loadSentimentVDaysScatterChart(listA, listB) {
   chart.draw(stats, options);
 }
 
-function loadAgePieChart(obj) {
+function loadAgePieChart(ageCount) {
   const stats = new google.visualization.DataTable();
 
   stats.addColumn('string', 'Age');
   stats.addColumn('number', 'Percentage');
   stats.addRows([
-    ['18-24', obj['18-24']],
-    ['25-34', obj['25-34']],
-    ['35-44', obj['35-44']],
-    ['45-54', obj['45-54']],
-    ['55-64', obj['55-64']],
-    ['65+', obj['65+']],
-    ['Unknown', obj['Unknown']],
+    ['18-24', ageCount['18-24']],
+    ['25-34', ageCount['25-34']],
+    ['35-44', ageCount['35-44']],
+    ['45-54', ageCount['45-54']],
+    ['55-64', ageCount['55-64']],
+    ['65+', ageCount['65+']],
+    ['Unknown', ageCount['Unknown']],
   ]);
 
   const options = {

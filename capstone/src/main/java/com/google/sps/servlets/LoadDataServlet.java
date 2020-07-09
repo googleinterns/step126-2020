@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that loads data * */
+/** Servlet that loads data from data store * */
 @WebServlet("/load-data")
 public class LoadDataServlet extends HttpServlet {
   @Override

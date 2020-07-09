@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that adds comments to datastore */
+/** Servlet that deletes entities from datastore */
 @WebServlet("/delete-data")
 public class DeleteDataServlet extends HttpServlet {
   @Override
