@@ -86,7 +86,7 @@ function centerControl(controlDiv, map) {
   controlUI.addEventListener('click', function() {
     map.setCenter({lat: 37.7749, lng: -122.4194});
     map.setZoom(12);
-     });
+  });
 }
 
 let zipClicked = false;
@@ -112,7 +112,6 @@ function zipControl(controlDiv, map) {
     zipClicked = !zipClicked;
     if (zipClicked) {
       zipcodeLayer.setStyle({visible: true});
-      precinctLayer.setStyle({visible: false});
     } else {
       zipcodeLayer.setStyle({visible: false});
     }
@@ -125,9 +124,9 @@ function precinctControl(controlDiv, map) {
   const precinctLayer = new google.maps.Data({map: map});
   precinctLayer.loadGeoJson('neighborhoods.json');
   precinctLayer.setStyle({visible: false});
-  precinctLayer.addListener("click", function(event) {
-    document.getElementById("sentiment-pie-chart").textContent
-     = event.feature.getProperty("station");
+  precinctLayer.addListener('click', function(event) {
+    document.getElementById('sentiment-pie-chart').textContent =
+     event.feature.getProperty('station');
   });
   //* *button creation and positioning*/
   const dataUI = document.createElement('div');
@@ -148,7 +147,6 @@ function precinctControl(controlDiv, map) {
       loadCharts();
     } else {
       precinctLayer.setStyle({visible: true});
-      zipcodeLayer.setStyle({visible: false});
     }
   });
 }
