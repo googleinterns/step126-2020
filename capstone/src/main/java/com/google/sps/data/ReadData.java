@@ -13,11 +13,12 @@ import java.util.Date;
 
 public class ReadData {
   final String DELIMITER = ",";
-  
+
   /**
-  * Reads the survey csv and adds each element to datastore
-  * @return {Void}   
-  */
+   * Reads the survey csv and adds each element to datastore
+   *
+   * @return {Void}
+   */
   public void readCSV() {
     BufferedReader reader = null;
     FileReader file = null;

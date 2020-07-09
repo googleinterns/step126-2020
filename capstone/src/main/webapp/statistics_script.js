@@ -6,7 +6,7 @@ google.charts.setOnLoadCallback(getSurveyResponses);
 async function getSurveyResponses() {
   const response = await fetch('/load-data');
   const list = await response.json(); // list of entities from datastore
-  
+
   // Sentiment category for the user's survey response
   const sentimentCount = {
     'Very Positive': 0,
@@ -39,7 +39,7 @@ async function getSurveyResponses() {
     'Yes': 0,
     'No': 0,
   };
-  
+
   // Number of users who partially or fully completed the survey
   const completionCount = {
     'Partial': 0,
@@ -53,7 +53,7 @@ async function getSurveyResponses() {
     'Response Three': 0,
   };
 
-  // Stores a respective field in each object of the list 
+  // Stores a respective field in each object of the list
   const scores = [];
   const genders = [];
   const responseTimesThree = []; // Third question, sentiment based on this
@@ -61,20 +61,19 @@ async function getSurveyResponses() {
   const days = [];
 
   for (let i = 0; i < list.length; i++) {
-    
     // Store the respective fields of each object for the charts
     scores.push(list[i].score);
     responseTimesThree.push(list[i].responseTimeThree);
     genders.push(list[i].gender);
     ages.push(list[i].ageRange);
-    
+
     // Extract the day from the full date string
     const date = list[i].date;
     const day = parseInt(date.substring(date.indexOf(' '), date.indexOf(',')));
     days.push(day);
 
     genderCount[list[i].gender] += 1;
-    
+
     // Categorize the sentiment score (-1 to 1)
     const sentiment = list[i].score;
     if (sentiment >= 0.5) {
@@ -99,12 +98,12 @@ async function getSurveyResponses() {
     responseTimeAverage['Response Two'] += list[i].responseTimeTwo;
     responseTimeAverage['Response Three'] += list[i].responseTimeThree;
   }
-  
+
   // Compute the averages for each response time
   responseTimeAverage['Response One'] /= list.length;
   responseTimeAverage['Response Two'] /= list.length;
   responseTimeAverage['Response Three'] /= list.length;
-  
+
   // Begin loading each of the charts with the necessary data
   loadBubbleChart(days, scores, genders, responseTimesThree);
   loadCompletionPieChart(completionCount);
@@ -126,15 +125,15 @@ function loadBubbleChart(days, scores, genders, responseTimeSThree) {
   stats.addColumn('number', 'Sentiment Score');
   stats.addColumn('string', 'Gender');
   stats.addColumn('number', 'Response time (in milliseconds)');
-  
+
   // All parameters are the same length
   const listLength = days.length;
   const res = 'Response #';
 
   for (let i = 0; i < listLength; i++) {
     stats.addRows([
-      [res + i.toString(10), 
-      days[i], scores[i], genders[i], responseTimeSThree[i]],
+      [res + i.toString(10),
+        days[i], scores[i], genders[i], responseTimeSThree[i]],
     ]);
   }
 
