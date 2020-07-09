@@ -37,6 +37,12 @@ public class UpdateAssociationServlet extends HttpServlet {
     nlp.close();
   }
 
+  /**
+   * Get the survey comment text from datastore
+   *
+   * @param datastore the datastore client object
+   * @return an arraylist of the comment text
+   */
   private ArrayList<String> getComments(DatastoreService datastore) {
     Query query = new Query(SURVEY_ENTITY_KIND);
     PreparedQuery results = datastore.prepare(query);
@@ -48,6 +54,11 @@ public class UpdateAssociationServlet extends HttpServlet {
     return comments;
   }
 
+  /**
+   * Removes all previous association results from datastore
+   *
+   * @param datastore the datastore client object
+   */
   private void clearPreviousResults(DatastoreService datastore) {
     Query query = new Query(AssociationResult.ENTITY_KIND);
     PreparedQuery results = datastore.prepare(query);
@@ -60,6 +71,12 @@ public class UpdateAssociationServlet extends HttpServlet {
     datastore.delete(toDelete);
   }
 
+  /**
+   * Adds new association results to the datastore service
+   *
+   * @param datastore the datastore client object
+   * @param res the arraylist of results to be stored
+   */
   private void storeResults(DatastoreService datastore, ArrayList<AssociationResult> res) {
     for (AssociationResult association : res) {
       Entity entity = new Entity(AssociationResult.ENTITY_KIND);
