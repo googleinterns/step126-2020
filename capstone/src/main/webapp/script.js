@@ -52,6 +52,13 @@ function createMap() {
   precinctControl(precinctControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER]
       .push(precinctControlDiv);
+
+    poly = new google.maps.Polyline({
+    strokeColor: "#000000",
+    strokeOpacity: 1.0,
+    strokeWeight: 3
+  });
+  poly.setMap(map);
 }
 
 function centerControl(controlDiv, map) {
@@ -69,7 +76,8 @@ function centerControl(controlDiv, map) {
   //* *button functionality */
   controlUI.addEventListener('click', function() {
     map.setCenter({lat: 37.7749, lng: -122.4194});
-  });
+    map.setZoom(12);
+     });
 }
 
 let zipClicked = false;
@@ -95,6 +103,7 @@ function zipControl(controlDiv, map) {
     zipClicked = !zipClicked;
     if (zipClicked) {
       zipcodeLayer.setStyle({visible: true});
+      precinctLayer.setStyle({visible: false});
     } else {
       zipcodeLayer.setStyle({visible: false});
     }
@@ -107,7 +116,10 @@ function precinctControl(controlDiv, map) {
   const precinctLayer = new google.maps.Data({map: map});
   precinctLayer.loadGeoJson('neighborhoods.json');
   precinctLayer.setStyle({visible: false});
-
+  precinctLayer.addListener("click", function(event) {
+    document.getElementById("sentiment-pie-chart").textContent
+     = event.feature.getProperty("station");
+  });
   //* *button creation and positioning*/
   const dataUI = document.createElement('div');
   dataUI.classList.add('button');
@@ -122,10 +134,12 @@ function precinctControl(controlDiv, map) {
   //* *button functionality */
   dataUI.addEventListener('click', function() {
     precinctButtonOn = !precinctButtonOn;
-    if (precinctButtonOn) {
+    if (!precinctButtonOn) {
       precinctLayer.setStyle({visible: false});
+      loadCharts();
     } else {
       precinctLayer.setStyle({visible: true});
+      zipcodeLayer.setStyle({visible: false});
     }
   });
 }

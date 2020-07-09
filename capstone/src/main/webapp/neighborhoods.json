@@ -14528,7 +14528,7 @@
                     "id": "500",
                     "properties": {
                         "id": 500,
-                        "stations": "Central"
+                        "station": "Central"
                     },
                     "type": "Feature"
                 },
