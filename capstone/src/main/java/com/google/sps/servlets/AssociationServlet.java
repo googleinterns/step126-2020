@@ -12,6 +12,7 @@ import com.google.sps.AssociationResult;
 import com.google.sps.data.AssociationData;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,11 +25,16 @@ public class AssociationServlet extends HttpServlet {
   private static final String OUTPUT_TYPE = "applications/json;";
   public static final int LIMIT = 3;
 
+  private DatastoreService datastore;
+
+  public void init() throws ServletException {
+    datastore = DatastoreServiceFactory.getDatastoreService();
+  }
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(OUTPUT_TYPE);
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     FetchOptions fetchOptions = FetchOptions.Builder.withLimit(LIMIT);
 
     Query posQuery =
