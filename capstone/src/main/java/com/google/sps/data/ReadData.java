@@ -7,9 +7,47 @@ import com.google.appengine.api.datastore.EntityNotFoundException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReadData {
   final String DELIMITER = ",";
+  static final Map<String,ArrayList> zipPrecinctMappint;
+  static {
+        zipPrecinctMappint = new HashMap<>();
+        zipPrecinctMappint.put("94103", new ArrayList<>(
+            Arrays.asList("Southern","Mission"));
+        zipPrecinctMappint.put("94107", new ArrayList<>(
+            Arrays.asList("Bayview","Southern"));
+        zipPrecinctMappint.put("94109", new ArrayList<>(
+            Arrays.asList("Tenderloin","Central","Northern"));
+        zipPrecinctMappint.put("94110", new ArrayList<>(
+            Arrays.asList("Ingleside","Mission"));
+        zipPrecinctMappint.put("94112", new ArrayList<>(
+            Arrays.asList("Ingleside","Taraval"));
+        zipPrecinctMappint.put("94114", new ArrayList<>(
+            Arrays.asList("Park","Mission"));
+        zipPrecinctMappint.put("94116", new ArrayList<>(
+            Arrays.asList("Taraval"));
+        zipPrecinctMappint.put("94117", new ArrayList<>(
+            Arrays.asList("Park","Northern"));
+        zipPrecinctMappint.put("94118", new ArrayList<>(
+            Arrays.asList("Richmond","Park"));
+        zipPrecinctMappint.put("94121", new ArrayList<>(
+            Arrays.asList("Richmond"));
+        zipPrecinctMappint.put("94122", new ArrayList<>(
+            Arrays.asList("Richmond","Taraval","Park"));
+        zipPrecinctMappint.put("94123", new ArrayList<>(
+            Arrays.asList("Northern"));
+        zipPrecinctMappint.put("94124", new ArrayList<>(
+            Arrays.asList("Bayview"));
+        zipPrecinctMappint.put("94129", new ArrayList<>(
+            Arrays.asList("Richmond"));
+        zipPrecinctMappint.put("94131", new ArrayList<>(
+            Arrays.asList("Ingleside","Park"));
+    }
+
 
   public void readCSV() {
     BufferedReader reader = null;
