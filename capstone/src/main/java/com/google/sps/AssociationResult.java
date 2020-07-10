@@ -8,6 +8,7 @@ public class AssociationResult {
   public static final String ENTITY_KIND = "AssociationResult";
   private String content;
   private float score;
+  private float weight;
 
   // epsilon for checking for float equality
   public static final float EPSILON = 0.05f;
@@ -17,10 +18,18 @@ public class AssociationResult {
    *
    * @param content the word/phrase for which the result is for
    * @param score an intial score for the word/phrase from -1 (neg) to 1 (pos)
+   * @param weight the weight of the sentiment
    */
-  public AssociationResult(String content, float score) {
+  public AssociationResult(String content, float score, float weight) {
     this.content = content;
     this.score = score;
+    this.weight = weight;
+  }
+
+  public AssociationResult(EntitySentiment entity) {
+    content = entity.getContent();
+    score = entity.getMagnitude() * entity.getSentiment();
+    weight = entity.getMagnitude();
   }
 
   /** @return the word/phrase that the score is for */
@@ -33,13 +42,24 @@ public class AssociationResult {
     return score;
   }
 
+  /** @return the average sentiment weighted by magnitude * */
+  public float getAverageSentiment() {
+    return weight == 0 ? 0 : (score / weight);
+  }
+
+  /** @return the weight of the overal sentiment */
+  public float getWeight() {
+    return weight;
+  }
+
   /**
    * Updates the score to a new score
    *
-   * @param newScore the new score to be set to
+   * @param entity the new entity to be added to the pool creating the result
    */
-  public void updateScore(float newScore) {
-    score = newScore;
+  public void updateResult(EntitySentiment entity) {
+    score += entity.getMagnitude() * entity.getSentiment();
+    weight += entity.getMagnitude();
   }
 
   public static final Comparator<AssociationResult> ORDER_BY_SCORE =
@@ -61,6 +81,8 @@ public class AssociationResult {
       return false;
     }
     AssociationResult x = (AssociationResult) obj;
-    return content.equals(x.getContent()) && (Math.abs(x.getScore() - score) < EPSILON);
+    return content.equals(x.getContent())
+        && (Math.abs(x.getScore() - score) < EPSILON)
+        && (Math.abs(x.getWeight() - weight) < EPSILON);
   }
 }
