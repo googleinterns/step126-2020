@@ -65,7 +65,7 @@ public class UpdateAssociationServlet extends HttpServlet {
           || !((boolean) e.getProperty("association-processed"))) {
         comments.add((String) e.getProperty(COMMENT_PROPERTY));
         e.setProperty("association-processed", true);
-	datastore.put(e);
+        datastore.put(e);
       }
     }
     return comments;
