@@ -39,13 +39,13 @@ public class AssociationServlet extends HttpServlet {
 
     Query posQuery =
         new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.DESCENDING);
-    ArrayList<String> positive = new ArrayList<String>();
-    extractContent(datastore.prepare(posQuery).asQueryResultList(fetchOptions), positive);
+    ArrayList<String> positive =
+        extractContent(datastore.prepare(posQuery).asQueryResultList(fetchOptions));
 
     Query negQuery =
         new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.ASCENDING);
-    ArrayList<String> negative = new ArrayList<String>();
-    extractContent(datastore.prepare(negQuery).asQueryResultList(fetchOptions), negative);
+    ArrayList<String> negative =
+        extractContent(datastore.prepare(negQuery).asQueryResultList(fetchOptions));
 
     AssociationData output = new AssociationData(positive, negative);
     Gson gson = new Gson();
@@ -56,11 +56,13 @@ public class AssociationServlet extends HttpServlet {
    * Adds the names of the associations to the arraylist passed in
    *
    * @param query the entities to get the names from
-   * @param output the arraylist to add the names of the entities to
+   * @return the arraylist to add the names of the entities to
    */
-  private void extractContent(QueryResultList<Entity> query, ArrayList<String> output) {
+  private ArrayList<String> extractContent(QueryResultList<Entity> query) {
+    ArrayList<String> output = new ArrayList<String>();
     for (Entity entity : query) {
       output.add((String) entity.getProperty("name"));
     }
+    return output;
   }
 }
