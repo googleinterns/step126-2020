@@ -7,12 +7,9 @@ import com.google.appengine.api.datastore.EntityNotFoundException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-<<<<<<< HEAD
-=======
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
->>>>>>> 9323de6eb6d2e287753e941b4b106cdbed0c6b0e
 
 public class ReadData {
   final String DELIMITER = ",";
