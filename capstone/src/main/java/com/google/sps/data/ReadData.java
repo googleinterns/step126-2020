@@ -7,10 +7,21 @@ import com.google.appengine.api.datastore.EntityNotFoundException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+<<<<<<< HEAD
+=======
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+>>>>>>> 9323de6eb6d2e287753e941b4b106cdbed0c6b0e
 
 public class ReadData {
   final String DELIMITER = ",";
 
+  /**
+   * Reads the survey csv and adds each element to datastore
+   *
+   * @return {Void}
+   */
   public void readCSV() {
     BufferedReader reader = null;
     FileReader file = null;
@@ -24,13 +35,24 @@ public class ReadData {
 
       while ((line = reader.readLine()) != null) {
         String[] values = line.split(DELIMITER);
-        String id = values[0];
-        double score = Double.parseDouble(values[2]);
-        String gender = values[3];
-        String ageRange = values[4];
-        long responseTime = Long.parseLong(values[5]);
-        String date = values[6];
-        long day = Long.parseLong(values[7]);
+        String id = values[0] + "-" + values[1];
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date;
+
+        try {
+          date = formatter.parse(values[2]);
+        } catch (ParseException e) {
+          date = null;
+        }
+        String completion = values[3];
+        String gender = values[5];
+        String ageRange = values[6];
+        String answerOne = values[8];
+        String answerTwo = values[9];
+        double score = Double.parseDouble(values[10]);
+        long responseTimeOne = Long.parseLong(values[11]);
+        long responseTimeTwo = Long.parseLong(values[12]);
+        long responseTimeThree = Long.parseLong(values[13]);
 
         Entity entity = new Entity("Response", id);
         Entity inStore; // Entity that may or may not exist in Datastore
@@ -43,12 +65,16 @@ public class ReadData {
 
         if (inStore == null) {
           entity.setProperty("id", id);
-          entity.setProperty("score", score);
+          entity.setProperty("date", date);
+          entity.setProperty("completion", completion);
           entity.setProperty("gender", gender);
           entity.setProperty("ageRange", ageRange);
-          entity.setProperty("responseTime", responseTime);
-          entity.setProperty("date", date);
-          entity.setProperty("day", day);
+          entity.setProperty("answerOne", answerOne);
+          entity.setProperty("answerTwo", answerTwo);
+          entity.setProperty("score", score);
+          entity.setProperty("responseTimeOne", responseTimeOne);
+          entity.setProperty("responseTimeTwo", responseTimeTwo);
+          entity.setProperty("responseTimeThree", responseTimeThree);
 
           datastoreService.put(entity);
         }
