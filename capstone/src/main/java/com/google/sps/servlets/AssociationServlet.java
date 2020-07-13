@@ -35,15 +35,20 @@ public class AssociationServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(OUTPUT_TYPE);
 
+    String scope = request.getParameter("scope");
+    if (scope == null) {
+      scope = "SF";
+    }
+
     FetchOptions fetchOptions = FetchOptions.Builder.withLimit(LIMIT);
 
     Query posQuery =
-        new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.DESCENDING);
+        new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.DESCENDING).addFilter("scope", Query.FilterOperator.EQUAL, scope);
     ArrayList<String> positive =
         extractContent(datastore.prepare(posQuery).asQueryResultList(fetchOptions));
 
     Query negQuery =
-        new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.ASCENDING);
+        new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.ASCENDING).addFilter("scope", Query.FilterOperator.EQUAL, scope);;
     ArrayList<String> negative =
         extractContent(datastore.prepare(negQuery).asQueryResultList(fetchOptions));
 
