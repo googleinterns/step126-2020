@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MapData {
+    
   static final Map<String,ArrayList> zipPrecinctMap;
   static {
         zipPrecinctMap = new HashMap<>();
