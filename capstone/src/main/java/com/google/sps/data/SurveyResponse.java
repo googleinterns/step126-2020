@@ -15,6 +15,17 @@ public class SurveyResponse {
   private long responseTimeOne;
   private long responseTimeTwo;
   private long responseTimeThree;
+  
+  // Default no parameter constructor
+  public SurveyResponse() {
+
+  }
+  // Optional constructor used in test clases
+  public SurveyResponse(String id, String completion, double score) {
+    this.id = id;
+    this.completion = completion;
+    this.score = score;
+  }
 
   /**
    * Sets the unique id for the survey response
