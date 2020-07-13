@@ -26,6 +26,8 @@ public class ReadData {
     FileReader file = null;
     DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
     SentimentData sentimentService = new SentimentData();
+    ArrayList<Entity> newEntities = new ArrayList<Entity>();
+
 
     try {
       file = new FileReader("assets/surveyresponse.csv");
@@ -44,6 +46,7 @@ public class ReadData {
         } catch (ParseException e) {
           date = null;
         }
+
         String completion = values[2];
         String gender = values[5];
         String ageRange = values[6];
@@ -77,10 +80,13 @@ public class ReadData {
           entity.setProperty("responseTimeOne", responseTimeOne);
           entity.setProperty("responseTimeTwo", responseTimeTwo);
           entity.setProperty("responseTimeThree", responseTimeThree);
-
-          datastoreService.put(entity);
+          
+          newEntities.add(entity);
         }
       }
+
+       datastoreService.put(newEntities);
+
     } catch (IOException e) {
       System.out.println("IO error");
     } finally {
