@@ -4,11 +4,13 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
+import com.google.sps.data.SentimentData;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ReadData {
@@ -23,6 +25,7 @@ public class ReadData {
     BufferedReader reader = null;
     FileReader file = null;
     DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
+    SentimentData sentimentService = new SentimentData();
 
     try {
       file = new FileReader("assets/surveyresponse.csv");
@@ -32,24 +35,25 @@ public class ReadData {
 
       while ((line = reader.readLine()) != null) {
         String[] values = line.split(DELIMITER);
-        String id = values[0] + "-" + values[1];
+        String id = values[0];
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date;
 
         try {
-          date = formatter.parse(values[2]);
+          date = formatter.parse(values[1]);
         } catch (ParseException e) {
           date = null;
         }
-        String completion = values[3];
+        String completion = values[2];
         String gender = values[5];
         String ageRange = values[6];
-        String answerOne = values[8];
-        String answerTwo = values[9];
-        double score = Double.parseDouble(values[10]);
-        long responseTimeOne = Long.parseLong(values[11]);
-        long responseTimeTwo = Long.parseLong(values[12]);
-        long responseTimeThree = Long.parseLong(values[13]);
+        String answerOne = values[9];
+        String answerTwo = values[10];
+        String answerThree = values[12];
+        double score = sentimentService.getSentiment(answerThree);
+        long responseTimeOne = Long.parseLong(values[13]);
+        long responseTimeTwo = Long.parseLong(values[14]);
+        long responseTimeThree = Long.parseLong(values[15]);
 
         Entity entity = new Entity("Response", id);
         Entity inStore; // Entity that may or may not exist in Datastore
@@ -68,6 +72,7 @@ public class ReadData {
           entity.setProperty("ageRange", ageRange);
           entity.setProperty("answerOne", answerOne);
           entity.setProperty("answerTwo", answerTwo);
+          entity.setProperty("answerThree", answerThree);
           entity.setProperty("score", score);
           entity.setProperty("responseTimeOne", responseTimeOne);
           entity.setProperty("responseTimeTwo", responseTimeTwo);
@@ -86,6 +91,7 @@ public class ReadData {
           System.out.println("Error closing the reader");
         }
       }
+      sentimentService.close();
     }
   }
 }
