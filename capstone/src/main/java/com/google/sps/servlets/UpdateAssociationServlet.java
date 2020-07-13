@@ -9,6 +9,7 @@ import com.google.appengine.api.datastore.Query;
 import com.google.cloud.language.v1.LanguageServiceClient;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,7 +43,6 @@ public class UpdateAssociationServlet extends HttpServlet {
         association.calculateScores(nlp.analyzeAssociations(getComments()));
     response.getWriter().println(res);
 
-    clearPreviousResults();
     storeResults(res);
   }
 
@@ -71,19 +71,6 @@ public class UpdateAssociationServlet extends HttpServlet {
     return comments;
   }
 
-  /** Removes all previous association results from datastore */
-  private void clearPreviousResults() {
-    Query query = new Query(AssociationResult.ENTITY_KIND);
-    PreparedQuery results = datastore.prepare(query);
-
-    ArrayList<Key> toDelete = new ArrayList<Key>();
-    for (Entity entity : results.asIterable()) {
-      toDelete.add(entity.getKey());
-    }
-
-    datastore.delete(toDelete);
-  }
-
   /**
    * Loads all previous association results from datastore
    *
@@ -98,7 +85,8 @@ public class UpdateAssociationServlet extends HttpServlet {
       String content = (String) entity.getProperty("name");
       float weight = (float) (double) entity.getProperty("weight");
       float score = (float) (double) entity.getProperty("score");
-      prev.add(new AssociationResult(content, score, weight));
+      Key key = entity.getKey();
+      prev.add(new AssociationResult(content, score, weight, key));
     }
 
     return prev;
@@ -112,7 +100,13 @@ public class UpdateAssociationServlet extends HttpServlet {
   private void storeResults(ArrayList<AssociationResult> res) {
     ArrayList<Entity> entities = new ArrayList<Entity>();
     for (AssociationResult association : res) {
-      Entity entity = new Entity(AssociationResult.ENTITY_KIND);
+      Optional<Key> key = association.getKey();
+      Entity entity;
+      if (key.isPresent()) {
+        entity = new Entity(key.get());
+      } else {
+        entity = new Entity(AssociationResult.ENTITY_KIND);
+      }
       entity.setProperty("name", association.getContent());
       entity.setProperty("score", association.getScore());
       entity.setProperty("weight", association.getWeight());
