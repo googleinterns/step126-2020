@@ -31,7 +31,7 @@ public class CloudNLPAssociation implements AutoCloseable {
    * @param entity the entity to be analyzed
    * @return an arraylist of the different entity sentiments in the entity
    */
-  private ArrayList<EntitySentiment> extractEntityMentions(Entity entity) {
+  private ArrayList<EntitySentiment> extractEntityMentions(Entity entity, AssociationInput input) {
     List<EntityMention> mentions = entity.getMentionsList();
     ArrayList<EntitySentiment> res = new ArrayList<EntitySentiment>();
     for (EntityMention mention : mentions) {
@@ -39,7 +39,8 @@ public class CloudNLPAssociation implements AutoCloseable {
           new EntitySentiment(
               entity.getName(),
               mention.getSentiment().getMagnitude(),
-              mention.getSentiment().getScore()));
+              mention.getSentiment().getScore(),
+	      input.getScopes()));
     }
     return res;
   }
@@ -50,8 +51,8 @@ public class CloudNLPAssociation implements AutoCloseable {
    * @param message the messaged to be analyzed
    * @return an arraylist of all the entity sentiments in the message
    */
-  private ArrayList<EntitySentiment> entitySentimentAnalysis(String message) {
-    Document doc = Document.newBuilder().setContent(message).setType(Type.PLAIN_TEXT).build();
+  private ArrayList<EntitySentiment> entitySentimentAnalysis(AssociationInput input) {
+    Document doc = Document.newBuilder().setContent(input.getMessage()).setType(Type.PLAIN_TEXT).build();
     AnalyzeEntitySentimentRequest request =
         AnalyzeEntitySentimentRequest.newBuilder()
             .setDocument(doc)
@@ -62,7 +63,7 @@ public class CloudNLPAssociation implements AutoCloseable {
     List<Entity> entities = response.getEntitiesList();
     ArrayList<EntitySentiment> res = new ArrayList<EntitySentiment>();
     for (Entity entity : entities) {
-      res.addAll(extractEntityMentions(entity));
+      res.addAll(extractEntityMentions(entity, input));
     }
     return res;
   }
@@ -73,9 +74,9 @@ public class CloudNLPAssociation implements AutoCloseable {
    * @param messages the open text to be analyzed
    * @return an arraylist of all the entity sentiments in the messages
    */
-  public ArrayList<EntitySentiment> analyzeAssociations(ArrayList<String> messages) {
+  public ArrayList<EntitySentiment> analyzeAssociations(ArrayList<AssociationInput> messages) {
     ArrayList<EntitySentiment> res = new ArrayList<EntitySentiment>();
-    for (String message : messages) {
+    for (AssociationInput message : messages) {
       res.addAll(entitySentimentAnalysis(message));
     }
     return res;
