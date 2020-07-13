@@ -1,0 +1,12 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+100468779,2020-07-03 01:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,n/a,n/a,72513,6428,6558
+1244944285,2020-07-02 18:00:00,Complete,News,Female,65+,US-WEST-CA-San Francisco,,No,5,They have always treated me well,They have always treated me well,4584,2838,21771
+1509571184,2020-07-02 23:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,1,Previous experiences,Previous experiences,6277,5875,13543
+1936682491,2020-07-03 21:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,3,Rude,Rude,32283,12308,19768
+2005469965,2020-07-03 13:00:00,Complete,News,Male,Unknown,US-WEST-CA-San Francisco,,No,2,They escalate rather than deescalate,They escalate rather than deescalate,17020,4873,20616
+2081029442,2020-07-03 20:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,5,no,no,31013,6449,4058
+219816648,2020-07-03 02:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,n/a,N/A,3455,2728,5936
+242718643,2020-07-03 14:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,4,They help,They help,8745,2959,7246
+370326682,2020-07-02 00:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,3,n/a,n/a,7016,7126,8600
+441484436,2020-07-03 12:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,1,I live in Oakland. Nuff said.,I live in Oakland. Nuff said.,8789,4067,15147
+743408592,2020-07-03 02:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,1,bad experience,bad experience,14743,5160,8077

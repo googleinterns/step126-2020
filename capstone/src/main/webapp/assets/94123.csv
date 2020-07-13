@@ -1,0 +1,11 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1199256225,2020-07-05 03:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,4,no,no,6856,14069,5842
+1380365715,2020-07-01 19:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,4,they don't police the homeless,they don't police the homeless,47619,8366,15501
+1474358353,2020-07-03 17:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,1,"They shoot and kill too many black, brown, and poor white people","They shoot and kill too many black, brown, and poor white people",10205,6281,39036
+1476266765,2020-07-04 13:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,Yes,4,My job includes interactions with the sheriffs dept,My job includes interactions with the sheriffs dept,13947,4772,59349
+1572204155,2020-07-04 19:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,5,They keep us safe,They keep us safe,4451,5137,13229
+166300204,2020-07-03 03:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,Yes,5,Helpful and professional,Helpful and professional,15238,10191,14175
+287749889,2020-07-02 16:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,Yes,3,na,na,76713,3483,3450
+543984943,2020-07-03 22:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,3,Pigs,Pigs,3953,2955,9171
+603531182,2020-07-05 17:00:00,Complete,News,Female,55-64,US-WEST-CA-San Francisco,,Yes,3,Neutral,Neutral,8329,3845,6990
+697654828,2020-07-04 14:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,Yes,2,"They rarely help, hurtful attitude, pushed me for no reason","They rarely help, hurtful attitude, pushed me for no reason",6873,6167,41322
