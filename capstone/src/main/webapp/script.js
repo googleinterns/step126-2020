@@ -1,9 +1,34 @@
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/* global google */
+
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(loadCharts);
+
 function createMap() {
-  const map = new google.maps.Map(document.getElementById('map-container'),
-      {
-        center: {lat: 37.7749, lng: -122.4194},
-        zoom: 12,
-      });
+  const map = new google.maps.Map(
+      document.getElementById('map-container'),
+      {center: {lat: 37.7749, lng: -122.4194}, zoom: 12},
+  );
+
+  /* adding zipcode overlay */
+  map.data.loadGeoJson('zipcode-data.json');
+  /* adding precinct overlay */
+  map.data.loadGeoJson('neighborhoods.json');
+
+  map.data.setStyle({visible: false});
 
   const cityBorder = [
     {lat: 37.708305, lng: -122.502691},
@@ -23,53 +48,42 @@ function createMap() {
 
   //* *button for centering map*/
   const centerControlDiv = document.createElement('div');
-  const centerControl = new CenterControl(centerControlDiv, map);
+  centerControl(centerControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER].push(centerControlDiv);
 
   //* *button for zipcode data layer */
   const zipControlDiv = document.createElement('div');
-  const zipControl = new ZipControl(zipControlDiv, map);
+  zipControl(zipControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER].push(zipControlDiv);
 
   //* *button for zipcode data layer */
   const precinctControlDiv = document.createElement('div');
-  const precinctControl = new PrecinctControl(precinctControlDiv, map);
+    precinctControl(precinctControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER]
       .push(precinctControlDiv);
 }
 
-function CenterControl(controlDiv, map) {
+function centerControl(controlDiv, map) {
   //* *button creation and positioning*/
   const controlUI = document.createElement('div');
-  controlUI.style.backgroundColor = '#fff';
-  controlUI.style.border = '2px solid #fff';
-  controlUI.style.borderRadius = '3px';
-  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-  controlUI.style.cursor = 'pointer';
-  controlUI.style.marginBottom = '22px';
-  controlUI.style.textAlign = 'center';
+  controlUI.classList.add('button');
   controlUI.title = 'Click to recenter the map';
   controlDiv.appendChild(controlUI);
 
   //* *css for interior of all buttons*/
   const text = document.createElement('div');
-  text.style.color = 'rgb(25,25,25)';
-  text.style.fontFamily = 'Roboto,Arial,sans-serif';
-  text.style.fontSize = '16px';
-  text.style.lineHeight = '38px';
-  text.style.paddingLeft = '5px';
-  text.style.paddingRight = '5px';
   text.innerHTML = 'Center Map';
   controlUI.appendChild(text);
 
   //* *button functionality */
   controlUI.addEventListener('click', function() {
     map.setCenter({lat: 37.7749, lng: -122.4194});
+    map.setZoom(12);
   });
 }
 
-let zipClicks = 0;
-function ZipControl(controlDiv, map) {
+let zipClicked = false;
+function zipControl(controlDiv, map) {
   //* *adding zipcode overlay*/
   const zipcodeLayer = new google.maps.Data({map: map});
   zipcodeLayer.loadGeoJson('zipcode-data.json');
@@ -77,31 +91,19 @@ function ZipControl(controlDiv, map) {
 
   //* *button creation and positioning*/
   const controlUI = document.createElement('div');
-  controlUI.style.backgroundColor = '#fff';
-  controlUI.style.border = '2px solid #fff';
-  controlUI.style.borderRadius = '3px';
-  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-  controlUI.style.cursor = 'pointer';
-  controlUI.style.marginBottom = '22px';
-  controlUI.style.textAlign = 'center';
+  controlUI.classList.add('button');
   controlUI.title = 'Click to show San Fransisco zip codes';
   controlDiv.appendChild(controlUI);
 
   //* *css for interior of all buttons*/
   const text = document.createElement('div');
-  text.style.color = 'rgb(25,25,25)';
-  text.style.fontFamily = 'Roboto,Arial,sans-serif';
-  text.style.fontSize = '16px';
-  text.style.lineHeight = '38px';
-  text.style.paddingLeft = '5px';
-  text.style.paddingRight = '5px';
   text.innerHTML = 'Show Zipcodes';
   controlUI.appendChild(text);
 
   //* *button functionality */
   controlUI.addEventListener('click', function() {
-    zipClicks++;
-    if (zipClicks%2==1) {
+    zipClicked = !zipClicked;
+    if (zipClicked) {
       zipcodeLayer.setStyle({visible: true});
     } else {
       zipcodeLayer.setStyle({visible: false});
@@ -109,48 +111,38 @@ function ZipControl(controlDiv, map) {
   });
 }
 
-let precinctClicks = 0;
-function PrecinctControl(controlDiv, map) {
+let precinctButtonOn= false;
+function precinctControl(controlDiv, map) {
   //* *adding precinct overlay */
   const precinctLayer = new google.maps.Data({map: map});
   precinctLayer.loadGeoJson('neighborhoods.json');
   precinctLayer.setStyle({visible: false});
-
+  precinctLayer.addListener('click', function(event) {
+    document.getElementById('sentiment-pie-chart').textContent =
+     event.feature.getProperty('station');
+  });
   //* *button creation and positioning*/
   const dataUI = document.createElement('div');
-  dataUI.style.backgroundColor = '#fff';
-  dataUI.style.border = '2px solid #fff';
-  dataUI.style.borderRadius = '3px';
-  dataUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-  dataUI.style.cursor = 'pointer';
-  //   dataUI.style.marginBottom = "22px";
-  dataUI.style.textAlign = 'center';
+  dataUI.classList.add('button');
   dataUI.title = 'Click to show San Fransisco precincts';
   controlDiv.appendChild(dataUI);
 
   //* *css for interior of all buttons*/
   const buttonText = document.createElement('div');
-  buttonText.style.color = 'rgb(25,25,25)';
-  buttonText.style.fontFamily = 'Roboto,Arial,sans-serif';
-  buttonText.style.fontSize = '16px';
-  buttonText.style.lineHeight = '38px';
-  buttonText.style.paddingLeft = '5px';
-  buttonText.style.paddingRight = '5px';
   buttonText.innerHTML = 'Show Precincts';
   dataUI.appendChild(buttonText);
 
   //* *button functionality */
   dataUI.addEventListener('click', function() {
-    precinctClicks++;
-    if (precinctClicks%2==0) {
+    precinctButtonOn = !precinctButtonOn;
+    if (!precinctButtonOn) {
       precinctLayer.setStyle({visible: false});
+      loadCharts();
     } else {
       precinctLayer.setStyle({visible: true});
     }
   });
 }
-
-window.addEventListener('load', createMap);
 
 async function associationUpdateDisplay() {
   const response = await fetch('/associations');
@@ -171,7 +163,14 @@ function addListElement(list, contents) {
   list.appendChild(elem);
 }
 
+window.addEventListener('load', createMap);
 window.addEventListener('load', associationUpdateDisplay);
+window.addEventListener('load', postSurveyResponses);
+
+async function postSurveyResponses() {
+  await fetch('/data', {method: 'POST'});
+}
+
 function loadCharts() {
   const stats = new google.visualization.DataTable();
   stats.addColumn('string', 'Sentiment');
@@ -196,16 +195,8 @@ function loadReponseChart() {
   stats.addColumn('string', 'Period');
   stats.addColumn('number', 'Number of Responses');
 
-  stats.addRows([
-    ['Daily', 4],
-    ['Weekly', 15],
-  ]);
-
   // Instantiate and draw the chart.
   const chart = new google.visualization.BarChart(
       document.getElementById('response-bar-chart'));
   chart.draw(stats, null);
 }
-
-google.charts.load('current', {packages: ['corechart']});
-google.charts.setOnLoadCallback(loadCharts);

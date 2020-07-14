@@ -1,9 +1,15 @@
 package com.google.sps;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
 import com.google.cloud.language.v1.LanguageServiceClient;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,23 +18,80 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/update-associations")
 public class UpdateAssociationServlet extends HttpServlet {
 
+  public static final String SURVEY_ENTITY_KIND = "Actual";
+  public static final String COMMENT_PROPERTY = "text";
+
+  private LanguageServiceClient nlpClient;
+  private DatastoreService datastore;
+
+  public void init() throws ServletException {
+    try {
+      nlpClient = LanguageServiceClient.create();
+      datastore = DatastoreServiceFactory.getDatastoreService();
+    } catch (IOException exception) {
+      System.err.println(exception);
+    }
+  }
+
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
     AssociationAnalysis association = new AssociationAnalysis();
-    CloudNLPAssociation nlp = new CloudNLPAssociation(LanguageServiceClient.create());
+    CloudNLPAssociation nlp = new CloudNLPAssociation(nlpClient);
     ArrayList<AssociationResult> res =
         association.calculateScores(nlp.analyzeAssociations(getComments()));
     response.getWriter().println(res);
-    nlp.close();
+
+    clearPreviousResults();
+    storeResults(res);
   }
 
+  public void destroy() {
+    nlpClient.close();
+  }
+
+  /**
+   * Get the survey comment text from datastore
+   *
+   * @return an arraylist of the comment text
+   */
   private ArrayList<String> getComments() {
-    return new ArrayList(
-        Arrays.asList(
-            "the police keep on pulling me over and it frustrates me",
-            "I don't understand why the police have to be so militarized",
-            "funding should be redistributed to other social services",
-            "i haven't had any bad experiences with the police personally"));
+    Query query = new Query(SURVEY_ENTITY_KIND);
+    PreparedQuery results = datastore.prepare(query);
+
+    ArrayList<String> comments = new ArrayList<String>();
+    for (Entity e : results.asIterable()) {
+      comments.add((String) e.getProperty(COMMENT_PROPERTY));
+    }
+    return comments;
+  }
+
+  /** Removes all previous association results from datastore */
+  private void clearPreviousResults() {
+    Query query = new Query(AssociationResult.ENTITY_KIND);
+    PreparedQuery results = datastore.prepare(query);
+
+    ArrayList<Key> toDelete = new ArrayList<Key>();
+    for (Entity entity : results.asIterable()) {
+      toDelete.add(entity.getKey());
+    }
+
+    datastore.delete(toDelete);
+  }
+
+  /**
+   * Adds new association results to the datastore service
+   *
+   * @param res the arraylist of results to be stored
+   */
+  private void storeResults(ArrayList<AssociationResult> res) {
+    ArrayList<Entity> entities = new ArrayList<Entity>();
+    for (AssociationResult association : res) {
+      Entity entity = new Entity(AssociationResult.ENTITY_KIND);
+      entity.setProperty("name", association.getContent());
+      entity.setProperty("score", association.getScore());
+      entities.add(entity);
+    }
+    datastore.put(entities);
   }
 }
