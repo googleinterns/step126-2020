@@ -27,6 +27,7 @@ public class LoadDataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity e : results.asIterable()) {
+      String zipCode = (String) e.getProperty("zipCode");
       String id = (String) e.getProperty("id");
       Date date = (Date) e.getProperty("date");
       String completion = (String) e.getProperty("completion");
@@ -40,6 +41,7 @@ public class LoadDataServlet extends HttpServlet {
       long responseTimeThree = (long) e.getProperty("responseTimeThree");
 
       SurveyResponse surveyResponse = new SurveyResponse();
+      surveyResponse.setZipCode(zipCode);
       surveyResponse.setId(id);
       surveyResponse.setDate(date);
       surveyResponse.setCompletion(completion);
