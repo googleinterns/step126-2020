@@ -4,6 +4,7 @@ import java.util.Date;
 
 /* This object represents each response a user submits */
 public class SurveyResponse {
+  private String zipCode;
   private String id;
   private Date date;
   private String completion;
@@ -16,15 +17,14 @@ public class SurveyResponse {
   private long responseTimeTwo;
   private long responseTimeThree;
   
-  // Default no parameter constructor
-  public SurveyResponse() {
-
-  }
-  // Optional constructor used in test clases
-  public SurveyResponse(String id, String completion, double score) {
-    this.id = id;
-    this.completion = completion;
-    this.score = score;
+  /**
+   * Sets the unique id for the survey response
+   *
+   * @param zipCode This is the zip code where the survey response comes from
+   * @return Void
+   */
+  public void setZipCode(String zipCode) {
+    this.zipCode = zipCode;
   }
 
   /**
@@ -125,6 +125,15 @@ public class SurveyResponse {
    */
   public void setDate(Date date) {
     this.date = date;
+  }
+
+  /**
+   * Gets the zip code of the survey response
+   *
+   * @return String zip code of survey
+   */
+  public String getZipCode() {
+    return zipCode;
   }
 
   /**
