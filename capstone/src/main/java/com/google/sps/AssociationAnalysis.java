@@ -13,9 +13,9 @@ public class AssociationAnalysis {
     res = new HashMap<String, AssociationResult>();
   }
 
-  public AssociationAnalysis(ArrayList<AssociationResult> init) {
+  public AssociationAnalysis(ArrayList<AssociationResult> initialResults) {
     res = new HashMap<String, AssociationResult>();
-    for (AssociationResult association : init) {
+    for (AssociationResult association : initialResults) {
       res.put(association.getContent(), association);
     }
   }
