@@ -7,7 +7,9 @@ import java.util.Map;
 
 public class MapData {
     
-  static final Map<String,ArrayList> zipPrecinctMap;
+  static final Map<String, ArrayList> zipPrecinctMap;
+  static final Map<String, ArrayList> precinctZipMap;
+
   static {
         zipPrecinctMap = new HashMap<>();
         zipPrecinctMap.put("94103", new ArrayList<>(
@@ -40,7 +42,30 @@ public class MapData {
             Arrays.asList("Richmond")));
         zipPrecinctMap.put("94131", new ArrayList<>(
             Arrays.asList("Ingleside","Park")));
+
+        precinctZipMap = new HashMap<>();
+        precinctZipMap.put("Southern", new ArrayList<>(
+            Arrays.asList("94103","94107")));
+        precinctZipMap.put("Mission", new ArrayList<>(
+            Arrays.asList("94110","94114","94103")));
+        precinctZipMap.put("Bayview", new ArrayList<>(
+            Arrays.asList("94124","94107")));
+        precinctZipMap.put("Tenderloin", new ArrayList<>(
+            Arrays.asList("94109")));
+        precinctZipMap.put("Central", new ArrayList<>(
+            Arrays.asList("94109")));
+        precinctZipMap.put("Ingleside", new ArrayList<>(
+            Arrays.asList("94110","94131","94112")));
+        precinctZipMap.put("Taraval", new ArrayList<>(
+            Arrays.asList("94112","94116","94122")));
+        precinctZipMap.put("Park", new ArrayList<>(
+            Arrays.asList("94114","94117","94118","94122","94131")));
+        precinctZipMap.put("Northern", new ArrayList<>(
+            Arrays.asList("94109","94117","94123")));
+        precinctZipMap.put("Richmond", new ArrayList<>(
+            Arrays.asList("94118","94121","94122","94129")));       
     }
+
     public ArrayList getPrecincts(String zipcode){
         return zipPrecinctMap.get(zipcode);
     }
