@@ -144,8 +144,10 @@ function precinctControl(controlDiv, map) {
   });
 }
 
+let precinct = "SF";
+
 async function associationUpdateDisplay() {
-  const response = await fetch('/associations');
+  const response = await fetch('/associations?scope=' + precinct);
   const associations = await response.json();
 
   const positive = document.getElementById('pos-associations');

@@ -40,17 +40,17 @@ public class AssociationServlet extends HttpServlet {
       scope = "SF";
     }
 
-    FetchOptions fetchOptions = FetchOptions.Builder.withLimit(LIMIT);
+    FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
 
     Query posQuery =
-        new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.DESCENDING).addFilter("scope", Query.FilterOperator.EQUAL, scope);
+        new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.DESCENDING);
     ArrayList<String> positive =
-        extractContent(datastore.prepare(posQuery).asQueryResultList(fetchOptions));
+        extractContent(datastore.prepare(posQuery).asQueryResultList(fetchOptions), scope);
 
     Query negQuery =
-        new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.ASCENDING).addFilter("scope", Query.FilterOperator.EQUAL, scope);;
+        new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.ASCENDING);
     ArrayList<String> negative =
-        extractContent(datastore.prepare(negQuery).asQueryResultList(fetchOptions));
+        extractContent(datastore.prepare(negQuery).asQueryResultList(fetchOptions), scope);
 
     AssociationData output = new AssociationData(positive, negative);
     Gson gson = new Gson();
@@ -63,9 +63,11 @@ public class AssociationServlet extends HttpServlet {
    * @param query the entities to get the names from
    * @return the arraylist to add the names of the entities to
    */
-  private ArrayList<String> extractContent(QueryResultList<Entity> query) {
+  private ArrayList<String> extractContent(QueryResultList<Entity> query, String scope) {
     ArrayList<String> output = new ArrayList<String>();
     for (Entity entity : query) {
+      if (!scope.equals((String) entity.getProperty("scope"))) continue;
+      if (output.size() >= LIMIT) break;
       output.add((String) entity.getProperty("name"));
     }
     return output;

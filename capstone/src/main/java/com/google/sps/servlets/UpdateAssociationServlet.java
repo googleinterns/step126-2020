@@ -23,8 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 public class UpdateAssociationServlet extends HttpServlet {
 
   public static final String SURVEY_ENTITY_KIND = "Response";
-  public static final String COMMENT_PROPERTY = "text";
-  public static final String ZIPCODE = "zipcode";
+  public static final String COMMENT_PROPERTY = "answerThree";
+  public static final String ZIPCODE = "zipCode";
 
   private LanguageServiceClient nlpClient;
   private DatastoreService datastore;
@@ -86,8 +86,7 @@ public class UpdateAssociationServlet extends HttpServlet {
 
     ArrayList<AssociationInput> comments = new ArrayList<AssociationInput>();
     for (Entity e : results.asIterable()) {
-      if (e.getProperty("association-processed") == null
-          || !((boolean) e.getProperty("association-processed"))) {
+      if (!((boolean) e.getProperty("association-processed"))) {
 	String message = (String) e.getProperty(COMMENT_PROPERTY);
 	ArrayList<String> scope = (ArrayList<String>) (new MapData()).getPrecincts((String) e.getProperty(ZIPCODE)).clone();
 	scope.add("SF");
@@ -105,11 +104,12 @@ public class UpdateAssociationServlet extends HttpServlet {
    * @return an arraylist of previous responses
    */
   private ArrayList<AssociationResult> loadPreviousResults(String scope) {
-    Query query = new Query(AssociationResult.ENTITY_KIND).addFilter("scope", Query.FilterOperator.EQUAL, scope);
+    Query query = new Query(AssociationResult.ENTITY_KIND);
     PreparedQuery results = datastore.prepare(query);
 
     ArrayList<AssociationResult> prev = new ArrayList<AssociationResult>();
     for (Entity entity : results.asIterable()) {
+      if (!scope.equals((String) entity.getProperty("scope"))) continue;
       String content = (String) entity.getProperty("name");
       float weight = (float) (double) entity.getProperty("weight");
       float score = (float) (double) entity.getProperty("score");
