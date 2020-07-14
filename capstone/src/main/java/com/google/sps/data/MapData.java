@@ -66,11 +66,11 @@ public class MapData {
             Arrays.asList("94118","94121","94122","94129")));       
     }
 
-    public ArrayList getPrecincts(String zipcode) {
+    public static ArrayList getPrecincts(String zipcode) {
         return zipPrecinctMap.get(zipcode);
     }
 
-    public ArrayList getZipCodes(String precinct) { 
+    public static ArrayList getZipCodes(String precinct) { 
         return precinctZipMap.get(precinct);
     }
 }
