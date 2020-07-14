@@ -51,6 +51,7 @@ public class ReadData {
         }
     }
     
+    sentimentService.close();
   }
 
   /**
@@ -95,7 +96,12 @@ public class ReadData {
             answerThree += values[i];
         }
         
-        float score = sentimentService.getSentiment(answerThree);
+        float score = 0;
+
+        if (answerThree.length() > 0) {
+            score = sentimentService.getSentiment(answerThree);
+        }
+        
         long responseTimeOne = Long.parseLong(values[indexOfLong++]);
         long responseTimeTwo = Long.parseLong(values[indexOfLong++]);
         long responseTimeThree = Long.parseLong(values[indexOfLong]);
@@ -140,7 +146,6 @@ public class ReadData {
           System.out.println("Error closing the reader");
         }
       }
-      sentimentService.close();
     }  
   }
 }
