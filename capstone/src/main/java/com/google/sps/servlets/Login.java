@@ -2,26 +2,30 @@ package com.google.sps.servlets;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/status")
-public class CheckStatus extends HttpServlet {
-
+@WebServlet("/login")
+public class Login extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("application/json;");
-    PrintWriter out = response.getWriter();
+    response.setContentType("text/html");
+
     UserService userService = UserServiceFactory.getUserService();
-    if (userService.isUserLoggedIn()) {
-      out.println(new Gson().toJson(true));
+    String logMsg = "";
+    String redirectUrl = "/";
+
+    if (!userService.isUserLoggedIn()) {
+      logMsg = "user is now logged in";
+      redirectUrl = userService.createLoginURL("/login");
     } else {
-      out.println(new Gson().toJson(false));
+      logMsg = "user is now logged out";
+      redirectUrl = userService.createLogoutURL("/");
     }
+    response.getWriter().println(logMsg);
+    response.sendRedirect(redirectUrl);
   }
 }

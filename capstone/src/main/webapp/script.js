@@ -58,7 +58,7 @@ function createMap() {
 
   //* *button for zipcode data layer */
   const precinctControlDiv = document.createElement('div');
-    precinctControl(precinctControlDiv, map);
+  precinctControl(precinctControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER]
       .push(precinctControlDiv);
 }
@@ -199,4 +199,15 @@ function loadReponseChart() {
   const chart = new google.visualization.BarChart(
       document.getElementById('response-bar-chart'));
   chart.draw(stats, null);
+}
+
+async function showStats() {
+  const logStatus = await fetch('/status');
+  const status = await logStatus.json();
+  console.log(status + ': status');
+  if (status==false) {
+    window.location.href = '/login';
+  } else {
+    window.location.replace('statistics.html');
+  }
 }
