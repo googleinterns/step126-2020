@@ -14,12 +14,21 @@
 
 /* global google */
 
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(loadCharts);
+
 function createMap() {
-  const map = new google.maps.Map(document.getElementById('map-container'),
-      {
-        center: {lat: 37.7749, lng: -122.4194},
-        zoom: 12,
-      });
+  const map = new google.maps.Map(
+      document.getElementById('map-container'),
+      {center: {lat: 37.7749, lng: -122.4194}, zoom: 12},
+  );
+
+  /* adding zipcode overlay */
+  map.data.loadGeoJson('zipcode-data.json');
+  /* adding precinct overlay */
+  map.data.loadGeoJson('neighborhoods.json');
+
+  map.data.setStyle({visible: false});
 
   const cityBorder = [
     {lat: 37.708305, lng: -122.502691},
@@ -49,7 +58,7 @@ function createMap() {
 
   //* *button for zipcode data layer */
   const precinctControlDiv = document.createElement('div');
-  precinctControl(precinctControlDiv, map);
+    precinctControl(precinctControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER]
       .push(precinctControlDiv);
 }
@@ -69,6 +78,7 @@ function centerControl(controlDiv, map) {
   //* *button functionality */
   controlUI.addEventListener('click', function() {
     map.setCenter({lat: 37.7749, lng: -122.4194});
+    map.setZoom(12);
   });
 }
 
@@ -107,7 +117,10 @@ function precinctControl(controlDiv, map) {
   const precinctLayer = new google.maps.Data({map: map});
   precinctLayer.loadGeoJson('neighborhoods.json');
   precinctLayer.setStyle({visible: false});
-
+  precinctLayer.addListener('click', function(event) {
+    document.getElementById('sentiment-pie-chart').textContent =
+     event.feature.getProperty('station');
+  });
   //* *button creation and positioning*/
   const dataUI = document.createElement('div');
   dataUI.classList.add('button');
@@ -122,15 +135,14 @@ function precinctControl(controlDiv, map) {
   //* *button functionality */
   dataUI.addEventListener('click', function() {
     precinctButtonOn = !precinctButtonOn;
-    if (precinctButtonOn) {
+    if (!precinctButtonOn) {
       precinctLayer.setStyle({visible: false});
+      loadCharts();
     } else {
       precinctLayer.setStyle({visible: true});
     }
   });
 }
-
-window.addEventListener('load', createMap);
 
 async function associationUpdateDisplay() {
   const response = await fetch('/associations');
@@ -151,7 +163,13 @@ function addListElement(list, contents) {
   list.appendChild(elem);
 }
 
+window.addEventListener('load', createMap);
 window.addEventListener('load', associationUpdateDisplay);
+window.addEventListener('load', postSurveyResponses);
+
+async function postSurveyResponses() {
+  await fetch('/data', {method: 'POST'});
+}
 
 function loadCharts() {
   const stats = new google.visualization.DataTable();
@@ -177,16 +195,8 @@ function loadReponseChart() {
   stats.addColumn('string', 'Period');
   stats.addColumn('number', 'Number of Responses');
 
-  stats.addRows([
-    ['Daily', 4],
-    ['Weekly', 15],
-  ]);
-
   // Instantiate and draw the chart.
   const chart = new google.visualization.BarChart(
       document.getElementById('response-bar-chart'));
   chart.draw(stats, null);
 }
-
-google.charts.load('current', {packages: ['corechart']});
-google.charts.setOnLoadCallback(loadCharts);

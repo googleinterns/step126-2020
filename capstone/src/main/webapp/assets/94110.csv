@@ -1,0 +1,12 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1027031007,2020-07-03 11:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,Yes,1,ACAB,ACAB,7074,3245,6410
+1051672957,2020-07-04 00:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,Yes,5,"Professional, realistic and I in turn am respectful","Professional, realistic and I in turn am respectful",9003,4999,39920
+1145202172,2020-07-03 21:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,4,Personally i have had only positive interactions. I can't ignore how police have treated others.,Personally i have had only positive interactions. I can't ignore how police have treated others.,4291,5132,44399
+1486582818,2020-07-03 23:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,4,Duh,Duh,12353,4050,7044
+1646623483,2020-07-03 22:00:00,Complete,News,Male,18-24,US-WEST-CA-San Francisco,,Prefer not to answer,1,Our cops are public servants. They shouldn't be armed to the teeth and using force regularly. We've normalized this behaviour for far too long.,Our cops are public servants. They shouldn't be armed to the teeth and using force regularly. We've normalized this behaviour for far too long.,12281,2208,63607
+1744177275,2020-07-03 19:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,2,experiences/interactions are welcome,experiences/interactions are welcome,4751,2238,9840
+1838034897,2020-07-04 01:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,3,General distrust,General distrust,7203,14078,99368
+1949187546,2020-07-03 02:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,Prefer not to answer,1,no,no,12794,3563,4775
+2145610100,2020-07-03 16:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,3,killed two people near my house without good reason,killed two people near my house without good reason,11436,3872,20016
+610612473,2020-07-03 18:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,Police Hold a bit too,Police Hold a bit too,4779,3788,22203
+68599863,2020-07-03 16:00:00,Complete,News,Female,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,3,Idk,Idk,3938,2699,6372

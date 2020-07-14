@@ -1,0 +1,21 @@
+Survey ID,User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Question #1 Answer,Question #2 Answer,Sentiment score (-1 to 1),Response time #1(milliseconds),Response time #2(milliseconds),Response time #3(milliseconds)
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,904012303,2020-07-03 17:00:00,Partial,News,Female,18-24,US-WEST-CA-San Francisco,Prefer not to answer,1,0.5,5000,2550,7005
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,882915784,2020-07-06 1:00:00,Partial,News,Unknown,18-24,US-WEST-CA-San Francisco,Prefer not to answer,2,-0.87,5500,2570,7050
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,952986540,2020-07-04 5:00:00,Partial,News,Female,18-24,US-WEST-CA-San Francisco,Prefer not to answer,2,-0.75,6000,2590,7095
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,926145618,2020-07-05 20:00:00,Complete,News,Unknown,18-24,US-WEST-CA-San Francisco,No,2,-0.54,6500,2610,7140
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,668874746,2020-07-05 18:00:00,Complete,Other,Female,25-34,US-WEST-CA-San Francisco,Prefer not to answer,2,-0.31,7000,2630,7185
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,280703465,2020-07-03 15:00:00,Partial,News,Female,25-34,US-WEST-CA-San Francisco,No,3,-0.1,7500,2650,7230
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,187896384,2020-07-04 1:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,No,3,0,8000,2670,7275
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,276044093,2020-07-03 19:00:00,Complete,Arts & Entertainment,Unknown,35-44,US-WEST-CA-San Francisco,No,1,-0.5,8500,2690,7320
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,999825176,2020-07-03 4:00:00,Partial,News,Unknown,35-44,US-WEST-CA-San Francisco,No,1,0.1,9000,2710,7365
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,574478935,2020-07-05 19:00:00,Complete,News,Unknown,35-44,US-WEST-CA-San Francisco,No,2,0.15,9500,2730,7410
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,172359371,2020-07-05 18:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,No,3,0.25,10000,2750,7455
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,74334172,2020-07-02 20:00:00,Complete,News,Unknown,35-44,US-WEST-CA-San Francisco,Yes,2,0.22,10500,2770,7500
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,306720570,2020-07-06 3:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,No,4,0.56,11000,2790,7545
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,530045777,2020-07-03 21:00:00,Partial,News,Unknown,45-54,US-WEST-CA-San Francisco,No,4,0.48,11500,2810,7590
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,417548923,2020-07-02 22:00:00,Partial,News,Female,45-54,US-WEST-CA-San Francisco,Yes,4,0.57,12000,2830,7635
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,494350166,2020-07-03 19:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,No,4,0.68,12500,2850,7680
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,335724133,2020-07-02 18:00:00,Partial,News,Female,45-54,US-WEST-CA-San Francisco,No,4,0.71,13000,2870,7725
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,880790906,2020-07-04 5:00:00,Partial,News,Male,55-64,US-WEST-CA-San Francisco,No,2,0.23,13500,2890,7770
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,60768127,2020-07-03 2:00:00,Partial,News,Unknown,55-64,US-WEST-CA-San Francisco,No,5,0.85,14000,2910,7815
+survey-2lgvgbn4q7mmodkapcpbjrvb2u,115656786,2020-07-06 0:00:00,Complete,Reference,Male,55-64,US-WEST-CA-San Francisco,Yes,5,0.87,14500,2930,7860

@@ -1,0 +1,12 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1002570778,2020-07-03 15:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,3,Lack of community policing,Lack of community policing,15944,4233,14450
+1060994960,2020-07-03 01:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,3,Due to news,Due to news,6221,4781,9510
+1269375957,2020-07-03 16:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,5,Cops are heros most of the time,Cops are heros most of the time,4999,3223,37042
+14067391,2020-07-03 01:00:00,Complete,News,Female,55-64,US-WEST-CA-San Francisco,,No,5,no contact,no contact,21659,8302,14627
+1505336926,2020-07-03 04:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,Yes,3,Always seem to have a black man pulled over.,Always seem to have a black man pulled over.,10383,9218,35513
+1934643373,2020-07-03 19:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,No,5,none,none,4877,5083,8930
+2019489324,2020-07-03 17:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,2,not enough necessary measures to curb racial profiling,not enough necessary measures to curb racial profiling,7952,4494,24337
+337475348,2020-06-30 20:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,no comment,no comment,112054,4057,10513
+382335974,2020-07-02 20:00:00,Complete,News,Male,18-24,US-WEST-CA-San Francisco,,No,1,bad past experience; awareness of role and function of police,bad past experience; awareness of role and function of police,14647,3157,19546
+522512446,2020-07-03 03:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,Yes,3,No,No,11307,4760,5682
+534580958,2020-07-03 19:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,5,Respect,Respect,4518,4647,12459

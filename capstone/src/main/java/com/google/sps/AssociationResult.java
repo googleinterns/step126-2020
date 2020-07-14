@@ -5,6 +5,7 @@ import java.util.Comparator;
 /** Stores the content of an entity along with it association score */
 public class AssociationResult {
 
+  public static final String ENTITY_KIND = "AssociationResult";
   private String content;
   private float score;
 
