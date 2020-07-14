@@ -43,12 +43,12 @@ public class AssociationServlet extends HttpServlet {
     FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
 
     Query posQuery =
-        new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.DESCENDING).addFilter("scope", Query.FilterOperator.EQUAL, scope);
+        new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.DESCENDING);
     ArrayList<String> positive =
         extractContent(datastore.prepare(posQuery).asQueryResultList(fetchOptions), scope);
 
     Query negQuery =
-        new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.ASCENDING).addFilter("scope", Query.FilterOperator.EQUAL, scope);;
+        new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.ASCENDING);
     ArrayList<String> negative =
         extractContent(datastore.prepare(negQuery).asQueryResultList(fetchOptions), scope);
 
