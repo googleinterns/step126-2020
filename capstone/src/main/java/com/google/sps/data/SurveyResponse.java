@@ -4,6 +4,7 @@ import java.util.Date;
 
 /* This object represents each response a user submits */
 public class SurveyResponse {
+  private String zipCode;
   private String id;
   private Date date;
   private String completion;
@@ -15,6 +16,16 @@ public class SurveyResponse {
   private long responseTimeOne;
   private long responseTimeTwo;
   private long responseTimeThree;
+
+  /**
+   * Sets the unique id for the survey response
+   *
+   * @param zipCode This is the zip code where the survey response comes from
+   * @return Void
+   */
+  public void setZipCode(String zipCode) {
+    this.zipCode = zipCode;
+  }
 
   /**
    * Sets the unique id for the survey response
@@ -114,6 +125,15 @@ public class SurveyResponse {
    */
   public void setDate(Date date) {
     this.date = date;
+  }
+
+  /**
+   * Gets the zip code of the survey response
+   *
+   * @return String zip code of survey
+   */
+  public String getZipCode() {
+    return zipCode;
   }
 
   /**

@@ -35,17 +35,22 @@ public class AssociationServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(OUTPUT_TYPE);
 
-    FetchOptions fetchOptions = FetchOptions.Builder.withLimit(LIMIT);
+    String scope = request.getParameter("scope");
+    if (scope == null) {
+      scope = "SF";
+    }
+
+    FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
 
     Query posQuery =
         new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.DESCENDING);
     ArrayList<String> positive =
-        extractContent(datastore.prepare(posQuery).asQueryResultList(fetchOptions));
+        extractContent(datastore.prepare(posQuery).asQueryResultList(fetchOptions), scope);
 
     Query negQuery =
         new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.ASCENDING);
     ArrayList<String> negative =
-        extractContent(datastore.prepare(negQuery).asQueryResultList(fetchOptions));
+        extractContent(datastore.prepare(negQuery).asQueryResultList(fetchOptions), scope);
 
     AssociationData output = new AssociationData(positive, negative);
     Gson gson = new Gson();
@@ -58,9 +63,11 @@ public class AssociationServlet extends HttpServlet {
    * @param query the entities to get the names from
    * @return the arraylist to add the names of the entities to
    */
-  private ArrayList<String> extractContent(QueryResultList<Entity> query) {
+  private ArrayList<String> extractContent(QueryResultList<Entity> query, String scope) {
     ArrayList<String> output = new ArrayList<String>();
     for (Entity entity : query) {
+      if (!scope.equals((String) entity.getProperty("scope"))) continue;
+      if (output.size() >= LIMIT) break;
       output.add((String) entity.getProperty("name"));
     }
     return output;

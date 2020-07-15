@@ -1,25 +1,35 @@
 package com.google.sps;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 /** Represents data for sentiment around a word/phrase */
 public class EntitySentiment {
 
   private String content;
-  private float significance;
+  private float magnitude;
   private float sentiment;
+  private ArrayList<String> scopes;
 
   /**
    * Creates a new EntitySentiment object
    *
    * @param content the word/phrase the object refers to
-   * @param signficance the importance of the entity in the text
+   * @param magnitude the importance of the entity in the text
    * @param sentiment the sentiment associated with the entity
    */
-  public EntitySentiment(String content, float significance, float sentiment) {
+  public EntitySentiment(String content, float magnitude, float sentiment) {
     this.content = content;
-    this.significance = significance;
+    this.magnitude = magnitude;
     this.sentiment = sentiment;
+    this.scopes = new ArrayList<String>();
+  }
+
+  public EntitySentiment(String content, float magnitude, float sentiment, ArrayList<String> scopes) {
+    this.content = content;
+    this.magnitude = magnitude;
+    this.sentiment = sentiment;
+    this.scopes = scopes;
   }
 
   /**
@@ -36,8 +46,8 @@ public class EntitySentiment {
    *
    * @return importance of the entity in the text
    */
-  public float getSignificance() {
-    return significance;
+  public float getMagnitude() {
+    return magnitude;
   }
 
   /**
@@ -47,6 +57,10 @@ public class EntitySentiment {
    */
   public float getSentiment() {
     return sentiment;
+  }
+
+  public ArrayList<String> getScopes() {
+    return scopes;
   }
 
   /** Orders alphabetically by content */
@@ -60,6 +74,6 @@ public class EntitySentiment {
 
   @Override
   public String toString() {
-    return content + "(" + Float.toString(significance) + ", " + Float.toString(sentiment) + ")";
+    return content + "(" + Float.toString(magnitude) + ", " + Float.toString(sentiment) + ")";
   }
 }

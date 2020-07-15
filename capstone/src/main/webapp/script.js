@@ -120,6 +120,8 @@ function precinctControl(controlDiv, map) {
   precinctLayer.addListener('click', function(event) {
     document.getElementById('sentiment-pie-chart').textContent =
      event.feature.getProperty('station');
+    precinct = event.feature.getProperty('station');
+    associationUpdateDisplay();
   });
   //* *button creation and positioning*/
   const dataUI = document.createElement('div');
@@ -137,6 +139,8 @@ function precinctControl(controlDiv, map) {
     precinctButtonOn = !precinctButtonOn;
     if (!precinctButtonOn) {
       precinctLayer.setStyle({visible: false});
+      precinct = 'SF';
+      associationUpdateDisplay();
       loadCharts();
     } else {
       precinctLayer.setStyle({visible: true});
@@ -144,8 +148,10 @@ function precinctControl(controlDiv, map) {
   });
 }
 
+let precinct = "SF";
+
 async function associationUpdateDisplay() {
-  const response = await fetch('/associations');
+  const response = await fetch('/associations?scope=' + precinct);
   const associations = await response.json();
 
   const positive = document.getElementById('pos-associations');
