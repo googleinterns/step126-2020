@@ -61,13 +61,6 @@ function createMap() {
   precinctControl(precinctControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER]
       .push(precinctControlDiv);
-
-  const poly = new google.maps.Polyline({
-    strokeColor: '#000000',
-    strokeOpacity: 1.0,
-    strokeWeight: 3,
-  });
-  poly.setMap(map);
 }
 
 function centerControl(controlDiv, map) {
@@ -127,6 +120,8 @@ function precinctControl(controlDiv, map) {
   precinctLayer.addListener('click', function(event) {
     document.getElementById('sentiment-pie-chart').textContent =
      event.feature.getProperty('station');
+    precinct = event.feature.getProperty('station');
+    associationUpdateDisplay();
   });
   //* *button creation and positioning*/
   const dataUI = document.createElement('div');
@@ -144,6 +139,8 @@ function precinctControl(controlDiv, map) {
     precinctButtonOn = !precinctButtonOn;
     if (!precinctButtonOn) {
       precinctLayer.setStyle({visible: false});
+      precinct = 'SF';
+      associationUpdateDisplay();
       loadCharts();
     } else {
       precinctLayer.setStyle({visible: true});
@@ -151,8 +148,10 @@ function precinctControl(controlDiv, map) {
   });
 }
 
+let precinct = "SF";
+
 async function associationUpdateDisplay() {
-  const response = await fetch('/associations');
+  const response = await fetch('/associations?scope=' + precinct);
   const associations = await response.json();
 
   const positive = document.getElementById('pos-associations');
@@ -206,4 +205,15 @@ function loadReponseChart() {
   const chart = new google.visualization.BarChart(
       document.getElementById('response-bar-chart'));
   chart.draw(stats, null);
+}
+
+async function showStats() {
+  const logStatus = await fetch('/status');
+  const status = await logStatus.json();
+  console.log(status + ': status');
+  if (status==false) {
+    window.location.href = '/login';
+  } else {
+    window.location.replace('statistics.html');
+  }
 }
