@@ -61,6 +61,11 @@ function createMap() {
   precinctControl(precinctControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER]
       .push(precinctControlDiv);
+
+  const averageSentimentControlDiv = document.createElement('div');
+  sentimentControl(averageSentimentControlDiv, map);
+  map.controls[google.maps.ControlPosition.LEFT_CENTER]
+      .push(averageSentimentControlDiv);
 }
 
 function centerControl(controlDiv, map) {
@@ -215,4 +220,76 @@ async function showStats() {
   } else {
     window.location.replace('statistics.html');
   }
+}
+
+function sentimentControl(controlDiv, map) {
+     //* *button creation and positioning*/
+    const controlUI = document.createElement('div');
+    controlUI.classList.add('button');
+    controlUI.title = 'Click to show average police sentiments';
+    controlDiv.appendChild(controlUI);
+
+    //* *css for interior of all buttons*/
+    const text = document.createElement('div');
+    text.innerHTML = 'Show Sentiments';
+    controlUI.appendChild(text);
+
+
+    let allPrecincts = ["Southern", "Mission", "Bayview",
+        "Tenderloin", "Central", "Ingleside", "Taraval", "Park",
+        "Northern", "Richmond"];
+    let allPrecinctColors = [];    
+
+    //* *button functionality */
+    controlUI.addEventListener('click', function() {
+        allPrecinctColors.push(allPrecincts.forEach(averagePrecinctSentiment));
+        console.log(allPrecinctColors);
+    });
+}
+
+function mapSentiment(colorArray){
+    let precinct = precinct.getFeatureById(boundary_id);
+    data_layer.overrideStyle(new_boundary.feature, {
+    fillColor: '#0000FF',
+    fillOpacity: 0.9
+    });
+}
+
+async function averagePrecinctSentiment(policePrecinct){
+    const response = await fetch('/load-data?precinct=' + policePrecinct);
+    const list = await response.json();
+    let sentimentCount = 0;
+    for(var i = 0; i < list.length; i++){
+        const sentiment = list[i].score;
+        if (sentiment >= 0.5) {
+        sentimentCount += 5;
+        } else if (sentiment > 0.05) {
+        sentimentCount += 4;
+        } else if (sentiment >= -0.05) {
+        sentimentCount += 3;
+        } else if (sentiment > -0.5) {
+        sentimentCount += 2;
+        } else {
+        sentimentCount += 1;
+        }
+    }
+    let sentimentAverage = sentimentCount/list.length;
+    return getSentimentColor(sentimentAverage, list.length);
+}
+
+function getSentimentColor(averageFeelings, surveyParticipants){
+    let somePositive = surveyParticipants*4;
+    let mostNuetral = surveyParticipants*3;
+    let someNegative = surveyParticipants*2;
+    if (averageFeelings >= 0.5) {
+        return "#165B33";
+    } else if (averageFeelings > somePositive) {
+        return "#146B3A";
+    } else if (averageFeelings >= mostNuetral) {
+        return "#F8B229";
+    } else if (averageFeelings > someNegative) {
+        return "#EA4630";
+    } else {
+        return "#BB2528";
+    }
 }
