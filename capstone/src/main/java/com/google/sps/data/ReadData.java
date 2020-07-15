@@ -4,23 +4,15 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
-import com.google.sps.data.MapData;
-import com.google.sps.data.SentimentData;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.NumberFormatException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
-import java.util.stream.Stream;
 
 public class ReadData {
   private DatastoreService datastoreService;
@@ -35,31 +27,33 @@ public class ReadData {
   }
 
   /**
-  * Calls read file while iterating through all the zip codes
-  * @return {Void}
-  */
+   * Calls read file while iterating through all the zip codes
+   *
+   * @return {Void}
+   */
   public void readAll() {
     Set<String> zipCodes = MapData.zipPrecinctMap.keySet();
-    
-    for (String zip : zipCodes) {
-        String filePath = "assets/" + zip + ".csv";
 
-        try {
-            readFile(new FileReader(filePath), zip);
-        } catch (FileNotFoundException e) {
-            System.out.println(filePath + " is not in the assets folder");
-        }
+    for (String zip : zipCodes) {
+      String filePath = "assets/" + zip + ".csv";
+
+      try {
+        readFile(new FileReader(filePath), zip);
+      } catch (FileNotFoundException e) {
+        System.out.println(filePath + " is not in the assets folder");
+      }
     }
-    
+
     sentimentService.close();
   }
 
   /**
-  * Reads the survey csv and adds each element to datastore
-  * @param file This is the file that is being parsed
-  * @param zip This is the zip code the file is associated with
-  * @return {Void}
-  */
+   * Reads the survey csv and adds each element to datastore
+   *
+   * @param file This is the file that is being parsed
+   * @param zip This is the zip code the file is associated with
+   * @return {Void}
+   */
   public void readFile(FileReader file, String zip) {
     final int EXPECTED_LENGTH = 15;
     BufferedReader reader = null;
@@ -68,7 +62,7 @@ public class ReadData {
       reader = new BufferedReader(file);
       String header = reader.readLine();
       String line = "";
-    
+
       while ((line = reader.readLine()) != null) {
         String[] values = line.split(DELIMITER);
         String id = values[0];
@@ -91,17 +85,17 @@ public class ReadData {
         final int START_INDEX = 11;
 
         int indexOfLong = (values.length - EXPECTED_LENGTH) + START_INDEX + 1;
-        
+
         for (int i = START_INDEX; i < indexOfLong; i++) {
-            answerThree += values[i];
+          answerThree += values[i];
         }
-        
+
         float score = 0;
 
         if (answerThree.length() > 0) {
-            score = sentimentService.getSentiment(answerThree);
+          score = sentimentService.getSentiment(answerThree);
         }
-        
+
         long responseTimeOne = Long.parseLong(values[indexOfLong++]);
         long responseTimeTwo = Long.parseLong(values[indexOfLong++]);
         long responseTimeThree = Long.parseLong(values[indexOfLong]);
@@ -129,12 +123,12 @@ public class ReadData {
           entity.setProperty("responseTimeOne", responseTimeOne);
           entity.setProperty("responseTimeTwo", responseTimeTwo);
           entity.setProperty("responseTimeThree", responseTimeThree);
-          
+
           newEntities.add(entity);
         }
       }
 
-       datastoreService.put(newEntities);
+      datastoreService.put(newEntities);
 
     } catch (IOException e) {
       System.out.println("Error parsing the csv");
@@ -146,6 +140,6 @@ public class ReadData {
           System.out.println("Error closing the reader");
         }
       }
-    }  
+    }
   }
 }
