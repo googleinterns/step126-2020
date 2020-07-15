@@ -84,7 +84,7 @@ public class UpdateAssociationServlet extends HttpServlet {
           datastore.put(e);
         } catch (NullPointerException exception) {
           System.err.println("Invalid zip code in response: " + (String) e.getProperty(ZIPCODE));
-        }
+	}
       }
     }
     return comments;
