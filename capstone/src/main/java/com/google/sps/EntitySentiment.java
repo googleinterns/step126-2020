@@ -68,6 +68,10 @@ public class EntitySentiment {
     return sentiment;
   }
 
+  public String getKey () {
+    return content.toLowerCase().trim(); 
+  }
+
   /**
    * Returns the scopes within this entity is valid
    *
