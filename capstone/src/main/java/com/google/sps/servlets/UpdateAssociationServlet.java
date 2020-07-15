@@ -55,7 +55,6 @@ public class UpdateAssociationServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
     CloudNLPAssociation nlp = new CloudNLPAssociation(nlpClient);
-
     ArrayList<EntitySentiment> sentiments = nlp.analyzeAssociations(getComments());
 
     for (String scope : SCOPES) {

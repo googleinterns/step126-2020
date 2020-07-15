@@ -239,7 +239,7 @@ async function showStats() {
   const logStatus = await fetch('/status');
   const status = await logStatus.json();
   console.log(status + ': status');
-  if (status==false) {
+  if (!status) {
     window.location.href = '/login';
   } else {
     window.location.replace('statistics.html');
