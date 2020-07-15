@@ -55,7 +55,7 @@ public class UpdateAssociationServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
     CloudNLPAssociation nlp = new CloudNLPAssociation(nlpClient);
-    
+
     ArrayList<EntitySentiment> sentiments = nlp.analyzeAssociations(getComments());
 
     for (String scope : SCOPES) {
@@ -86,13 +86,20 @@ public class UpdateAssociationServlet extends HttpServlet {
 
     ArrayList<AssociationInput> comments = new ArrayList<AssociationInput>();
     for (Entity e : results.asIterable()) {
-      if (!((boolean) e.getProperty("association-processed"))) {
-	String message = (String) e.getProperty(COMMENT_PROPERTY);
-	ArrayList<String> scope = (ArrayList<String>) (new MapData()).getPrecincts((String) e.getProperty(ZIPCODE)).clone();
-	scope.add("SF");
-        comments.add(new AssociationInput(message, scope));
-        e.setProperty("association-processed", true);
-        datastore.put(e);
+      if (e.getProperty("association-processed") == null
+          || !((boolean) e.getProperty("association-processed"))) {
+        String message = (String) e.getProperty(COMMENT_PROPERTY);
+	try {
+          ArrayList<String> scope =
+              (ArrayList<String>)
+                  (new MapData()).getPrecincts((String) e.getProperty(ZIPCODE)).clone();
+          scope.add("SF");
+          comments.add(new AssociationInput(message, scope));
+          e.setProperty("association-processed", true);
+          datastore.put(e);
+	} catch (NullPointerException exception) {
+	  System.err.println("Invalid zip code in response");
+	}
       }
     }
     return comments;
@@ -101,6 +108,7 @@ public class UpdateAssociationServlet extends HttpServlet {
   /**
    * Loads all previous association results from datastore
    *
+   * @param scope the scope to load results from
    * @return an arraylist of previous responses
    */
   private ArrayList<AssociationResult> loadPreviousResults(String scope) {
@@ -124,6 +132,7 @@ public class UpdateAssociationServlet extends HttpServlet {
    * Adds new association results to the datastore service
    *
    * @param res the arraylist of results to be stored
+   * @param scope the precinct/scope to store the results under
    */
   private void storeResults(ArrayList<AssociationResult> res, String scope) {
     ArrayList<Entity> entities = new ArrayList<Entity>();

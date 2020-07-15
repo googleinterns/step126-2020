@@ -121,6 +121,7 @@ function precinctControl(controlDiv, map) {
   precinctLayer.addListener('click', function(event) {
     precinct = event.feature.getProperty('station');
     loadCharts();
+    associationUpdateDisplay(precinct);
   });
   //* *button creation and positioning*/
   const dataUI = document.createElement('div');
@@ -140,16 +141,15 @@ function precinctControl(controlDiv, map) {
       precinctLayer.setStyle({visible: false});
       precinct = 'SF';
       loadCharts();
+      associationUpdateDisplay('SF');
     } else {
       precinctLayer.setStyle({visible: true});
     }
   });
 }
 
-let precinct = "SF";
-
-async function associationUpdateDisplay() {
-  const response = await fetch('/associations?scope=' + precinct);
+async function associationUpdateDisplay(scope) {
+  const response = await fetch('/associations?scope=' + scope);
   const associations = await response.json();
 
   const positive = document.getElementById('pos-associations');
@@ -168,6 +168,9 @@ function addListElement(list, contents) {
 }
 
 window.addEventListener('load', createMap);
+window.addEventListener('load', function() {
+  associationUpdateDisplay('SF');
+});
 window.addEventListener('load', postSurveyResponses);
 
 async function postSurveyResponses() {
