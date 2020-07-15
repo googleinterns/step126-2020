@@ -61,6 +61,13 @@ function createMap() {
   precinctControl(precinctControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER]
       .push(precinctControlDiv);
+
+  const poly = new google.maps.Polyline({
+    strokeColor: '#000000',
+    strokeOpacity: 1.0,
+    strokeWeight: 3,
+  });
+  poly.setMap(map);
 }
 
 function centerControl(controlDiv, map) {
@@ -199,14 +206,4 @@ function loadReponseChart() {
   const chart = new google.visualization.BarChart(
       document.getElementById('response-bar-chart'));
   chart.draw(stats, null);
-}
-
-async function showStats() {
-  const logStatus = await fetch('/status');
-  const status = await logStatus.json();
-  if (!status) {
-    window.location.href = '/login';
-  } else {
-    window.location.replace('statistics.html');
-  }
 }
