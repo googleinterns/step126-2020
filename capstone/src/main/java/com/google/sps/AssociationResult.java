@@ -82,6 +82,10 @@ public class AssociationResult {
     return key;
   }
 
+  public String getNormalizedString() {
+    return content.toLowerCase().trim();
+  }
+
   /**
    * Updates the score to a new score
    *

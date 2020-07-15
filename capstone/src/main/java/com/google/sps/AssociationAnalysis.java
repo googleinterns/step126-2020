@@ -16,7 +16,7 @@ public class AssociationAnalysis {
   public AssociationAnalysis(ArrayList<AssociationResult> initialResults) {
     res = new HashMap<String, AssociationResult>();
     for (AssociationResult association : initialResults) {
-      res.put(association.getContent(), association);
+      res.put(association.getNormalizedString(), association);
     }
   }
 
@@ -35,11 +35,11 @@ public class AssociationAnalysis {
 
   /** Updates the result array with the new entity mention given */
   private void updateScore(HashMap<String, AssociationResult> res, EntitySentiment sentiment) {
-    AssociationResult association = res.get(sentiment.getContent());
+    AssociationResult association = res.get(sentiment.getKey());
     if (association != null) {
       association.updateResult(sentiment);
     } else {
-      res.put(sentiment.getContent(), new AssociationResult(sentiment));
+      res.put(sentiment.getKey(), new AssociationResult(sentiment));
     }
   }
 }
