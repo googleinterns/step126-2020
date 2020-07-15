@@ -40,7 +40,7 @@ public class CloudNLPAssociation implements AutoCloseable {
               entity.getName(),
               mention.getSentiment().getMagnitude(),
               mention.getSentiment().getScore(),
-	      input.getScopes()));
+              input.getScopes()));
     }
     return res;
   }
@@ -52,7 +52,8 @@ public class CloudNLPAssociation implements AutoCloseable {
    * @return an arraylist of all the entity sentiments in the message
    */
   private ArrayList<EntitySentiment> entitySentimentAnalysis(AssociationInput input) {
-    Document doc = Document.newBuilder().setContent(input.getMessage()).setType(Type.PLAIN_TEXT).build();
+    Document doc =
+        Document.newBuilder().setContent(input.getMessage()).setType(Type.PLAIN_TEXT).build();
     AnalyzeEntitySentimentRequest request =
         AnalyzeEntitySentimentRequest.newBuilder()
             .setDocument(doc)
