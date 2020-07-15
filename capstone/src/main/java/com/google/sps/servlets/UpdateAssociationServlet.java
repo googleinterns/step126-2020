@@ -89,7 +89,7 @@ public class UpdateAssociationServlet extends HttpServlet {
       if (e.getProperty("association-processed") == null
           || !((boolean) e.getProperty("association-processed"))) {
         String message = (String) e.getProperty(COMMENT_PROPERTY);
-	try {
+        try {
           ArrayList<String> scope =
               (ArrayList<String>)
                   (new MapData()).getPrecincts((String) e.getProperty(ZIPCODE)).clone();
@@ -97,9 +97,9 @@ public class UpdateAssociationServlet extends HttpServlet {
           comments.add(new AssociationInput(message, scope));
           e.setProperty("association-processed", true);
           datastore.put(e);
-	} catch (NullPointerException exception) {
-	  System.err.println("Invalid zip code in response");
-	}
+        } catch (NullPointerException exception) {
+          System.err.println("Invalid zip code in response");
+        }
       }
     }
     return comments;
