@@ -30,7 +30,6 @@ public class LoadDataServlet extends HttpServlet {
 
     ArrayList<String> zipCodes = MapData.getZipCodes(precinct);
 
-
     for (Entity e : results.asIterable()) {
       String zipCode = (String) e.getProperty("zipCode");
 

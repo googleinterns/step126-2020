@@ -6,28 +6,26 @@ import com.google.cloud.language.v1.Sentiment;
 import java.io.IOException;
 
 public class SentimentData {
-    private LanguageServiceClient languageService;
-    
-    public SentimentData() {
-        try {
-            languageService = LanguageServiceClient.create(); 
-        } catch (IOException e) {
-            System.out.println("Client failed to initialize");
-        }
-    }
+  private LanguageServiceClient languageService;
 
-    public float getSentiment(String message) throws IOException {
-        Document doc = Document.newBuilder()
-          .setContent(message)
-          .setType(Document.Type.PLAIN_TEXT)
-          .build();
-        Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
-        float score = sentiment.getScore();
-
-        return score;
+  public SentimentData() {
+    try {
+      languageService = LanguageServiceClient.create();
+    } catch (IOException e) {
+      System.out.println("Client failed to initialize");
     }
+  }
 
-    public void close(){
-        languageService.close();
-    }
+  public float getSentiment(String message) throws IOException {
+    Document doc =
+        Document.newBuilder().setContent(message).setType(Document.Type.PLAIN_TEXT).build();
+    Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+    float score = sentiment.getScore();
+
+    return score;
+  }
+
+  public void close() {
+    languageService.close();
+  }
 }

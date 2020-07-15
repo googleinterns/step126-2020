@@ -16,7 +16,7 @@ public class SurveyResponse {
   private long responseTimeOne;
   private long responseTimeTwo;
   private long responseTimeThree;
-  
+
   /**
    * Sets the unique id for the survey response
    *
