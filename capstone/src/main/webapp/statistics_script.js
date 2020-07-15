@@ -4,7 +4,8 @@ google.charts.load('current', {packages: ['corechart']});
 google.charts.setOnLoadCallback(getSurveyResponses);
 
 async function getSurveyResponses() {
-  const response = await fetch('/load-data');
+  const precinct = 'Mission';
+  const response = await fetch('/load-data?precinct=' + precinct);
   const list = await response.json(); // list of entities from datastore
 
   // Sentiment category for the user's survey response
