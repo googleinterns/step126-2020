@@ -5,51 +5,101 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 
 public class ReadData {
-  final String DELIMITER = ",";
+  private DatastoreService datastoreService;
+  private SentimentData sentimentService;
+  private ArrayList<Entity> newEntities;
+  private final String DELIMITER = ",";
+
+  public ReadData() throws IOException {
+    datastoreService = DatastoreServiceFactory.getDatastoreService();
+    sentimentService = new SentimentData();
+    newEntities = new ArrayList<Entity>();
+  }
 
   /**
-   * Reads the survey csv and adds each element to datastore
+   * Calls read file while iterating through all the zip codes
    *
    * @return {Void}
    */
-  public void readCSV() {
+  public void readAll() {
+    Set<String> zipCodes = MapData.zipPrecinctMap.keySet();
+
+    for (String zip : zipCodes) {
+      String filePath = "assets/" + zip + ".csv";
+
+      try {
+        readFile(new FileReader(filePath), zip);
+      } catch (FileNotFoundException e) {
+        System.out.println(filePath + " is not in the assets folder");
+      }
+    }
+
+    sentimentService.close();
+  }
+
+  /**
+   * Reads the survey csv, splits the lines by a comma delimiter, and adds each element to data
+   * store as an entity property
+   *
+   * @param file This is the file that is being parsed
+   * @param zip This is the zip code the file is associated with
+   * @return {Void}
+   */
+  public void readFile(FileReader file, String zip) {
+    final int EXPECTED_LENGTH = 15;
     BufferedReader reader = null;
-    FileReader file = null;
-    DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
 
     try {
-      file = new FileReader("assets/surveyresponse.csv");
       reader = new BufferedReader(file);
       String header = reader.readLine();
       String line = "";
 
       while ((line = reader.readLine()) != null) {
         String[] values = line.split(DELIMITER);
-        String id = values[0] + "-" + values[1];
+        String id = values[0];
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date;
 
         try {
-          date = formatter.parse(values[2]);
+          date = formatter.parse(values[1]);
         } catch (ParseException e) {
           date = null;
         }
-        String completion = values[3];
-        String gender = values[5];
-        String ageRange = values[6];
+
+        String completion = values[2];
+        String gender = values[4];
+        String ageRange = values[5];
         String answerOne = values[8];
         String answerTwo = values[9];
-        double score = Double.parseDouble(values[10]);
-        long responseTimeOne = Long.parseLong(values[11]);
-        long responseTimeTwo = Long.parseLong(values[12]);
-        long responseTimeThree = Long.parseLong(values[13]);
+        String answerThree = "";
+
+        final int START_INDEX = 11;
+
+        int indexOfLong = (values.length - EXPECTED_LENGTH) + START_INDEX + 1;
+
+        for (int i = START_INDEX; i < indexOfLong; i++) {
+          answerThree += values[i];
+        }
+
+        float score = 0;
+
+        if (answerThree.length() > 0) {
+          score = sentimentService.getSentiment(answerThree);
+        }
+
+        long responseTimeOne = Long.parseLong(values[indexOfLong++]);
+        long responseTimeTwo = Long.parseLong(values[indexOfLong++]);
+        long responseTimeThree = Long.parseLong(values[indexOfLong]);
 
         Entity entity = new Entity("Response", id);
         Entity inStore; // Entity that may or may not exist in Datastore
@@ -61,6 +111,7 @@ public class ReadData {
         }
 
         if (inStore == null) {
+          entity.setProperty("zipCode", zip);
           entity.setProperty("id", id);
           entity.setProperty("date", date);
           entity.setProperty("completion", completion);
@@ -68,16 +119,20 @@ public class ReadData {
           entity.setProperty("ageRange", ageRange);
           entity.setProperty("answerOne", answerOne);
           entity.setProperty("answerTwo", answerTwo);
+          entity.setProperty("answerThree", answerThree);
           entity.setProperty("score", score);
           entity.setProperty("responseTimeOne", responseTimeOne);
           entity.setProperty("responseTimeTwo", responseTimeTwo);
           entity.setProperty("responseTimeThree", responseTimeThree);
 
-          datastoreService.put(entity);
+          newEntities.add(entity);
         }
       }
+
+      datastoreService.put(newEntities);
+
     } catch (IOException e) {
-      System.out.println("IO error");
+      System.out.println("Error parsing the csv");
     } finally {
       if (reader != null) {
         try {
