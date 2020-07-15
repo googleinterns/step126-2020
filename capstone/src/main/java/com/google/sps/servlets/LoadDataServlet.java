@@ -33,7 +33,7 @@ public class LoadDataServlet extends HttpServlet {
     for (Entity e : results.asIterable()) {
       String zipCode = (String) e.getProperty("zipCode");
 
-      if (precinct.length() > 0 && zipCodes.contains(zipCode)) {
+      if (precinct.equals("SF") || zipCodes.contains(zipCode)) {
         String id = (String) e.getProperty("id");
         Date date = (Date) e.getProperty("date");
         String completion = (String) e.getProperty("completion");

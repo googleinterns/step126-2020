@@ -25,7 +25,8 @@ public class EntitySentiment {
     this.scopes = new ArrayList<String>();
   }
 
-  public EntitySentiment(String content, float magnitude, float sentiment, ArrayList<String> scopes) {
+  public EntitySentiment(
+      String content, float magnitude, float sentiment, ArrayList<String> scopes) {
     this.content = content;
     this.magnitude = magnitude;
     this.sentiment = sentiment;
