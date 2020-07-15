@@ -48,7 +48,8 @@ public class ReadData {
   }
 
   /**
-   * Reads the survey csv and adds each element to datastore
+   * Reads the survey csv, splits the lines by a comma delimiter, and adds each element to data
+   * store as an entity property
    *
    * @param file This is the file that is being parsed
    * @param zip This is the zip code the file is associated with
