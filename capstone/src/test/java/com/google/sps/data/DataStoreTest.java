@@ -1,4 +1,3 @@
-
 import static com.google.appengine.api.datastore.FetchOptions.Builder.withLimit;
 import static org.junit.Assert.assertEquals;
 
@@ -36,13 +35,13 @@ public class DataStoreTest {
     assertEquals(2, ds.prepare(new Query("test")).countEntities(withLimit(10)));
   }
 
-  @Test
-  public void testInsert1() {
-    doTest();
-  }
+//   @Test
+//   public void testInsert1() {
+//     doTest();
+//   }
 
-  @Test
-  public void testInsert2() {
-    doTest();
-  }
+//   @Test
+//   public void testInsert2() {
+//     doTest();
+//   }
 }
