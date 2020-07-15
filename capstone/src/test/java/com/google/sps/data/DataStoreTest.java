@@ -9,7 +9,6 @@ import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestC
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
 public class DataStoreTest {
 
@@ -35,13 +34,13 @@ public class DataStoreTest {
     assertEquals(2, ds.prepare(new Query("test")).countEntities(withLimit(10)));
   }
 
-//   @Test
-//   public void testInsert1() {
-//     doTest();
-//   }
+  //   @Test
+  //   public void testInsert1() {
+  //     doTest();
+  //   }
 
-//   @Test
-//   public void testInsert2() {
-//     doTest();
-//   }
+  //   @Test
+  //   public void testInsert2() {
+  //     doTest();
+  //   }
 }
