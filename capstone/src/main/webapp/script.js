@@ -234,14 +234,3 @@ function loadResponseChart(totalResponses, precinct) {
       document.getElementById('response-bar-chart'));
   chart.draw(stats, null);
 }
-
-async function showStats() {
-  const logStatus = await fetch('/status');
-  const status = await logStatus.json();
-  console.log(status + ': status');
-  if (!status) {
-    window.location.href = '/login';
-  } else {
-    window.location.replace('statistics.html');
-  }
-}
