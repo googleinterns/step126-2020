@@ -146,14 +146,7 @@ function precinctControl(controlDiv, map) {
   });
 }
 
-function addListElement(list, contents) {
-  const elem = document.createElement('li');
-  elem.textContent = contents;
-  list.appendChild(elem);
-}
-
 window.addEventListener('load', createMap);
-window.addEventListener('load', associationUpdateDisplay);
 window.addEventListener('load', postSurveyResponses);
 
 async function postSurveyResponses() {
