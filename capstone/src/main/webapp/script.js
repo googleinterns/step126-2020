@@ -120,7 +120,6 @@ function precinctControl(controlDiv, map) {
   precinctLayer.setStyle({visible: false});
   precinctLayer.addListener('click', function(event) {
     precinct = event.feature.getProperty('station');
-    associationUpdateDisplay();
     loadCharts();
   });
   //* *button creation and positioning*/
@@ -140,25 +139,11 @@ function precinctControl(controlDiv, map) {
     if (!precinctButtonOn) {
       precinctLayer.setStyle({visible: false});
       precinct = 'SF';
-      associationUpdateDisplay();
       loadCharts();
     } else {
       precinctLayer.setStyle({visible: true});
     }
   });
-}
-
-async function associationUpdateDisplay() {
-  const response = await fetch('/associations?scope=' + precinct);
-  const associations = await response.json();
-
-  const positive = document.getElementById('pos-associations');
-  positive.innerHTML = '';
-  associations.positive.forEach((elem) => addListElement(positive, elem));
-
-  const negative = document.getElementById('neg-associations');
-  negative.innerHTML = '';
-  associations.negative.forEach((elem) => addListElement(negative, elem));
 }
 
 function addListElement(list, contents) {
