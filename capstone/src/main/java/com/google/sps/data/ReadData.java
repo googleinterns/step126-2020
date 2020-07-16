@@ -76,25 +76,25 @@ public class ReadData {
           date = null;
         }
 
-        String completion = values[2];
+        String completionStatus = values[2];
         String gender = values[4];
         String ageRange = values[5];
-        String answerOne = values[8];
-        String answerTwo = values[9];
-        String answerThree = "";
+        String directExperience = values[8];
+        String rating = values[9];
+        String text = "";
 
         final int START_INDEX = 11;
 
         int indexOfLong = (values.length - EXPECTED_LENGTH) + START_INDEX + 1;
 
         for (int i = START_INDEX; i < indexOfLong; i++) {
-          answerThree += values[i];
+          text += values[i];
         }
 
         float score = 0;
 
-        if (answerThree.length() > 0) {
-          score = sentimentService.getSentiment(answerThree);
+        if (text.length() > 0) {
+          score = sentimentService.getSentiment(text);
         }
 
         long responseTimeOne = Long.parseLong(values[indexOfLong++]);
@@ -114,12 +114,12 @@ public class ReadData {
           entity.setProperty("zipCode", zip);
           entity.setProperty("id", id);
           entity.setProperty("date", date);
-          entity.setProperty("completion", completion);
+          entity.setProperty("completionStatus", completionStatus);
           entity.setProperty("gender", gender);
           entity.setProperty("ageRange", ageRange);
-          entity.setProperty("answerOne", answerOne);
-          entity.setProperty("answerTwo", answerTwo);
-          entity.setProperty("answerThree", answerThree);
+          entity.setProperty("directExperience", directExperience);
+          entity.setProperty("rating", rating);
+          entity.setProperty("text", text);
           entity.setProperty("score", score);
           entity.setProperty("responseTimeOne", responseTimeOne);
           entity.setProperty("responseTimeTwo", responseTimeTwo);
