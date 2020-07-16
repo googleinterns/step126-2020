@@ -55,7 +55,7 @@ public class UpdateAssociationServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
     CloudNLPAssociation nlp = new CloudNLPAssociation(nlpClient);
-    
+
     ArrayList<EntitySentiment> sentiments = nlp.analyzeAssociations(getComments());
 
     for (String scope : SCOPES) {
@@ -87,9 +87,11 @@ public class UpdateAssociationServlet extends HttpServlet {
     ArrayList<AssociationInput> comments = new ArrayList<AssociationInput>();
     for (Entity e : results.asIterable()) {
       if (!((boolean) e.getProperty("association-processed"))) {
-	String message = (String) e.getProperty(COMMENT_PROPERTY);
-	ArrayList<String> scope = (ArrayList<String>) (new MapData()).getPrecincts((String) e.getProperty(ZIPCODE)).clone();
-	scope.add("SF");
+        String message = (String) e.getProperty(COMMENT_PROPERTY);
+        ArrayList<String> scope =
+            (ArrayList<String>)
+                (new MapData()).getPrecincts((String) e.getProperty(ZIPCODE)).clone();
+        scope.add("SF");
         comments.add(new AssociationInput(message, scope));
         e.setProperty("association-processed", true);
         datastore.put(e);
