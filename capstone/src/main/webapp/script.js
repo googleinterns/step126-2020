@@ -364,6 +364,42 @@ async function showStats() {
   }
 }
 
+const MAX_SIZE = 100;
+const darkRed = 0x4B0B06;
+const lightRed = 0xED2A1D;
+const lightGreen = 0xA9D45E;
+const darkGreen = 0x23300D;
+const neutralShade = 0x7E7F9A;
+
+function getColor(gradient) {
+  let res;
+  if(Math.abs(gradient) <= 0.1) res = neutralShade;
+  else if (gradient < 0) {
+    res = lightRed + (darkRed - lightRed) * Math.abs(gradient);
+  } else {
+    res = lightGreen + (darkGreen - lightGreen) * gradient;
+  }
+  res = Math.round(res);
+  console.log('#' + res.toString(16));
+  return '#' + res.toString(16);
+}
+
+async function loadWordcloud() {
+  const response = await fetch('/wordcloud');
+  let data = await response.json();
+  data.sort(function (a,b) {b.weight - a.weight});
+  data.map(function (x) {x.weight = Math.sqrt(x.weight)});
+  let scalar = MAX_SIZE / data[0].weight;
+  data.map(function (x) {x.weight = x.weight * scalar});
+  let list = data.map(function (x) {return [x.content, x.weight]});
+  console.log(list);
+  let color = function (word, weight, fontSize, distance, theta) {
+	  let elem = data.find(function(elem) { return elem.content === word });
+	  return getColor(elem.gradient);
+	}
+  WordCloud(document.getElementById('cloud-canvas'), { list: list, color: color } );
+}
+
 function configModal() {
   // Get the modal
   const modal = document.getElementById('modal');
@@ -377,6 +413,7 @@ function configModal() {
   // When the user clicks the button, open the modal 
   btn.onclick = function() {
     modal.style.display = 'block';
+    loadWordcloud();
   }
 
   // When the user clicks on <span> (x), close the modal
