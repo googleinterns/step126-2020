@@ -54,6 +54,7 @@ public class UpdateAssociationServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
+    AssociationAnalysis association = new AssociationAnalysis(loadPreviousResults());
     CloudNLPAssociation nlp = new CloudNLPAssociation(nlpClient);
 
     ArrayList<EntitySentiment> sentiments = nlp.analyzeAssociations(getComments());
@@ -69,6 +70,7 @@ public class UpdateAssociationServlet extends HttpServlet {
       ArrayList<AssociationResult> res = analysis.calculateScores(filteredSentiment);
       storeResults(res, scope);
     }
+    storeResults(res);
   }
 
   public void destroy() {
@@ -86,13 +88,9 @@ public class UpdateAssociationServlet extends HttpServlet {
 
     ArrayList<AssociationInput> comments = new ArrayList<AssociationInput>();
     for (Entity e : results.asIterable()) {
-      if (!((boolean) e.getProperty("association-processed"))) {
-        String message = (String) e.getProperty(COMMENT_PROPERTY);
-        ArrayList<String> scope =
-            (ArrayList<String>)
-                (new MapData()).getPrecincts((String) e.getProperty(ZIPCODE)).clone();
-        scope.add("SF");
-        comments.add(new AssociationInput(message, scope));
+      if (e.getProperty("association-processed") == null
+          || !((boolean) e.getProperty("association-processed"))) {
+        comments.add((String) e.getProperty(COMMENT_PROPERTY));
         e.setProperty("association-processed", true);
         datastore.put(e);
       }
@@ -105,13 +103,12 @@ public class UpdateAssociationServlet extends HttpServlet {
    *
    * @return an arraylist of previous responses
    */
-  private ArrayList<AssociationResult> loadPreviousResults(String scope) {
+  private ArrayList<AssociationResult> loadPreviousResults() {
     Query query = new Query(AssociationResult.ENTITY_KIND);
     PreparedQuery results = datastore.prepare(query);
 
     ArrayList<AssociationResult> prev = new ArrayList<AssociationResult>();
     for (Entity entity : results.asIterable()) {
-      if (!scope.equals((String) entity.getProperty("scope"))) continue;
       String content = (String) entity.getProperty("name");
       float weight = (float) (double) entity.getProperty("weight");
       float score = (float) (double) entity.getProperty("score");
@@ -141,7 +138,6 @@ public class UpdateAssociationServlet extends HttpServlet {
       entity.setProperty("score", association.getScore());
       entity.setProperty("weight", association.getWeight());
       entity.setProperty("average-sentiment", association.getAverageSentiment());
-      entity.setProperty("scope", scope);
       entities.add(entity);
     }
     datastore.put(entities);
