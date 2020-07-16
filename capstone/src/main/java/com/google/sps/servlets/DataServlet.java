@@ -13,7 +13,7 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     ReadData readData = new ReadData();
-    readData.readCSV();
+    readData.readAll();
 
     response.sendRedirect("/index.html");
   }
