@@ -51,22 +51,23 @@ public class MapData {
   public static ArrayList getZipCodes(String precinct) {
     return precinctZipMap.get(precinct);
   }
-    
+
   public ArrayList<String> getAllScopes() {
-    return new ArrayList<String>(Arrays.asList(
-          "SF",
-          "Southern",
-          "Mission",
-          "Bayview",
-          "Tenderloin",
-          "Central",
-          "Northern",
-          "Ingleside",
-          "Taraval",
-          "Park",
-          "Richmond"));
+    return new ArrayList<String>(
+        Arrays.asList(
+            "SF",
+            "Southern",
+            "Mission",
+            "Bayview",
+            "Tenderloin",
+            "Central",
+            "Northern",
+            "Ingleside",
+            "Taraval",
+            "Park",
+            "Richmond"));
   }
-  
+
   public ArrayList<String> getScope(String zipcode) {
     ArrayList<String> result = (ArrayList<String>) getPrecincts(zipcode).clone();
     result.add("SF");
