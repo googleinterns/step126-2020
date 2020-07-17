@@ -60,12 +60,31 @@ public class MapData {
     populationPrecinctZip.put(
         "Richmond", new ArrayList<>(Arrays.asList("94121", "94129")));
   }
-
+  
+   /**
+   * Gets the precincts that overlap with one zip code region
+   *
+   * @return Arraylist list of precincts that overlap with zip code
+   */
   public static ArrayList getPrecincts(String zipcode) {
     return zipPrecinctMap.get(zipcode);
   }
 
+   /**
+   * Gets the list of zip codes that overlap with one precinct
+   *
+   * @return Arraylist list of zip codes that overlap with one precinct
+   */
   public static ArrayList getZipCodes(String precinct) {
     return precinctZipMap.get(precinct);
+  }
+
+   /**
+   * Gets the list of zip codes that overlap with one precinct
+   *
+   * @return Arraylist list of zip codes that overlap with one precinct
+   */
+  public static ArrayList getPopulationZipCodes(String precinct) {
+    return populationPrecinctZip.get(precinct);
   }
 }
