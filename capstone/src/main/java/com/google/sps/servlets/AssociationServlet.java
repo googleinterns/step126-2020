@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AssociationServlet extends HttpServlet {
 
   private static final String OUTPUT_TYPE = "applications/json;";
-  public static final int LIMIT = 3;
+  public static final int MAX_ASSOCIATIONS = 3;
 
   private DatastoreService datastore;
 
@@ -66,8 +66,11 @@ public class AssociationServlet extends HttpServlet {
   private ArrayList<String> extractContent(QueryResultList<Entity> query, String scope) {
     ArrayList<String> output = new ArrayList<String>();
     for (Entity entity : query) {
-      if (!scope.equals((String) entity.getProperty("scope"))) continue;
-      if (output.size() >= LIMIT) break;
+      if (!scope.equals((String) entity.getProperty("scope"))) {
+	continue;
+      } else if (output.size() >= MAX_ASSOCIATIONS) {
+        break;
+      }
       output.add((String) entity.getProperty("name"));
     }
     return output;

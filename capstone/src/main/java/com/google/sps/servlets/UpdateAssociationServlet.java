@@ -28,19 +28,7 @@ public class UpdateAssociationServlet extends HttpServlet {
 
   private LanguageServiceClient nlpClient;
   private DatastoreService datastore;
-  private static final List<String> SCOPES =
-      Arrays.asList(
-          "SF",
-          "Southern",
-          "Mission",
-          "Bayview",
-          "Tenderloin",
-          "Central",
-          "Northern",
-          "Ingleside",
-          "Taraval",
-          "Park",
-          "Richmond");
+  private MapData mapData = new MapData();
 
   public void init() throws ServletException {
     try {
@@ -58,7 +46,7 @@ public class UpdateAssociationServlet extends HttpServlet {
 
     ArrayList<EntitySentiment> sentiments = nlp.analyzeAssociations(getComments());
 
-    for (String scope : SCOPES) {
+    for (String scope : mapData.getAllScopes()) {
       AssociationAnalysis analysis = new AssociationAnalysis(loadPreviousResults(scope));
       ArrayList<EntitySentiment> filteredSentiment = new ArrayList<EntitySentiment>();
       for (EntitySentiment sentiment : sentiments) {
@@ -90,15 +78,12 @@ public class UpdateAssociationServlet extends HttpServlet {
           || !((boolean) e.getProperty("association-processed"))) {
         String message = (String) e.getProperty(COMMENT_PROPERTY);
         try {
-          ArrayList<String> scope =
-              (ArrayList<String>)
-                  (new MapData()).getPrecincts((String) e.getProperty(ZIPCODE)).clone();
-          scope.add("SF");
+          ArrayList<String> scope = mapData.getScope((String) e.getProperty(ZIPCODE));
           comments.add(new AssociationInput(message, scope));
           e.setProperty("association-processed", true);
           datastore.put(e);
         } catch (NullPointerException exception) {
-          System.err.println("Invalid zip code in response");
+          System.err.println("Invalid zip code in response: " + (String) e.getProperty(ZIPCODE));
         }
       }
     }
