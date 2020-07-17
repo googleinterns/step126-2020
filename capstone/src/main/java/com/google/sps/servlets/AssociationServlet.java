@@ -67,7 +67,7 @@ public class AssociationServlet extends HttpServlet {
     ArrayList<String> output = new ArrayList<String>();
     for (Entity entity : query) {
       if (!scope.equals((String) entity.getProperty("scope"))) {
-	continue;
+        continue;
       } else if (output.size() >= MAX_ASSOCIATIONS) {
         break;
       }
