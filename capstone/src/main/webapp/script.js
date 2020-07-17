@@ -14,7 +14,6 @@
 
 /* global google */
 
-/* global google */
 let precinct = 'SF';
 
 google.charts.load('current', {packages: ['corechart']});
@@ -135,7 +134,7 @@ function precinctControl(controlDiv, map) {
       fillOpacity: 0.9});
     precinctLayer.overrideStyle(event.feature, {
       fillColor: '#19B3B1', fillOpacity: .7});
-    let thisPrecinct = event.feature.getProperty('station');
+    const thisPrecinct = event.feature.getProperty('station');
     document.getElementById('chart-title').textContent =
      thisPrecinct + ' Police Sentiment';
     loadCharts();
