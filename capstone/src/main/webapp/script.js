@@ -380,7 +380,6 @@ function getColor(gradient) {
     res = lightGreen + (darkGreen - lightGreen) * gradient;
   }
   res = Math.round(res);
-  console.log('#' + res.toString(16));
   return '#' + res.toString(16);
 }
 
@@ -400,7 +399,6 @@ async function loadWordcloud() {
   const list = data.map(function(x) {
     return [x.content, x.weight];
   });
-  console.log(list);
   const color = function(word, weight, fontSize, distance, theta) {
 	  const elem = data.find(function(elem) {
       return elem.content === word;
