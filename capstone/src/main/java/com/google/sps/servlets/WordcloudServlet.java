@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 import com.google.sps.AssociationResult;
 import com.google.sps.data.WordcloudData;
 import java.io.IOException;
-import java.lang.Math;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,14 +35,14 @@ public class WordcloudServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(OUTPUT_TYPE);
-  
+
     FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
 
     String scope = request.getParameter("scope");
     if (scope == null) {
       scope = "SF";
     }
-    
+
     Query query =
         new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.ASCENDING);
     ArrayList<WordcloudData> result =
