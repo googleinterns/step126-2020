@@ -194,11 +194,11 @@ function loadSentimentPieChart(sentimentCount) {
   ]);
 
   const options = {
-    animation:{
-        startup: true,
-        duration: 1000,
-        easing: 'out',
-      },
+    animation: {
+      startup: true,
+      duration: 1000,
+      easing: 'out',
+    },
   };
 
   // Instantiate and draw the chart.
@@ -217,11 +217,11 @@ function loadResponseChart(totalResponses, precinct) {
   ]);
 
   const options = {
-    animation:{
-        startup: true,
-        duration: 3000,
-        easing: 'out',
-      },
+    animation: {
+      startup: true,
+      duration: 3000,
+      easing: 'out',
+    },
   };
 
   // Instantiate and draw the chart.

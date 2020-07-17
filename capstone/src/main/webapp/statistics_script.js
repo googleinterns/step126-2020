@@ -144,13 +144,13 @@ function loadBubbleChart(days, scores, genders, responseTimeSThree) {
     vAxis: {title: 'Sentiment Score'},
     bubble: {textStyle: {fontSize: 11}},
     legend: 'left',
-    animation:{
-        startup: true,
-        duration: 3000,
-        easing: 'out',
+    animation: {
+      startup: true,
+      duration: 3000,
+      easing: 'out',
     },
-    };
-    
+  };
+
 
   const chart = new google.visualization.BubbleChart(
       document.getElementById('prediction-panel'));
@@ -192,12 +192,12 @@ function loadResponseTimeAverageBarChart(averages) {
     title: 'Response Time Average Bar Chart',
     legend: 'none',
     colors: ['#800000'],
-    animation:{
-        startup: true,
-        duration: 3000,
-        easing: 'out',
+    animation: {
+      startup: true,
+      duration: 3000,
+      easing: 'out',
     },
-    };
+  };
 
   // Instantiate and draw the chart.
   const chart = new google.visualization.BarChart(
@@ -267,10 +267,10 @@ function loadAgeColumnChart(ageCount) {
 
   const options = {
     title: 'Age Column Chart',
-    animation:{
-        startup: true,
-        duration: 3000,
-        easing: 'out',
+    animation: {
+      startup: true,
+      duration: 3000,
+      easing: 'out',
     },
   };
 
@@ -295,10 +295,10 @@ function loadGenderBarChart(genderCount) {
     title: 'Gender Bar Chart',
     legend: 'none',
     colors: ['#8C47CD'],
-    animation:{
-        startup: true,
-        duration: 3000,
-        easing: 'out',
+    animation: {
+      startup: true,
+      duration: 3000,
+      easing: 'out',
     },
   };
 
@@ -354,10 +354,10 @@ function loadSentimentVDaysScatterChart(days, scores) {
     vAxis: {title: 'Sentiment Score', minValue: -1, maxValue: 1},
     legend: 'none',
     colors: ['#1FC142'],
-    animation:{
-        startup: true,
-        duration: 3000,
-        easing: 'out',
+    animation: {
+      startup: true,
+      duration: 3000,
+      easing: 'out',
     },
   };
 
