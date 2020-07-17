@@ -7,6 +7,19 @@ import java.util.HashMap;
 /** Calculates association scores from a list of sentiments per entity mention */
 public class AssociationAnalysis {
 
+  HashMap<String, AssociationResult> res;
+
+  public AssociationAnalysis() {
+    res = new HashMap<String, AssociationResult>();
+  }
+
+  public AssociationAnalysis(ArrayList<AssociationResult> initialResults) {
+    res = new HashMap<String, AssociationResult>();
+    for (AssociationResult association : initialResults) {
+      res.put(association.getNormalizedString(), association);
+    }
+  }
+
   /**
    * Calculates association scores for the input array list of mentions
    *
@@ -14,7 +27,6 @@ public class AssociationAnalysis {
    * @return the array list of association scores sorted by score
    */
   public ArrayList<AssociationResult> calculateScores(ArrayList<EntitySentiment> sentiments) {
-    HashMap<String, AssociationResult> res = new HashMap<String, AssociationResult>();
     sentiments.forEach(sentiment -> updateScore(res, sentiment));
     ArrayList<AssociationResult> list = new ArrayList(res.values());
     Collections.sort(list, AssociationResult.ORDER_BY_SCORE);
@@ -23,12 +35,11 @@ public class AssociationAnalysis {
 
   /** Updates the result array with the new entity mention given */
   private void updateScore(HashMap<String, AssociationResult> res, EntitySentiment sentiment) {
-    float scoreDiff = sentiment.getSentiment() * sentiment.getSignificance();
-    AssociationResult association = res.get(sentiment.getContent());
+    AssociationResult association = res.get(sentiment.getKey());
     if (association != null) {
-      association.updateScore(association.getScore() + scoreDiff);
+      association.updateResult(sentiment);
     } else {
-      res.put(sentiment.getContent(), new AssociationResult(sentiment.getContent(), scoreDiff));
+      res.put(sentiment.getKey(), new AssociationResult(sentiment));
     }
   }
 }

@@ -14,6 +14,7 @@
 // limitations under the License.
 
 /* global google */
+let precinct = 'SF';
 
 google.charts.load('current', {packages: ['corechart']});
 google.charts.setOnLoadCallback(loadCharts);
@@ -62,13 +63,6 @@ function createMap() {
   precinctControl(precinctControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER]
       .push(precinctControlDiv);
-
-  const poly = new google.maps.Polyline({
-    strokeColor: '#000000',
-    strokeOpacity: 1.0,
-    strokeWeight: 3,
-  });
-  poly.setMap(map);
 }
 
 function centerControl(controlDiv, map) {
@@ -126,8 +120,9 @@ function precinctControl(controlDiv, map) {
   precinctLayer.loadGeoJson('neighborhoods.json');
   precinctLayer.setStyle({visible: false});
   precinctLayer.addListener('click', function(event) {
-    document.getElementById('sentiment-pie-chart').textContent =
-     event.feature.getProperty('station');
+    precinct = event.feature.getProperty('station');
+    loadCharts();
+    associationUpdateDisplay(precinct);
   });
   //* *button creation and positioning*/
   const dataUI = document.createElement('div');
@@ -145,15 +140,17 @@ function precinctControl(controlDiv, map) {
     precinctButtonOn = !precinctButtonOn;
     if (!precinctButtonOn) {
       precinctLayer.setStyle({visible: false});
+      precinct = 'SF';
       loadCharts();
+      associationUpdateDisplay('SF');
     } else {
       precinctLayer.setStyle({visible: true});
     }
   });
 }
 
-async function associationUpdateDisplay() {
-  const response = await fetch('/associations');
+async function associationUpdateDisplay(scope) {
+  const response = await fetch('/associations?scope=' + scope);
   const associations = await response.json();
 
   const positive = document.getElementById('pos-associations');
@@ -172,37 +169,69 @@ function addListElement(list, contents) {
 }
 
 window.addEventListener('load', createMap);
-window.addEventListener('load', associationUpdateDisplay);
+window.addEventListener('load', function() {
+  associationUpdateDisplay('SF');
+});
 window.addEventListener('load', postSurveyResponses);
 
 async function postSurveyResponses() {
   await fetch('/data', {method: 'POST'});
 }
 
-function loadCharts() {
+async function loadCharts() {
+  const response = await fetch('/load-data?precinct=' + precinct);
+
+  sessionStorage.setItem('precinct', precinct);
+
+  const list = await response.json(); // list of entities from datastore
+  const size = list.length;
+
+  const sentimentCount = {
+    'Positive': 0,
+    'Neutral': 0,
+    'Negative': 0,
+  };
+
+  for (let i = 0; i < size; i++) {
+    // Summarize the sentiment score (-1 to 1)
+    const sentiment = list[i].score;
+    if (sentiment > 0.05) {
+      sentimentCount['Positive'] += 1;
+    } else if (sentiment >= -0.05) {
+      sentimentCount['Neutral'] += 1;
+    } else {
+      sentimentCount['Negative'] += 1;
+    }
+  }
+
+  loadSentimentPieChart(sentimentCount);
+  loadResponseChart(size, precinct);
+}
+
+function loadSentimentPieChart(sentimentCount) {
   const stats = new google.visualization.DataTable();
   stats.addColumn('string', 'Sentiment');
   stats.addColumn('number', 'Percentage');
   stats.addRows([
-    ['Positive', 0.7],
-    ['Neutral', 0.1],
-    ['Negative', 0.2],
+    ['Positive', sentimentCount['Positive']],
+    ['Neutral', sentimentCount['Neutral']],
+    ['Negative', sentimentCount['Negative']],
   ]);
 
   // Instantiate and draw the chart.
   const chart = new google.visualization.PieChart(
       document.getElementById('sentiment-pie-chart'));
   chart.draw(stats, null);
-
-  loadReponseChart();
 }
 
-function loadReponseChart() {
+function loadResponseChart(totalResponses, precinct) {
   const stats = new google.visualization.DataTable();
 
-  stats.addColumn('string', 'Period');
-  stats.addColumn('number', 'Number of Responses');
-
+  stats.addColumn('string', precinct);
+  stats.addColumn('number', 'Total Responses');
+  stats.addRows([
+    [precinct, totalResponses],
+  ]);
   // Instantiate and draw the chart.
   const chart = new google.visualization.BarChart(
       document.getElementById('response-bar-chart'));
