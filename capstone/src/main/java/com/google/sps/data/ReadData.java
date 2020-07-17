@@ -4,6 +4,9 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
+import com.google.sps.data.FeatureData;
+import com.google.sps.data.MapData;
+import com.google.sps.data.Precinct;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -55,7 +58,7 @@ public class ReadData {
    * @param zip This is the zip code the file is associated with
    * @return {Void}
    */
-  public void readFile(FileReader file, String zip) {
+  public void readFile(FileReader file, String zipCode) {
     final int EXPECTED_LENGTH = 15;
     BufferedReader reader = null;
 
@@ -111,7 +114,7 @@ public class ReadData {
         }
 
         if (inStore == null) {
-          entity.setProperty("zipCode", zip);
+          entity.setProperty("zipCode", zipCode);
           entity.setProperty("id", id);
           entity.setProperty("date", date);
           entity.setProperty("completionStatus", completionStatus);
@@ -124,6 +127,16 @@ public class ReadData {
           entity.setProperty("responseTimeOne", responseTimeOne);
           entity.setProperty("responseTimeTwo", responseTimeTwo);
           entity.setProperty("responseTimeThree", responseTimeThree);
+
+          // Set properties pertaining to the precinct the survey maps to
+          String precinctName = MapData.getPopulationPrecinct(zipCode);
+          Precinct precinctData = FeatureData.getPrecinct(precinctName);
+
+          if (precinctData != null) {
+            entitiy.setProperty("averageHouseholdIncome", precinctData.getAverageHouseholdIncome());
+            entitiy.setProperty("crimeRate", precinctData.getCrimeRate());
+            entitiy.setProperty("policeStationRating", precinctData.getPoliceStationRating());
+          }
 
           newEntities.add(entity);
         }
