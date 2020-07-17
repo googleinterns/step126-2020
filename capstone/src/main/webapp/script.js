@@ -193,10 +193,18 @@ function loadSentimentPieChart(sentimentCount) {
     ['Negative', sentimentCount['Negative']],
   ]);
 
+  const options = {
+    animation:{
+        startup: true,
+        duration: 1000,
+        easing: 'out',
+      },
+  };
+
   // Instantiate and draw the chart.
   const chart = new google.visualization.PieChart(
       document.getElementById('sentiment-pie-chart'));
-  chart.draw(stats, null);
+  chart.draw(stats, options);
 }
 
 function loadResponseChart(totalResponses, precinct) {
@@ -207,8 +215,17 @@ function loadResponseChart(totalResponses, precinct) {
   stats.addRows([
     [precinct, totalResponses],
   ]);
+
+  const options = {
+    animation:{
+        startup: true,
+        duration: 3000,
+        easing: 'out',
+      },
+  };
+
   // Instantiate and draw the chart.
   const chart = new google.visualization.BarChart(
       document.getElementById('response-bar-chart'));
-  chart.draw(stats, null);
+  chart.draw(stats, options);
 }
