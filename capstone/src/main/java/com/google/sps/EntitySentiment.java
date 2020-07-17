@@ -68,8 +68,8 @@ public class EntitySentiment {
     return sentiment;
   }
 
-  public String getKey () {
-    return content.toLowerCase().trim(); 
+  public String getKey() {
+    return content.toLowerCase().trim();
   }
 
   /**
