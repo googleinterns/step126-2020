@@ -64,7 +64,7 @@ public class CloudNLPAssociation implements AutoCloseable {
     List<Entity> entities = response.getEntitiesList();
     ArrayList<EntitySentiment> result = new ArrayList<EntitySentiment>();
     for (Entity entity : entities) {
-      result.addAll(extractEntityMentions(entity, input));
+      res.addAll(extractEntityMentions(entity, input));
     }
     return result;
   }

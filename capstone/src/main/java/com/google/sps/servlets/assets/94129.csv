@@ -1,0 +1,8 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1029524743,2020-07-07 18:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,3,"My experiences have been fine and overall helpful (I'm a white 26yo woman), but many of my friends have had very negative experiences. Some while I was with them. It needs to change.","My experiences have been fine and overall helpful (I'm a white 26yo woman), but many of my friends have had very negative experiences. Some while I was with them. It needs to change.",54720,8511,43757
+1168600282,2020-07-07 23:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,3,Na,Na,3362,4712,5459
+1399426806,2020-07-07 04:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,No,3,Na,Na,3719,4024,7279
+1436226351,2020-07-01 03:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Yes,1,Acab,Acab,6258,3295,6567
+1441359365,2020-07-03 18:00:00,Complete,News,Female,55-64,US-WEST-CA-San Francisco,,Prefer not to answer,5,Police are awesome!,Police are awesome!,5739,3990,15535
+696128904,2020-07-06 00:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,4,Na,N/A,5930,5820,20734
+954151678,2020-07-07 06:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,Yes,2,Recent police shootings & incidents where they used pepper spray and tear gas on peaceful protesters.,Recent police shootings & incidents where they used pepper spray and tear gas on peaceful protesters.,16109,8969,46122

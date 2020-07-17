@@ -15,6 +15,15 @@
     </div>
     <div class="clear"></div>
     <div id="content" class="content">
+      <div id="map-key">
+        <h2>Check to See Precinct Data</h2>
+        <input type="checkbox" id="sentimentCheck" name="check" onclick="onlyOne(this)">
+        <label for="sentimentCheck">Show sentiment</label><br>
+        <input type="checkbox" id="crimerateCheck" name="check" onclick="onlyOne(this)">
+        <label for="crimerateCheck">Show crime rate</label><br>
+        <input type="checkbox" id="incomeCheck" name="check" onclick="onlyOne(this)">
+        <label for="incomeCheck">Show household incomes</label><br><br>
+      </div>
       <div id="map-container" class="container map">
         <p>There is a map here</p>
       </div>
@@ -28,7 +37,7 @@
           </ul>
         </div>
         <div id="second-stats" class="container second-stats">
-          <h2>Sentiment Percentages</h2>
+          <h2 id="chart-title">Citywide Sentiment Percentages</h2>
           <div id="sentiment-pie-chart" onclick="showStats()"></div>
         </div>
         <div id="third-stats" class="container third-stats">
