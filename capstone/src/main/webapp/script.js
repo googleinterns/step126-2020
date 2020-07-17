@@ -277,17 +277,6 @@ function loadResponseChart(totalResponses, precinct) {
   chart.draw(stats, null);
 }
 
-/* exported showStats */
-async function showStats() {
-  const logStatus = await fetch('/status');
-  const status = await logStatus.json();
-  if (!status) {
-    window.location.href = '/login';
-  } else {
-    window.location.replace('statistics.html');
-  }
-}
-
 function mapSentiment(colorMap) {
   const precinctLayer = mapAndSelection.map;
   for (const [precinctName, precinctColor] of colorMap) {
@@ -345,7 +334,7 @@ function getSentimentColor(averageFeelings) {
 }
 
 const mapAndSelection = {};
-/* exported onlyOne */
+/* eslint-disable no-unused-vars */
 function onlyOne(checkbox) {
   const checkboxes = document.getElementsByName('check');
   checkboxes.forEach((item) => {
@@ -354,3 +343,14 @@ function onlyOne(checkbox) {
   mapAndSelection.selection = checkbox.id;
   drawCheckboxLayer();
 }
+
+async function showStats() {
+  const logStatus = await fetch('/status');
+  const status = await logStatus.json();
+  if (!status) {
+    window.location.href = '/login';
+  } else {
+    window.location.replace('statistics.html');
+  }
+}
+/* eslint-enable no-unused-vars */
