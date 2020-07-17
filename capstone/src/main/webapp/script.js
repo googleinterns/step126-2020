@@ -13,6 +13,8 @@
 // limitations under the License.
 
 /* global google */
+
+/* global google */
 let precinct = 'SF';
 
 google.charts.load('current', {packages: ['corechart']});
@@ -21,15 +23,9 @@ google.charts.setOnLoadCallback(loadCharts);
 function createMap() {
   const map = new google.maps.Map(
       document.getElementById('map-container'),
-      {center: {lat: 37.7749, lng: -122.4194}, zoom: 12},
+      {center: {lat: 37.7749, lng: -122.4194},
+        zoom: 12},
   );
-
-  /* adding zipcode overlay */
-  map.data.loadGeoJson('zipcode-data.json');
-  /* adding precinct overlay */
-  map.data.loadGeoJson('neighborhoods.json');
-
-  map.data.setStyle({visible: false});
 
   const cityBorder = [
     {lat: 37.708305, lng: -122.502691},
@@ -62,6 +58,7 @@ function createMap() {
   precinctControl(precinctControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER]
       .push(precinctControlDiv);
+  document.getElementById('map-key').style.display='none';
 }
 
 function centerControl(controlDiv, map) {
@@ -88,7 +85,15 @@ function zipControl(controlDiv, map) {
   //* *adding zipcode overlay*/
   const zipcodeLayer = new google.maps.Data({map: map});
   zipcodeLayer.loadGeoJson('zipcode-data.json');
-  zipcodeLayer.setStyle({visible: false});
+  zipcodeLayer.setStyle({fillColor: '#C698A0',
+    fillOpacity: 0.9, visible: false});
+  zipcodeLayer.addListener('click', function(event) {
+    zipcodeLayer.revertStyle();
+    zipcodeLayer.setStyle({fillColor: '#C698A0',
+      fillOpacity: 0.9});
+    zipcodeLayer.overrideStyle(event.feature, {
+      fillColor: '#19B3B1', fillOpacity: .7});
+  });
 
   //* *button creation and positioning*/
   const controlUI = document.createElement('div');
@@ -105,9 +110,12 @@ function zipControl(controlDiv, map) {
   controlUI.addEventListener('click', function() {
     zipClicked = !zipClicked;
     if (zipClicked) {
-      zipcodeLayer.setStyle({visible: true});
+      zipcodeLayer.revertStyle();
+      zipcodeLayer.setStyle({fillColor: '#C698A0',
+        fillOpacity: 0.9, visible: true});
     } else {
-      zipcodeLayer.setStyle({visible: false});
+      zipcodeLayer.setStyle({fillColor: '#C698A0',
+        fillOpacity: 0.9, visible: false});
     }
   });
 }
@@ -117,9 +125,19 @@ function precinctControl(controlDiv, map) {
   //* *adding precinct overlay */
   const precinctLayer = new google.maps.Data({map: map});
   precinctLayer.loadGeoJson('neighborhoods.json');
-  precinctLayer.setStyle({visible: false});
+  // a function that uses color map to map, checks if button is clicked
+  precinctLayer.setStyle({fillColor: '#CECDBC',
+    fillOpacity: 0.9, visible: false});
+  mapAndSelection.map = precinctLayer;
   precinctLayer.addListener('click', function(event) {
+    precinctLayer.revertStyle();
+    precinctLayer.setStyle({fillColor: '#CECDBC',
+      fillOpacity: 0.9});
+    precinctLayer.overrideStyle(event.feature, {
+      fillColor: '#19B3B1', fillOpacity: .7});
     precinct = event.feature.getProperty('station');
+    document.getElementById('chart-title').textContent =
+     precinct + ' Police Sentiment';
     loadCharts();
     associationUpdateDisplay(precinct);
   });
@@ -138,15 +156,40 @@ function precinctControl(controlDiv, map) {
   dataUI.addEventListener('click', function() {
     precinctButtonOn = !precinctButtonOn;
     if (!precinctButtonOn) {
+      document.getElementById('map-key').style.display='none';
       precinctLayer.setStyle({visible: false});
       precinct = 'SF';
+      document.getElementById('chart-title').textContent =
+        'Sentiment Percentages in ' + precinct;
       loadCharts();
       associationUpdateDisplay('SF');
     } else {
-      precinctLayer.setStyle({visible: true});
+      precinctLayer.setStyle({fillColor: '#CECDBC',
+        fillOpacity: 0.9, visible: true});
+      document.getElementById('map-key').style.display='block';
+      mapAndSelection.selection = 'noneSelected';
     }
   });
 }
+function drawCheckboxLayer() {
+  if (mapAndSelection.selection == 'noneSelected') {
+    alert('nothing yet');
+  } else if (mapAndSelection.selection == 'sentimentCheck') {
+    const allPrecincts = ['Southern', 'Mission', 'Bayview',
+      'Tenderloin', 'Central', 'Ingleside', 'Taraval', 'Park',
+      'Northern', 'Richmond'];
+    const allPrecinctColors = new Map();
+    for (let i = 0; i < allPrecincts.length; i++) {
+      allPrecinctColors.set(
+          allPrecincts[i], averagePrecinctSentiment(allPrecincts[i]));
+    }
+    mapSentiment(allPrecinctColors);
+  } else {
+    alert('precinctLayer');
+  }
+}
+
+let precinct = 'SF';
 
 async function associationUpdateDisplay(scope) {
   const response = await fetch('/associations?scope=' + scope);
@@ -235,4 +278,82 @@ function loadResponseChart(totalResponses, precinct) {
   const chart = new google.visualization.BarChart(
       document.getElementById('response-bar-chart'));
   chart.draw(stats, null);
+}
+
+/* exported showStats */
+async function showStats() {
+  const logStatus = await fetch('/status');
+  const status = await logStatus.json();
+  if (!status) {
+    window.location.href = '/login';
+  } else {
+    window.location.replace('statistics.html');
+  }
+}
+
+function mapSentiment(colorMap) {
+  const precinctLayer = mapAndSelection.map;
+  for (const [precinctName, precinctColor] of colorMap) {
+    precinctLayer.revertStyle();
+    precinctLayer.setStyle({fillColor: '#CECDBC',
+      fillOpacity: 0.9});
+    precinctLayer.overrideStyle(precinctLayer.getFeatureById(
+        searchPrecinctsByStation(precinctName)),
+    {fillColor: precinctColor, fillOpacity: 0.9});
+  }
+}
+
+function searchPrecinctsByStation(desiredStation) {
+  mapAndSelection.map.forEachFeature( function(feature) {
+    if (feature.getProperty('station') == desiredStation) {
+      return feature.getProperty('id');
+    }
+  });
+}
+
+async function averagePrecinctSentiment(policePrecinct) {
+  const response = await fetch('/load-data?precinct=' + policePrecinct);
+  const list = await response.json();
+  let sentimentCount = 0;
+  for (let i = 0; i < list.length; i++) {
+    const sentiment = list[i].score;
+    if (sentiment >= 0.5) {
+      sentimentCount += 5;
+    } else if (sentiment > 0.05) {
+      sentimentCount += 4;
+    } else if (sentiment >= -0.05) {
+      sentimentCount += 3;
+    } else if (sentiment > -0.5) {
+      sentimentCount += 2;
+    } else {
+      sentimentCount += 1;
+    }
+  }
+  const sentimentAverage = sentimentCount/list.length;
+  return getSentimentColor(sentimentAverage);
+}
+
+function getSentimentColor(averageFeelings) {
+  if (Math.round(averageFeelings) == 5) {
+    return '#165B33';
+  } else if (Math.round(averageFeelings) == 4) {
+    return '#146B3A';
+  } else if (Math.round(averageFeelings) == 3) {
+    return '#F8B229';
+  } else if (Math.round(averageFeelings) == 2) {
+    return '#EA4630';
+  } else {
+    return '#BB2528';
+  }
+}
+
+const mapAndSelection = {};
+/* exported onlyOne */
+function onlyOne(checkbox) {
+  const checkboxes = document.getElementsByName('check');
+  checkboxes.forEach((item) => {
+    if (item !== checkbox) item.checked = false;
+  });
+  mapAndSelection.selection = checkbox.id;
+  drawCheckboxLayer();
 }
