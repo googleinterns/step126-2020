@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UpdateAssociationServlet extends HttpServlet {
 
   public static final String SURVEY_ENTITY_KIND = "Response";
-  public static final String COMMENT_PROPERTY = "answerThree";
+  public static final String COMMENT_PROPERTY = "text";
   public static final String ZIPCODE = "zipCode";
 
   private LanguageServiceClient nlpClient;
