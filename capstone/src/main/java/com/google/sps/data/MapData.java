@@ -58,6 +58,7 @@ public class MapData {
     populationZipPrecinct.put("94114", "Mission");
     populationZipPrecinct.put("94116", "Taraval");
     populationZipPrecinct.put("94117", "Park");
+    populationZipPrecinct.put("94118", "Park");
     populationZipPrecinct.put("94121", "Richmond");
     populationZipPrecinct.put("94122", "Taraval");
     populationZipPrecinct.put("94123", "Northern");
