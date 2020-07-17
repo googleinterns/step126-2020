@@ -135,9 +135,9 @@ function precinctControl(controlDiv, map) {
       fillOpacity: 0.9});
     precinctLayer.overrideStyle(event.feature, {
       fillColor: '#19B3B1', fillOpacity: .7});
-    precinct = event.feature.getProperty('station');
+    let thisPrecinct = event.feature.getProperty('station');
     document.getElementById('chart-title').textContent =
-     precinct + ' Police Sentiment';
+     thisPrecinct + ' Police Sentiment';
     loadCharts();
     associationUpdateDisplay(precinct);
   });
@@ -188,8 +188,6 @@ function drawCheckboxLayer() {
     alert('precinctLayer');
   }
 }
-
-let precinct = 'SF';
 
 async function associationUpdateDisplay(scope) {
   const response = await fetch('/associations?scope=' + scope);
