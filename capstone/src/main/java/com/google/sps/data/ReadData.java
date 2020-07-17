@@ -4,9 +4,6 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
-import com.google.sps.data.FeatureData;
-import com.google.sps.data.MapData;
-import com.google.sps.data.Precinct;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -133,9 +130,9 @@ public class ReadData {
           Precinct precinctData = FeatureData.getPrecinct(precinctName);
 
           if (precinctData != null) {
-            entitiy.setProperty("averageHouseholdIncome", precinctData.getAverageHouseholdIncome());
-            entitiy.setProperty("crimeRate", precinctData.getCrimeRate());
-            entitiy.setProperty("policeStationRating", precinctData.getPoliceStationRating());
+            entity.setProperty("averageHouseholdIncome", precinctData.getAverageHouseholdIncome());
+            entity.setProperty("crimeRate", precinctData.getCrimeRate());
+            entity.setProperty("policeStationRating", precinctData.getPoliceStationRating());
           }
 
           newEntities.add(entity);

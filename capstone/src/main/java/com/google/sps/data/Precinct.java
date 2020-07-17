@@ -1,16 +1,11 @@
 package com.google.sps.data;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 /* This class stores information pertaining to each precinct */
 public class Precinct {
   private String name;
   private int population;
-  private float averageHouseholdIncome; 
-  private float crimeRate;  
+  private float averageHouseholdIncome;
+  private float crimeRate;
   private float policeStationRating;
 
   /**
@@ -75,7 +70,7 @@ public class Precinct {
   /**
    * Gets the population of the precinct
    *
-   * @return int The number of people 
+   * @return int The number of people
    */
   public int getPopulation() {
     return population;

@@ -48,23 +48,23 @@ public class MapData {
     precinctZipMap.put("Northern", new ArrayList<>(Arrays.asList("94109", "94117", "94123")));
     precinctZipMap.put(
         "Richmond", new ArrayList<>(Arrays.asList("94118", "94121", "94122", "94129")));
-    
+
     populationZipPrecinct = new HashMap<>();
-    populationZipPrecinct.put("94103", "Southern" ));
-    populationZipPrecinct.put("94107", "Southern"));
-    populationZipPrecinct.put("94109", "Tenderloin"));
-    populationZipPrecinct.put("94110", "Mission"));
-    populationZipPrecinct.put("94112", "Taraval"));
-    populationZipPrecinct.put("94114", "Mission"));
-    populationZipPrecinct.put("94116", "Taraval"));
-    populationZipPrecinct.put("94117", "Park"));
-    populationZipPrecinct.put("94121", "Richmond"));
-    populationZipPrecinct.put("94122", "Taraval"));
-    populationZipPrecinct.put("94123", "Northern"));
-    populationZipPrecinct.put("94124", "Bayview"));
-    populationZipPrecinct.put("94129", "Richmond"));
-    populationZipPrecinct.put("94131", "Ingleside"));
-    populationZipPrecinct.put("94133", "Central"));
+    populationZipPrecinct.put("94103", "Southern");
+    populationZipPrecinct.put("94107", "Southern");
+    populationZipPrecinct.put("94109", "Tenderloin");
+    populationZipPrecinct.put("94110", "Mission");
+    populationZipPrecinct.put("94112", "Taraval");
+    populationZipPrecinct.put("94114", "Mission");
+    populationZipPrecinct.put("94116", "Taraval");
+    populationZipPrecinct.put("94117", "Park");
+    populationZipPrecinct.put("94121", "Richmond");
+    populationZipPrecinct.put("94122", "Taraval");
+    populationZipPrecinct.put("94123", "Northern");
+    populationZipPrecinct.put("94124", "Bayview");
+    populationZipPrecinct.put("94129", "Richmond");
+    populationZipPrecinct.put("94131", "Ingleside");
+    populationZipPrecinct.put("94133", "Central");
 
     populationPrecinctZip = new HashMap<>();
     populationPrecinctZip.put("Southern", new ArrayList<>(Arrays.asList("94103", "94107")));
@@ -74,14 +74,12 @@ public class MapData {
     populationPrecinctZip.put("Central", new ArrayList<>(Arrays.asList("94133")));
     populationPrecinctZip.put("Ingleside", new ArrayList<>(Arrays.asList("94131")));
     populationPrecinctZip.put("Taraval", new ArrayList<>(Arrays.asList("94112", "94116", "94122")));
-    populationPrecinctZip.put(
-        "Park", new ArrayList<>(Arrays.asList("94117", "94118")));
+    populationPrecinctZip.put("Park", new ArrayList<>(Arrays.asList("94117", "94118")));
     populationPrecinctZip.put("Northern", new ArrayList<>(Arrays.asList("94123")));
-    populationPrecinctZip.put(
-        "Richmond", new ArrayList<>(Arrays.asList("94121", "94129")));
+    populationPrecinctZip.put("Richmond", new ArrayList<>(Arrays.asList("94121", "94129")));
   }
-  
-   /**
+
+  /**
    * Gets the precincts that overlap with one zip code region
    *
    * @return Arraylist list of precincts that overlap with zip code
@@ -90,7 +88,7 @@ public class MapData {
     return zipPrecinctMap.get(zipcode);
   }
 
-   /**
+  /**
    * Gets the list of zip codes that overlap with one precinct
    *
    * @return Arraylist list of zip codes that overlap with one precinct
@@ -108,7 +106,7 @@ public class MapData {
     return populationZipPrecinct.get(zipCode);
   }
 
-   /**
+  /**
    * Gets the list of zip codes that overlap with one precinct
    *
    * @return Arraylist list of zip codes that overlap with one precinct
