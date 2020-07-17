@@ -30,7 +30,7 @@ public class EntitySentiment {
    *
    * @param content the word/phrase the object refers to
    * @param magnitude the importance of th entity in the text
-   * @param sentiment th sentiment associated with the entity
+   * @param sentiment the sentiment associated with the entity
    * @param scopes the scopes within this entity is valid
    */
   public EntitySentiment(

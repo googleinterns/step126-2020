@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that deletes entities from datastore */
+/** Servlet that resets the association processing status of comments */
 @WebServlet("/reset-associations")
 public class ResetAssociationServlet extends HttpServlet {
   @Override
