@@ -10,6 +10,9 @@ public class MapData {
   static final Map<String, ArrayList> zipPrecinctMap;
   static final Map<String, ArrayList> precinctZipMap;
 
+  // Map that accounts for population density when mapping zipcodes to precincts
+  static final Map<String, ArrayList> populationPrecinctZip;
+
   static {
     zipPrecinctMap = new HashMap<>();
     zipPrecinctMap.put("94103", new ArrayList<>(Arrays.asList("Southern", "Mission")));
@@ -30,7 +33,7 @@ public class MapData {
     zipPrecinctMap.put("94131", new ArrayList<>(Arrays.asList("Ingleside", "Park")));
 
     precinctZipMap = new HashMap<>();
-    precinctZipMap.put("Southern", new ArrayList<>(Arrays.asList("94103", "94107")));
+    precinctZipMap.put("Southern", new ArrayList<>(Arrays.asList("94103")));
     precinctZipMap.put("Mission", new ArrayList<>(Arrays.asList("94110", "94114", "94103")));
     precinctZipMap.put("Bayview", new ArrayList<>(Arrays.asList("94124", "94107")));
     precinctZipMap.put("Tenderloin", new ArrayList<>(Arrays.asList("94109")));
@@ -42,6 +45,20 @@ public class MapData {
     precinctZipMap.put("Northern", new ArrayList<>(Arrays.asList("94109", "94117", "94123")));
     precinctZipMap.put(
         "Richmond", new ArrayList<>(Arrays.asList("94118", "94121", "94122", "94129")));
+
+    populationPrecinctZip = new HashMap<>();
+    populationPrecinctZip.put("Southern", new ArrayList<>(Arrays.asList("94103", "94107")));
+    populationPrecinctZip.put("Mission", new ArrayList<>(Arrays.asList("94110", "94114")));
+    populationPrecinctZip.put("Bayview", new ArrayList<>(Arrays.asList("94124")));
+    populationPrecinctZip.put("Tenderloin", new ArrayList<>(Arrays.asList("94109")));
+    populationPrecinctZip.put("Central", new ArrayList<>(Arrays.asList("94133")));
+    populationPrecinctZip.put("Ingleside", new ArrayList<>(Arrays.asList("94131")));
+    populationPrecinctZip.put("Taraval", new ArrayList<>(Arrays.asList("94112", "94116", "94122")));
+    populationPrecinctZip.put(
+        "Park", new ArrayList<>(Arrays.asList("94117", "94118")));
+    populationPrecinctZip.put("Northern", new ArrayList<>(Arrays.asList("94123")));
+    populationPrecinctZip.put(
+        "Richmond", new ArrayList<>(Arrays.asList("94121", "94129")));
   }
 
   public static ArrayList getPrecincts(String zipcode) {
