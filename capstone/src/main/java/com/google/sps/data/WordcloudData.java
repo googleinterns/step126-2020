@@ -1,6 +1,5 @@
 package com.google.sps.data;
 
-import java.util.ArrayList;
 
 /** Data for associations wordcloud */
 public final class WordcloudData {

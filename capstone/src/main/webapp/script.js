@@ -373,7 +373,7 @@ const neutralShade = 0x7E7F9A;
 
 function getColor(gradient) {
   let res;
-  if(Math.abs(gradient) <= 0.1) res = neutralShade;
+  if (Math.abs(gradient) <= 0.1) res = neutralShade;
   else if (gradient < 0) {
     res = lightRed + (darkRed - lightRed) * Math.abs(gradient);
   } else {
@@ -386,47 +386,57 @@ function getColor(gradient) {
 
 async function loadWordcloud() {
   const response = await fetch('/wordcloud');
-  let data = await response.json();
-  data.sort(function (a,b) {b.weight - a.weight});
-  data.map(function (x) {x.weight = Math.sqrt(x.weight)});
-  let scalar = MAX_SIZE / data[0].weight;
-  data.map(function (x) {x.weight = x.weight * scalar});
-  let list = data.map(function (x) {return [x.content, x.weight]});
+  const data = await response.json();
+  data.sort(function(a, b) {
+    b.weight - a.weight;
+  });
+  data.map(function(x) {
+    x.weight = Math.sqrt(x.weight);
+  });
+  const scalar = MAX_SIZE / data[0].weight;
+  data.map(function(x) {
+    x.weight = x.weight * scalar;
+  });
+  const list = data.map(function(x) {
+    return [x.content, x.weight];
+  });
   console.log(list);
-  let color = function (word, weight, fontSize, distance, theta) {
-	  let elem = data.find(function(elem) { return elem.content === word });
+  const color = function(word, weight, fontSize, distance, theta) {
+	  const elem = data.find(function(elem) {
+      return elem.content === word;
+    });
 	  return getColor(elem.gradient);
-	}
-  WordCloud(document.getElementById('cloud-canvas'), { list: list, color: color } );
+  };
+  WordCloud(document.getElementById('cloud-canvas'), {list: list, color: color} );
 }
 
 function configModal() {
   // Get the modal
   const modal = document.getElementById('modal');
-  
+
   // Get the button that opens the modal
   const btn = document.getElementById('associations-container');
 
   // Get the <span> element that closes the modal
   const span = document.getElementById('modal-close');
 
-  // When the user clicks the button, open the modal 
+  // When the user clicks the button, open the modal
   btn.onclick = function() {
     modal.style.display = 'block';
     loadWordcloud();
-  }
+  };
 
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
     modal.style.display = 'none';
-  }
+  };
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = 'none';
     }
-  }
+  };
 }
 
 window.addEventListener('load', configModal);
