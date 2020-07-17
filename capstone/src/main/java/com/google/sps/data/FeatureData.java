@@ -100,4 +100,20 @@ public class FeatureData {
 
     return numCrimes / (population / PER_RESIDENTS);
   } 
+  
+  /**
+   * Find and return a precinct by name
+   *
+   * @param name Name of the precinct 
+   * @return Precinct precinct with matching name
+   */
+  public static Precinct getPrecinct(String name) {
+    for (Precinct p : precinctData) {
+      if (p.getName().equals(name)) {
+        return p;
+      }
+    }
+
+    return null;
+  }
 }
