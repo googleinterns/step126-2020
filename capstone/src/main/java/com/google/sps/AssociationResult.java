@@ -84,6 +84,7 @@ public class AssociationResult {
     return weight;
   }
 
+  /** @return whether this association has strong sentiment */
   public boolean hasStrongSentiment() {
     return strongSentiment;
   }
@@ -93,6 +94,7 @@ public class AssociationResult {
     return key;
   }
 
+  /** @return content all lowercase without extra spaces for comparison */
   public String getNormalizedString() {
     return content.toLowerCase().trim();
   }
