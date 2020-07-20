@@ -134,9 +134,9 @@ function precinctControl(controlDiv, map) {
       fillOpacity: 0.9});
     precinctLayer.overrideStyle(event.feature, {
       fillColor: '#19B3B1', fillOpacity: .7});
-    const thisPrecinct = event.feature.getProperty('station');
+    precinct = event.feature.getProperty('station');
     document.getElementById('chart-title').textContent =
-     thisPrecinct + ' Police Sentiment';
+     precinct + ' Police Sentiment';
     loadCharts();
     associationUpdateDisplay(precinct);
   });

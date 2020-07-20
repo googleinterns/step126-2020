@@ -1,6 +1,5 @@
 package com.google.sps.data;
 
-
 /** Data for associations wordcloud */
 public final class WordcloudData {
 
