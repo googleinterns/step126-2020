@@ -365,26 +365,20 @@ async function showStats() {
 }
 
 const MAX_SIZE = 100;
-const darkRed = 0x4B0B06;
-const lightRed = 0xED2A1D;
-const lightGreen = 0xA9D45E;
-const darkGreen = 0x23300D;
-const neutralShade = 0x7E7F9A;
 
 function getColor(gradient) {
   let res;
-  if (Math.abs(gradient) <= 0.1) res = neutralShade;
-  else if (gradient < 0) {
-    res = lightRed + (darkRed - lightRed) * Math.abs(gradient);
+  if (gradient < 0) {
+    let red = 255 * (Math.abs(gradient));
+    return 'rgb(' + red + ', 0, 0)';
   } else {
-    res = lightGreen + (darkGreen - lightGreen) * gradient;
+    let green = 255 * gradient;
+    return 'rgb(0, ' + green + ', 0)';
   }
-  res = Math.round(res);
-  return '#' + res.toString(16);
 }
 
 async function loadWordcloud() {
-  const response = await fetch('/wordcloud');
+  const response = await fetch('/wordcloud?scope=' + precinct);
   const data = await response.json();
   data.sort(function(a, b) {
     b.weight - a.weight;
