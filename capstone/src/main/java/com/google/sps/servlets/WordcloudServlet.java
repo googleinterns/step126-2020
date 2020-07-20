@@ -62,7 +62,8 @@ public class WordcloudServlet extends HttpServlet {
     if (query.size() == 0) return new ArrayList<WordcloudData>();
     ArrayList<WordcloudData> output = new ArrayList<WordcloudData>();
     for (Entity entity : query) {
-      if (!scope.equals((String) entity.getProperty("scope"))) continue;
+      if (!scope.equals((String) entity.getProperty("scope"))
+          || (!(boolean) entity.getProperty("strong-sentiment"))) continue;
       float weight = Math.abs((float) (double) entity.getProperty("weight"));
       float gradient = (float) (double) entity.getProperty("average-sentiment");
       String content = (String) entity.getProperty("name");
