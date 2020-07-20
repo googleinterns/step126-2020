@@ -13,6 +13,7 @@
 // limitations under the License.
 
 /* global google */
+/* global WordCloud */
 
 let precinct = 'SF';
 
@@ -343,36 +344,16 @@ function onlyOne(checkbox) {
   mapAndSelection.selection = checkbox.id;
   drawCheckboxLayer();
 }
-
-async function showStats() {
-  const logStatus = await fetch('/status');
-  const status = await logStatus.json();
-  if (!status) {
-    window.location.href = '/login';
-  } else {
-    window.location.replace('statistics.html');
-  }
-}
 /* eslint-enable no-unused-vars */
-async function showStats() {
-  const logStatus = await fetch('/status');
-  const status = await logStatus.json();
-  if (!status) {
-    window.location.href = '/login';
-  } else {
-    window.location.replace('statistics.html');
-  }
-}
 
 const MAX_SIZE = 100;
 
 function getColor(gradient) {
-  let res;
   if (gradient < 0) {
-    let red = 255 * (Math.abs(gradient));
+    const red = 255 * (Math.abs(gradient));
     return 'rgb(' + red + ', 0, 0)';
   } else {
-    let green = 255 * gradient;
+    const green = 255 * gradient;
     return 'rgb(0, ' + green + ', 0)';
   }
 }
@@ -394,12 +375,15 @@ async function loadWordcloud() {
     return [x.content, x.weight];
   });
   const color = function(word, weight, fontSize, distance, theta) {
-	  const elem = data.find(function(elem) {
+    const elem = data.find(function(elem) {
       return elem.content === word;
     });
-	  return getColor(elem.gradient);
+    return getColor(elem.gradient);
   };
-  WordCloud(document.getElementById('cloud-canvas'), {list: list, color: color} );
+  /* eslint-disable new-cap */
+  WordCloud(document.getElementById('cloud-canvas'),
+      {list: list, color: color} );
+  /* eslint-enable new-cap */
 }
 
 function configModal() {
