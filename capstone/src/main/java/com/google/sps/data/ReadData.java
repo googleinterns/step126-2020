@@ -130,9 +130,9 @@ public class ReadData {
           Precinct precinctData = FeatureData.getPrecinct(precinctName);
 
           if (precinctData != null) {
-            entity.setProperty("averageHouseholdIncome", precinctData.getAverageHouseholdIncome());
-            entity.setProperty("crimeRate", precinctData.getCrimeRate());
-            entity.setProperty("policeStationRating", precinctData.getPoliceStationRating());
+            entity.setProperty("averageHouseholdIncome", String.format("%.2f", precinctData.getAverageHouseholdIncome()));
+            entity.setProperty("crimeRate", String.format("%.2f", precinctData.getCrimeRate()));
+            entity.setProperty("policeStationRating", String.format("%.2f", precinctData.getPoliceStationRating()));
           }
 
           newEntities.add(entity);
