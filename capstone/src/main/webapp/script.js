@@ -163,6 +163,7 @@ function precinctControl(controlDiv, map) {
       loadCharts();
       associationUpdateDisplay('SF');
     } else {
+      precinctLayer.revertStyle();
       precinctLayer.setStyle({fillColor: '#CECDBC',
         fillOpacity: 0.9, visible: true});
       document.getElementById('map-key').style.display='block';
@@ -182,7 +183,6 @@ function drawCheckboxLayer() {
       allPrecinctColors.set(
           allPrecincts[i], averagePrecinctSentiment(allPrecincts[i]));
     }
-    mapSentiment(allPrecinctColors);
   } else {
     alert('precinctLayer');
   }
@@ -277,24 +277,13 @@ function loadResponseChart(totalResponses, precinct) {
   chart.draw(stats, null);
 }
 
-function mapSentiment(colorMap) {
-  const precinctLayer = mapAndSelection.map;
-  for (const [precinctName, precinctColor] of colorMap) {
-    precinctLayer.revertStyle();
-    precinctLayer.setStyle({fillColor: '#CECDBC',
-      fillOpacity: 0.9});
-    precinctLayer.overrideStyle(precinctLayer.getFeatureById(
-        searchPrecinctsByStation(precinctName)),
-    {fillColor: precinctColor, fillOpacity: 0.9});
-  }
-}
-
 function searchPrecinctsByStation(desiredStation) {
-  mapAndSelection.map.forEachFeature( function(feature) {
-    if (feature.getProperty('station') == desiredStation) {
-      return feature.getProperty('id');
+    let precinctID = [200,300,400,500,600,800,900,1000];
+  for (let i = 0; i < precinctID.length; i++) {
+    if (mapAndSelection.map.getFeatureById(precinctID[i]).getProperty('station') == desiredStation) {
+      return precinctID[i];
     }
-  });
+  }
 }
 
 async function averagePrecinctSentiment(policePrecinct) {
@@ -316,21 +305,29 @@ async function averagePrecinctSentiment(policePrecinct) {
     }
   }
   const sentimentAverage = sentimentCount/list.length;
-  return getSentimentColor(sentimentAverage);
+  return getSentimentColor(sentimentAverage, policePrecinct);
 }
 
-function getSentimentColor(averageFeelings) {
+function getSentimentColor(averageFeelings, policePrecinct) {
+    let precinctColor = '#228B22';
   if (Math.round(averageFeelings) == 5) {
-    return '#165B33';
+    precinctColor = '#165B33';
   } else if (Math.round(averageFeelings) == 4) {
-    return '#146B3A';
+    precinctColor = '#146B3A';
   } else if (Math.round(averageFeelings) == 3) {
-    return '#F8B229';
+    precinctColor = '#F8B229';
   } else if (Math.round(averageFeelings) == 2) {
-    return '#EA4630';
+    precinctColor = '#EA4630';
   } else {
-    return '#BB2528';
+    precinctColor = '#BB2528';
   }
+   const precinctLayer = mapAndSelection.map;
+
+    if(policePrecinct!='Richmond'&& policePrecinct!='Southern'){
+        precinctLayer.overrideStyle(precinctLayer.getFeatureById(
+            searchPrecinctsByStation(policePrecinct)),
+        {fillColor: precinctColor, fillOpacity: 0.9});
+    }
 }
 
 const mapAndSelection = {};
@@ -338,10 +335,18 @@ const mapAndSelection = {};
 function onlyOne(checkbox) {
   const checkboxes = document.getElementsByName('check');
   checkboxes.forEach((item) => {
-    if (item !== checkbox) item.checked = false;
+    if (item !== checkbox){
+        item.checked = false;
+    }
   });
-  mapAndSelection.selection = checkbox.id;
-  drawCheckboxLayer();
+  if(mapAndSelection.selection == checkbox.id){
+     mapAndSelection.selection = 'noneSelected';
+     fixMap();
+  }
+  else{
+      mapAndSelection.selection = checkbox.id;
+      drawCheckboxLayer();
+  }
 }
 
 async function showStats() {
@@ -354,3 +359,10 @@ async function showStats() {
   }
 }
 /* eslint-enable no-unused-vars */
+
+function fixMap(){
+    if (mapAndSelection.selection == 'noneSelected'){
+        mapAndSelection.map.setStyle({fillColor: '#CECDBC',
+        fillOpacity: 0.9});
+    }
+}
