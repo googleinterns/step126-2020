@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /** Servlet to fetch association data with most positive and negative associations */
 @WebServlet("/wordcloud")
-public class WordcloudServlet extends HttpServlet {
+public class WordCloudServlet extends HttpServlet {
 
   private static final String OUTPUT_TYPE = "applications/json;";
 

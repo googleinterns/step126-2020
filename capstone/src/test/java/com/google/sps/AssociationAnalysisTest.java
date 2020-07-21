@@ -33,9 +33,9 @@ public class AssociationAnalysisTest extends Mockito {
         res,
         new ArrayList(
             Arrays.asList(
-                new AssociationResult("test2", -0.54f, 0.9f),
-                new AssociationResult("test3", 0f, 0f),
-                new AssociationResult("test1", 0.25f, 0.5f))));
+                new AssociationResult("test2", -0.54f, 0.9f, true),
+                new AssociationResult("test3", 0f, 0f, false),
+                new AssociationResult("test1", 0.25f, 0.5f, true))));
   }
 
   @Test
@@ -53,8 +53,8 @@ public class AssociationAnalysisTest extends Mockito {
         res,
         new ArrayList(
             Arrays.asList(
-                new AssociationResult("test2", -1.0f, 1.0f),
-                new AssociationResult("test1", 0.79f, 1.4f))));
+                new AssociationResult("test2", -1.0f, 1.0f, true),
+                new AssociationResult("test1", 0.79f, 1.4f, true))));
   }
 
   @Test
@@ -73,8 +73,8 @@ public class AssociationAnalysisTest extends Mockito {
         res,
         new ArrayList(
             Arrays.asList(
-                new AssociationResult("test1", 0.29f, 0.9f),
-                new AssociationResult("test2", 1.54f, 1.9f))));
+                new AssociationResult("test1", 0.29f, 0.9f, true),
+                new AssociationResult("test2", 1.54f, 1.9f, true))));
   }
 
   @Test
@@ -89,7 +89,8 @@ public class AssociationAnalysisTest extends Mockito {
                 new EntitySentiment("test1", 0.4f, 0.1f)));
     AssociationAnalysis analysis = new AssociationAnalysis();
     ArrayList<AssociationResult> res = analysis.calculateScores(input);
-    assertEquals(res, new ArrayList(Arrays.asList(new AssociationResult("test1", 1.83f, 2.8f))));
+    assertEquals(
+        res, new ArrayList(Arrays.asList(new AssociationResult("test1", 1.83f, 2.8f, true))));
   }
 
   @Test
@@ -108,9 +109,9 @@ public class AssociationAnalysisTest extends Mockito {
         res,
         new ArrayList(
             Arrays.asList(
-                new AssociationResult("test2", -0.46f, 1.9f),
-                new AssociationResult("test1", -0.25f, 0.5f),
-                new AssociationResult("test3", 0.04f, 0.4f))));
+                new AssociationResult("test2", -0.46f, 1.9f, true),
+                new AssociationResult("test1", -0.25f, 0.5f, true),
+                new AssociationResult("test3", 0.04f, 0.4f, false))));
   }
 
   @Test(expected = NullPointerException.class)
