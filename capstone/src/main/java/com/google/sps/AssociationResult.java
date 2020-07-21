@@ -86,7 +86,13 @@ public class AssociationResult {
     return weight;
   }
 
-  /** @return whether this association has strong sentiment */
+  /**
+   * Whether or not the result has had an instance of strong sentiment among the entities it is made
+   * up of (mixed sentiments that add to 0 with negative and positive sentiments canceling can still
+   * have individual strong sentiments)
+   *
+   * @return whether this association has strong sentiment
+   */
   public boolean hasStrongSentiment() {
     return strongSentiment;
   }
