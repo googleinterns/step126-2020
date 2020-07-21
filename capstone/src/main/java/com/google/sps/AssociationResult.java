@@ -42,13 +42,15 @@ public class AssociationResult {
    * @param content the word/phrase for which the result is for
    * @param score an intial score for the word/phrase from -1 (neg) to 1 (pos)
    * @param weight the weight of the sentiment
+   * @param strongSentiment whether there is an occurance of this entity with sentiment above the
+   *     threshold
    */
-  public AssociationResult(String content, float score, float weight) {
+  public AssociationResult(String content, float score, float weight, boolean strongSentiment) {
     this.content = content;
     this.score = score;
     this.weight = weight;
-    strongSentiment = Math.abs(score) > SENTIMENT_THRESHOLD;
-    key = Optional.empty();
+    this.strongSentiment = strongSentiment;
+    this.key = Optional.empty();
   }
 
   /**
@@ -120,7 +122,7 @@ public class AssociationResult {
 
   @Override
   public String toString() {
-    return content + "(" + Float.toString(score) + ")";
+    return content + "(" + Float.toString(score) + ", " + Boolean.toString(strongSentiment) + ")";
   }
 
   @Override
