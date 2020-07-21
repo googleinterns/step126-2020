@@ -61,6 +61,11 @@
       <artifactId>google-cloud-language</artifactId>
       <version>1.55.0</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.opennlp</groupId>
+      <artifactId>opennlp-tools</artifactId>
+      <version>1.9.2</version>
+    </dependency>
   </dependencies>
 
   <build>
