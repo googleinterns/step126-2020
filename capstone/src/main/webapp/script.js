@@ -339,6 +339,7 @@ function onlyOne(checkbox) {
         item.checked = false;
     }
   });
+
   if(mapAndSelection.selection == checkbox.id){
      mapAndSelection.selection = 'noneSelected';
      fixMap();
@@ -361,8 +362,8 @@ async function showStats() {
 /* eslint-enable no-unused-vars */
 
 function fixMap(){
-    if (mapAndSelection.selection == 'noneSelected'){
-        mapAndSelection.map.setStyle({fillColor: '#CECDBC',
-        fillOpacity: 0.9});
-    }
+    let precinctDataLayer = mapAndSelection.map;
+    precinctDataLayer.revertStyle();
+    precinctDataLayer.setStyle({fillColor: '#CECDBC',
+    fillOpacity: 0.9, visible: true});
 }
