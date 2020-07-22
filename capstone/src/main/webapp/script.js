@@ -372,8 +372,6 @@ function fixMap() {
   precinctDataLayer.setStyle({fillColor: '#CECDBC',
     fillOpacity: 0.9, visible: true});
 }
-  mapAndSelection.selection = checkbox.id;
-  drawCheckboxLayer();
 
 /* eslint-enable no-unused-vars */
 
