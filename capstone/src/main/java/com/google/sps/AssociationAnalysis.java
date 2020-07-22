@@ -3,24 +3,20 @@ package com.google.sps;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import opennlp.tools.stemmer.PorterStemmer;
 
 /** Calculates association scores from a list of sentiments per entity mention */
 public class AssociationAnalysis {
 
   HashMap<String, AssociationResult> res;
-  PorterStemmer stemmer;
 
   public AssociationAnalysis() {
     res = new HashMap<String, AssociationResult>();
-    stemmer = new PorterStemmer();
   }
 
   public AssociationAnalysis(ArrayList<AssociationResult> initialResults) {
     res = new HashMap<String, AssociationResult>();
-    stemmer = new PorterStemmer();
     for (AssociationResult association : initialResults) {
-      res.put(stemmer.stem(association.getNormalizedString()), association);
+      res.put(AssociationKey.getKey(association), association);
     }
   }
 
@@ -39,11 +35,11 @@ public class AssociationAnalysis {
 
   /** Updates the result array with the new entity mention given */
   private void updateScore(HashMap<String, AssociationResult> res, EntitySentiment sentiment) {
-    AssociationResult association = res.get(sentiment.getKey());
+    AssociationResult association = res.get(AssociationKey.getKey(sentiment));
     if (association != null) {
       association.updateResult(sentiment);
     } else {
-      res.put(stemmer.stem(sentiment.getKey()), new AssociationResult(sentiment));
+      res.put(AssociationKey.getKey(sentiment), new AssociationResult(sentiment));
     }
   }
 }
