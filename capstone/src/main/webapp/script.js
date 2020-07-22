@@ -374,7 +374,7 @@ function fixMap() {
 }
   mapAndSelection.selection = checkbox.id;
   drawCheckboxLayer();
-}
+
 /* eslint-enable no-unused-vars */
 
 const MAX_SIZE = 100;
