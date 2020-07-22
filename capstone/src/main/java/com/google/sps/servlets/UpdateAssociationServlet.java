@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UpdateAssociationServlet extends HttpServlet {
 
   public static final String SURVEY_ENTITY_KIND = "Response";
-  public static final String COMMENT_PROPERTY = "answerThree";
+  public static final String COMMENT_PROPERTY = "text";
   public static final String ZIPCODE = "zipCode";
 
   private LanguageServiceClient nlpClient;
@@ -104,8 +104,9 @@ public class UpdateAssociationServlet extends HttpServlet {
       String content = (String) entity.getProperty("name");
       float weight = (float) (double) entity.getProperty("weight");
       float score = (float) (double) entity.getProperty("score");
+      boolean strongSentiment = (boolean) entity.getProperty("strong-sentiment");
       Key key = entity.getKey();
-      prev.add(new AssociationResult(content, score, weight, key));
+      prev.add(new AssociationResult(content, score, weight, strongSentiment, key));
     }
 
     return prev;
@@ -131,6 +132,7 @@ public class UpdateAssociationServlet extends HttpServlet {
       entity.setProperty("score", association.getScore());
       entity.setProperty("weight", association.getWeight());
       entity.setProperty("average-sentiment", association.getAverageSentiment());
+      entity.setProperty("strong-sentiment", association.hasStrongSentiment());
       entity.setProperty("scope", scope);
       entities.add(entity);
     }

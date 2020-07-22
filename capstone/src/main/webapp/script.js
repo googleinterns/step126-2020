@@ -13,6 +13,7 @@
 // limitations under the License.
 
 /* global google */
+/* global WordCloud */
 
 let precinct = 'SF';
 
@@ -134,9 +135,9 @@ function precinctControl(controlDiv, map) {
       fillOpacity: 0.9});
     precinctLayer.overrideStyle(event.feature, {
       fillColor: '#19B3B1', fillOpacity: .7});
-    const thisPrecinct = event.feature.getProperty('station');
+    precinct = event.feature.getProperty('station');
     document.getElementById('chart-title').textContent =
-     thisPrecinct + ' Police Sentiment';
+     precinct + ' Police Sentiment';
     loadCharts();
     associationUpdateDisplay(precinct);
   });
@@ -371,3 +372,78 @@ function fixMap() {
   precinctDataLayer.setStyle({fillColor: '#CECDBC',
     fillOpacity: 0.9, visible: true});
 }
+  mapAndSelection.selection = checkbox.id;
+  drawCheckboxLayer();
+}
+/* eslint-enable no-unused-vars */
+
+const MAX_SIZE = 100;
+
+function getColor(gradient) {
+  if (gradient < 0) {
+    const red = 255 * (Math.abs(gradient));
+    return 'rgb(' + red + ', 0, 0)';
+  } else {
+    const green = 255 * gradient;
+    return 'rgb(0, ' + green + ', 0)';
+  }
+}
+
+async function loadWordcloud() {
+  const response = await fetch('/wordcloud?scope=' + precinct);
+  const data = await response.json();
+  data.sort(function(a, b) {
+    b.weight - a.weight;
+  });
+  data.map(function(x) {
+    x.weight = Math.sqrt(x.weight);
+  });
+  const scalar = MAX_SIZE / data[0].weight;
+  data.map(function(x) {
+    x.weight = x.weight * scalar;
+  });
+  const list = data.map(function(x) {
+    return [x.content, x.weight];
+  });
+  const color = function(word, weight, fontSize, distance, theta) {
+    const elem = data.find(function(elem) {
+      return elem.content === word;
+    });
+    return getColor(elem.gradient);
+  };
+  /* eslint-disable new-cap */
+  WordCloud(document.getElementById('cloud-canvas'),
+      {list: list, color: color} );
+  /* eslint-enable new-cap */
+}
+
+function configModal() {
+  // Get the modal
+  const modal = document.getElementById('modal');
+
+  // Get the button that opens the modal
+  const btn = document.getElementById('associations-container');
+
+  // Get the <span> element that closes the modal
+  const span = document.getElementById('modal-close');
+
+  // When the user clicks the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = 'block';
+    loadWordcloud();
+  };
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = 'none';
+  };
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  };
+}
+
+window.addEventListener('load', configModal);
