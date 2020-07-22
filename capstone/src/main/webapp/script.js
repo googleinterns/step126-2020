@@ -18,7 +18,7 @@ let precinct = 'SF';
 
 google.charts.load('current', {packages: ['corechart']});
 google.charts.setOnLoadCallback(loadCharts);
-
+//* *zooms and centers map to SF, draws city boarder and creates 3 buttons */
 function createMap() {
   const map = new google.maps.Map(
       document.getElementById('map-container'),
@@ -59,7 +59,7 @@ function createMap() {
       .push(precinctControlDiv);
   document.getElementById('map-key').style.display='none';
 }
-
+//* *button that centers map and zooms it to SF */
 function centerControl(controlDiv, map) {
   //* *button creation and positioning*/
   const controlUI = document.createElement('div');
@@ -78,7 +78,7 @@ function centerControl(controlDiv, map) {
     map.setZoom(12);
   });
 }
-
+//* *button that shows or hides zip code data layer on map */
 let zipClicked = false;
 function zipControl(controlDiv, map) {
   //* *adding zipcode overlay*/
@@ -118,7 +118,7 @@ function zipControl(controlDiv, map) {
     }
   });
 }
-
+//* *button that shows ot hides police precincts on SF map */
 let precinctButtonOn= false;
 function precinctControl(controlDiv, map) {
   //* *adding precinct overlay */
@@ -171,6 +171,7 @@ function precinctControl(controlDiv, map) {
     }
   });
 }
+//* *drawing sentiment on map by coloring precinct layer */
 function drawCheckboxLayer() {
   if (mapAndSelection.selection == 'noneSelected') {
     alert('nothing yet');
@@ -276,7 +277,7 @@ function loadResponseChart(totalResponses, precinct) {
       document.getElementById('response-bar-chart'));
   chart.draw(stats, null);
 }
-
+//* * get precinct name as parameter and returns precinct ID*/
 function searchPrecinctsByStation(desiredStation) {
   const precinctID = [200, 300, 400, 500, 600, 800, 900, 1000];
   for (let i = 0; i < precinctID.length; i++) {
@@ -286,7 +287,7 @@ function searchPrecinctsByStation(desiredStation) {
     }
   }
 }
-
+// based on google survey question ratings 1-5 on police sentiment
 async function averagePrecinctSentiment(policePrecinct) {
   const response = await fetch('/load-data?precinct=' + policePrecinct);
   const list = await response.json();
@@ -308,7 +309,7 @@ async function averagePrecinctSentiment(policePrecinct) {
   const sentimentAverage = sentimentCount/list.length;
   return getSentimentColor(sentimentAverage, policePrecinct);
 }
-
+//* *colors precinct on map based on strong dislike to strong like */
 function getSentimentColor(averageFeelings, policePrecinct) {
   let precinctColor = '#228B22';
   if (Math.round(averageFeelings) == 5) {
@@ -324,15 +325,17 @@ function getSentimentColor(averageFeelings, policePrecinct) {
   }
   const precinctLayer = mapAndSelection.map;
 
-  if (policePrecinct!='Richmond'&& policePrecinct!='Southern') {
+  if (policePrecinct != 'Richmond' && policePrecinct != 'Southern') {
     precinctLayer.overrideStyle(precinctLayer.getFeatureById(
         searchPrecinctsByStation(policePrecinct)),
     {fillColor: precinctColor, fillOpacity: 0.9});
   }
 }
-
+//* *global variable for precinctLayer data layer and checkbox selection */
 const mapAndSelection = {};
+//* *following two functions are only used in index.html */
 /* eslint-disable no-unused-vars */
+//* *unchecks boxes when new checkbox is checked */
 function onlyOne(checkbox) {
   const checkboxes = document.getElementsByName('check');
   checkboxes.forEach((item) => {
@@ -349,18 +352,19 @@ function onlyOne(checkbox) {
     drawCheckboxLayer();
   }
 }
-
+//* *goes to log in page if user is not logged in */
 async function showStats() {
   const logStatus = await fetch('/status');
   const status = await logStatus.json();
-  if (!status) {
-    window.location.href = '/login';
-  } else {
+  console.log(status);
+  if (status == true) {
     window.location.replace('statistics.html');
+  } else {
+    window.location.replace('/login');
   }
 }
 /* eslint-enable no-unused-vars */
-
+//* *erases precinct coloring after checkbox is unselected */
 function fixMap() {
   const precinctDataLayer = mapAndSelection.map;
   precinctDataLayer.revertStyle();
