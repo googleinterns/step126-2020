@@ -102,11 +102,6 @@ public class AssociationResult {
     return key;
   }
 
-  /** @return content all lowercase without extra spaces for comparison */
-  public String getNormalizedString() {
-    return content.toLowerCase().trim();
-  }
-
   /**
    * Updates the score to a new score
    *
