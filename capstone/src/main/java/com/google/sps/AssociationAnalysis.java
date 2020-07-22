@@ -7,7 +7,7 @@ import java.util.HashMap;
 /** Calculates association scores from a list of sentiments per entity mention */
 public class AssociationAnalysis {
 
-  HashMap<String, AssociationResult> res;
+  private HashMap<String, AssociationResult> res;
 
   public AssociationAnalysis() {
     res = new HashMap<String, AssociationResult>();
