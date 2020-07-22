@@ -8,7 +8,9 @@ public class FeatureData {
 
   private final int NUMBER_OF_PRECINCTS = 10;
 
-  // Initialize the list of precincts
+  /* The precinct data was taken from public datasets such as
+     https://www.incomebyzipcode.com/california/94111 and 
+     https://www.sanfranciscopolice.org/stay-safe/crime-data/crime-dashboard */
   static {
     precinctData = new ArrayList<Precinct>();
 
