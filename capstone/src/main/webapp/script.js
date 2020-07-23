@@ -124,7 +124,7 @@ let precinctButtonOn= false;
 function precinctControl(controlDiv, map) {
   //* *adding precinct overlay */
   const precinctLayer = new google.maps.Data({map: map});
-  precinctLayer.loadGeoJson('neighborhoods.json');
+  precinctLayer.loadGeoJson('policePrecincts.geojson');
   // a function that uses color map to map, checks if button is clicked
   precinctLayer.setStyle({fillColor: '#CECDBC',
     fillOpacity: 0.9, visible: false});
@@ -135,7 +135,7 @@ function precinctControl(controlDiv, map) {
       fillOpacity: 0.9});
     precinctLayer.overrideStyle(event.feature, {
       fillColor: '#19B3B1', fillOpacity: .7});
-    precinct = event.feature.getProperty('station');
+    precinct = event.feature.getProperty('district');
     document.getElementById('chart-title').textContent =
      precinct + ' Police Sentiment';
     loadCharts();
@@ -285,14 +285,14 @@ function mapSentiment(colorMap) {
     precinctLayer.setStyle({fillColor: '#CECDBC',
       fillOpacity: 0.9});
     precinctLayer.overrideStyle(precinctLayer.getFeatureById(
-        searchPrecinctsByStation(precinctName)),
+        searchPrecinctsByDistrict(precinctName)),
     {fillColor: precinctColor, fillOpacity: 0.9});
   }
 }
 
-function searchPrecinctsByStation(desiredStation) {
+function searchPrecinctsByDistrict(desiredDistrict) {
   mapAndSelection.map.forEachFeature( function(feature) {
-    if (feature.getProperty('station') == desiredStation) {
+    if (feature.getProperty('district') == desiredDistrict) {
       return feature.getProperty('id');
     }
   });
