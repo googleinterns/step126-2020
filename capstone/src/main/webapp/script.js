@@ -387,30 +387,42 @@ async function loadWordcloud() {
 }
 
 function configModal() {
+  //Get the map key
+  const key = document.getElementById('map-key');
+
+  //Get the space for word cloud
+  const cloud = document.getElementById('map-cloud');
+
   // Get the modal
   const modal = document.getElementById('modal');
 
   // Get the button that opens the modal
-  const btn = document.getElementById('associations-container');
+  const btn = document.getElementById('map-cloud');
 
   // Get the <span> element that closes the modal
   const span = document.getElementById('modal-close');
 
   // When the user clicks the button, open the modal
   btn.onclick = function() {
-    modal.style.display = 'block';
+    modal.style.display = 'block'; 
+    key.style.display = 'none'; 
+    cloud.style.display = 'none';  
     loadWordcloud();
   };
 
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
     modal.style.display = 'none';
+    key.style.display = 'block';
+    cloud.style.display = 'block';
   };
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = 'none';
+      key.style.display = 'block';
+      cloud.style.display = 'block';
     }
   };
 }

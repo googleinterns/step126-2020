@@ -231,11 +231,27 @@ ul {
 
 #map-key {
   position: absolute;
-  top: 30%;
-  left: 60%;
+  bottom: 10%;
+  left: 55%;
   z-index: 5;
   background-color: #fff;
   padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+#map-cloud {
+  position: absolute;
+  top: 10%;
+  left: 55%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  width: 20%;
+  height: 20%;
   border: 1px solid #999;
   text-align: center;
   font-family: "Raleway", sans-serif;
