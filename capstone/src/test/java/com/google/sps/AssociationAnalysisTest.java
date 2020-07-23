@@ -3,6 +3,7 @@ package com.google.sps.servlet;
 import static org.junit.Assert.assertEquals;
 
 import com.google.sps.AssociationAnalysis;
+import com.google.sps.AssociationMockKey;
 import com.google.sps.AssociationResult;
 import com.google.sps.EntitySentiment;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class AssociationAnalysisTest extends Mockito {
 
   @Test
   public void testEmpty() throws Exception {
-    AssociationAnalysis analysis = new AssociationAnalysis();
+    AssociationAnalysis analysis = new AssociationAnalysis(new AssociationMockKey());
     ArrayList<AssociationResult> res = analysis.calculateScores(new ArrayList<EntitySentiment>());
     assertEquals(res, new ArrayList<AssociationResult>());
   }
@@ -27,7 +28,7 @@ public class AssociationAnalysisTest extends Mockito {
                 new EntitySentiment("test1", 0.5f, 0.5f),
                 new EntitySentiment("test2", 0.9f, -0.6f),
                 new EntitySentiment("test3", 0f, 1.0f)));
-    AssociationAnalysis analysis = new AssociationAnalysis();
+    AssociationAnalysis analysis = new AssociationAnalysis(new AssociationMockKey());
     ArrayList<AssociationResult> res = analysis.calculateScores(input);
     assertEquals(
         res,
@@ -47,7 +48,7 @@ public class AssociationAnalysisTest extends Mockito {
                 new EntitySentiment("test1", 0.9f, 0.6f),
                 new EntitySentiment("test2", 0f, 1.0f),
                 new EntitySentiment("test2", 1.0f, -1.0f)));
-    AssociationAnalysis analysis = new AssociationAnalysis();
+    AssociationAnalysis analysis = new AssociationAnalysis(new AssociationMockKey());
     ArrayList<AssociationResult> res = analysis.calculateScores(input);
     assertEquals(
         res,
@@ -67,7 +68,7 @@ public class AssociationAnalysisTest extends Mockito {
                 new EntitySentiment("test1", 0f, 1.0f),
                 new EntitySentiment("test2", 1.0f, 1.0f),
                 new EntitySentiment("test1", 0.4f, 0.1f)));
-    AssociationAnalysis analysis = new AssociationAnalysis();
+    AssociationAnalysis analysis = new AssociationAnalysis(new AssociationMockKey());
     ArrayList<AssociationResult> res = analysis.calculateScores(input);
     assertEquals(
         res,
@@ -87,7 +88,7 @@ public class AssociationAnalysisTest extends Mockito {
                 new EntitySentiment("test1", 0f, 1.0f),
                 new EntitySentiment("test1", 1.0f, 1.0f),
                 new EntitySentiment("test1", 0.4f, 0.1f)));
-    AssociationAnalysis analysis = new AssociationAnalysis();
+    AssociationAnalysis analysis = new AssociationAnalysis(new AssociationMockKey());
     ArrayList<AssociationResult> res = analysis.calculateScores(input);
     assertEquals(
         res, new ArrayList(Arrays.asList(new AssociationResult("test1", 1.83f, 2.8f, true))));
@@ -103,7 +104,7 @@ public class AssociationAnalysisTest extends Mockito {
                 new EntitySentiment("test1", 0f, 1.0f),
                 new EntitySentiment("test2", 1.0f, -1.0f),
                 new EntitySentiment("test3", 0.4f, 0.1f)));
-    AssociationAnalysis analysis = new AssociationAnalysis();
+    AssociationAnalysis analysis = new AssociationAnalysis(new AssociationMockKey());
     ArrayList<AssociationResult> res = analysis.calculateScores(input);
     assertEquals(
         res,
@@ -116,7 +117,7 @@ public class AssociationAnalysisTest extends Mockito {
 
   @Test(expected = NullPointerException.class)
   public void testNullExceptionThrown() {
-    AssociationAnalysis analysis = new AssociationAnalysis();
+    AssociationAnalysis analysis = new AssociationAnalysis(new AssociationMockKey());
     analysis.calculateScores(null);
   }
 }

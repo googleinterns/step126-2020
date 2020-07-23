@@ -27,6 +27,11 @@ public class UpdateAssociationServlet extends HttpServlet {
   private LanguageServiceClient nlpClient;
   private DatastoreService datastore;
   private MapData mapData = new MapData();
+  private AssociationKey keyGeneration;
+
+  public UpdateAssociationServlet() {
+    keyGeneration = new AssociationKey();
+  }
 
   public void init() throws ServletException {
     try {
@@ -45,7 +50,7 @@ public class UpdateAssociationServlet extends HttpServlet {
     ArrayList<EntitySentiment> sentiments = nlp.analyzeAssociations(getComments());
 
     for (String scope : mapData.getAllScopes()) {
-      AssociationAnalysis analysis = new AssociationAnalysis(loadPreviousResults(scope));
+      AssociationAnalysis analysis = new AssociationAnalysis(keyGeneration, loadPreviousResults(scope));
       ArrayList<EntitySentiment> filteredSentiment = new ArrayList<EntitySentiment>();
       for (EntitySentiment sentiment : sentiments) {
         if (sentiment.getScopes().contains(scope)) {
