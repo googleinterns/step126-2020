@@ -8,15 +8,18 @@ import java.util.HashMap;
 public class AssociationAnalysis {
 
   private HashMap<String, AssociationResult> res;
+  private AssociationKey keys;
 
-  public AssociationAnalysis() {
-    res = new HashMap<String, AssociationResult>();
+  public AssociationAnalysis(AssociationKey keys) {
+    this.res = new HashMap<String, AssociationResult>();
+    this.keys = keys;
   }
 
-  public AssociationAnalysis(ArrayList<AssociationResult> initialResults) {
-    res = new HashMap<String, AssociationResult>();
+  public AssociationAnalysis(AssociationKey keys, ArrayList<AssociationResult> initialResults) {
+    this.res = new HashMap<String, AssociationResult>();
+    this.keys = keys;
     for (AssociationResult association : initialResults) {
-      res.put(AssociationKey.getKey(association), association);
+      res.put(keys.getKey(association), association);
     }
   }
 
@@ -35,11 +38,11 @@ public class AssociationAnalysis {
 
   /** Updates the result array with the new entity mention given */
   private void updateScore(HashMap<String, AssociationResult> res, EntitySentiment sentiment) {
-    AssociationResult association = res.get(AssociationKey.getKey(sentiment));
+    AssociationResult association = res.get(keys.getKey(sentiment));
     if (association != null) {
       association.updateResult(sentiment);
     } else {
-      res.put(AssociationKey.getKey(sentiment), new AssociationResult(sentiment));
+      res.put(keys.getKey(sentiment), new AssociationResult(sentiment));
     }
   }
 }
