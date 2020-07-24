@@ -127,21 +127,21 @@ public class ReadData {
 
           // If the survey maps to more than 1 precinct, average the precinct data
           ArrayList<String> precinctNames = MapData.getPrecincts(zipCode);
-          
-          int sumIncome =  0;
+
+          int sumIncome = 0;
           int sumCrimeRate = 0;
           int sumStationRating = 0;
           int total = 0;
           for (String precinctName : precinctNames) {
             Precinct precinct = FeatureData.getPrecinct(precinctName);
-            
+
             sumIncome += precinct.getAverageHouseholdIncome();
             sumCrimeRate += precinct.getCrimeRate();
             sumStationRating += precinct.getPoliceStationRating();
 
-            total ++;
+            total++;
           }
-          
+
           if (total != 0) {
             entity.setProperty("averageHouseholdIncome", Math.round(sumIncome / total));
             entity.setProperty("crimeRate", Math.round(sumCrimeRate / total));
