@@ -2,7 +2,8 @@ package com.google.sps.data;
 
 /* This class stores information pertaining to each precinct */
 public class Precinct {
-
+  
+  /* Builder to construct each precinct object */
   public static class Builder {
 
     private String name;
@@ -62,26 +63,32 @@ public class Precinct {
 
       return this;
     }
-
+    
+    /**
+     * Instantiates precinct and injects builder
+     *
+     * @return Precinct instance
+     */
     public Precinct build() {
-      Precinct precinct = new Precinct();
-      precinct.name = this.name;
-      precinct.population = this.population;
-      precinct.averageHouseholdIncome = this.averageHouseholdIncome;
-      precinct.crimeRate = this.crimeRate;
-      precinct.policeStationRating = this.policeStationRating;
+      Precinct precinct = new Precinct(this);
 
       return precinct;
     }
   }
 
-  String name;
-  int population;
-  float averageHouseholdIncome;
-  float crimeRate;
-  float policeStationRating;
+  private String name;
+  private int population;
+  private float averageHouseholdIncome;
+  private float crimeRate;
+  private float policeStationRating;
 
-  private Precinct() {}
+  private Precinct(Builder builder) {
+    this.name = builder.name;
+    this.population = builder.population;
+    this.averageHouseholdIncome = builder.averageHouseholdIncome;
+    this.crimeRate = builder.crimeRate;
+    this.policeStationRating = builder.policeStationRating;
+  }
 
   /**
    * Gets the name of the precinct
