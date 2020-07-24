@@ -125,14 +125,27 @@ public class ReadData {
           entity.setProperty("responseTimeTwo", responseTimeTwo);
           entity.setProperty("responseTimeThree", responseTimeThree);
 
-          // Set properties pertaining to the precinct the survey maps to
-          String precinctName = MapData.getPopulationPrecinct(zipCode);
-          Precinct precinctData = FeatureData.getPrecinct(precinctName);
+          // If the survey maps to more than 1 precinct, average the precinct data
+          ArrayList<String> precinctNames = MapData.getPrecincts(zipCode);
+          
+          int sumIncome =  0;
+          int sumCrimeRate = 0;
+          int sumStationRating = 0;
+          int total = 0;
+          for (String precinctName : precinctNames) {
+            Precinct precinct = FeatureData.getPrecinct(precinctName);
+            
+            sumIncome += precinct.getAverageHouseholdIncome();
+            sumCrimeRate += precinct.getCrimeRate();
+            sumStationRating += precinct.getPoliceStationRating();
 
-          if (precinctData != null) {
-            entity.setProperty("averageHouseholdIncome", precinctData.getAverageHouseholdIncome());
-            entity.setProperty("crimeRate", precinctData.getCrimeRate());
-            entity.setProperty("policeStationRating", precinctData.getPoliceStationRating());
+            total ++;
+          }
+          
+          if (total != 0) {
+            entity.setProperty("averageHouseholdIncome", Math.round(sumIncome / total));
+            entity.setProperty("crimeRate", Math.round(sumCrimeRate / total));
+            entity.setProperty("policeStationRating", Math.round(sumStationRating / total));
           }
 
           newEntities.add(entity);
