@@ -13,6 +13,7 @@
 // limitations under the License.
 
 /* global google */
+/* global WordCloud */
 
 let precinct = 'SF';
 
@@ -123,7 +124,7 @@ let precinctButtonOn= false;
 function precinctControl(controlDiv, map) {
   //* *adding precinct overlay */
   const precinctLayer = new google.maps.Data({map: map});
-  precinctLayer.loadGeoJson('neighborhoods.json');
+  precinctLayer.loadGeoJson('policePrecincts.geojson');
   // a function that uses color map to map, checks if button is clicked
   precinctLayer.setStyle({fillColor: '#CECDBC',
     fillOpacity: 0.9, visible: false});
@@ -134,9 +135,9 @@ function precinctControl(controlDiv, map) {
       fillOpacity: 0.9});
     precinctLayer.overrideStyle(event.feature, {
       fillColor: '#19B3B1', fillOpacity: .7});
-    const thisPrecinct = event.feature.getProperty('station');
+    precinct = event.feature.getProperty('district');
     document.getElementById('chart-title').textContent =
-     thisPrecinct + ' Police Sentiment';
+     precinct + ' Police Sentiment';
     loadCharts();
     associationUpdateDisplay(precinct);
   });
@@ -277,15 +278,26 @@ function loadResponseChart(totalResponses, precinct) {
       document.getElementById('response-bar-chart'));
   chart.draw(stats, null);
 }
-//* * get precinct name as parameter and returns precinct ID*/
-function searchPrecinctsByStation(desiredStation) {
-  const precinctID = [200, 300, 400, 500, 600, 800, 900, 1000];
-  for (let i = 0; i < precinctID.length; i++) {
-    if (mapAndSelection.map.getFeatureById(precinctID[i])
-        .getProperty('station') == desiredStation) {
-      return precinctID[i];
-    }
+
+function mapSentiment(colorMap) {
+  const precinctLayer = mapAndSelection.map;
+  for (const [precinctName, precinctColor] of colorMap) {
+    precinctLayer.revertStyle();
+    precinctLayer.setStyle({fillColor: '#CECDBC',
+      fillOpacity: 0.9});
+    precinctLayer.overrideStyle(precinctLayer.getFeatureById(
+        searchPrecinctsByDistrict(precinctName)),
+    {fillColor: precinctColor, fillOpacity: 0.9});
   }
+}
+//* * get precinct name as parameter and returns precinct ID*/
+function searchPrecinctsByDistrict(desiredDistrict) {
+    let precinctLayer = mapAndSelection.map;
+    precinctLayer.forEach((precinct) => {
+        if (precinct.getProperty('district') == desiredDistrict) {
+            return precinct;
+        }
+    });
 }
 // based on google survey question ratings 1-5 on police sentiment
 async function averagePrecinctSentiment(policePrecinct) {
@@ -325,11 +337,9 @@ function getSentimentColor(averageFeelings, policePrecinct) {
   }
   const precinctLayer = mapAndSelection.map;
 
-  if (policePrecinct != 'Richmond' && policePrecinct != 'Southern') {
     precinctLayer.overrideStyle(precinctLayer.getFeatureById(
         searchPrecinctsByStation(policePrecinct)),
     {fillColor: precinctColor, fillOpacity: 0.9});
-  }
 }
 //* *global variable for precinctLayer data layer and checkbox selection */
 const mapAndSelection = {};
@@ -363,7 +373,6 @@ async function showStats() {
     window.location.replace('/login');
   }
 }
-/* eslint-enable no-unused-vars */
 //* *erases precinct coloring after checkbox is unselected */
 function fixMap() {
   const precinctDataLayer = mapAndSelection.map;
@@ -371,3 +380,75 @@ function fixMap() {
   precinctDataLayer.setStyle({fillColor: '#CECDBC',
     fillOpacity: 0.9, visible: true});
 }
+/* eslint-enable no-unused-vars */
+
+const MAX_SIZE = 100;
+
+function getColor(gradient) {
+  if (gradient < 0) {
+    const red = 255 * (Math.abs(gradient));
+    return 'rgb(' + red + ', 0, 0)';
+  } else {
+    const green = 255 * gradient;
+    return 'rgb(0, ' + green + ', 0)';
+  }
+}
+
+async function loadWordcloud() {
+  const response = await fetch('/wordcloud?scope=' + precinct);
+  const data = await response.json();
+  data.sort(function(a, b) {
+    b.weight - a.weight;
+  });
+  data.map(function(x) {
+    x.weight = Math.sqrt(x.weight);
+  });
+  const scalar = MAX_SIZE / data[0].weight;
+  data.map(function(x) {
+    x.weight = x.weight * scalar;
+  });
+  const list = data.map(function(x) {
+    return [x.content, x.weight];
+  });
+  const color = function(word, weight, fontSize, distance, theta) {
+    const elem = data.find(function(elem) {
+      return elem.content === word;
+    });
+    return getColor(elem.gradient);
+  };
+  /* eslint-disable new-cap */
+  WordCloud(document.getElementById('cloud-canvas'),
+      {list: list, color: color} );
+  /* eslint-enable new-cap */
+}
+
+function configModal() {
+  // Get the modal
+  const modal = document.getElementById('modal');
+
+  // Get the button that opens the modal
+  const btn = document.getElementById('associations-container');
+
+  // Get the <span> element that closes the modal
+  const span = document.getElementById('modal-close');
+
+  // When the user clicks the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = 'block';
+    loadWordcloud();
+  };
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = 'none';
+  };
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  };
+}
+
+window.addEventListener('load', configModal);
