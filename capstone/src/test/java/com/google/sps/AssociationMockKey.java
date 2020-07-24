@@ -1,11 +1,7 @@
 package com.google.sps;
 
-import com.google.sps.AssociationKey;
-import com.google.sps.AssociationResult;
-import com.google.sps.EntitySentiment;
-
 public class AssociationMockKey extends AssociationKey {
-  
+
   private String key;
 
   @Override
