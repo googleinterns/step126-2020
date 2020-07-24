@@ -2,7 +2,7 @@ package com.google.sps;
 
 import opennlp.tools.stemmer.PorterStemmer;
 
-/** Generates lowercase no spaces word stems for keys in the AssociationResults hashmap */
+/** Generates keys in the Hashmap used to store entity sentiments and their associations */
 public class AssociationKey {
 
   private static PorterStemmer stemmer;

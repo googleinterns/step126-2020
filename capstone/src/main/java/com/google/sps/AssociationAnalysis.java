@@ -10,11 +10,16 @@ public class AssociationAnalysis {
   private HashMap<String, AssociationResult> res;
   private AssociationKey keys;
 
+  /** @param keys object that generates keys from sentiments, association results, and strings */
   public AssociationAnalysis(AssociationKey keys) {
     this.res = new HashMap<String, AssociationResult>();
     this.keys = keys;
   }
 
+  /**
+   * @param keys object that generates keys from sentiments, association results, and strings
+   * @param initialResults previous association results from old data to build on
+   */
   public AssociationAnalysis(AssociationKey keys, ArrayList<AssociationResult> initialResults) {
     this.res = new HashMap<String, AssociationResult>();
     this.keys = keys;

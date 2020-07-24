@@ -50,7 +50,8 @@ public class UpdateAssociationServlet extends HttpServlet {
     ArrayList<EntitySentiment> sentiments = nlp.analyzeAssociations(getComments());
 
     for (String scope : mapData.getAllScopes()) {
-      AssociationAnalysis analysis = new AssociationAnalysis(keyGeneration, loadPreviousResults(scope));
+      AssociationAnalysis analysis =
+          new AssociationAnalysis(keyGeneration, loadPreviousResults(scope));
       ArrayList<EntitySentiment> filteredSentiment = new ArrayList<EntitySentiment>();
       for (EntitySentiment sentiment : sentiments) {
         if (sentiment.getScopes().contains(scope)) {
