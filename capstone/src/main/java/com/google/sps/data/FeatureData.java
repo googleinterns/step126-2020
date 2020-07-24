@@ -8,83 +8,93 @@ public class FeatureData {
 
   private final int NUMBER_OF_PRECINCTS = 10;
 
-  /** 
+  /**
    * The precinct data was taken from public datasets such as
    * https://www.incomebyzipcode.com/california/94111 and
-   * https://www.sanfranciscopolice.org/stay-safe/crime-data/crime-dashboard 
+   * https://www.sanfranciscopolice.org/stay-safe/crime-data/crime-dashboard
    */
   static {
     precinctData = new ArrayList<Precinct>();
 
-    Precinct southern = new Precinct();
-    southern.setName("Southern");
-    southern.setPopulation(40384);
-    southern.setAverageHouseholdIncome(153727.5f);
-    southern.setCrimeRate(calculateRate(72, 40384));
-    southern.setPoliceStationRating(3.0f);
+    Precinct southern =
+        new Precinct.Builder("Southern")
+            .population(40384)
+            .averageHouseholdIncome(15372750)
+            .crimeRate(calculateRate(72, 40384))
+            .policeStationRating(300)
+            .build();
 
-    Precinct mission = new Precinct();
-    mission.setName("Mission");
-    mission.setPopulation(128223);
-    mission.setAverageHouseholdIncome(164227.67f);
-    mission.setCrimeRate(calculateRate(139, 128223));
-    mission.setPoliceStationRating(4.3f);
+    Precinct mission =
+        new Precinct.Builder("Mission")
+            .population(128223)
+            .averageHouseholdIncome(16422767)
+            .crimeRate(calculateRate(139, 128223))
+            .policeStationRating(430)
+            .build();
 
-    Precinct bayview = new Precinct();
-    bayview.setName("Bayview");
-    bayview.setPopulation(50538);
-    bayview.setAverageHouseholdIncome(138774.5f);
-    bayview.setCrimeRate(calculateRate(115, 50538));
-    bayview.setPoliceStationRating(4.3f);
+    Precinct bayview =
+        new Precinct.Builder("Bayview")
+            .population(50538)
+            .averageHouseholdIncome(13877450)
+            .crimeRate(calculateRate(115, 50538))
+            .policeStationRating(430)
+            .build();
 
-    Precinct tenderloin = new Precinct();
-    tenderloin.setName("Tenderloin");
-    tenderloin.setPopulation(56322);
-    tenderloin.setAverageHouseholdIncome(134441f);
-    tenderloin.setCrimeRate(calculateRate(37, 56322));
-    tenderloin.setPoliceStationRating(2.9f);
+    Precinct tenderloin =
+        new Precinct.Builder("Tenderloin")
+            .population(56322)
+            .averageHouseholdIncome(13444100)
+            .crimeRate(calculateRate(37, 56322))
+            .policeStationRating(290)
+            .build();
 
-    Precinct central = new Precinct();
-    central.setName("Central");
-    central.setPopulation(56322);
-    central.setAverageHouseholdIncome(134441f);
-    central.setCrimeRate(calculateRate(132, 56322));
-    central.setPoliceStationRating(3.3f);
+    Precinct central =
+        new Precinct.Builder("Central")
+            .population(56322)
+            .averageHouseholdIncome(13444100)
+            .crimeRate(calculateRate(132, 56322))
+            .policeStationRating(330)
+            .build();
 
-    Precinct ingleside = new Precinct();
-    ingleside.setName("Ingleside");
-    ingleside.setPopulation(175634);
-    ingleside.setAverageHouseholdIncome(155101.67f);
-    ingleside.setCrimeRate(calculateRate(102, 175634));
-    ingleside.setPoliceStationRating(3.6f);
+    Precinct ingleside =
+        new Precinct.Builder("Ingleside")
+            .population(175634)
+            .averageHouseholdIncome(15510167)
+            .crimeRate(calculateRate(102, 175634))
+            .policeStationRating(360)
+            .build();
 
-    Precinct taraval = new Precinct();
-    taraval.setName("Taraval");
-    taraval.setPopulation(171554);
-    taraval.setAverageHouseholdIncome(136967f);
-    taraval.setCrimeRate(calculateRate(89, 171554));
-    taraval.setPoliceStationRating(4.2f);
+    Precinct taraval =
+        new Precinct.Builder("Taraval")
+            .population(171554)
+            .averageHouseholdIncome(13696700)
+            .crimeRate(calculateRate(89, 171554))
+            .policeStationRating(420)
+            .build();
 
-    Precinct park = new Precinct();
-    park.setName("Park");
-    park.setPopulation(152902);
-    park.setAverageHouseholdIncome(179955.2f);
-    park.setCrimeRate(calculateRate(71, 152902));
-    park.setPoliceStationRating(2.4f);
+    Precinct park =
+        new Precinct.Builder("Park")
+            .population(152902)
+            .averageHouseholdIncome(17995520)
+            .crimeRate(calculateRate(71, 152902))
+            .policeStationRating(240)
+            .build();
 
-    Precinct northern = new Precinct();
-    northern.setName("Northern");
-    northern.setPopulation(117963);
-    northern.setAverageHouseholdIncome(180944.67f);
-    northern.setCrimeRate(calculateRate(199, 117963));
-    northern.setPoliceStationRating(2.6f);
+    Precinct northern =
+        new Precinct.Builder("Northern")
+            .population(117963)
+            .averageHouseholdIncome(180944670)
+            .crimeRate(calculateRate(199, 117963))
+            .policeStationRating(260)
+            .build();
 
-    Precinct richmond = new Precinct();
-    richmond.setName("Richmond");
-    richmond.setPopulation(136904);
-    richmond.setAverageHouseholdIncome(146030f);
-    richmond.setCrimeRate(calculateRate(104, 136904));
-    richmond.setPoliceStationRating(2.8f);
+    Precinct richmond =
+        new Precinct.Builder("Richmond")
+            .population(136904)
+            .averageHouseholdIncome(14603000)
+            .crimeRate(calculateRate(104, 136904))
+            .policeStationRating(280)
+            .build();
 
     precinctData.add(southern);
     precinctData.add(mission);
@@ -105,10 +115,10 @@ public class FeatureData {
    * @param population Population of the precinct
    * @return float Crime rate for the precinct
    */
-  public static float calculateRate(int numCrimes, int population) {
+  public static int calculateRate(int numCrimes, int population) {
     final int PER_RESIDENTS = 1000;
 
-    return (float) numCrimes / ((float) population / PER_RESIDENTS);
+    return (int) ((double) numCrimes / ((double) population / PER_RESIDENTS) * 100);
   }
 
   /**

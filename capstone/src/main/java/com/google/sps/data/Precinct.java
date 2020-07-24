@@ -2,61 +2,86 @@ package com.google.sps.data;
 
 /* This class stores information pertaining to each precinct */
 public class Precinct {
-  private String name;
-  private int population;
-  private float averageHouseholdIncome;
-  private float crimeRate;
-  private float policeStationRating;
 
-  /**
-   * Sets the name of the precinct
-   *
-   * @param name The precinct's name
-   * @return Void
-   */
-  public void setName(String name) {
-    this.name = name;
+  public static class Builder {
+
+    private String name;
+    private int population;
+    private float averageHouseholdIncome;
+    private float crimeRate;
+    private float policeStationRating;
+
+    public Builder(String name) {
+      this.name = name;
+    }
+
+    /**
+     * Sets the population of the precinct
+     *
+     * @param population The number of people in the precinct
+     * @return Builder instance
+     */
+    public Builder population(int population) {
+      this.population = population;
+
+      return this;
+    }
+
+    /**
+     * Sets the household income average (USD) for the precinct
+     *
+     * @param averageHouseholdIncome Income in each household
+     * @return Builder instance
+     */
+    public Builder averageHouseholdIncome(float averageHouseholdIncome) {
+      this.averageHouseholdIncome = averageHouseholdIncome;
+
+      return this;
+    }
+
+    /**
+     * Sets the crime rate for the precinct
+     *
+     * @param crimeRate Crime rate per 1,000 residents
+     * @return Builder instance
+     */
+    public Builder crimeRate(float crimeRate) {
+      this.crimeRate = crimeRate;
+
+      return this;
+    }
+
+    /**
+     * Sets the rating for the police department in each precinct
+     *
+     * @param policeStationRating 1-5 star rating of the station
+     * @return Builder instance
+     */
+    public Builder policeStationRating(float policeStationRating) {
+      this.policeStationRating = policeStationRating;
+
+      return this;
+    }
+
+    public Precinct build() {
+      Precinct precinct = new Precinct();
+      precinct.name = this.name;
+      precinct.population = this.population;
+      precinct.averageHouseholdIncome = this.averageHouseholdIncome;
+      precinct.crimeRate = this.crimeRate;
+      precinct.policeStationRating = this.policeStationRating;
+
+      return precinct;
+    }
   }
 
-  /**
-   * Sets the population of the precinct
-   *
-   * @param population The number of people in the precinct
-   * @return Void
-   */
-  public void setPopulation(int population) {
-    this.population = population;
-  }
+  String name;
+  int population;
+  float averageHouseholdIncome;
+  float crimeRate;
+  float policeStationRating;
 
-  /**
-   * Sets the house hold income average (USD) for the precinct
-   *
-   * @param averageHouseholdIncome Income in each house hold
-   * @return Void
-   */
-  public void setAverageHouseholdIncome(float averageHouseholdIncome) {
-    this.averageHouseholdIncome = averageHouseholdIncome;
-  }
-
-  /**
-   * Sets the crime rate for the precinct
-   *
-   * @param crimeRate Crime rate per 1,000 residents
-   * @return Void
-   */
-  public void setCrimeRate(float crimeRate) {
-    this.crimeRate = crimeRate;
-  }
-
-  /**
-   * Sets the rating for the police department in each precinct
-   *
-   * @param policeStationRating 1-5 star rating of the station
-   * @return Void
-   */
-  public void setPoliceStationRating(float policeStationRating) {
-    this.policeStationRating = policeStationRating;
-  }
+  private Precinct() {}
 
   /**
    * Gets the name of the precinct
@@ -77,9 +102,9 @@ public class Precinct {
   }
 
   /**
-   * Gets the average house hold income of the precinct
+   * Gets the average household income of the precinct
    *
-   * @return float The average house hold income
+   * @return float The average household income
    */
   public float getAverageHouseholdIncome() {
     return averageHouseholdIncome;
