@@ -373,6 +373,8 @@ async function showStats() {
     window.location.replace('/login');
   }
 }
+
+/* eslint-enable no-unused-vars */
 //* *erases precinct coloring after checkbox is unselected */
 function fixMap() {
   const precinctDataLayer = mapAndSelection.map;
@@ -380,6 +382,7 @@ function fixMap() {
   precinctDataLayer.setStyle({fillColor: '#CECDBC',
     fillOpacity: 0.9, visible: true});
 }
+
 /* eslint-enable no-unused-vars */
 
 const MAX_SIZE = 100;
