@@ -343,9 +343,9 @@ function getSentimentColor(averageFeelings, policePrecinct) {
 }
 //* *global variable for precinctLayer data layer and checkbox selection */
 const mapAndSelection = {};
-//* *following two functions are only used in index.html */
+//**following two functions are only used in index.html */
 /* eslint-disable no-unused-vars */
-//* *unchecks boxes when new checkbox is checked */
+//**unchecks boxes when new checkbox is checked */
 function onlyOne(checkbox) {
   const checkboxes = document.getElementsByName('check');
   checkboxes.forEach((item) => {
