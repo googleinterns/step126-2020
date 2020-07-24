@@ -2,7 +2,7 @@ package com.google.sps.data;
 
 /* This class stores information pertaining to each precinct */
 public class Precinct {
-  
+
   /* Builder to construct each precinct object */
   public static class Builder {
 
@@ -63,7 +63,7 @@ public class Precinct {
 
       return this;
     }
-    
+
     /**
      * Instantiates precinct and injects builder
      *
