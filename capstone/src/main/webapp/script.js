@@ -177,14 +177,7 @@ function drawCheckboxLayer() {
   if (mapAndSelection.selection == 'noneSelected') {
     alert('nothing yet');
   } else if (mapAndSelection.selection == 'sentimentCheck') {
-    const allPrecincts = ['Southern', 'Mission', 'Bayview',
-      'Tenderloin', 'Central', 'Ingleside', 'Taraval', 'Park',
-      'Northern', 'Richmond'];
-    const allPrecinctColors = new Map();
-    for (let i = 0; i < allPrecincts.length; i++) {
-      allPrecinctColors.set(
-          allPrecincts[i], averagePrecinctSentiment(allPrecincts[i]));
-    }
+        searchPrecinctsByDistrict();
   } else {
     alert('precinctLayer');
   }
@@ -279,25 +272,16 @@ function loadResponseChart(totalResponses, precinct) {
   chart.draw(stats, null);
 }
 
-function mapSentiment(colorMap) {
-  const precinctLayer = mapAndSelection.map;
-  for (const [precinctName, precinctColor] of colorMap) {
-    precinctLayer.revertStyle();
-    precinctLayer.setStyle({fillColor: '#CECDBC',
-      fillOpacity: 0.9});
-    precinctLayer.overrideStyle(precinctLayer.getFeatureById(
-        searchPrecinctsByDistrict(precinctName)),
-    {fillColor: precinctColor, fillOpacity: 0.9});
-  }
-}
 //* * get precinct name as parameter and returns precinct ID*/
-function searchPrecinctsByDistrict(desiredDistrict) {
-    let precinctLayer = mapAndSelection.map;
-    precinctLayer.forEach((precinct) => {
-        if (precinct.getProperty('district') == desiredDistrict) {
-            return precinct;
-        }
+function searchPrecinctsByDistrict() {
+     mapAndSelection.map.setStyle({ visible: false});
+    mapAndSelection.map.forEach((feature) => {
+        let color = averagePrecinctSentiment(feature.getProperty('district'));
+            mapAndSelection.map.overrideStyle(feature, {fillColor: color,
+                  fillOpacity: 0.9});
+        console.log(color);
     });
+    mapAndSelection.map.setStyle({ visible: true});
 }
 // based on google survey question ratings 1-5 on police sentiment
 async function averagePrecinctSentiment(policePrecinct) {
@@ -335,11 +319,7 @@ function getSentimentColor(averageFeelings, policePrecinct) {
   } else {
     precinctColor = '#BB2528';
   }
-  const precinctLayer = mapAndSelection.map;
-
-    precinctLayer.overrideStyle(precinctLayer.getFeatureById(
-        searchPrecinctsByStation(policePrecinct)),
-    {fillColor: precinctColor, fillOpacity: 0.9});
+  return precinctColor;
 }
 //* *global variable for precinctLayer data layer and checkbox selection */
 const mapAndSelection = {};
@@ -366,7 +346,6 @@ function onlyOne(checkbox) {
 async function showStats() {
   const logStatus = await fetch('/status');
   const status = await logStatus.json();
-  console.log(status);
   if (status == true) {
     window.location.replace('statistics.html');
   } else {
