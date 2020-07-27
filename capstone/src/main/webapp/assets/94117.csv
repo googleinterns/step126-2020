@@ -1,11 +1,22 @@
 User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
-1629167647,2020-07-03 16:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,Positive out reach events and observed interactions with homeless,Positive out reach events and observed interactions with homeless,8873,7265,36794
-1636911447,2020-07-03 15:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,Yes,5,Helpful,Helpful,9476,4143,13797
-1668130165,2020-07-02 21:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,5,You can trust some of them that are on the force!,You can trust some of them that are on the force!,30683,6647,31340
-1890660154,2020-07-03 16:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,3,Prefer not to,Prefer not to,242605,5435,27560
-271170859,2020-07-03 19:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,5,They share donuts with me.,They share donuts with me.,4840,5313,21714
-278752945,2020-07-02 20:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,2,BLM,BLM,26231,4656,5988
-365720850,2020-06-30 23:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,ummmm,ummmm,38396,6159,8557
-476402987,2020-07-02 16:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,news incidents,news incidents,7721,5083,11296
-774295968,2020-07-02 22:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,Yes,1,they lost my report and gave me wrong info,they lost my report and gave me wrong info,8878,3507,10268
-875623472,2020-07-03 16:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,Yes,3,The are overreactive and involved in situations they are not trained for like 51/50,The are overreactive and involved in situations they are not trained for like 51/50,8017,8637,40029
+1024665518,2020-07-21 16:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,4,n/a,n/a,1156408.0,5611.0,3176.0
+1040950037,2020-07-16 21:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,4,few bad apples should not even be permitted - could we tolerate bad apples within the airplane pilot ?,few bad apples should not even be permitted - could we tolerate bad apples within the airplane pilot ?,17316.0,3211.0,48391.0
+1211662160,2020-07-21 17:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,1,what is on the news,what is on the news,481523.0,3795.0,8865.0
+1291586031,2020-07-17 19:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,little interaction,little interaction,13269.0,4185.0,8319.0
+1578331103,2020-07-19 20:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,2,Racism,Racism,17669.0,8723.0,13368.0
+160872051,2020-07-20 03:00:00,Complete,News,Female,18-24,US-WEST-CA-San Francisco,,No,3,n/a,n/a,14066.0,8012.0,6043.0
+1644501501,2020-07-19 03:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,1,Just seen too much dirt,Just seen too much dirt,4205.0,4226.0,10561.0
+2005636212,2020-07-21 16:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,1,George Floyd,George Floyd,7207.0,3820.0,6449.0
+2056936340,2020-07-21 16:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,No,4,Most are quite good.,Most are quite good.,7230.0,6179.0,12938.0
+2061857401,2020-07-21 02:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,Yes,3,They need to be better,They need to be better,12212.0,9301.0,9114.0
+2131219895,2020-07-19 04:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,4,I think they are mostly good with some problems that need to be resolved,I think they are mostly good with some problems that need to be resolved,15531.0,4025.0,23427.0
+2136467717,2020-07-21 02:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,1,bad,bad,4173.0,2704.0,3507.0
+24145604,2020-07-20 20:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,4,I think SF Police are doing what they can to help some of the racial unjust issues.,I think SF Police are doing what they can to help some of the racial unjust issues.,52394.0,4937.0,24223.0
+413763404,2020-07-18 18:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,Not enough police presence. Poor control of homeless.,Not enough police presence. Poor control of homeless.,3206.0,2885.0,12919.0
+625778543,2020-07-20 16:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,3,What cops do today isn't of much value,What cops do today isn't of much value,13040.0,13719.0,37507.0
+753923896,2020-07-21 16:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,2,systemic and institutional racism,systemic and institutional racism,43328.0,3230.0,23742.0
+775444282,2020-07-17 04:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,4,No comment,No comment,4329.0,11170.0,11609.0
+777768027,2020-07-20 18:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,2,i believe there is too much power and no accountability,i believe there is too much power and no accountability,15670.0,4793.0,23668.0
+79309088,2020-07-17 19:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,1,The police are terrorists.,The police are terrorists.,22021.0,3735.0,11068.0
+901135753,2020-07-21 02:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,1,"i have only ever seen a patrolling police officer harass the homeless, never anything else useful","i have only ever seen a patrolling police officer harass the homeless, never anything else useful",24932.0,3415.0,33271.0
+905165511,2020-07-21 16:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,1,Negative,Negative,22219.0,2303.0,27930.0

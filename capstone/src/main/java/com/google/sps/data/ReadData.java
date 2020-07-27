@@ -36,7 +36,7 @@ public class ReadData {
    * @return {Void}
    */
   public void readAll() throws IOException {
-    File folder = new File("temp-assets/");
+    File folder = new File("assets/");
 
     File[] fileNames = folder.listFiles();
     for(File file : fileNames){

@@ -1,12 +1,21 @@
 User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
-1027031007,2020-07-03 11:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,Yes,1,ACAB,ACAB,7074,3245,6410
-1051672957,2020-07-04 00:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,Yes,5,"Professional, realistic and I in turn am respectful","Professional, realistic and I in turn am respectful",9003,4999,39920
-1145202172,2020-07-03 21:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,4,Personally i have had only positive interactions. I can't ignore how police have treated others.,Personally i have had only positive interactions. I can't ignore how police have treated others.,4291,5132,44399
-1486582818,2020-07-03 23:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,4,Duh,Duh,12353,4050,7044
-1646623483,2020-07-03 22:00:00,Complete,News,Male,18-24,US-WEST-CA-San Francisco,,Prefer not to answer,1,Our cops are public servants. They shouldn't be armed to the teeth and using force regularly. We've normalized this behaviour for far too long.,Our cops are public servants. They shouldn't be armed to the teeth and using force regularly. We've normalized this behaviour for far too long.,12281,2208,63607
-1744177275,2020-07-03 19:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,2,experiences/interactions are welcome,experiences/interactions are welcome,4751,2238,9840
-1838034897,2020-07-04 01:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,3,General distrust,General distrust,7203,14078,99368
-1949187546,2020-07-03 02:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,Prefer not to answer,1,no,no,12794,3563,4775
-2145610100,2020-07-03 16:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,3,killed two people near my house without good reason,killed two people near my house without good reason,11436,3872,20016
-610612473,2020-07-03 18:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,Police Hold a bit too,Police Hold a bit too,4779,3788,22203
-68599863,2020-07-03 16:00:00,Complete,News,Female,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,3,Idk,Idk,3938,2699,6372
+1022159784,2020-07-18 21:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,Yes,1,No,No,9107.0,3627.0,7331.0
+1044950390,2020-07-18 17:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,2,Police union has always been very opposed to reforms,Police union has always been very opposed to reforms,7720.0,3263.0,32914.0
+1064557031,2020-07-19 02:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,They enjoy force too much.,They enjoy force too much.,13551.0,5977.0,17003.0
+113913588,2020-07-17 18:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,4,n/a,Na,3606.0,4041.0,3405.0
+1200638062,2020-07-18 21:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,1,The awful things that happen. But I don't believe in a broad stroke!,The awful things that happen. But I don't believe in a broad stroke!,142121.0,11184.0,30021.0
+1243399150,2020-07-20 15:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,neutral,neutral,56911.0,5279.0,6374.0
+1271234137,2020-07-19 20:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,5,No,no,50370.0,2924.0,4173.0
+1360590618,2020-07-20 17:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,4,No,No,6340.0,5741.0,10258.0
+1640909472,2020-07-17 21:00:00,Complete,News,Male,18-24,US-WEST-CA-San Francisco,,No,4,n/a,n/a,5583.0,3013.0,3772.0
+1716397993,2020-07-18 04:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,5,no reason,no reason,11430.0,4925.0,7745.0
+1903130891,2020-07-20 00:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,Yes,4,Police have been helpful to me and my family.,Police have been helpful to me and my family.,20904.0,3816.0,13645.0
+2055416089,2020-07-20 17:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,2,"I have seen differences in the way police respond to me, vs. some friends of mine.","I have seen differences in the way police respond to me, vs. some friends of mine.",9179.0,3582.0,23738.0
+209265760,2020-07-20 16:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,Feel safe,Feel safe,57506.0,5130.0,9717.0
+288061089,2020-07-17 20:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,4,No thank you,No thank you,29499.0,4654.0,7670.0
+405717896,2020-07-16 15:00:00,Complete,News,Female,55-64,US-WEST-CA-San Francisco,,No,2,SWAT team responded to a simple call about vandalism.,SWAT team responded to a simple call about vandalism.,16292.0,4521.0,17772.0
+418654083,2020-07-17 23:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,n/a,N/A,19302.0,3390.0,5458.0
+506876154,2020-07-20 16:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,4,n/a,n/a,81374.0,3197.0,5924.0
+547325228,2020-07-18 13:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,3,They treat everyone like criminals instead of fellow members of the community,They treat everyone like criminals instead of fellow members of the community,7355.0,2244.0,33937.0
+761729826,2020-07-17 20:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Yes,1,Bad,Bad,4935.0,3108.0,5689.0
+985407327,2020-07-18 07:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,No,5,not applicable,not applicable,26269.0,9228.0,50515.0
