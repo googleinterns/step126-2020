@@ -60,7 +60,7 @@ h2 {
   margin: 0;
   padding 0.5rem;
   font-size: 1.25rem;
-  color: #303030;
+  color: white;
 }
 
 
@@ -138,7 +138,7 @@ h2 {
   margin: 0;
   padding: 0.5rem;
   font-size: 1.1rem;
-  color: #303030;
+  color: white;
 }
 
 ul {
@@ -231,11 +231,28 @@ ul {
 
 #map-key {
   position: absolute;
-  top: 30%;
-  left: 60%;
+  bottom: 15%;
+  z-index: 5;
+  padding: 5px;
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  line-height: 30px;
+  padding-left: 10px;
+  background-color: #19B3B1;
+  border: double;
+  border-radius: 5px;
+    color: white;
+}
+
+#map-cloud {
+  position: absolute;
+  top: 10%;
+  left: 52%;
   z-index: 5;
   background-color: #fff;
   padding: 5px;
+  width: 27%;
+  height: 70%;
   border: 1px solid #999;
   text-align: center;
   font-family: "Raleway", sans-serif;
