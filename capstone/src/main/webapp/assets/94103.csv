@@ -1,22 +1,12 @@
 User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
-1150228125,2020-07-18 21:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,Yes,4,Probably because i'm not in a socio-demographic group that has had poor dealings with the police,Probably because i'm not in a socio-demographic group that has had poor dealings with the police,6535.0,3679.0,32558.0
-1278265996,2020-07-16 14:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,2,they are always the ones speeding / breaking traffic rules,they are always the ones speeding / breaking traffic rules,15308.0,4559.0,18750.0
-1298698716,2020-07-18 02:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,3,PISSOFF,PISSOFF,23545.0,11088.0,21096.0
-1545322744,2020-07-17 22:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,5,good,good,17893.0,9698.0,8621.0
-1640286551,2020-07-20 19:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,5,attentive and present,attentive and present,581195.0,3125.0,9334.0
-1693445739,2020-07-20 15:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,2,"They aren't pillars of the community, they never engage with the public, truly, I think they hate their job","They aren't pillars of the community, they never engage with the public, truly, I think they hate their job",69267.0,3787.0,31030.0
-1744164939,2020-07-17 22:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,"Always friendly, always attentive.","Always friendly, always attentive.",22857.0,5097.0,33756.0
-1874663093,2020-07-19 16:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,no problems with them,no problems with them,6139.0,5155.0,9008.0
-1959367757,2020-07-19 22:00:00,Complete,Arts & Entertainment,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,3,stop,stop,4221.0,3364.0,4823.0
-20028409,2020-07-19 15:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,4,They just seem kind of useless,They just seem kind of useless,10777.0,3660.0,16305.0
-210594774,2020-07-17 23:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,1,None of your business,None of your business,6623.0,4376.0,14444.0
-2146545209,2020-07-18 20:00:00,Complete,Reference,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,3,no,no,5806.0,5949.0,6136.0
-400877434,2020-07-17 05:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,Police in my community are doing a fine job,Police in my community are doing a fine job,4308.0,3337.0,23038.0
-435527416,2020-07-17 22:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,No,5,I'm police,I'm police,7692.0,5484.0,11942.0
-457359849,2020-07-20 15:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,1,Violent,Violent,2585.0,3850.0,9516.0
-684366150,2020-07-18 23:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,Thin blue line,Thin blue line,6712.0,3326.0,14933.0
-769244845,2020-07-18 06:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,2,police haven't investigated crimes.,police haven't investigated crimes.,22651.0,10965.0,14341.0
-818530834,2020-07-19 01:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,5,police were extremely helpful and compassionate after i was assaulted,police were extremely helpful and compassionate after i was assaulted,12975.0,13548.0,32886.0
-832526478,2020-07-16 17:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,3,Seems that the response is inconsistent dependent on the call,Seems that the response is inconsistent dependent on the call,6954.0,6976.0,54409.0
-93547873,2020-07-19 17:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,4,Pleasant officers,Pleasant officers,5040.0,3784.0,11562.0
-943274165,2020-07-19 20:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,3,not sure,not sure,16933.0,5386.0,7374.0
+1615703318,2020-07-05 20:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,ss,ss,7133,4413,4188
+1760344981,2020-07-05 18:00:00,Complete,Other,Female,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,2,Nope,Nope,2484,3570,4509
+2096277504,2020-07-04 01:00:00,Complete,News,Female,18-24,US-WEST-CA-San Francisco,,No,3,Reading the news,Reading the news,4669,5710,15961
+2143195615,2020-07-03 19:00:00,Complete,Arts & Entertainment,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,"I had one bad experience, I wanted assistance and this cop was just a little too nonchalant","I had one bad experience, I wanted assistance and this cop was just a little too nonchalant",6658,6697,93363
+291335151,2020-07-05 19:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,i dont know,n/a,35610,5477,10895
+301919167,2020-07-05 18:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,3,indifferent,indifferent,20696,4426,8411
+340555680,2020-07-02 20:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,5,the cops saved my life,the cops saved my life,8811,7554,18502
+390450157,2020-07-06 03:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,4,No problems,No problems,19595,5851,10738
+609817508,2020-07-03 19:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,None,None,12799,10345,6602
+722897977,2020-07-06 00:00:00,Complete,Reference,Male,18-24,US-WEST-CA-San Francisco,,Yes,5,"At the BLM protests, I saw a couple officers kneel in respect to the innocent deaths of black peoples.","At the BLM protests, I saw a couple officers kneel in respect to the innocent deaths of black peoples.",3992,4110,45463
+733333239,2020-07-04 22:00:00,Complete,Arts & Entertainment,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,3,i dont know,i dont know,3361,4349,8972

@@ -1,0 +1,7 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1309809493,2020-07-26 01:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,"I dislike the police culture, but they are necessary.","I dislike the police culture, but they are necessary.",5001.0,9827.0,33671.0
+1478648416,2020-07-25 21:00:00,Complete,News,Female,55-64,US-WEST-CA-San Francisco,,Yes,5,Police are there to help.,Police are there to help.,40610.0,16355.0,44139.0
+1774984096,2020-07-24 16:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,I live in SF and we have a good police force.,I live in SF and we have a good police force.,14947.0,10629.0,23510.0
+547854095,2020-07-27 00:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,social awareness,social awareness,6233.0,5262.0,13049.0
+785528943,2020-07-25 00:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Yes,1,Service,Service,7199.0,3493.0,7773.0
+885254368,2020-07-23 22:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,4,no,no,7363.0,4870.0,5649.0

@@ -1,0 +1,11 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1009918612,2020-07-19 18:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,disproportionally more violent towards people of color,disproportionally more violent towards people of color,14965.0,7681.0,26316.0
+1079515952,2020-07-22 01:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,5,thank you,thank you,10792.0,3357.0,10388.0
+122911323,2020-07-20 22:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,Yes,2,"Fixed nothing, solved nothing.","Fixed nothing, solved nothing.",5993.0,3068.0,7767.0
+1304025282,2020-07-15 18:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,2,N/A,N/A,9886.0,4452.0,20508.0
+1473680237,2020-07-15 23:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,No,5,Community policing,Community policing,5648.0,7574.0,20589.0
+1565004683,2020-07-22 03:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,Don't have broad stroke,Don't have broad stroke,7754.0,12933.0,36144.0
+292642861,2020-07-18 19:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,5,No bad encounters,No bad encounters,7581.0,2810.0,7338.0
+658972926,2020-07-21 19:00:00,Complete,News,Female,18-24,US-WEST-CA-San Francisco,,No,4,"I'm a white older American, so they're very deferential. I am under no illusions that it wouldn't be very different if I looked differently than I do.","I'm a white older American, so they're very deferential. I am under no illusions that it wouldn't be very different if I looked differently than I do.",11809.0,3315.0,25826.0
+700100348,2020-07-22 04:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,None,None,3839.0,2966.0,5032.0
+808990291,2020-07-20 23:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,4,It seems fine,It seems fine,8668.0,4261.0,7406.0

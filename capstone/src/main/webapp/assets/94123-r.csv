@@ -1,0 +1,22 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1059007102,2020-07-20 01:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,3,idk,idk,10770.0,5438.0,4145.0
+1059498448,2020-07-17 17:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Yes,4,Ed,Ed,3132.0,2492.0,3708.0
+1083819204,2020-07-17 18:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,Prefer not to answer,5,nah,no,260605.0,3447.0,4427.0
+1100816646,2020-07-17 23:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,Not confident policing is skin color-blind.,Not confident policing is skin color-blind.,381528.0,8101.0,194488.0
+1195940336,2020-07-17 03:00:00,Complete,News,Female,65+,US-WEST-CA-San Francisco,,No,5,"they do a good job, no negative interactions","they do a good job, no negative interactions",6098.0,3980.0,16275.0
+1228089216,2020-07-18 17:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,idk,NA,5470.0,3903.0,10776.0
+1244604823,2020-07-19 17:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,No,3,Not present,Not present,3408.0,3842.0,6341.0
+1369093204,2020-07-15 14:00:00,Complete,News,Female,65+,US-WEST-CA-San Francisco,,No,3,idk,idk,6270.0,3579.0,6034.0
+1455020925,2020-07-16 01:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,1,nah,nah,1639.0,1859.0,3970.0
+1706796417,2020-07-17 20:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,4,"They are good, but seem busy with higher priority crimes to deal with low level problems in the community","They are good, but seem busy with higher priority crimes to deal with low level problems in the community",21506.0,5007.0,22521.0
+1821719795,2020-07-20 00:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,4,We are white. And they have been very friendly to our kids.,We are white. And they have been very friendly to our kids.,48571.0,3841.0,19026.0
+1824835547,2020-07-17 20:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,Prefer not to answer,5,Have never had a negative interaction.,Have never had a negative interaction.,4437.0,7205.0,27342.0
+196970921,2020-07-19 03:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,Wish they did more about the homeless problem,Wish they did more about the homeless problem,143276.0,3205.0,10743.0
+1981808377,2020-07-16 03:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,3,idk,na,10954.0,2920.0,3589.0
+1995826575,2020-07-16 23:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,police have been courteous,police have been courteous,12040.0,3507.0,24755.0
+429924094,2020-07-17 18:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,Police love cars too much and don't care about pedestrians and cyclists,Police love cars too much and don't care about pedestrians and cyclists,9334.0,4416.0,24541.0
+499831013,2020-07-17 19:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,5,Always have been helpful when I've needed them,Always have been helpful when I've needed them,17414.0,17156.0,27479.0
+773528014,2020-07-20 01:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,Prefer not to answer,5,idk,na,5197.0,3287.0,3871.0
+828720512,2020-07-19 01:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,2,racism,racism,5009.0,3684.0,5669.0
+841990258,2020-07-19 21:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,3,"In general, while I don't see as many instances of SF police making blatantly racially-based arrests / clear abuses of power, I find they are also primarily ineffective at keeping the general people in their city safe. I recognize that may be due to policies beyond their control...","In general, while I don't see as many instances of SF police making blatantly racially-based arrests / clear abuses of power, I find they are also primarily ineffective at keeping the general people in their city safe. I recognize that may be due to policies beyond their control...",83267.0,8942.0,102448.0
+908342472,2020-07-18 07:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Yes,3,Police doesn't care about pedestrians and cyclists,Police doesn't care about pedestrians and cyclists,9734.0,2217.0,29308.0

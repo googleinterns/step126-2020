@@ -1,23 +1,12 @@
 User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
-1046401090,2020-07-21 02:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,Yes,1,Racism,Racism,7279.0,4153.0,15715.0
-1053304437,2020-07-20 23:00:00,Complete,Other,Male,25-34,US-WEST-CA-San Francisco,,No,4,No bad experience in person but saw some news coverage,No bad experience in person but saw some news coverage,80709.0,5829.0,33626.0
-1205224676,2020-07-19 23:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,Yes,5,Treated us w respect,Treated us w respect,10320.0,4038.0,17212.0
-1538839165,2020-07-18 19:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,Most police are fair,Most police are fair,45438.0,5206.0,40722.0
-1562365018,2020-07-19 19:00:00,Complete,Reference,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,News,News,5081.0,4381.0,7535.0
-1674931389,2020-07-20 23:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,Yes,5,They help keep us safe,They help keep us safe,6256.0,6059.0,31149.0
-1730495952,2020-07-18 22:00:00,Complete,Reference,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,Usually pretty friendly,Usually pretty friendly,6314.0,5853.0,23064.0
-1889756582,2020-07-20 04:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,1,.ther,.ther,2426766.0,52621.0,20571.0
-1973216271,2020-07-19 05:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,4,No recent experiences,No recent experiences,4534.0,4097.0,15165.0
-199066718,2020-07-19 16:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,2,no,no,27931.0,8110.0,4898.0
-237201934,2020-07-18 15:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,5,Don't know,Don't know,4731.0,3470.0,14607.0
-267087911,2020-07-18 01:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,Don't know,N/A,9659.0,4334.0,7281.0
-374571349,2020-07-19 22:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,4,overall helpful,overall helpful,25289.0,6433.0,10211.0
-380998553,2020-07-17 22:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,"Overall police have been, usually, helpful and considerate","Overall police have been, usually, helpful and considerate",11653.0,4771.0,16382.0
-566386329,2020-07-20 16:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,5,Don't know,dunno,37464.0,6814.0,10357.0
-610640891,2020-07-20 23:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,2,dont trust them,dont trust them,14394.0,2784.0,8545.0
-646834472,2020-07-21 02:00:00,Complete,Other,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,No direct interaction or personal experience but saw them on news and social media.,No direct interaction or personal experience but saw them on news and social media.,3797.0,2178.0,53289.0
-675317304,2020-07-20 23:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,Yes,5,Police have a very difficult job to do - I give them respect,Police have a very difficult job to do - I give them respect,7285.0,5960.0,49490.0
-772137593,2020-07-20 23:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,2,Police are a corrupt organization with too much money and it enough training,Police are a corrupt organization with too much money and it enough training,5089.0,3212.0,19835.0
-870145455,2020-07-20 17:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,3,Little contact,Little contact,3380.0,2951.0,7760.0
-91557946,2020-07-19 20:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,2,Don't know,Na,4460.0,4123.0,7850.0
-924815199,2020-07-19 21:00:00,Complete,News,Female,55-64,US-WEST-CA-San Francisco,,No,5,Only saw police help change tires etc.,Only saw police help change tires etc.,35125.0,5804.0,24731.0
+1006804921,2020-07-03 16:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,4,Almost never interact with them,Almost never interact with them,4574,5725,40851
+1062379016,2020-07-01 00:00:00,Complete,News,Male,18-24,US-WEST-CA-San Francisco,,Yes,1,police officers are given permission to kill black and brown people and the mentally ill with impunity,police officers are given permission to kill black and brown people and the mentally ill with impunity,8607,3326,35465
+1152304067,2020-07-03 20:00:00,Complete,News,Female,Unknown,US-WEST-CA-San Francisco,,No,1,In the past my friends and I have experienced harassment from the police for skateboarding. These situations were escalated by the police irresponsibly as they were in positions of power,In the past my friends and I have experienced harassment from the police for skateboarding. These situations were escalated by the police irresponsibly as they were in positions of power,6835,5194,193106
+1627665333,2020-07-03 21:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,2,n/a,n/a,10390,5604,8266
+1629250773,2020-07-02 19:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,"I'm white, so I'm not a target.","I'm white, so I'm not a target.",10769,6411,35484
+1630753614,2020-07-03 03:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,No problem except for some individual unpleasantness.,No problem except for some individual unpleasantness.,5684,14444,146485
+1691171601,2020-07-03 07:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,4,No prob,No prob,43718,7267,9159
+1777004044,2020-07-02 16:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,Yes,3,Many instances of publicized police misconduct. Racial jokes. Shootings. Etc.,Many instances of publicized police misconduct. Racial jokes. Shootings. Etc.,11294,6664,24514
+2111578464,2020-07-02 23:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,1,I just want to read the article :/,I just want to read the article :/,20055,3140,12458
+453973494,2020-07-03 19:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,Police provide a needed service but police unions have given them no checks or balances,Police provide a needed service but police unions have given them no checks or balances,713851,3267,51949
+839326108,2020-07-03 04:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,1,Not based on actually helping people or solving problems - unless the person calling is from a good neighborhood.,Not based on actually helping people or solving problems - unless the person calling is from a good neighborhood.,3749,2267,49880

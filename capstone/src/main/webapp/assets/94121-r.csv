@@ -1,0 +1,18 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1094369646,2020-07-21 23:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,Yes,5,Experience was great. Police Officers did a fantastic job and help community feels safe.,Experience was great. Police Officers did a fantastic job and help community feels safe.,15044.0,5337.0,25604.0
+1278566887,2020-07-19 21:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,4,N/a,N/a,4201.0,5672.0,5449.0
+1469616840,2020-07-20 02:00:00,Complete,Other,Male,35-44,US-WEST-CA-San Francisco,,Prefer not to answer,3,abc,abc,5642.0,4441.0,16147.0
+1579238584,2020-07-21 00:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,3,neutral,neutral,58873.0,11370.0,18154.0
+1751721513,2020-07-20 17:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Yes,5,The police department in my community works directly with the school district to create relationships with students and support education practices that promote community unity,The police department in my community works directly with the school district to create relationships with students and support education practices that promote community unity,3799.0,2370.0,129444.0
+1901865103,2020-07-20 17:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,very helpful,very helpful,44886.0,8669.0,16487.0
+2047025021,2020-07-20 17:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,3,Systemic racism,Systemic racism,3329.0,2358.0,10810.0
+267820668,2020-07-19 07:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,3,Have seen the good and the bad,Have seen the good and the bad,25029.0,5511.0,10453.0
+283633855,2020-07-18 17:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,2,They are mean and rude,They are mean and rude,2886.0,2650.0,10708.0
+310510117,2020-07-19 15:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,5,I like them,I like them,15929.0,6630.0,13294.0
+404312379,2020-07-18 16:00:00,Complete,Other,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,4,people need to chill,people need to chill,2655.0,3406.0,99776.0
+520009120,2020-07-18 23:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,Prefer not to answer,3,Because they're are bad and good cops.,Because they're are bad and good cops.,5885.0,7073.0,66397.0
+541764206,2020-07-21 05:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,No,4,I have no problem with the police,I have no problem with the police,19864.0,6171.0,20396.0
+551643070,2020-07-17 04:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,5,"Police always polite and respectful in San Francisco, California USA","Police always polite and respectful in San Francisco, California USA",23291.0,7662.0,35976.0
+555128975,2020-07-20 00:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,5,I have no explanation,I have no explanation,2435.0,2509.0,8601.0
+637614907,2020-07-21 00:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,3,"I feel the police system in this country needs a massive overhaul, immediately.","I feel the police system in this country needs a massive overhaul, immediately.",13882.0,4908.0,23937.0
+935733147,2020-07-19 21:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,1,N/a,n/a,92041.0,2778.0,3873.0
