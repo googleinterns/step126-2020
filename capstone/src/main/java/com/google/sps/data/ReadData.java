@@ -5,9 +5,13 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,17 +35,12 @@ public class ReadData {
    *
    * @return {Void}
    */
-  public void readAll() {
-    Set<String> zipCodes = MapData.zipPrecinctMap.keySet();
+  public void readAll() throws IOException {
+    File folder = new File("temp-assets/");
 
-    for (String zip : zipCodes) {
-      String filePath = "assets/" + zip + ".csv";
-
-      try {
-        readFile(new FileReader(filePath), zip);
-      } catch (FileNotFoundException e) {
-        System.out.println(filePath + " is not in the assets folder");
-      }
+    File[] fileNames = folder.listFiles();
+    for(File file : fileNames){
+       readFile(file);
     }
 
     sentimentService.close();
@@ -52,15 +51,24 @@ public class ReadData {
    * store as an entity property
    *
    * @param file This is the file that is being parsed
-   * @param zip This is the zip code the file is associated with
    * @return {Void}
    */
-  public void readFile(FileReader file, String zipCode) {
-    final int EXPECTED_LENGTH = 15;
-    BufferedReader reader = null;
+  public void readFile(File file) {
+    String zipCode = file.getName().substring(0, 5);
+    FileReader fileReader = null;
 
     try {
-      reader = new BufferedReader(file);
+      fileReader = new FileReader(file);
+    } catch (FileNotFoundException e) {
+      System.out.println("No file found");
+    }
+    
+    BufferedReader reader = null;
+
+    final int EXPECTED_LENGTH = 15;
+
+    try {
+      reader = new BufferedReader(fileReader);
       String header = reader.readLine();
       String line = "";
 
@@ -85,9 +93,9 @@ public class ReadData {
 
         final int START_INDEX = 11;
 
-        int indexOfLong = (values.length - EXPECTED_LENGTH) + START_INDEX + 1;
+        int indexOfInt = (values.length - EXPECTED_LENGTH) + START_INDEX + 1;
 
-        for (int i = START_INDEX; i < indexOfLong; i++) {
+        for (int i = START_INDEX; i < indexOfInt; i++) {
           text += values[i];
         }
 
@@ -97,9 +105,9 @@ public class ReadData {
           score = sentimentService.getSentiment(text);
         }
 
-        long responseTimeOne = Long.parseLong(values[indexOfLong++]);
-        long responseTimeTwo = Long.parseLong(values[indexOfLong++]);
-        long responseTimeThree = Long.parseLong(values[indexOfLong]);
+        int responseTimeOne = (int)Math.round(Double.parseDouble(values[indexOfInt++]));
+        int responseTimeTwo = (int)Math.round(Double.parseDouble(values[indexOfInt++]));
+        int responseTimeThree = (int)Math.round(Double.parseDouble(values[indexOfInt]));
 
         Entity entity = new Entity("Response", id);
         Entity inStore; // Entity that may or may not exist in Datastore
