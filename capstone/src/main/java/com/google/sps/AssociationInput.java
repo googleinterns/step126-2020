@@ -28,4 +28,16 @@ public class AssociationInput {
   public ArrayList<String> getScopes() {
     return scopes;
   }
+
+  public String toString() {
+    return "{" + message + ", " + scopes.toString() + "}";
+  }
+
+  public boolean equals(Object obj) {
+    if (obj == null || !AssociationInput.class.isAssignableFrom(obj.getClass())) {
+      return false;
+    }
+    AssociationInput x = (AssociationInput) obj;
+    return x.getMessage().equals(message) && x.getScopes().equals(scopes);
+  }
 }
