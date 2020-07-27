@@ -177,7 +177,7 @@ function drawCheckboxLayer() {
   if (mapAndSelection.selection == 'noneSelected') {
     alert('nothing yet');
   } else if (mapAndSelection.selection == 'sentimentCheck') {
-        searchPrecinctsByDistrict();
+    searchPrecinctsByDistrict();
   } else {
     alert('precinctLayer');
   }
@@ -274,14 +274,15 @@ function loadResponseChart(totalResponses, precinct) {
 
 //* * get precinct name as parameter and returns precinct ID*/
 function searchPrecinctsByDistrict() {
-     mapAndSelection.map.setStyle({ visible: false});
-    mapAndSelection.map.forEach((feature) => {
-        let color = averagePrecinctSentiment(feature.getProperty('district'));
-            mapAndSelection.map.overrideStyle(feature, {fillColor: color,
-                  fillOpacity: 0.9});
-        console.log(color);
-    });
-    mapAndSelection.map.setStyle({ visible: true});
+  mapAndSelection.map.setStyle({visible: false});
+  mapAndSelection.map.forEach((feature) => {
+    let randCol = Math.floor(Math.random()*16777215).toString(16);
+    let color = averagePrecinctSentiment(feature.getProperty('district'));
+    mapAndSelection.map.overrideStyle(feature, {fillColor: randCol,
+      fillOpacity: 0.9});
+    console.log(color);
+  });
+  mapAndSelection.map.setStyle({visible: true});
 }
 // based on google survey question ratings 1-5 on police sentiment
 async function averagePrecinctSentiment(policePrecinct) {
@@ -323,9 +324,9 @@ function getSentimentColor(averageFeelings, policePrecinct) {
 }
 //* *global variable for precinctLayer data layer and checkbox selection */
 const mapAndSelection = {};
-//**following two functions are only used in index.html */
+//* *following two functions are only used in index.html */
 /* eslint-disable no-unused-vars */
-//**unchecks boxes when new checkbox is checked */
+//* *unchecks boxes when new checkbox is checked */
 function onlyOne(checkbox) {
   const checkboxes = document.getElementsByName('check');
   checkboxes.forEach((item) => {
