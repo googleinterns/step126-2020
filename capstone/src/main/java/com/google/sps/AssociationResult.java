@@ -123,7 +123,14 @@ public class AssociationResult {
 
   @Override
   public String toString() {
-    return content + "(" + Float.toString(score) + ", " + Boolean.toString(strongSentiment) + ")";
+    return content
+        + "("
+        + Float.toString(score)
+        + ", "
+        + Float.toString(weight)
+        + ", "
+        + Boolean.toString(strongSentiment)
+        + ")";
   }
 
   @Override

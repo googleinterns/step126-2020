@@ -9,6 +9,7 @@ import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestC
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -72,5 +73,81 @@ public class AssociationDatastoreTest {
             Arrays.asList(
                 new AssociationInput(
                     "test", new ArrayList<String>(Arrays.asList("Bayview", "SF"))))));
+  }
+
+  public boolean isValidAssociationDatastore(ArrayList<AssociationResult> results) {
+    HashSet<String> seen = new HashSet<String>();
+    for (AssociationResult result : results) {
+      if (seen.contains(result.getContent())) {
+        return false;
+      }
+      seen.add(result.getContent());
+    }
+    return true;
+  }
+
+  @Test
+  public void addThenRetrieveTest() {
+    ArrayList<AssociationResult> data =
+        new ArrayList<AssociationResult>(
+            Arrays.asList(
+                new AssociationResult("hi", 12.4f, 118.0f, false),
+                new AssociationResult("test1", 1.3f, 123.4f, true)));
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    AssociationDatastore association = new AssociationDatastore(datastore);
+    association.storeResults(data, "SF");
+    ArrayList<AssociationResult> retrieved = association.loadPreviousResults("SF");
+    assert (isValidAssociationDatastore(retrieved));
+    assertEquals(data, retrieved);
+  }
+
+  @Test
+  public void addThenRetrieveDifferentScopeTest() {
+    ArrayList<AssociationResult> data =
+        new ArrayList<AssociationResult>(
+            Arrays.asList(
+                new AssociationResult("hi", 12.4f, 118.0f, false),
+                new AssociationResult("test1", 1.3f, 123.4f, true)));
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    AssociationDatastore association = new AssociationDatastore(datastore);
+    association.storeResults(data, "Bayview");
+    ArrayList<AssociationResult> retrieved = association.loadPreviousResults("SF");
+    assert (isValidAssociationDatastore(retrieved));
+    assertEquals(new ArrayList<AssociationResult>(), retrieved);
+  }
+
+  @Test
+  public void dataPersistenceTest() {
+    ArrayList<AssociationResult> data =
+        new ArrayList<AssociationResult>(
+            Arrays.asList(
+                new AssociationResult("hi", 12.4f, 118.0f, false),
+                new AssociationResult("test1", 1.3f, 123.4f, true)));
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    AssociationDatastore association = new AssociationDatastore(datastore);
+    association.storeResults(data, "SF");
+    AssociationDatastore newAssociation = new AssociationDatastore(datastore);
+    ArrayList<AssociationResult> retrieved = newAssociation.loadPreviousResults("SF");
+    assert (isValidAssociationDatastore(retrieved));
+    assertEquals(data, retrieved);
+  }
+
+  @Test
+  public void doubleAddTest() {
+    ArrayList<AssociationResult> data =
+        new ArrayList<AssociationResult>(
+            Arrays.asList(
+                new AssociationResult("hi", 12.4f, 118.0f, false),
+                new AssociationResult("test1", 1.3f, 123.4f, true)));
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    AssociationDatastore association = new AssociationDatastore(datastore);
+    association.storeResults(data, "SF");
+    ArrayList<AssociationResult> retrieved = association.loadPreviousResults("SF");
+    assert (isValidAssociationDatastore(retrieved));
+    assertEquals(data, retrieved);
+    association.storeResults(retrieved, "SF");
+    retrieved = association.loadPreviousResults("SF");
+    assert (isValidAssociationDatastore(retrieved));
+    assertEquals(data, retrieved);
   }
 }
