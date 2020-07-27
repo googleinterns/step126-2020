@@ -361,6 +361,7 @@ function getColor(gradient) {
 async function loadWordcloud() {
   const response = await fetch('/wordcloud?scope=' + precinct);
   const data = await response.json();
+  console.log("loading");
   data.sort(function(a, b) {
     b.weight - a.weight;
   });
@@ -374,6 +375,9 @@ async function loadWordcloud() {
   const list = data.map(function(x) {
     return [x.content, x.weight];
   });
+  const list2 = data.map(function(x) {
+    return [x.content, x.weight/7];
+  });
   const color = function(word, weight, fontSize, distance, theta) {
     const elem = data.find(function(elem) {
       return elem.content === word;
@@ -383,10 +387,15 @@ async function loadWordcloud() {
   /* eslint-disable new-cap */
   WordCloud(document.getElementById('cloud-canvas'),
       {list: list, color: color} );
+  WordCloud(document.getElementById('map-cloud'),
+      {list: list2, color: color} );
   /* eslint-enable new-cap */
 }
 
 function configModal() {
+  //Get WordCloud 
+    loadWordcloud();
+    
   //Get the map key
   const key = document.getElementById('map-key');
 
@@ -407,7 +416,6 @@ function configModal() {
     modal.style.display = 'block'; 
     key.style.display = 'none'; 
     cloud.style.display = 'none';  
-    loadWordcloud();
   };
 
   // When the user clicks on <span> (x), close the modal
