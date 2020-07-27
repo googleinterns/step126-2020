@@ -361,7 +361,7 @@ function getColor(gradient) {
 async function loadWordcloud() {
   const response = await fetch('/wordcloud?scope=' + precinct);
   const data = await response.json();
-  console.log("loading");
+  console.log('loading');
   data.sort(function(a, b) {
     b.weight - a.weight;
   });
@@ -393,13 +393,13 @@ async function loadWordcloud() {
 }
 
 function configModal() {
-  //Get WordCloud 
-    loadWordcloud();
-    
-  //Get the map key
+  // Get WordCloud
+  loadWordcloud();
+
+  // Get the map key
   const key = document.getElementById('map-key');
 
-  //Get the space for word cloud
+  // Get the space for word cloud
   const cloud = document.getElementById('map-cloud');
 
   // Get the modal
@@ -413,9 +413,9 @@ function configModal() {
 
   // When the user clicks the button, open the modal
   btn.onclick = function() {
-    modal.style.display = 'block'; 
-    key.style.display = 'none'; 
-    cloud.style.display = 'none';  
+    modal.style.display = 'block';
+    key.style.display = 'none';
+    cloud.style.display = 'none';
   };
 
   // When the user clicks on <span> (x), close the modal
