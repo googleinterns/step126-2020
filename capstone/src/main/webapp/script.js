@@ -252,10 +252,18 @@ function loadSentimentPieChart(sentimentCount) {
     ['Negative', sentimentCount['Negative']],
   ]);
 
+  const options = {
+    animation: {
+      startup: true,
+      duration: 1000,
+      easing: 'out',
+    },
+  };
+
   // Instantiate and draw the chart.
   const chart = new google.visualization.PieChart(
       document.getElementById('sentiment-pie-chart'));
-  chart.draw(stats, null);
+  chart.draw(stats, options);
 }
 
 function loadResponseChart(totalResponses, precinct) {
@@ -266,10 +274,19 @@ function loadResponseChart(totalResponses, precinct) {
   stats.addRows([
     [precinct, totalResponses],
   ]);
+
+  const options = {
+    animation: {
+      startup: true,
+      duration: 3000,
+      easing: 'out',
+    },
+  };
+
   // Instantiate and draw the chart.
   const chart = new google.visualization.BarChart(
       document.getElementById('response-bar-chart'));
-  chart.draw(stats, null);
+  chart.draw(stats, options);
 }
 
 //* * get precinct name as parameter and returns precinct ID*/
@@ -380,6 +397,7 @@ function getColor(gradient) {
 async function loadWordcloud() {
   const response = await fetch('/wordcloud?scope=' + precinct);
   const data = await response.json();
+  console.log('loading');
   data.sort(function(a, b) {
     b.weight - a.weight;
   });
@@ -393,6 +411,9 @@ async function loadWordcloud() {
   const list = data.map(function(x) {
     return [x.content, x.weight];
   });
+  const list2 = data.map(function(x) {
+    return [x.content, x.weight/7];
+  });
   const color = function(word, weight, fontSize, distance, theta) {
     const elem = data.find(function(elem) {
       return elem.content === word;
@@ -402,15 +423,26 @@ async function loadWordcloud() {
   /* eslint-disable new-cap */
   WordCloud(document.getElementById('cloud-canvas'),
       {list: list, color: color} );
+  WordCloud(document.getElementById('map-cloud'),
+      {list: list2, color: color} );
   /* eslint-enable new-cap */
 }
 
 function configModal() {
+  // Get WordCloud
+  loadWordcloud();
+
+  // Get the map key
+  const key = document.getElementById('map-key');
+
+  // Get the space for word cloud
+  const cloud = document.getElementById('map-cloud');
+
   // Get the modal
   const modal = document.getElementById('modal');
 
   // Get the button that opens the modal
-  const btn = document.getElementById('associations-container');
+  const btn = document.getElementById('map-cloud');
 
   // Get the <span> element that closes the modal
   const span = document.getElementById('modal-close');
@@ -418,18 +450,23 @@ function configModal() {
   // When the user clicks the button, open the modal
   btn.onclick = function() {
     modal.style.display = 'block';
-    loadWordcloud();
+    key.style.display = 'none';
+    cloud.style.display = 'none';
   };
 
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
     modal.style.display = 'none';
+    key.style.display = 'block';
+    cloud.style.display = 'block';
   };
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = 'none';
+      key.style.display = 'block';
+      cloud.style.display = 'block';
     }
   };
 }

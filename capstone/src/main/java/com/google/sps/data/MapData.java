@@ -30,7 +30,7 @@ public class MapData {
     zipPrecinctMap.put("94131", new ArrayList<>(Arrays.asList("Ingleside", "Park")));
 
     precinctZipMap = new HashMap<>();
-    precinctZipMap.put("Southern", new ArrayList<>(Arrays.asList("94103", "94107")));
+    precinctZipMap.put("Southern", new ArrayList<>(Arrays.asList("94103")));
     precinctZipMap.put("Mission", new ArrayList<>(Arrays.asList("94110", "94114", "94103")));
     precinctZipMap.put("Bayview", new ArrayList<>(Arrays.asList("94124", "94107")));
     precinctZipMap.put("Tenderloin", new ArrayList<>(Arrays.asList("94109")));
@@ -44,10 +44,20 @@ public class MapData {
         "Richmond", new ArrayList<>(Arrays.asList("94118", "94121", "94122", "94129")));
   }
 
+  /**
+   * Gets the precincts that overlap with one zip code region
+   *
+   * @return Arraylist list of precincts that overlap with zip code
+   */
   public static ArrayList getPrecincts(String zipcode) {
     return zipPrecinctMap.get(zipcode);
   }
 
+  /**
+   * Gets the list of zip codes that overlap with one precinct
+   *
+   * @return Arraylist list of zip codes that overlap with one precinct
+   */
   public static ArrayList getZipCodes(String precinct) {
     return precinctZipMap.get(precinct);
   }
