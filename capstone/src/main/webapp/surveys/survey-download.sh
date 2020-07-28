@@ -31,7 +31,7 @@ ZIP_CODES=('94103-r' '94103-r2' '94107-r' '94107-r2' '94109-r' '94109-r2' '94110
 linux_amd64/oauth2l fetch --credentials $CLIENT_SECRET_FILE --scope https://www.googleapis.com/auth/surveys
 
 for survey in "${SURVEY_IDS[@]}"; do 
-  TOKEN=$(linux_amd64/oauth2l fetch --credentials client_secret_71285827048-mh3huvq5tkcfv846jvigmjb5b5bm51vm.apps.googleusercontent.com.json --scope https://www.googleapis.com/auth/surveys)
+  TOKEN=$(linux_amd64/oauth2l fetch --credentials $CLIENT_SECRET_FILE --scope https://www.googleapis.com/auth/surveys)
   curl "https://surveys.google.com/reporting/export_oauth?format=xls&survey=$survey&access_token=$TOKEN" > $survey.xls
 done
 echo Finished downloading ${#SURVEY_IDS[@]} surveys
