@@ -1,10 +1,12 @@
-package com.google.sps;
+package com.google.sps.servlet;
 
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.sps.AssociationDatastore;
+import com.google.sps.AssociationKey;
+import com.google.sps.UpdateAssociation;
 import com.google.sps.data.MapData;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,15 +24,16 @@ public class UpdateAssociationServlet extends HttpServlet {
   private AssociationDatastore datastore;
   private MapData mapData = new MapData();
   private AssociationKey keyGeneration;
+  private UpdateAssociation association;
 
-  public UpdateAssociationServlet() {
-    keyGeneration = new AssociationKey();
-  }
+  public UpdateAssociationServlet() {}
 
   public void init() throws ServletException {
     try {
       nlpClient = LanguageServiceClient.create();
       datastore = new AssociationDatastore(DatastoreServiceFactory.getDatastoreService());
+      keyGeneration = new AssociationKey();
+      association = new UpdateAssociation(datastore, nlpClient, keyGeneration);
     } catch (IOException exception) {
       System.err.println(exception);
     }
@@ -38,23 +41,7 @@ public class UpdateAssociationServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    CloudNLPAssociation nlp = new CloudNLPAssociation(nlpClient);
-
-    ArrayList<EntitySentiment> sentiments = nlp.analyzeAssociations(datastore.getComments());
-
-    for (String scope : mapData.getAllScopes()) {
-      AssociationAnalysis analysis =
-          new AssociationAnalysis(keyGeneration, datastore.loadPreviousResults(scope));
-      ArrayList<EntitySentiment> filteredSentiment = new ArrayList<EntitySentiment>();
-      for (EntitySentiment sentiment : sentiments) {
-        if (sentiment.getScopes().contains(scope)) {
-          filteredSentiment.add(sentiment);
-        }
-      }
-      ArrayList<AssociationResult> res = analysis.calculateScores(filteredSentiment);
-      datastore.storeResults(res, scope);
-    }
+    association.update();
   }
 
   public void destroy() {
