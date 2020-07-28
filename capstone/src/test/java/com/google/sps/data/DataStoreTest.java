@@ -1,5 +1,6 @@
 import static com.google.appengine.api.datastore.FetchOptions.Builder.withLimit;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -9,6 +10,9 @@ import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+import com.google.sps.data.ReadData;
+import com.google.sps.data.SentimentData;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import org.junit.After;
@@ -50,6 +54,16 @@ public class DataStoreTest {
     doTest();
   }
 
+  public boolean inLocalStore(Entity entity) {
+    try {
+      datastore.get(entity.getKey());
+    } catch (EntityNotFoundException e) {
+      return false;
+    }
+    
+    return true;
+  }
+
    /**
    * Creates an entity based on given survey response values
    *
@@ -68,7 +82,7 @@ public class DataStoreTest {
   }
 
   @Test
-  public void testMockEntityProperty() throws IOException {
+  public void testMockEntityStorage() throws IOException {
     ArrayList<Entity> testEntities = new ArrayList<Entity>();
     Entity a = getMockEntity("ResponseTest", "94101", 1, 0.5f);
     Entity b = getMockEntity("ResponseTest", "94151", 2, 0.83f);
@@ -78,18 +92,42 @@ public class DataStoreTest {
 
     datastore.put(testEntities);
     
-    Entity stored = new Entity("ResponseTest", 2);
-     
-    try {
-      stored = datastore.get(stored.getKey());
-    } catch (EntityNotFoundException e) {
-      stored = null;
+    Entity entity = new Entity("ResponseTest", 2);
+    
+
+    assertTrue(inLocalStore(entity));
+  }
+
+   /**
+   * Creates entities based on real survey file through
+   * the ReadData class
+   *
+   * @return ArrayList<Entity> data store objects initailized with
+   * the data from all files
+   */
+  public ArrayList<Entity> getEntities() throws IOException {
+   ReadData readData = new ReadData(new SentimentData());
+   
+   return readData.allEntitiesFromFiles();
+  }
+
+  @Test
+  public void testInsertNewEntity() throws IOException { 
+    // All entities to consider
+    ArrayList<Entity> allEntities = getEntities();
+    
+    //Test insert entity
+    Entity outStoreEntity = allEntities.remove(0);
+    
+    //Entities that will be in datastore
+    ArrayList<Entity> inStoreEntities = allEntities;
+
+    datastore.put(inStoreEntities);
+    
+    if (!inLocalStore(outStoreEntity)) {
+        datastore.put(outStoreEntity);
     }
 
-    if (stored != null) {
-      assertEquals("94151", stored.getProperty("zipCode"));
-    } else {
-      fail("Entity failed to store locally");
-    }
-  }  
+    assertTrue(inLocalStore(outStoreEntity));
+  }
 }
