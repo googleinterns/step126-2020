@@ -91,6 +91,9 @@ public class AssociationDatastore {
       } else {
         entity = new Entity(AssociationResult.ENTITY_KIND);
       }
+      if (Math.abs(association.getWeight()) < AssociationResult.EPSILON) {
+        continue;
+      }
       entity.setProperty("name", association.getContent());
       entity.setProperty("score", association.getScore());
       entity.setProperty("weight", association.getWeight());
