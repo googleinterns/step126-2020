@@ -139,6 +139,7 @@ function precinctControl(controlDiv, map) {
     document.getElementById('chart-title').textContent =
      precinct + ' Police Sentiment';
     loadCharts();
+    loadWordcloud();
     associationUpdateDisplay(precinct);
   });
   //* *button creation and positioning*/
@@ -162,6 +163,7 @@ function precinctControl(controlDiv, map) {
       document.getElementById('chart-title').textContent =
         'Sentiment Percentages in ' + precinct;
       loadCharts();
+      loadWordcloud();
       associationUpdateDisplay('SF');
     } else {
       precinctLayer.setStyle({fillColor: '#CECDBC',
