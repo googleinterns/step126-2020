@@ -5,7 +5,6 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.sps.data.ReadData;
-import com.google.sps.data.SentimentData;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
@@ -19,10 +18,8 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    
-    SentimentData sentimentService = new SentimentData();
 
-    ReadData readData = new ReadData(sentimentService);
+    ReadData readData = new ReadData();
     ArrayList<Entity> allEntities = readData.allEntitiesFromFiles();
     
     for (Entity entity : allEntities) {

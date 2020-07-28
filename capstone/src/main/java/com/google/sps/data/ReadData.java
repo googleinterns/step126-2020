@@ -18,7 +18,12 @@ import java.util.Set;
 public class ReadData {
   private SentimentData sentimentService;
   private final String DELIMITER = ",";
-
+  
+  public ReadData() throws IOException {
+    sentimentService = new SentimentData();
+  }
+  
+  // Overloaded constructor to test dependency injection
   public ReadData(SentimentData sentimentService) throws IOException {
     this.sentimentService = sentimentService;
   }
