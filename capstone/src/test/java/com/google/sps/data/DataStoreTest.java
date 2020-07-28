@@ -1,17 +1,23 @@
 import static com.google.appengine.api.datastore.FetchOptions.Builder.withLimit;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+import java.io.IOException;
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 public class DataStoreTest {
-
+  private final DatastoreService datastore =
+      DatastoreServiceFactory.getDatastoreService();
   private final LocalServiceTestHelper helper =
       new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
 
@@ -34,14 +40,56 @@ public class DataStoreTest {
     assertEquals(2, ds.prepare(new Query("test")).countEntities(withLimit(10)));
   }
 
-  /* Commented these out since tests fail, will add more tests in future PRS */
-  //   @Test
-  //   public void testInsert1() {
-  //     doTest();
-  //   }
+  @Test
+  public void testStateleakInsert1() {
+    doTest();
+  }
 
-  //   @Test
-  //   public void testInsert2() {
-  //     doTest();
-  //   }
+  @Test
+  public void testStateleakInsert2() {
+    doTest();
+  }
+
+   /**
+   * Creates an entity based on given survey response values
+   *
+   * @param kind Namespace in datastore
+   * @param zipCode Location of where survey was taken
+   * @param id Unique id given to each survey
+   * @param score Sentiment score for the survey response
+   * @return Entity data store object representing a survey response
+   */
+  public Entity getMockEntity(String kind, String zipCode, int id, float score) {
+   Entity entity = new Entity(kind, id);
+   entity.setProperty("zipCode", zipCode);
+   entity.setProperty("score", score);  
+
+   return entity;
+  }
+
+  @Test
+  public void testMockEntityProperty() throws IOException {
+    ArrayList<Entity> testEntities = new ArrayList<Entity>();
+    Entity a = getMockEntity("ResponseTest", "94101", 1, 0.5f);
+    Entity b = getMockEntity("ResponseTest", "94151", 2, 0.83f);
+    
+    testEntities.add(a);
+    testEntities.add(b);
+
+    datastore.put(testEntities);
+    
+    Entity stored = new Entity("ResponseTest", 2);
+     
+    try {
+      stored = datastore.get(stored.getKey());
+    } catch (EntityNotFoundException e) {
+      stored = null;
+    }
+
+    if (stored != null) {
+      assertEquals("94151", stored.getProperty("zipCode"));
+    } else {
+      fail("Entity failed to store locally");
+    }
+  }  
 }
