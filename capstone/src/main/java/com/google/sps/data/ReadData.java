@@ -6,35 +6,27 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Set;
 
 public class ReadData {
   private SentimentData sentimentService;
   private final String DELIMITER = ",";
-  
+
   /**
-   * Default constructor with no sentiment analysis
-   * dependency. Objects initialized through this constructor
-   * can be locally tested since sentiment analysis is not authorized
-   * for local testing at this time
-   *
+   * Default constructor with no sentiment analysis dependency. Objects initialized through this
+   * constructor can be locally tested since sentiment analysis is not authorized for local testing
+   * at this time
    */
   public ReadData() throws IOException {
     sentimentService = null;
   }
-  
-   /**
-   * Injected dependency included in this overloaded constuctor. 
-   * Objects initialized through this constructor will use sentiment
-   * analysis to analyze positivity/ negativity of survey responses.
-   *
+
+  /**
+   * Injected dependency included in this overloaded constuctor. Objects initialized through this
+   * constructor will use sentiment analysis to analyze positivity/ negativity of survey responses.
    */
   public ReadData(SentimentData sentimentService) throws IOException {
     this.sentimentService = sentimentService;
@@ -43,8 +35,8 @@ public class ReadData {
   /**
    * Calls read file while iterating through all files in the assets directory
    *
-   * @return ArrayList<Entity> all the entities that were created from parsing every
-   * file in the assets directory
+   * @return ArrayList<Entity> all the entities that were created from parsing every file in the
+   *     assets directory
    */
   public ArrayList<Entity> allEntitiesFromFiles() throws IOException {
     ArrayList<Entity> allEntities = new ArrayList<Entity>();
@@ -52,10 +44,10 @@ public class ReadData {
     File folder = new File("assets/");
 
     File[] fileNames = folder.listFiles();
-    for(File file : fileNames){
-       entitiesFromFile(allEntities, file);
+    for (File file : fileNames) {
+      entitiesFromFile(allEntities, file);
     }
-    
+
     if (sentimentService != null) {
       sentimentService.close();
     }
@@ -64,12 +56,12 @@ public class ReadData {
   }
 
   /**
-   * Reads the survey csv, splits the lines by a comma delimiter, and creates
-   * entites with the parsed data for datastore
+   * Reads the survey csv, splits the lines by a comma delimiter, and creates entites with the
+   * parsed data for datastore
    *
    * @param file This is the file that is being parsed
    * @param newEntities stores created entities
-   * @return  void
+   * @return void
    */
   public void entitiesFromFile(ArrayList<Entity> newEntities, File file) {
     String zipCode = file.getName().substring(0, 5);
@@ -80,7 +72,7 @@ public class ReadData {
     } catch (FileNotFoundException e) {
       System.out.println("No file found");
     }
-    
+
     BufferedReader reader = null;
 
     final int EXPECTED_LENGTH = 15;
@@ -123,9 +115,9 @@ public class ReadData {
           score = sentimentService.getSentiment(text);
         }
 
-        int responseTimeOne = (int)Math.round(Double.parseDouble(values[indexOfInt++]));
-        int responseTimeTwo = (int)Math.round(Double.parseDouble(values[indexOfInt++]));
-        int responseTimeThree = (int)Math.round(Double.parseDouble(values[indexOfInt]));
+        int responseTimeOne = (int) Math.round(Double.parseDouble(values[indexOfInt++]));
+        int responseTimeTwo = (int) Math.round(Double.parseDouble(values[indexOfInt++]));
+        int responseTimeThree = (int) Math.round(Double.parseDouble(values[indexOfInt]));
 
         Entity entity = new Entity("Response", id);
 
@@ -151,19 +143,19 @@ public class ReadData {
         int sumStationRating = 0;
         int total = 0;
         for (String precinctName : precinctNames) {
-            Precinct precinct = FeatureData.getPrecinct(precinctName);
+          Precinct precinct = FeatureData.getPrecinct(precinctName);
 
-            sumIncome += precinct.getAverageHouseholdIncome();
-            sumCrimeRate += precinct.getCrimeRate();
-            sumStationRating += precinct.getPoliceStationRating();
+          sumIncome += precinct.getAverageHouseholdIncome();
+          sumCrimeRate += precinct.getCrimeRate();
+          sumStationRating += precinct.getPoliceStationRating();
 
-            total++;
+          total++;
         }
 
         if (total != 0) {
-            entity.setProperty("averageHouseholdIncome", Math.round(sumIncome / total));
-            entity.setProperty("crimeRate", Math.round(sumCrimeRate / total));
-            entity.setProperty("policeStationRating", Math.round(sumStationRating / total));
+          entity.setProperty("averageHouseholdIncome", Math.round(sumIncome / total));
+          entity.setProperty("crimeRate", Math.round(sumCrimeRate / total));
+          entity.setProperty("policeStationRating", Math.round(sumStationRating / total));
         }
 
         newEntities.add(entity);

@@ -22,22 +22,22 @@ public class DataServlet extends HttpServlet {
 
     ReadData readData = new ReadData(new SentimentData());
     ArrayList<Entity> allEntities = readData.allEntitiesFromFiles();
-    
+
     for (int i = 0; i < allEntities.size(); i++) {
-        Entity currentEntity = allEntities.get(i);
-        Entity inStore = null;
+      Entity currentEntity = allEntities.get(i);
+      Entity inStore = null;
 
-        try {
-            inStore = datastore.get(currentEntity.getKey());
-        } catch (EntityNotFoundException e) {
-            inStore = null;
-        }
+      try {
+        inStore = datastore.get(currentEntity.getKey());
+      } catch (EntityNotFoundException e) {
+        inStore = null;
+      }
 
-        if (inStore != null) {
-            allEntities.remove(i);
+      if (inStore != null) {
+        allEntities.remove(i);
 
-            i -= 1;
-        }
+        i -= 1;
+      }
     }
 
     datastore.put(allEntities);
