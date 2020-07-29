@@ -150,7 +150,7 @@ window.addEventListener('load', createMap);
 window.addEventListener('load', postSurveyResponses);
 
 async function postSurveyResponses() {
-  await fetch('/update-associations', {method: 'POST'});
+  await fetch('/data', {method: 'POST'});
 }
 
 async function loadCharts() {
