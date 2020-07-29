@@ -1,5 +1,6 @@
 import static com.google.appengine.api.datastore.FetchOptions.Builder.withLimit;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -11,7 +12,6 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.google.sps.data.ReadData;
-import com.google.sps.data.SentimentData;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -102,32 +102,45 @@ public class DataStoreTest {
    * Creates entities based on real survey file through
    * the ReadData class
    *
-   * @return ArrayList<Entity> data store objects initailized with
-   * the data from all files
+   * @param entities Arraylist of entities that will be modified with file data
+   * @param file The file that will be parsed to create entities
+   *
+   * @return void
    */
-  public ArrayList<Entity> getEntities() throws IOException {
-   ReadData readData = new ReadData(new SentimentData());
-   
-   return readData.allEntitiesFromFiles();
+  public void getEntities(ArrayList<Entity> entities, File file) throws IOException {
+    ReadData readData = new ReadData();
+    readData.entitiesFromFile(entities, file);
+
   }
 
   @Test
-  public void testInsertNewEntity() throws IOException { 
-    // All entities to consider
-    ArrayList<Entity> allEntities = getEntities();
-    
-    //Test insert entity
-    Entity outStoreEntity = allEntities.remove(0);
-    
-    //Entities that will be in datastore
-    ArrayList<Entity> inStoreEntities = allEntities;
+  public void testInsertEntity() throws IOException { 
+    ArrayList<Entity> aEntities = new ArrayList<Entity>();
 
-    datastore.put(inStoreEntities);
+    File aFile = new File("src/main/webapp/assets/94103.csv");
     
-    if (!inLocalStore(outStoreEntity)) {
-        datastore.put(outStoreEntity);
+    getEntities(aEntities, aFile);
+
+    ArrayList<Entity> bEntities = new ArrayList<Entity>();
+
+    File bFile = new File("src/main/webapp/assets/94107.csv");
+    
+    getEntities(bEntities, bFile);
+    
+    // Entities that will be in datastore
+    datastore.put(aEntities);
+
+    // Test storage of old entity A
+    Entity a = aEntities.get(0).clone();
+    assertTrue(inLocalStore(a));
+    
+    // Test insert of new entity B
+    Entity b = bEntities.get(0).clone();
+    
+    if (!inLocalStore(b)) {
+      datastore.put(b);    
     }
 
-    assertTrue(inLocalStore(outStoreEntity));
+    assertTrue(inLocalStore(b));
   }
 }
