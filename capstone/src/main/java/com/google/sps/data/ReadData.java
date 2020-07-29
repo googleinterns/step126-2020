@@ -19,11 +19,23 @@ public class ReadData {
   private SentimentData sentimentService;
   private final String DELIMITER = ",";
   
+  /**
+   * Default constructor with no sentiment analysis
+   * dependency. Objects initialized through this constructor
+   * can be locally tested since sentiment analysis is not authorized
+   * for local testing at this time
+   *
+   */
   public ReadData() throws IOException {
-    sentimentService = new SentimentData();
+    sentimentService = null;
   }
   
-  // Overloaded constructor to test dependency injection
+   /**
+   * Injected dependency included in this overloaded constuctor. 
+   * Objects initialized through this constructor will use sentiment
+   * analysis to analyze positivity/ negativity of survey responses.
+   *
+   */
   public ReadData(SentimentData sentimentService) throws IOException {
     this.sentimentService = sentimentService;
   }
@@ -43,8 +55,10 @@ public class ReadData {
     for(File file : fileNames){
        entitiesFromFile(allEntities, file);
     }
-
-    sentimentService.close();
+    
+    if (sentimentService != null) {
+      sentimentService.close();
+    }
 
     return allEntities;
   }
@@ -105,7 +119,7 @@ public class ReadData {
 
         float score = 0;
 
-        if (text.length() > 0) {
+        if (sentimentService != null && text.length() > 0) {
           score = sentimentService.getSentiment(text);
         }
 
