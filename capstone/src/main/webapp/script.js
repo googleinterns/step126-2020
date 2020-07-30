@@ -179,7 +179,7 @@ function drawCheckboxLayer() {
   if (mapAndSelection.selection == 'noneSelected') {
     alert('nothing yet');
   } else if (mapAndSelection.selection == 'sentimentCheck') {
-    searchPrecinctsByDistrict();
+    showSentiment();
   } else {
     alert('precinctLayer');
   }
@@ -291,22 +291,24 @@ function loadResponseChart(totalResponses, precinct) {
   chart.draw(stats, options);
 }
 
-//* * get precinct name as parameter and returns precinct ID*/
-function searchPrecinctsByDistrict() {
-  mapAndSelection.map.forEach((feature) => {
-    getSentimentList(feature.getProperty('district'));
-    //mapAndSelection.map.setStyle({fillColor: randCol, fillOpacity: 0.9});
-    mapAndSelection.map.overrideStyle(feature, {fillColor: mapAndSelection.color, fillOpacity: 0.7});
-    console.log(feature.getProperty('district') + ": " + mapAndSelection.color);
-  });
+function showSentiment(){
+    mapAndSelection.map.forEach((feature) => {
+        getSentimentList(feature);
+    });
 }
-// based on google survey question ratings 1-5 on police sentiment
-function getSentimentList(policePrecinct) {
-  const responsePromise = fetch('/load-data?precinct=' + policePrecinct);
-  responsePromise.then(averagePrecinctSentiment);
+
+//* * color precincts by sentement*/
+async function getSentimentList(district) {
+    const responsePromise = await fetch('/load-data?precinct=' + district.getProperty('district'));
+    const list = await responsePromise.json();
+    let colors = averagePrecinctSentiment(list);
+    mapAndSelection.map.overrideStyle(
+        district, {fillColor: colors, fillOpacity: 0.7});
+    console.log(colors);
 }
-function averagePrecinctSentiment(response){
-  const list = response.json();
+
+// **based on google survey question ratings 1-5 on police sentiment*/
+function averagePrecinctSentiment(list){
   let sentimentCount = 0;
   for (let i = 0; i < list.length; i++) {
     const sentiment = list[i].score;
@@ -323,7 +325,6 @@ function averagePrecinctSentiment(response){
     }
   }
   const sentimentAverage = sentimentCount/list.length;
-  console.log("getSC " + getSentimentColor(sentimentAverage));
   return getSentimentColor(sentimentAverage);
 }
 //* *colors precinct on map based on strong dislike to strong like */
@@ -340,7 +341,6 @@ function getSentimentColor(averageFeelings) {
   } else {
     precinctColor = '#BB2528';
   }
-  mapAndSelection.color = precinctColor;
   return precinctColor;
 }
 //* *global variable for precinctLayer data layer and checkbox selection */
