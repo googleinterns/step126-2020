@@ -1,6 +1,7 @@
 package com.google.sps;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -75,6 +76,13 @@ public class AssociationDatastoreTest {
                     "test", new ArrayList<String>(Arrays.asList("Bayview", "SF"))))));
   }
 
+  /**
+   * Calculates whether the list of results is a valid list of results (has at most one response per
+   * word
+   *
+   * @param results the list of results to be checked for validity
+   * @return whether the list is a valid list of results
+   */
   public boolean isValidAssociationDatastore(ArrayList<AssociationResult> results) {
     HashSet<String> seen = new HashSet<String>();
     for (AssociationResult result : results) {
@@ -97,7 +105,7 @@ public class AssociationDatastoreTest {
     AssociationDatastore association = new AssociationDatastore(datastore);
     association.storeResults(data, "SF");
     ArrayList<AssociationResult> retrieved = association.loadPreviousResults("SF");
-    assert (isValidAssociationDatastore(retrieved));
+    assertTrue("Has multiple results for the same word", isValidAssociationDatastore(retrieved));
     assertEquals(data, retrieved);
   }
 
@@ -112,7 +120,7 @@ public class AssociationDatastoreTest {
     AssociationDatastore association = new AssociationDatastore(datastore);
     association.storeResults(data, "Bayview");
     ArrayList<AssociationResult> retrieved = association.loadPreviousResults("SF");
-    assert (isValidAssociationDatastore(retrieved));
+    assertTrue("Has multiple results for the same word", isValidAssociationDatastore(retrieved));
     assertEquals(new ArrayList<AssociationResult>(), retrieved);
   }
 
@@ -128,7 +136,7 @@ public class AssociationDatastoreTest {
     association.storeResults(data, "SF");
     AssociationDatastore newAssociation = new AssociationDatastore(datastore);
     ArrayList<AssociationResult> retrieved = newAssociation.loadPreviousResults("SF");
-    assert (isValidAssociationDatastore(retrieved));
+    assertTrue("Has multiple results for the same word", isValidAssociationDatastore(retrieved));
     assertEquals(data, retrieved);
   }
 
@@ -143,11 +151,11 @@ public class AssociationDatastoreTest {
     AssociationDatastore association = new AssociationDatastore(datastore);
     association.storeResults(data, "SF");
     ArrayList<AssociationResult> retrieved = association.loadPreviousResults("SF");
-    assert (isValidAssociationDatastore(retrieved));
+    assertTrue("Has multiple results for the same word", isValidAssociationDatastore(retrieved));
     assertEquals(data, retrieved);
     association.storeResults(retrieved, "SF");
     retrieved = association.loadPreviousResults("SF");
-    assert (isValidAssociationDatastore(retrieved));
+    assertTrue("Has multiple results for the same word", isValidAssociationDatastore(retrieved));
     assertEquals(data, retrieved);
   }
 }
