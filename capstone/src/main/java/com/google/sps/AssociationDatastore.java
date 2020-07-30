@@ -37,15 +37,15 @@ public class AssociationDatastore {
     for (Entity e : results.asIterable()) {
       if (e.getProperty("association-processed") == null
           || !((boolean) e.getProperty("association-processed"))) {
-        String message = (String) e.getProperty(COMMENT_PROPERTY);
-        try {
-          ArrayList<String> scope = mapData.getScope((String) e.getProperty(ZIPCODE));
-          comments.add(new AssociationInput(message, scope));
-          e.setProperty("association-processed", true);
-          datastore.put(e);
-        } catch (NullPointerException exception) {
-          System.err.println("Invalid zip code in response: " + (String) e.getProperty(ZIPCODE));
+        if (e.getProperty(ZIPCODE) == null) {
+          System.err.println(
+              "No zipcode property on entity with id " + e.getProperty("id").toString());
         }
+        String message = (String) e.getProperty(COMMENT_PROPERTY);
+        ArrayList<String> scope = mapData.getScope((String) e.getProperty(ZIPCODE));
+        comments.add(new AssociationInput(message, scope));
+        e.setProperty("association-processed", true);
+        datastore.put(e);
       }
     }
     return comments;
