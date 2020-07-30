@@ -291,27 +291,28 @@ function loadResponseChart(totalResponses, precinct) {
   chart.draw(stats, options);
 }
 
-function showSentiment(){
-    mapAndSelection.map.forEach((feature) => {
-        getSentimentList(feature);
-    });
+function showSentiment() {
+  mapAndSelection.map.forEach((feature) => {
+    getSentimentList(feature);
+  });
 }
 
 //* * color precincts by sentement*/
 async function getSentimentList(district) {
-    const responsePromise = await fetch('/load-data?precinct=' + district.getProperty('district'));
-    const list = await responsePromise.json();
-    let colors = averagePrecinctSentiment(list);
-    mapAndSelection.map.overrideStyle(
-        district, {fillColor: colors, fillOpacity: 0.7});
-    console.log(colors);
+  const responsePromise =
+    await fetch('/load-data?precinct=' + district.getProperty('district'));
+  const list = await responsePromise.json();
+  const colors = averagePrecinctSentiment(list);
+  mapAndSelection.map.overrideStyle(
+      district, {fillColor: colors, fillOpacity: 0.7});
 }
 
 // **based on google survey question ratings 1-5 on police sentiment*/
-function averagePrecinctSentiment(list){
+function averagePrecinctSentiment(list) {
   let sentimentCount = 0;
   for (let i = 0; i < list.length; i++) {
     const sentiment = list[i].score;
+    console.log(list[i].date);
     if (sentiment >= 0.5) {
       sentimentCount += 5;
     } else if (sentiment > 0.05) {
