@@ -139,6 +139,7 @@ function precinctControl(controlDiv, map) {
     document.getElementById('chart-title').textContent =
      precinct + ' Police Sentiment';
     loadCharts();
+    loadWordcloud();
     associationUpdateDisplay(precinct);
   });
   //* *button creation and positioning*/
@@ -162,6 +163,7 @@ function precinctControl(controlDiv, map) {
       document.getElementById('chart-title').textContent =
         'Sentiment Percentages in ' + precinct;
       loadCharts();
+      loadWordcloud();
       associationUpdateDisplay('SF');
     } else {
       precinctLayer.revertStyle();
@@ -291,20 +293,20 @@ function loadResponseChart(totalResponses, precinct) {
 
 //* * get precinct name as parameter and returns precinct ID*/
 function searchPrecinctsByDistrict() {
-  mapAndSelection.map.setStyle({visible: false});
   mapAndSelection.map.forEach((feature) => {
-    let randCol = Math.floor(Math.random()*16777215).toString(16);
-    let color = averagePrecinctSentiment(feature.getProperty('district'));
-    mapAndSelection.map.overrideStyle(feature, {fillColor: randCol,
-      fillOpacity: 0.9});
-    console.log(color);
+    getSentimentList(feature.getProperty('district'));
+    //mapAndSelection.map.setStyle({fillColor: randCol, fillOpacity: 0.9});
+    mapAndSelection.map.overrideStyle(feature, {fillColor: mapAndSelection.color, fillOpacity: 0.7});
+    console.log(feature.getProperty('district') + ": " + mapAndSelection.color);
   });
-  mapAndSelection.map.setStyle({visible: true});
 }
 // based on google survey question ratings 1-5 on police sentiment
-async function averagePrecinctSentiment(policePrecinct) {
-  const response = await fetch('/load-data?precinct=' + policePrecinct);
-  const list = await response.json();
+function getSentimentList(policePrecinct) {
+  const responsePromise = fetch('/load-data?precinct=' + policePrecinct);
+  responsePromise.then(averagePrecinctSentiment);
+}
+function averagePrecinctSentiment(response){
+  const list = response.json();
   let sentimentCount = 0;
   for (let i = 0; i < list.length; i++) {
     const sentiment = list[i].score;
@@ -321,10 +323,11 @@ async function averagePrecinctSentiment(policePrecinct) {
     }
   }
   const sentimentAverage = sentimentCount/list.length;
-  return getSentimentColor(sentimentAverage, policePrecinct);
+  console.log("getSC " + getSentimentColor(sentimentAverage));
+  return getSentimentColor(sentimentAverage);
 }
 //* *colors precinct on map based on strong dislike to strong like */
-function getSentimentColor(averageFeelings, policePrecinct) {
+function getSentimentColor(averageFeelings) {
   let precinctColor = '#228B22';
   if (Math.round(averageFeelings) == 5) {
     precinctColor = '#165B33';
@@ -337,6 +340,7 @@ function getSentimentColor(averageFeelings, policePrecinct) {
   } else {
     precinctColor = '#BB2528';
   }
+  mapAndSelection.color = precinctColor;
   return precinctColor;
 }
 //* *global variable for precinctLayer data layer and checkbox selection */
@@ -397,7 +401,6 @@ function getColor(gradient) {
 async function loadWordcloud() {
   const response = await fetch('/wordcloud?scope=' + precinct);
   const data = await response.json();
-  console.log('loading');
   data.sort(function(a, b) {
     b.weight - a.weight;
   });

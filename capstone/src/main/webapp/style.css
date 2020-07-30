@@ -230,6 +230,7 @@ ul {
 }
 
 #map-key {
+  cursor: pointer;
   position: absolute;
   bottom: 15%;
   z-index: 5;
