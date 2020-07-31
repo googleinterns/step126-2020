@@ -7,6 +7,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.sps.data.MapData;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -19,11 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/update-associations")
 public class UpdateAssociationServlet extends HttpServlet {
 
-  public static final String SURVEY_ENTITY_KIND = "Actual";
+  public static final String SURVEY_ENTITY_KIND = "Response";
   public static final String COMMENT_PROPERTY = "text";
+  public static final String ZIPCODE = "zipCode";
 
   private LanguageServiceClient nlpClient;
   private DatastoreService datastore;
+  private MapData mapData = new MapData();
 
   public void init() throws ServletException {
     try {
@@ -37,13 +40,21 @@ public class UpdateAssociationServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    AssociationAnalysis association = new AssociationAnalysis(loadPreviousResults());
     CloudNLPAssociation nlp = new CloudNLPAssociation(nlpClient);
-    ArrayList<AssociationResult> res =
-        association.calculateScores(nlp.analyzeAssociations(getComments()));
-    response.getWriter().println(res);
 
-    storeResults(res);
+    ArrayList<EntitySentiment> sentiments = nlp.analyzeAssociations(getComments());
+
+    for (String scope : mapData.getAllScopes()) {
+      AssociationAnalysis analysis = new AssociationAnalysis(loadPreviousResults(scope));
+      ArrayList<EntitySentiment> filteredSentiment = new ArrayList<EntitySentiment>();
+      for (EntitySentiment sentiment : sentiments) {
+        if (sentiment.getScopes().contains(scope)) {
+          filteredSentiment.add(sentiment);
+        }
+      }
+      ArrayList<AssociationResult> res = analysis.calculateScores(filteredSentiment);
+      storeResults(res, scope);
+    }
   }
 
   public void destroy() {
@@ -55,17 +66,23 @@ public class UpdateAssociationServlet extends HttpServlet {
    *
    * @return an arraylist of the comment text
    */
-  private ArrayList<String> getComments() {
+  private ArrayList<AssociationInput> getComments() {
     Query query = new Query(SURVEY_ENTITY_KIND);
     PreparedQuery results = datastore.prepare(query);
 
-    ArrayList<String> comments = new ArrayList<String>();
+    ArrayList<AssociationInput> comments = new ArrayList<AssociationInput>();
     for (Entity e : results.asIterable()) {
       if (e.getProperty("association-processed") == null
           || !((boolean) e.getProperty("association-processed"))) {
-        comments.add((String) e.getProperty(COMMENT_PROPERTY));
-        e.setProperty("association-processed", true);
-        datastore.put(e);
+        String message = (String) e.getProperty(COMMENT_PROPERTY);
+        try {
+          ArrayList<String> scope = mapData.getScope((String) e.getProperty(ZIPCODE));
+          comments.add(new AssociationInput(message, scope));
+          e.setProperty("association-processed", true);
+          datastore.put(e);
+        } catch (NullPointerException exception) {
+          System.err.println("Invalid zip code in response: " + (String) e.getProperty(ZIPCODE));
+        }
       }
     }
     return comments;
@@ -74,19 +91,22 @@ public class UpdateAssociationServlet extends HttpServlet {
   /**
    * Loads all previous association results from datastore
    *
+   * @param scope the scope to load results from
    * @return an arraylist of previous responses
    */
-  private ArrayList<AssociationResult> loadPreviousResults() {
+  private ArrayList<AssociationResult> loadPreviousResults(String scope) {
     Query query = new Query(AssociationResult.ENTITY_KIND);
     PreparedQuery results = datastore.prepare(query);
 
     ArrayList<AssociationResult> prev = new ArrayList<AssociationResult>();
     for (Entity entity : results.asIterable()) {
+      if (!scope.equals((String) entity.getProperty("scope"))) continue;
       String content = (String) entity.getProperty("name");
       float weight = (float) (double) entity.getProperty("weight");
       float score = (float) (double) entity.getProperty("score");
+      boolean strongSentiment = (boolean) entity.getProperty("strong-sentiment");
       Key key = entity.getKey();
-      prev.add(new AssociationResult(content, score, weight, key));
+      prev.add(new AssociationResult(content, score, weight, strongSentiment, key));
     }
 
     return prev;
@@ -96,8 +116,9 @@ public class UpdateAssociationServlet extends HttpServlet {
    * Adds new association results to the datastore service
    *
    * @param res the arraylist of results to be stored
+   * @param scope the precinct/scope to store the results under
    */
-  private void storeResults(ArrayList<AssociationResult> res) {
+  private void storeResults(ArrayList<AssociationResult> res, String scope) {
     ArrayList<Entity> entities = new ArrayList<Entity>();
     for (AssociationResult association : res) {
       Optional<Key> key = association.getKey();
@@ -111,6 +132,8 @@ public class UpdateAssociationServlet extends HttpServlet {
       entity.setProperty("score", association.getScore());
       entity.setProperty("weight", association.getWeight());
       entity.setProperty("average-sentiment", association.getAverageSentiment());
+      entity.setProperty("strong-sentiment", association.hasStrongSentiment());
+      entity.setProperty("scope", scope);
       entities.add(entity);
     }
     datastore.put(entities);
