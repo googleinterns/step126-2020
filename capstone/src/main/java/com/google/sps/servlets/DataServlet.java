@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** 
-* Servlet that retreives entities from the ReadData class and adds them to 
-* data store if they are not already present
-*/
+/**
+ * Servlet that retreives entities from the ReadData class and adds them to data store if they are
+ * not already present
+ */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   @Override
@@ -28,16 +28,16 @@ public class DataServlet extends HttpServlet {
 
     for (int i = 0; i < allEntities.size(); i++) {
       Entity currentEntity = allEntities.get(i);
-      
+
       try {
         datastore.get(currentEntity.getKey());
       } catch (EntityNotFoundException e) {
         continue;
       }
-   
+
       allEntities.remove(i);
 
-      i -= 1;  
+      i -= 1;
     }
 
     datastore.put(allEntities);

@@ -150,7 +150,7 @@ public class ReadData {
 
           total++;
         }
-        
+
         // Store these properties in the hundreds to avoid precision errors
         if (total != 0) {
           entity.setProperty("averageHouseholdIncome", Math.round(sumIncome / total));
