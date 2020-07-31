@@ -438,7 +438,6 @@ async function loadWordcloud() {
 function configModal() {
   // Get the modal
   const modal = document.getElementById('modal');
-
   // Get the <span> element that closes the modal
   const span = document.getElementById('modal-close');
 

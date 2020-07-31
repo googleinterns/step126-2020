@@ -241,7 +241,10 @@ ul {
   font-family: "Oswald", sans-serif;
   line-height: 30px;
   padding-left: 10px;
-  color: white;
+  background-color: #19B3B1;
+  border: double;
+  border-radius: 5px;
+    color: white;
 }
 
 /* The Modal (background) */
