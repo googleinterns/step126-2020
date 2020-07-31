@@ -155,7 +155,7 @@ let precinctButtonOn= false;
 function precinctControl(controlDiv, map) {
   //* *adding precinct overlay */
   const precinctLayer = new google.maps.Data({map: map});
-  precinctLayer.loadGeoJson('neighborhoods.json');
+  precinctLayer.loadGeoJson('policePrecincts.geojson');
   // a function that uses color map to map, checks if button is clicked
   precinctLayer.setStyle({fillColor: '#CECDBC',
     fillOpacity: 0.9, visible: false});
@@ -166,7 +166,7 @@ function precinctControl(controlDiv, map) {
       fillOpacity: 0.9});
     precinctLayer.overrideStyle(event.feature, {
       fillColor: '#19B3B1', fillOpacity: .7});
-    precinct = event.feature.getProperty('station');
+    precinct = event.feature.getProperty('district');
     document.getElementById('chart-title').textContent =
      precinct + ' Police Sentiment';
     loadCharts();
@@ -289,10 +289,18 @@ function loadSentimentPieChart(sentimentCount) {
     ['Negative', sentimentCount['Negative']],
   ]);
 
+  const options = {
+    animation: {
+      startup: true,
+      duration: 1000,
+      easing: 'out',
+    },
+  };
+
   // Instantiate and draw the chart.
   const chart = new google.visualization.PieChart(
       document.getElementById('sentiment-pie-chart'));
-  chart.draw(stats, null);
+  chart.draw(stats, options);
 }
 
 function loadResponseChart(totalResponses, precinct) {
@@ -303,10 +311,19 @@ function loadResponseChart(totalResponses, precinct) {
   stats.addRows([
     [precinct, totalResponses],
   ]);
+
+  const options = {
+    animation: {
+      startup: true,
+      duration: 3000,
+      easing: 'out',
+    },
+  };
+
   // Instantiate and draw the chart.
   const chart = new google.visualization.BarChart(
       document.getElementById('response-bar-chart'));
-  chart.draw(stats, null);
+  chart.draw(stats, options);
 }
 
 function mapSentiment(colorMap) {
@@ -316,14 +333,14 @@ function mapSentiment(colorMap) {
     precinctLayer.setStyle({fillColor: '#CECDBC',
       fillOpacity: 0.9});
     precinctLayer.overrideStyle(precinctLayer.getFeatureById(
-        searchPrecinctsByStation(precinctName)),
+        searchPrecinctsByDistrict(precinctName)),
     {fillColor: precinctColor, fillOpacity: 0.9});
   }
 }
 
-function searchPrecinctsByStation(desiredStation) {
+function searchPrecinctsByDistrict(desiredDistrict) {
   mapAndSelection.map.forEachFeature( function(feature) {
-    if (feature.getProperty('station') == desiredStation) {
+    if (feature.getProperty('district') == desiredDistrict) {
       return feature.getProperty('id');
     }
   });
@@ -392,6 +409,7 @@ function getColor(gradient) {
 async function loadWordcloud() {
   const response = await fetch('/wordcloud?scope=' + precinct);
   const data = await response.json();
+  console.log('loading');
   data.sort(function(a, b) {
     b.weight - a.weight;
   });
@@ -405,6 +423,9 @@ async function loadWordcloud() {
   const list = data.map(function(x) {
     return [x.content, x.weight];
   });
+  const list2 = data.map(function(x) {
+    return [x.content, x.weight/7];
+  });
   const color = function(word, weight, fontSize, distance, theta) {
     const elem = data.find(function(elem) {
       return elem.content === word;
@@ -414,14 +435,25 @@ async function loadWordcloud() {
   /* eslint-disable new-cap */
   WordCloud(document.getElementById('cloud-canvas'),
       {list: list, color: color} );
+  WordCloud(document.getElementById('map-cloud'),
+      {list: list2, color: color} );
   /* eslint-enable new-cap */
 }
 
 // configures and opens word cloud modal
 function configModal() {
+  // Get WordCloud
+  loadWordcloud();
+
+  // Get the map key
+  const key = document.getElementById('map-key');
+
+  // Get the space for word cloud
+  const cloud = document.getElementById('map-cloud');
+
   // Get the modal
   const modal = document.getElementById('modal');
-
+  
   // Get the <span> element that closes the modal
   const span = document.getElementById('modal-close');
 
@@ -432,12 +464,16 @@ function configModal() {
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
     modal.style.display = 'none';
+    key.style.display = 'block';
+    cloud.style.display = 'block';
   };
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = 'none';
+      key.style.display = 'block';
+      cloud.style.display = 'block';
     }
   };
 }

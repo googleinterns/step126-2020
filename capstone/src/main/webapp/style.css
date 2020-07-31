@@ -231,17 +231,17 @@ ul {
 
 #map-key {
   position: absolute;
-  top: 30%;
-  left: 60%;
+  bottom: 15%;
   z-index: 5;
-  background-color: #19B3B1;
   padding: 5px;
-  border: double 5px;
   text-align: center;
   font-family: "Oswald", sans-serif;
   line-height: 30px;
   padding-left: 10px;
-  color: white;
+  background-color: #19B3B1;
+  border: double;
+  border-radius: 5px;
+    color: white;
 }
 
 /* The Modal (background) */

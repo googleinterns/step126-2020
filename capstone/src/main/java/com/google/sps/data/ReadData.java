@@ -55,7 +55,7 @@ public class ReadData {
    * @param zip This is the zip code the file is associated with
    * @return {Void}
    */
-  public void readFile(FileReader file, String zip) {
+  public void readFile(FileReader file, String zipCode) {
     final int EXPECTED_LENGTH = 15;
     BufferedReader reader = null;
 
@@ -76,25 +76,25 @@ public class ReadData {
           date = null;
         }
 
-        String completion = values[2];
+        String completionStatus = values[2];
         String gender = values[4];
         String ageRange = values[5];
-        String answerOne = values[8];
-        String answerTwo = values[9];
-        String answerThree = "";
+        String directExperience = values[8];
+        String rating = values[9];
+        String text = "";
 
         final int START_INDEX = 11;
 
         int indexOfLong = (values.length - EXPECTED_LENGTH) + START_INDEX + 1;
 
         for (int i = START_INDEX; i < indexOfLong; i++) {
-          answerThree += values[i];
+          text += values[i];
         }
 
         float score = 0;
 
-        if (answerThree.length() > 0) {
-          score = sentimentService.getSentiment(answerThree);
+        if (text.length() > 0) {
+          score = sentimentService.getSentiment(text);
         }
 
         long responseTimeOne = Long.parseLong(values[indexOfLong++]);
@@ -111,19 +111,42 @@ public class ReadData {
         }
 
         if (inStore == null) {
-          entity.setProperty("zipCode", zip);
+          entity.setProperty("zipCode", zipCode);
           entity.setProperty("id", id);
           entity.setProperty("date", date);
-          entity.setProperty("completion", completion);
+          entity.setProperty("completionStatus", completionStatus);
           entity.setProperty("gender", gender);
           entity.setProperty("ageRange", ageRange);
-          entity.setProperty("answerOne", answerOne);
-          entity.setProperty("answerTwo", answerTwo);
-          entity.setProperty("answerThree", answerThree);
+          entity.setProperty("directExperience", directExperience);
+          entity.setProperty("rating", rating);
+          entity.setProperty("text", text);
           entity.setProperty("score", score);
           entity.setProperty("responseTimeOne", responseTimeOne);
           entity.setProperty("responseTimeTwo", responseTimeTwo);
           entity.setProperty("responseTimeThree", responseTimeThree);
+
+          // If the survey maps to more than 1 precinct, average the precinct data
+          ArrayList<String> precinctNames = MapData.getPrecincts(zipCode);
+
+          int sumIncome = 0;
+          int sumCrimeRate = 0;
+          int sumStationRating = 0;
+          int total = 0;
+          for (String precinctName : precinctNames) {
+            Precinct precinct = FeatureData.getPrecinct(precinctName);
+
+            sumIncome += precinct.getAverageHouseholdIncome();
+            sumCrimeRate += precinct.getCrimeRate();
+            sumStationRating += precinct.getPoliceStationRating();
+
+            total++;
+          }
+
+          if (total != 0) {
+            entity.setProperty("averageHouseholdIncome", Math.round(sumIncome / total));
+            entity.setProperty("crimeRate", Math.round(sumCrimeRate / total));
+            entity.setProperty("policeStationRating", Math.round(sumStationRating / total));
+          }
 
           newEntities.add(entity);
         }
