@@ -417,6 +417,7 @@ async function loadWordcloud() {
   /* eslint-enable new-cap */
 }
 
+// configures and opens word cloud modal
 function configModal() {
   // Get the modal
   const modal = document.getElementById('modal');
@@ -444,8 +445,8 @@ function configModal() {
 //* *goes to log in page if user is not logged in */
 async function showStats() {
   const logStatus = await fetch('/status');
-  const status = await logStatus.json();
-  if (status == true) {
+  const loggedIn = await logStatus.json();
+  if (loggedIn) {
     window.location.href = 'statistics.html';
   } else {
     window.location = '/login';
