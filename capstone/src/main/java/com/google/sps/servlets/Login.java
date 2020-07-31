@@ -23,7 +23,6 @@ public class Login extends HttpServlet {
       redirectUrl = userService.createLoginURL("/login");
     } else {
       logMsg = "user is already logged in";
-      redirectUrl = "statistics.html";
     }
     response.getWriter().println(logMsg);
     response.sendRedirect(redirectUrl);
