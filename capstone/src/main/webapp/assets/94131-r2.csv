@@ -1,0 +1,8 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+130116039,2020-07-27 02:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,No,3,no experience,no experience,64850.0,20614.0,13479.0
+1325696130,2020-07-27 03:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,5,none,none,5932.0,8780.0,5761.0
+1433862685,2020-07-27 01:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,3,Police are necessary but not always sufficient.,Police are necessary but not always sufficient.,4825.0,3329.0,44395.0
+151981420,2020-07-27 00:00:00,Complete,News,Female,18-24,US-WEST-CA-San Francisco,,No,3,no strong opinion,no strong opinion,8378.0,3349.0,6914.0
+1536947333,2020-07-25 22:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,1,no,no,7935.0,7736.0,6779.0
+1702076403,2020-07-23 20:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,no,no,43755.0,5058.0,4133.0
+434278325,2020-07-27 01:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,2,portland,portland,5834.0,5662.0,8205.0

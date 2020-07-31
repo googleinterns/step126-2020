@@ -1,0 +1,18 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1036339032,2020-07-27 17:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,mind your own business,mind your own business,49458.0,19568.0,12341.0
+1093636002,2020-07-26 22:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,Have had no personal experience either way,Have had no personal experience either way,7143.0,7148.0,42173.0
+1144161276,2020-07-26 21:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,no reponse,no reponse,6181.0,6301.0,9257.0
+135623122,2020-07-25 13:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,4,None,None,3944.0,4641.0,8597.0
+1752961389,2020-07-24 16:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,4,News,News,10993.0,2327.0,3717.0
+1808559975,2020-07-27 14:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,3,We need police. Just not so violent.,We need police. Just not so violent.,2508349.0,4607.0,32881.0
+1855025038,2020-07-25 00:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,4,They put up with a lot without overreacting or getting macho.,They put up with a lot without overreacting or getting macho.,25040.0,5356.0,23200.0
+1999357434,2020-07-23 04:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,4,based on news,based on news,8524.0,4561.0,21191.0
+2042119250,2020-07-26 04:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,1,No,No,5763.0,3973.0,5660.0
+2048127173,2020-07-27 00:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,Not enough experience with the police to give a different rating,Not enough experience with the police to give a different rating,318613.0,2283.0,13998.0
+345211461,2020-07-27 17:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,3,Na,na,12623.0,8549.0,16270.0
+506869352,2020-07-26 20:00:00,Complete,News,Female,65+,US-WEST-CA-San Francisco,,No,5,No reason,No reason,2829.0,2395.0,10192.0
+517869178,2020-07-23 17:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,No,3,"in my community, we haven't had a george floyd moment but that doesn't mean we won't and that is scary","in my community, we haven't had a george floyd moment but that doesn't mean we won't and that is scary",5341.0,6812.0,63826.0
+567153216,2020-07-23 20:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,2,They are fascits,They are fascits,5655.0,2785.0,8236.0
+644059736,2020-07-24 19:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,Yes,1,"past experiences of police pointing guns at me based on false claims of reported crime, when in fact no call or complaint came in. Threatening to kill me in front of my children. Stuff like that.","past experiences of police pointing guns at me based on false claims of reported crime, when in fact no call or complaint came in. Threatening to kill me in front of my children. Stuff like that.",7613.0,3837.0,63835.0
+824033332,2020-07-25 17:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,5,Vast majority are reasonable and polite. Only negative interactions have been when they are forced to enforce new policies or old laws that constrain their discretion and judgement.,Vast majority are reasonable and polite. Only negative interactions have been when they are forced to enforce new policies or old laws that constrain their discretion and judgement.,13677.0,3694.0,166122.0
+826540851,2020-07-26 15:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,No,3,Na,Na,10603.0,7743.0,7310.0

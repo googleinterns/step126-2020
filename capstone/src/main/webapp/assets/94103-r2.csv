@@ -1,0 +1,16 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1105326847,2020-07-26 23:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,Thin blue line,Thin blue line,5728.0,3439.0,10869.0
+1115853498,2020-07-26 20:00:00,Complete,Arts & Entertainment,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,5,been friendly to me,been friendly to me,52203.0,7328.0,14684.0
+1247232524,2020-07-24 05:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,4,An OPD Officer gave did not write me a ticket for expired registration due to DMV closure due to Covid 19.,An OPD Officer gave did not write me a ticket for expired registration due to DMV closure due to Covid 19.,12695.0,6851.0,110401.0
+1294678414,2020-07-24 00:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,No,4,they seem to be doing a good job from my perspective,they seem to be doing a good job from my perspective,766411.0,3205.0,23452.0
+1343167551,2020-07-23 23:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,4,SF generally OK,SF generally OK,9410.0,3374.0,7304.0
+1438473899,2020-07-27 17:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,Prefer not to answer,1,blah blah blah,blah blah blah,20632.0,9178.0,15685.0
+144944335,2020-07-25 21:00:00,Complete,News,Female,18-24,US-WEST-CA-San Francisco,,No,4,n ty,n ty,43378.0,4229.0,12190.0
+1536663957,2020-07-27 20:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,4,"When I was robbed in the park they helped me out, and were very kind.","When I was robbed in the park they helped me out, and were very kind.",1401216.0,5897.0,20677.0
+1656555825,2020-07-23 21:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,can be better,can be better,40398.0,9066.0,17634.0
+296212986,2020-07-25 19:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,2,police brutality,police brutality,194180.0,4391.0,11400.0
+594689836,2020-07-24 20:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,Prefer not to answer,4,No reason,No reason,300362.0,4077.0,18366.0
+606874621,2020-07-23 23:00:00,Complete,Arts & Entertainment,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,3,sagepho,sagepho,3633.0,3531.0,8469.0
+721827831,2020-07-25 16:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,4,Good,Good,6938.0,4703.0,8161.0
+954299867,2020-07-24 19:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,"I believe cops do a decent job in my area, but I still believe that their training leads them to lean more to violet action then peaceful ones. I have seen several videos of locals police activity where a suspect was shot or harmed during arrest simply because the police chose to...","I believe cops do a decent job in my area, but I still believe that their training leads them to lean more to violet action then peaceful ones. I have seen several videos of locals police activity where a suspect was shot or harmed during arrest simply because the police chose to...",24277.0,8055.0,106523.0
+999030454,2020-07-26 13:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,5,Protection,Protection,14420.0,5693.0,14353.0

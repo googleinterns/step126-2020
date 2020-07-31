@@ -1,0 +1,10 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1424970534,2020-07-18 05:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,3,Haven't really helped me but it's good they exist,Haven't really helped me but it's good they exist,6646.0,6864.0,28889.0
+1693422368,2020-07-21 18:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,No,5,I have many relatives in the police force and I support them..,I have many relatives in the police force and I support them..,44699.0,20761.0,74839.0
+1722872393,2020-07-20 16:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,3,Too militarized generally,Too militarized generally,111165.0,3217.0,11608.0
+1759931274,2020-07-20 16:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,Very professional,Very professional,19462.0,6901.0,25279.0
+2082457879,2020-07-17 20:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,5,awer,awer,5180.0,4727.0,4175.0
+286835421,2020-07-22 00:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,3,NEVER BEEN IN TROUBLE,NEVER BEEN IN TROUBLE,12562.0,14675.0,34697.0
+644143101,2020-07-22 06:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Yes,5,Most trusted public department (check the statistics) in the nation.,Most trusted public department (check the statistics) in the nation.,21649.0,3777.0,21455.0
+754003471,2020-07-20 22:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,3,none,none,5078.0,5749.0,6786.0
+90518541,2020-07-20 20:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,Yes,4,no thanks,no thanks,6682.0,5740.0,9924.0

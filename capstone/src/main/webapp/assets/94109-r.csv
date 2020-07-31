@@ -1,0 +1,21 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1152763231,2020-07-20 16:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,2,We need to rebuild our police departments,We need to rebuild our police departments,3884.0,3852.0,27032.0
+1258226104,2020-07-19 05:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,4,"cops around here are generally good, it's a tough job","cops around here are generally good, it's a tough job",11896.0,7267.0,34167.0
+1308496118,2020-07-15 21:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,1,bad,bad,5292.0,5231.0,15067.0
+1447609324,2020-07-18 20:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,2,Clearly different treatment for people of color,Clearly different treatment for people of color,5339.0,3557.0,38785.0
+15710904,2020-07-17 18:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,2,"live in a major city, they're focused on othering/criminalizing vulnerable populations, limited compassion","live in a major city, they're focused on othering/criminalizing vulnerable populations, limited compassion",10324.0,5215.0,49003.0
+1573729294,2020-07-18 05:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,5,No problem,No problem,6403.0,4788.0,9222.0
+1597115131,2020-07-20 17:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,5,n/a,n/a,15405.0,7583.0,12048.0
+170797357,2020-07-20 20:00:00,Complete,News,Male,18-24,US-WEST-CA-San Francisco,,Prefer not to answer,3,n/a,n/a,7951.0,4434.0,6494.0
+1721547741,2020-07-18 17:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,4,Nop,no,11351.0,5310.0,7507.0
+1863890522,2020-07-20 06:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,4,Yes,Yes,4866.0,3749.0,6246.0
+1882133003,2020-07-15 23:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,Nop,Nop,4447.0,2316.0,4171.0
+1979813379,2020-07-18 17:00:00,Complete,News,Female,55-64,US-WEST-CA-San Francisco,,No,5,peace,peace,5761.0,5246.0,14643.0
+1989325117,2020-07-18 22:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,Yes,4,n/a,NA,4579.0,2688.0,4297.0
+2010274167,2020-07-19 17:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,n/a,n?A,30061.0,7302.0,9245.0
+2088023030,2020-07-19 03:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,2,Yes,yes,7480.0,4056.0,6838.0
+271250266,2020-07-19 01:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,Yes,2,defund the police,defund the police,2801.0,3252.0,10725.0
+299003605,2020-07-20 16:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,5,They protect our city,They protect our city,8417.0,5635.0,12045.0
+367409010,2020-07-20 14:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,4,police are needed,police are needed,9851.0,5038.0,11606.0
+429551479,2020-07-18 18:00:00,Complete,Reference,Female,18-24,US-WEST-CA-San Francisco,,No,3,n/a,n/a,3492.0,2490.0,5451.0
+558323647,2020-07-20 08:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,1,Racism,Racism,4083.0,2880.0,7228.0
