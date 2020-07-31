@@ -1,0 +1,8 @@
+runtime: python37
+service: pythonservice
+instance_class: F4
+entrypoint: gunicorn -b :8080 -w 2 main:app
+
+handlers:
+- url: /regression-analysis
+  script: auto
