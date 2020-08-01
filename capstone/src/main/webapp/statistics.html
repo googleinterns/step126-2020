@@ -15,8 +15,27 @@
     <div class="clear"></div>
     <div id="content" class="content">
     <div id = "stats-area" class="stats-area">
-      <div id="prediction-panel" class="prediction-panel"></div>
-
+      <div id="prediction-panel" class="prediction-panel">
+      <div id="option-panel" class="option-panel">
+      <h3>Select a gender:</h3>
+      <select onchange="getPrediction(this, 'gender')">
+        <option>Male</option>
+        <option>Female</option>
+        <option>Unknown</option>
+      </select>
+      <h3>Select an age range:</h3>
+      <select onchange="getPrediction(this, 'ageRange')">
+        <option>18-24</option>
+        <option>25-34</option>
+        <option>35-44</option>
+        <option>45-54</option>
+        <option>55-64</option>
+        <option>65+</option>
+        <option>Unknown</option>
+      </select>
+      </div>
+      <div id="prediction-bar" class="prediction-bar"></div>
+      </div>
       <div class="stats-grid">
         <div id="completion-pie-chart" class="grid-item"></div>
         <div id="response-time-average-bar-chart" class="grid-item"></div>

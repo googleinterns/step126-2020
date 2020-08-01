@@ -229,3 +229,7 @@ function loadResponseChart(totalResponses, precinct) {
       document.getElementById('response-bar-chart'));
   chart.draw(stats, options);
 }
+
+function showStats () {
+    window.location.href = 'statistics.html';
+}
