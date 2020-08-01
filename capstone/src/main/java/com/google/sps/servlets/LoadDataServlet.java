@@ -27,17 +27,19 @@ public class LoadDataServlet extends HttpServlet {
     Query query = new Query(kind);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-    
-    if (kind.equals("Response")) {
+
+    if (kind != null && kind.equals("Response")) {
       getSurveyData(request, response, results);
     }
 
-    if (kind.equals("Predictions")) {
+    if (kind != null && kind.equals("Predictions")) {
       getPredictions(request, response, results);
     }
   }
 
-  public void getSurveyData(HttpServletRequest request, HttpServletResponse response, PreparedQuery results) throws IOException {
+  public void getSurveyData(
+      HttpServletRequest request, HttpServletResponse response, PreparedQuery results)
+      throws IOException {
     List<SurveyResponse> surveyResponses = new ArrayList<SurveyResponse>();
 
     String precinct = request.getParameter("precinct");
@@ -83,11 +85,13 @@ public class LoadDataServlet extends HttpServlet {
     response.getWriter().println(gson.toJson(surveyResponses));
   }
 
-  public void getPredictions(HttpServletRequest request, HttpServletResponse response, PreparedQuery results) throws IOException {
+  public void getPredictions(
+      HttpServletRequest request, HttpServletResponse response, PreparedQuery results)
+      throws IOException {
     String gender = request.getParameter("gender");
     String ageRange = request.getParameter("ageRange");
     float score = 0;
-   
+
     for (Entity e : results.asIterable()) {
       String entityGender = (String) e.getProperty("gender");
       String entityAgeRange = (String) e.getProperty("ageRange");

@@ -5,6 +5,7 @@ from google.cloud import datastore
 from flask import Flask
 app = Flask(__name__)
 
+
 @app.route('/regression-analysis')
 def main():
     df = load_dataframe()
@@ -82,6 +83,7 @@ def getEncodedArray(gender, ageRange):
         encoded_array.append(value)
     
     return encoded_array
+
 
 def add_predictions(fit_regressor):
     datastore_client = datastore.Client()

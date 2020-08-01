@@ -6,7 +6,8 @@ google.charts.setOnLoadCallback(getPrediction(null, ''));
 google.charts.setOnLoadCallback(getSurveyResponses);
 
 async function getSurveyResponses() {
-  const response = await fetch('/load-data?kind=Response&precinct=' + precinctSelected);
+  const response = await fetch('/load-data?kind=Response&precinct=' +
+                               precinctSelected);
   const list = await response.json(); // list of entities from datastore
 
   // Sentiment category for the user's survey response
@@ -120,16 +121,17 @@ async function getSurveyResponses() {
 
 async function getPrediction(choice, category) {
   // Default values
-  gender = 'Male';
-  ageRange = '18-24';
+  let gender = 'Male';
+  let ageRange = '18-24';
 
   if (category === 'gender') {
-    gender = choice.options[choice.selectedIndex].text;    
+    gender = choice.options[choice.selectedIndex].text;
   } else if (category === 'ageRange') {
     ageRange = choice.options[choice.selectedIndex].text;
   }
-  
-  const response = await fetch('/load-data?kind=Predictions&gender=' + gender + '&ageRange=' + ageRange);
+
+  const response = await fetch('/load-data?kind=Predictions&gender=' +
+                               gender + '&ageRange=' + ageRange);
   const score = await response.json(); // Predicted sentiment score
 
   loadPredictionBar(score);
@@ -147,7 +149,8 @@ function loadPredictionBar(score) {
   const options = {
     title: 'Sentiment Score Predictions',
     legend: 'none',
-    vAxis: {title: 'Negative to Positive Sentiment', minValue: -0.5, maxValue: 0.5},
+    vAxis: {title: 'Negative to Positive Sentiment',
+      minValue: -0.5, maxValue: 0.5},
     colors: ['#0000FF'],
     animation: {
       startup: true,
@@ -159,7 +162,7 @@ function loadPredictionBar(score) {
   // Instantiate and draw the chart.
   const chart = new google.visualization.ColumnChart(
       document.getElementById('prediction-bar'));
-  chart.draw(stats, options);  
+  chart.draw(stats, options);
 }
 
 function loadCompletionPieChart(completionCount) {

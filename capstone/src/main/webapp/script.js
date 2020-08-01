@@ -154,7 +154,7 @@ async function postSurveyResponses() {
 }
 
 async function loadCharts() {
-  const response = await fetch('/load-data?precinct=' + precinct);
+  const response = await fetch('/load-data?kind=Response&precinct=' + precinct);
 
   sessionStorage.setItem('precinct', precinct);
 
@@ -230,6 +230,6 @@ function loadResponseChart(totalResponses, precinct) {
   chart.draw(stats, options);
 }
 
-function showStats () {
-    window.location.href = 'statistics.html';
+function showStats() {
+  window.location.href = 'statistics.html';
 }
