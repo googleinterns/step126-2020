@@ -2,8 +2,12 @@
 const precinctSelected = sessionStorage.getItem('precinct');
 
 google.charts.load('current', {packages: ['corechart']});
-google.charts.setOnLoadCallback(getPrediction(null, ''));
-google.charts.setOnLoadCallback(getSurveyResponses);
+google.charts.setOnLoadCallback(loadCharts);
+
+function loadCharts() {
+  getPrediction(null, '');
+  getSurveyResponses();
+}
 
 async function getSurveyResponses() {
   const response = await fetch('/load-data?kind=Response&precinct=' +
