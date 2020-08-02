@@ -97,9 +97,10 @@ public class LoadDataServlet extends HttpServlet {
       String entityDirectExp = (String) e.getProperty("directExperience");
       String entityGender = (String) e.getProperty("gender");
       String entityAgeRange = (String) e.getProperty("ageRange");
-      
-      if (entityGender.equals(gender) && entityAgeRange.equals(ageRange) &&
-          entityDirectExp.equals(directExperience)) {
+
+      if (entityGender.equals(gender)
+          && entityAgeRange.equals(ageRange)
+          && entityDirectExp.equals(directExperience)) {
         score = (float) (double) e.getProperty("score");
         break;
       }

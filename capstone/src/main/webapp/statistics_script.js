@@ -124,11 +124,11 @@ async function getSurveyResponses() {
 }
 
 // Default global values
-var directExperience = 'No';
-var gender = 'Male';
-var ageRange = '18-24';
+let directExperience = 'No';
+let gender = 'Male';
+let ageRange = '18-24';
 
-async function getPrediction(choice, category) {  
+async function getPrediction(choice, category) {
   if (category === 'gender') {
     gender = choice.options[choice.selectedIndex].text;
   } else if (category === 'ageRange') {
@@ -136,18 +136,18 @@ async function getPrediction(choice, category) {
   } else if (category === 'directExperience') {
     directExperience = choice.options[choice.selectedIndex].text;
   }
-  
+
   // Ensures values match those in data store
   if (directExperience ==='Unknown') {
-    directExperience = "NoResponse"
+    directExperience = 'NoResponse';
   }
 
   if (gender ==='Unknown') {
-    gender = "UnknownGender"
+    gender = 'UnknownGender';
   }
 
   if (ageRange ==='Unknown') {
-    ageRange = "UnknownAge"
+    ageRange = 'UnknownAge';
   }
 
   const response = await fetch('/load-data?kind=Predictions&gender=' +
