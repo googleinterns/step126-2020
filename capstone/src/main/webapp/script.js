@@ -230,6 +230,8 @@ function loadResponseChart(totalResponses, precinct) {
   chart.draw(stats, options);
 }
 
+/* ignore jslint start*/
 function showStats() {
   window.location.href = 'statistics.html';
 }
+/* ignore jslint end*/

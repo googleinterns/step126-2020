@@ -123,17 +123,25 @@ async function getSurveyResponses() {
   loadAgePieChart(ageCount);
 }
 
-async function getPrediction(choice, category) {
-  // Default values
-  let gender = 'Male';
-  let ageRange = '18-24';
+// Default global values
+var gender = 'Male';
+var ageRange = '18-24';
 
+async function getPrediction(choice, category) {  
   if (category === 'gender') {
     gender = choice.options[choice.selectedIndex].text;
   } else if (category === 'ageRange') {
     ageRange = choice.options[choice.selectedIndex].text;
   }
+  
+  // Can share same value so distinguish
+  if (gender ==='Unknown') {
+    gender = "UnknownGender"
+  }
 
+  if (ageRange ==='Unknown') {
+    ageRange = "UnknownAge"
+  }
   const response = await fetch('/load-data?kind=Predictions&gender=' +
                                gender + '&ageRange=' + ageRange);
   const score = await response.json(); // Predicted sentiment score
