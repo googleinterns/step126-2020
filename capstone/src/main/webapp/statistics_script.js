@@ -124,6 +124,7 @@ async function getSurveyResponses() {
 }
 
 // Default global values
+var directExperience = 'No';
 var gender = 'Male';
 var ageRange = '18-24';
 
@@ -132,9 +133,15 @@ async function getPrediction(choice, category) {
     gender = choice.options[choice.selectedIndex].text;
   } else if (category === 'ageRange') {
     ageRange = choice.options[choice.selectedIndex].text;
+  } else if (category === 'directExperience') {
+    directExperience = choice.options[choice.selectedIndex].text;
   }
   
-  // Can share same value so distinguish
+  // Ensures values match those in data store
+  if (directExperience ==='Unknown') {
+    directExperience = "NoResponse"
+  }
+
   if (gender ==='Unknown') {
     gender = "UnknownGender"
   }
@@ -142,8 +149,10 @@ async function getPrediction(choice, category) {
   if (ageRange ==='Unknown') {
     ageRange = "UnknownAge"
   }
+
   const response = await fetch('/load-data?kind=Predictions&gender=' +
-                               gender + '&ageRange=' + ageRange);
+                               gender + '&ageRange=' + ageRange +
+                               '&directExperience=' + directExperience);
   const score = await response.json(); // Predicted sentiment score
 
   loadPredictionBar(score);
@@ -162,7 +171,7 @@ function loadPredictionBar(score) {
     title: 'Sentiment Score Predictions',
     legend: 'none',
     vAxis: {title: 'Negative to Positive Sentiment',
-      minValue: -0.5, maxValue: 0.5},
+      minValue: -1, maxValue: 1},
     colors: ['#0000FF'],
     animation: {
       startup: true,
@@ -344,7 +353,7 @@ function loadSentimentVResponseTimeScatterChart(responseTimes, scores) {
 
   const options = {
     title: 'Sentiment V. Response Time',
-    hAxis: {title: 'Response Time'},
+    hAxis: {title: 'Response Time', minValue: 0, maxValue: 50000},
     vAxis: {title: 'Sentiment Score', minValue: -1, maxValue: 1},
     legend: 'none',
   };

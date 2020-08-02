@@ -88,15 +88,18 @@ public class LoadDataServlet extends HttpServlet {
   public void getPredictions(
       HttpServletRequest request, HttpServletResponse response, PreparedQuery results)
       throws IOException {
+    String directExperience = request.getParameter("directExperience");
     String gender = request.getParameter("gender");
     String ageRange = request.getParameter("ageRange");
     float score = 0;
 
     for (Entity e : results.asIterable()) {
+      String entityDirectExp = (String) e.getProperty("directExperience");
       String entityGender = (String) e.getProperty("gender");
       String entityAgeRange = (String) e.getProperty("ageRange");
-
-      if (entityGender.equals(gender) && entityAgeRange.equals(ageRange)) {
+      
+      if (entityGender.equals(gender) && entityAgeRange.equals(ageRange) &&
+          entityDirectExp.equals(directExperience)) {
         score = (float) (double) e.getProperty("score");
         break;
       }
