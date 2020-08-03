@@ -1,0 +1,18 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1142819542,2020-07-27 15:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,Yes,3,Just how I feel.. neutral,Just how I feel.. neutral,7812.0,6778.0,23367.0
+134246227,2020-07-24 23:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,None,None,7675.0,4083.0,10043.0
+1562140504,2020-07-25 22:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,Yes,4,nothing in particular,nothing in particular,12363.0,4196.0,9557.0
+1580627208,2020-07-25 21:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,No,3,Na,Na,9777.0,6554.0,7471.0
+1663065572,2020-07-26 20:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,4,overall no issues,overall no issues,6424.0,10277.0,9184.0
+1766293324,2020-07-26 22:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,4,Cops in SF are chill,Cops in SF are chill,9583.0,9205.0,23137.0
+1838699308,2020-07-25 21:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,No,3,i have had both good and bad experiences with police.,i have had both good and bad experiences with police.,14722.0,4483.0,27708.0
+1850372338,2020-07-26 03:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,3,No,No,2752.0,3819.0,3663.0
+1904920140,2020-07-25 20:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,4,"Our police department have had some episodes of police brutality, but I think they are mostly law-abiding police.","Our police department have had some episodes of police brutality, but I think they are mostly law-abiding police.",32682.0,5885.0,53830.0
+2139705851,2020-07-24 17:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,3,Cuz,Cuz,4456.0,7042.0,5785.0
+231192478,2020-07-26 21:00:00,Complete,News,Female,65+,US-WEST-CA-San Francisco,,No,5,They have been non violent and helpful,They have been non violent and helpful,12250.0,14426.0,29490.0
+461316270,2020-07-27 03:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,No,3,Nothing good or bad,Nothing good or bad,32192.0,10842.0,20952.0
+537665823,2020-07-24 23:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Yes,5,I was in the wrong and the police did their jobs.,I was in the wrong and the police did their jobs.,9614.0,3534.0,25574.0
+71363915,2020-07-26 00:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,Fine,Fine,1956.0,1907.0,4636.0
+736902190,2020-07-25 16:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Yes,1,The only good cop is the cop that just turned in his badge.,The only good cop is the cop that just turned in his badge.,6141.0,3619.0,105266.0
+947661205,2020-07-22 23:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,4,outsourcing violence to the police is a good idea,outsourcing violence to the police is a good idea,8981.0,4369.0,36956.0
+953245211,2020-07-24 21:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,1,None,none,539746.0,3314.0,5888.0

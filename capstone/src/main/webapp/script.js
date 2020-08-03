@@ -23,7 +23,7 @@ google.charts.setOnLoadCallback(loadCharts);
 function createMap() {
   const map = new google.maps.Map(
       document.getElementById('map-container'),
-      {center: {lat: 37.7749, lng: -122.4194},
+      {center: {lat: 37.762844, lng: -122.455289},
         zoom: 12},
   );
 
@@ -43,7 +43,20 @@ function createMap() {
 
   cityLimit.setMap(map);
 
-  // button for centering map
+
+  //buttons leading to stats page and showing wordcloud
+  const wcControlDiv = document.createElement('div');
+  wordcloudControl(wcControlDiv, map);
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(wcControlDiv);
+
+  const statsControlDiv = document.createElement('div');
+  statsControlDiv.classList.add('button');
+  statsControlDiv.title = 'Click to see a detailed Statistics Page';
+  statsControlDiv.innerHTML = 'Show Detailed Stats';
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(statsControlDiv);
+  statsControlDiv.addEventListener('click', showStats);
+
+  //button for centering map
   const centerControlDiv = document.createElement('div');
   centerControl(centerControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER].push(centerControlDiv);
@@ -60,7 +73,26 @@ function createMap() {
       .push(precinctControlDiv);
   document.getElementById('map-key').style.display='none';
 }
-// button that centers map and zooms it to SF
+
+function wordcloudControl(wordcloudControlDiv, map) {
+  //* *button creation and positioning*/
+  const controlUI = document.createElement('div');
+  controlUI.id = 'wordcloud-btn';
+  controlUI.classList.add('button');
+  controlUI.title = 'Click to show Word Cloud of top word associations';
+  wordcloudControlDiv.appendChild(controlUI);
+
+  //* *css for interior of all buttons*/
+  const text = document.createElement('div');
+  text.innerHTML = 'Show WordCloud';
+  controlUI.appendChild(text);
+
+  //* *button functionality */
+  controlUI.addEventListener('click', function() {
+    configModal();
+  });
+}
+
 function centerControl(controlDiv, map) {
   // button creation and positioning
   const controlUI = document.createElement('div');
@@ -427,47 +459,37 @@ async function loadWordcloud() {
   /* eslint-enable new-cap */
 }
 
+// configures and opens word cloud modal
 function configModal() {
-  // Get WordCloud
-  loadWordcloud();
-
-  // Get the map key
-  const key = document.getElementById('map-key');
-
-  // Get the space for word cloud
-  const cloud = document.getElementById('map-cloud');
-
   // Get the modal
   const modal = document.getElementById('modal');
-
-  // Get the button that opens the modal
-  const btn = document.getElementById('map-cloud');
-
   // Get the <span> element that closes the modal
   const span = document.getElementById('modal-close');
 
   // When the user clicks the button, open the modal
-  btn.onclick = function() {
-    modal.style.display = 'block';
-    key.style.display = 'none';
-    cloud.style.display = 'none';
-  };
+  modal.style.display = 'block';
+  loadWordcloud();
 
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
     modal.style.display = 'none';
-    key.style.display = 'block';
-    cloud.style.display = 'block';
   };
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = 'none';
-      key.style.display = 'block';
-      cloud.style.display = 'block';
     }
   };
 }
 
-window.addEventListener('load', configModal);
+//* *goes to log in page if user is not logged in */
+async function showStats() {
+  const logStatus = await fetch('/status');
+  const loggedIn = await logStatus.json();
+  if (loggedIn) {
+    window.location.href = 'statistics.html';
+  } else {
+    window.location = '/login';
+  }
+}

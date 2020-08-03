@@ -1,0 +1,7 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1316689551,2020-07-17 16:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Yes,5,Professional,Professional,7986.0,4086.0,9593.0
+1392203602,2020-07-19 19:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,5,No experience,No experience,7399.0,4815.0,8619.0
+1614638067,2020-07-21 23:00:00,Complete,News,Female,55-64,US-WEST-CA-San Francisco,,No,3,Scared of bullying,Scared of bullying,5048.0,7986.0,24194.0
+561352253,2020-07-18 21:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,n/a,not sure,12632.0,9025.0,15956.0
+617632070,2020-07-17 20:00:00,Complete,News,Male,18-24,US-WEST-CA-San Francisco,,Yes,3,n/a,n/a,12723.0,7241.0,5618.0
+901355015,2020-07-15 18:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,n/a,na,14553.0,6919.0,5371.0

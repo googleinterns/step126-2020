@@ -1,0 +1,12 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1057497718,2020-07-25 17:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,No,3,N/a,N/a,5354.0,3719.0,7484.0
+1510974469,2020-07-24 01:00:00,Complete,News,Female,55-64,US-WEST-CA-San Francisco,,No,3,Just a feeling,Just a feeling,19304.0,8003.0,14942.0
+1670571270,2020-07-27 17:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,Prefer not to answer,1,they kill Black people,they kill Black people,2383.0,16827.0,37188.0
+1844097331,2020-07-27 18:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,1,Police keep killing black people,Police keep killing black people,67501.0,15306.0,10051.0
+2049928293,2020-07-26 16:00:00,Complete,News,Male,Unknown,US-WEST-CA-San Francisco,,No,3,I have very little encounters with the police.,I have very little encounters with the police.,30542.0,10434.0,32030.0
+234537814,2020-07-26 23:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,3,No,No,3853.0,6369.0,5680.0
+281842793,2020-07-22 16:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,2,For a while I thought SF police did a good job focusing on what actually mattered (e.g. not busting people for lighting a jay). But recently it's become obvious that they suffer from the same systemic racism that police departments across the country have,For a while I thought SF police did a good job focusing on what actually mattered (e.g. not busting people for lighting a jay). But recently it's become obvious that they suffer from the same systemic racism that police departments across the country have,253427.0,8615.0,70800.0
+663542062,2020-07-27 16:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,they ok,they ok,3902.0,3350.0,5818.0
+695551719,2020-07-25 01:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,Decline,Decline,11367.0,9475.0,14137.0
+707418592,2020-07-24 04:00:00,Complete,News,Female,65+,US-WEST-CA-San Francisco,,No,3,Unfairness,Unfairness,8809.0,6922.0,27233.0
+800465824,2020-07-27 15:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,3,N/a,n/a,19510.0,5950.0,12220.0

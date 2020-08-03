@@ -1,0 +1,22 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1019090555,2020-07-25 01:00:00,Complete,Arts & Entertainment,Male,45-54,US-WEST-CA-San Francisco,,No,1,I was attacked at Walgreens store. I made a Police report with the picture Id and the full name of my attacker. They didn't even send that to DA'S office.,I was attacked at Walgreens store. I made a Police report with the picture Id and the full name of my attacker. They didn't even send that to DA'S office.,3100.0,6795.0,134939.0
+1094670072,2020-07-25 01:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,Yes,3,not much direct contact,not much direct contact,9552.0,9166.0,11555.0
+1140952760,2020-07-23 18:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,2,disrespect,disrespect,3757.0,2710.0,13004.0
+1198765727,2020-07-24 20:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,3,no comment,no comment,2662.0,2401.0,5420.0
+1201709047,2020-07-23 16:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,5,No negative experiences,No negative experiences,15777.0,11948.0,12546.0
+1375720809,2020-07-25 23:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,Yes,1,I see questionable behavior from police in San Francisco nearly every day,I see questionable behavior from police in San Francisco nearly every day,4043.0,2095.0,30896.0
+139489007,2020-07-24 00:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,No,3,indifference,indifference,17093.0,11541.0,15743.0
+1449317785,2020-07-25 18:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,4,I have had no negative experiences.,I have had no negative experiences.,17897.0,4401.0,22224.0
+1574229400,2020-07-24 23:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,no comment,no comment,33432.0,5841.0,19397.0
+1677072348,2020-07-23 14:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Prefer not to answer,1,Been beaten by police before,Been beaten by police before,4814.0,5393.0,14782.0
+1781098420,2020-07-26 01:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,Yes,4,They do a decent job and are culturally competent.,They do a decent job and are culturally competent.,66819.0,7730.0,37501.0
+2108269181,2020-07-25 02:00:00,Complete,Reference,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,supportive,supportive,62846.0,3835.0,11239.0
+222983572,2020-07-25 06:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,2,Too many friends with negative encounters.,Too many friends with negative encounters.,6711.0,4189.0,32825.0
+258744217,2020-07-25 23:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,Yes,2,Police presence brings about anxiety as I am black.,Police presence brings about anxiety as I am black.,41350.0,5989.0,42558.0
+382372502,2020-07-24 23:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,3,"I've had police lie to my face on multiple occasions, so I often treat their presence with skepticism","I've had police lie to my face on multiple occasions, so I often treat their presence with skepticism",11160.0,5364.0,38532.0
+439380108,2020-07-24 23:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,4,Family,Family,13006.0,8170.0,5908.0
+484464585,2020-07-25 01:00:00,Complete,News,Male,18-24,US-WEST-CA-San Francisco,,No,3,no opinion,no opinion,16265.0,4444.0,5552.0
+530807825,2020-07-26 00:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,3,blm,blm,28683.0,7663.0,11145.0
+596540172,2020-07-24 18:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,Yes,3,lack of trust,lack of trust,16750.0,4833.0,20681.0
+863410380,2020-07-24 18:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,3,No,No,505213.0,4200.0,5590.0
+978236039,2020-07-23 19:00:00,Complete,News,Female,55-64,US-WEST-CA-San Francisco,,No,2,I disapprove of military style tactics.,I disapprove of military style tactics.,6739.0,5653.0,40984.0

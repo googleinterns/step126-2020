@@ -1,0 +1,21 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+103873542,2020-07-21 05:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,5,None,None,15378.0,5385.0,9820.0
+1068827556,2020-07-18 04:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,4,None,None,6080.0,8528.0,14617.0
+1375093939,2020-07-21 16:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,1,Violence,Violence,42612.0,3667.0,5440.0
+1429231849,2020-07-17 19:00:00,Complete,News,Female,55-64,US-WEST-CA-San Francisco,,No,4,no,no,23898.0,8349.0,15966.0
+1469494758,2020-07-21 04:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,5,no issues,no issues,26716.0,4503.0,5557.0
+1479222452,2020-07-20 03:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,5,Only positive experiences,Only positive experiences,5946.0,3834.0,12399.0
+1569578422,2020-07-20 19:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,NA,NA,9767.0,4062.0,6711.0
+1618703448,2020-07-18 19:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,Yes,5,Neighborhood issues,Neighborhood issues,15479.0,6807.0,39475.0
+1934183131,2020-07-17 18:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,4,NA,NA,5642.0,3988.0,9947.0
+2044831144,2020-07-21 15:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,Yes,5,Never experienced a negative interaction with the police.,Never experienced a negative interaction with the police.,19760.0,5565.0,37333.0
+211503081,2020-07-20 21:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,3,no preference,no preference,7036.0,3787.0,14480.0
+33041848,2020-07-17 21:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,4,no bad experiences,no bad experiences,28560.0,11871.0,24283.0
+382720845,2020-07-19 01:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,Yes,2,I'm white and my husband is black and he is always getting racially profiled doing everyday things. Recently we were hiking during the day and the police threatened to ticket him and detained him until they could check his ID.,I'm white and my husband is black and he is always getting racially profiled doing everyday things. Recently we were hiking during the day and the police threatened to ticket him and detained him until they could check his ID.,4476.0,2983.0,110670.0
+543472727,2020-07-17 18:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,None,none,12859.0,4167.0,9152.0
+582249027,2020-07-18 18:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,Yes,4,NA,Na,11666.0,4823.0,9436.0
+6009592,2020-07-21 06:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,Yes,2,no,No,3938.0,4022.0,4789.0
+609336861,2020-07-20 15:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,3,Never see them so I have no knowledge on one of the other,Never see them so I have no knowledge on one of the other,5547.0,11016.0,27331.0
+765643068,2020-07-20 18:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,no comment,no comment,5120.0,3153.0,10675.0
+93516855,2020-07-17 21:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,1,Police never solved any real cases.,Police never solved any real cases.,9252.0,3760.0,17868.0
+96370486,2020-07-17 22:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,no,no,5180.0,9690.0,19619.0

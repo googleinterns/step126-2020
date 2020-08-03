@@ -1,0 +1,17 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+107095999,2020-07-25 03:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,5,They are fine,They are fine,2641.0,2635.0,19270.0
+1212160384,2020-07-25 22:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,5,They are very cordial,They are very cordial,14798.0,5772.0,31762.0
+1380803609,2020-07-24 18:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,new to city,new to city,18091.0,6600.0,8714.0
+1405065643,2020-07-23 17:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,4,They are good but DA refuses to support Police,They are good but DA refuses to support Police,20341.0,4312.0,25336.0
+1427213810,2020-07-27 18:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,Yes,1,Bad,Bad,4264.0,3911.0,8658.0
+1521026310,2020-07-24 17:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,5,Trust them,Trust them,4698.0,4003.0,14467.0
+1951141844,2020-07-27 18:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,3,nothing to share,nothing to share,10955.0,8636.0,8267.0
+2008243931,2020-07-24 21:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,No,3,n/a,n/a,5059.0,3115.0,5984.0
+232876086,2020-07-23 05:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,4,I have not had any bad experiences with the police and they have been helpful.,I have not had any bad experiences with the police and they have been helpful.,6350.0,8879.0,21789.0
+318565088,2020-07-22 23:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,"most cops are decent, the others are power hungry bad people","most cops are decent, the others are power hungry bad people",38023.0,6382.0,23683.0
+519153012,2020-07-24 20:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,2,they are do not deescalate,they are do not deescalate,23891.0,6907.0,61698.0
+596589953,2020-07-26 19:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,No,4,no problems experienced,no problems experienced,37063.0,15218.0,38464.0
+733446955,2020-07-27 17:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Yes,1,"they are self interested do not serve and protect the community, do the job in order to inflate their own egos and power trip","they are self interested do not serve and protect the community, do the job in order to inflate their own egos and power trip",5676.0,3777.0,33325.0
+882750488,2020-07-22 14:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,5,good,good,5809.0,3830.0,7156.0
+948438416,2020-07-27 15:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,n/a,na,32034.0,7832.0,4130.0
+98374221,2020-07-27 15:00:00,Complete,News,Female,65+,US-WEST-CA-San Francisco,,Yes,4,neighboorhood safety issue they were helpful,neighboorhood safety issue they were helpful,10136.0,5272.0,27781.0

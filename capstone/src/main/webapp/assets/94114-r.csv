@@ -1,0 +1,23 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1149709426,2020-07-15 22:00:00,Complete,News,Male,35-44,US-WEST-CA-San Francisco,,Yes,1,gogo,gogo,9186.0,1941.0,4481.0
+1198204757,2020-07-17 18:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,3,never a negative encounter,never a negative encounter,31283.0,7639.0,47222.0
+1572502449,2020-07-20 22:00:00,Complete,News,Female,18-24,US-WEST-CA-San Francisco,,Yes,3,SF police are respectful,SF police are respectful,9994.0,3887.0,14279.0
+168628295,2020-07-19 20:00:00,Complete,News,Male,18-24,US-WEST-CA-San Francisco,,No,3,"some good, some not so good","some good, some not so good",17756.0,5890.0,10997.0
+1704724717,2020-07-17 21:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,Yes,4,no problems,no problems,13581.0,5774.0,12320.0
+1713636993,2020-07-18 04:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,Yes,3,Ff,Ff,4941.0,3324.0,4944.0
+1738220494,2020-07-19 18:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,5,No,no,6695.0,6603.0,4619.0
+1887459381,2020-07-20 23:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,Prefer not to answer,1,they kill Black people,they kill Black people,8856.0,6187.0,10469.0
+293850156,2020-07-20 22:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,No,2,policing disproportionately hurts communities of color,policing disproportionately hurts communities of color,17000.0,7516.0,48238.0
+34834162,2020-07-17 14:00:00,Complete,News,Female,65+,US-WEST-CA-San Francisco,,Yes,4,They were polite,They were polite,13890.0,7426.0,20447.0
+362643897,2020-07-18 01:00:00,Complete,News,Female,65+,US-WEST-CA-San Francisco,,No,3,Unfairness,Unfairness,14925.0,5055.0,37455.0
+377857981,2020-07-20 17:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,4,had no interaction,had no interaction,5769.0,5210.0,47313.0
+404522055,2020-07-20 23:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,2,"I am a black man in America, although I know not all police officers are bad, I think the system as a whole is setup to protect the bad cops and enforce negative racial practices.","I am a black man in America, although I know not all police officers are bad, I think the system as a whole is setup to protect the bad cops and enforce negative racial practices.",81135.0,7413.0,64007.0
+449617060,2020-07-20 21:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,storties,storties,5849.0,2846.0,15201.0
+451205632,2020-07-17 22:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,Prefer not to answer,1,No,No,2165.0,1982.0,3024.0
+47692005,2020-07-20 17:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,2,na,na,11034.0,8367.0,5321.0
+566727941,2020-07-20 16:00:00,Complete,News,Female,55-64,US-WEST-CA-San Francisco,,No,3,to read article,to read article,20026.0,5184.0,10168.0
+579982458,2020-07-16 02:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,Yes,4,"Small town no real pressure situations, cops try to be reasonable","Small town no real pressure situations, cops try to be reasonable",15795.0,7005.0,40380.0
+633806250,2020-07-20 17:00:00,Complete,News,Male,18-24,US-WEST-CA-San Francisco,,No,2,general sentiment,general sentiment,8014.0,4057.0,12559.0
+879077141,2020-07-17 20:00:00,Complete,Other,Female,55-64,US-WEST-CA-San Francisco,,No,4,just appreciate them for all thwy do,just appreciate them for all thwy do,6810.0,4992.0,36690.0
+911722239,2020-07-17 15:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,2,Almost got hit by one in their car while I was walking; not great around here.,Almost got hit by one in their car while I was walking; not great around here.,13601.0,4471.0,34021.0
+919543399,2020-07-18 02:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,Yes,4,provide safety,provide safety,9161.0,8618.0,17753.0

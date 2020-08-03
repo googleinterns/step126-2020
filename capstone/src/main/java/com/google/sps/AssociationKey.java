@@ -2,16 +2,20 @@ package com.google.sps;
 
 import opennlp.tools.stemmer.PorterStemmer;
 
-/** Generates lowercase no spaces word stems for keys in the AssociationResults hashmap */
+/** Generates keys in the Hashmap used to store entity sentiments and their associations */
 public class AssociationKey {
 
-  private static PorterStemmer stemmer = new PorterStemmer();
+  private static PorterStemmer stemmer;
+
+  public AssociationKey() {
+    stemmer = new PorterStemmer();
+  }
 
   /**
    * @param content the word/phrase that makes up an association
    * @return the lowercase root for use as a key in a hashmap
    */
-  public static String getKey(String content) {
+  public String getKey(String content) {
     return stemmer.stem(content.toLowerCase().trim());
   }
 
@@ -19,7 +23,7 @@ public class AssociationKey {
    * @param sentiment an entity sentiment to generate a key from
    * @return the lowercase root of the content for use as a key in a hashmap
    */
-  public static String getKey(EntitySentiment sentiment) {
+  public String getKey(EntitySentiment sentiment) {
     return getKey(sentiment.getContent());
   }
 
@@ -27,7 +31,7 @@ public class AssociationKey {
    * @param result the association result to generate a key from
    * @return the lowercase root of the content for use as a key in a hashmap
    */
-  public static String getKey(AssociationResult result) {
+  public String getKey(AssociationResult result) {
     return getKey(result.getContent());
   }
 }

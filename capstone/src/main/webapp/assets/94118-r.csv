@@ -1,0 +1,10 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+126914024,2020-07-21 23:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,4,Limited interaction,Limited interaction,7504.0,3042.0,19508.0
+1824949881,2020-07-20 17:00:00,Complete,Arts & Entertainment,Male,35-44,US-WEST-CA-San Francisco,,No,3,no answer,no answer,6761.0,4640.0,9105.0
+258357576,2020-07-21 00:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,No,5,"SFPD is respectful, underfunded and well managed","SFPD is respectful, underfunded and well managed",10199.0,4314.0,22880.0
+315012372,2020-07-16 23:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,No,3,me,me,8568.0,6725.0,3785.0
+363981157,2020-07-18 06:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,1,Bbb,Bbb,5766.0,5283.0,6174.0
+4807872,2020-07-20 22:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,3,NA,NA,14040.0,16152.0,3052.0
+484833029,2020-07-20 17:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,No,1,Always pulling over Black people and harassing them.,Always pulling over Black people and harassing them.,19817.0,11280.0,32915.0
+505719048,2020-07-20 23:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,4,NA,n/a,12706.0,10070.0,6362.0
+803540027,2020-07-21 23:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,2,Racism.,Racism.,20451.0,3260.0,11670.0

@@ -1,0 +1,7 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1121992573,2020-07-20 02:00:00,Complete,News,Male,18-24,US-WEST-CA-San Francisco,,No,2,They watch me,They watch me,11613.0,4500.0,8265.0
+2053316687,2020-07-19 20:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,4,There is room for improvement,There is room for improvement,43081.0,7686.0,31354.0
+2067397870,2020-07-20 00:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,Yes,5,Responsive and dedicated.,Responsive and dedicated.,10803.0,4270.0,33763.0
+277751282,2020-07-20 18:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,1,Police are committing a genocide against Black americans,Police are committing a genocide against Black americans,21962.0,3112.0,74539.0
+315823638,2020-07-20 16:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,Prefer not to answer,3,No thank you,No thank you,22148.0,5930.0,13510.0
+805901102,2020-07-19 12:00:00,Complete,News,Unknown,Unknown,US-WEST-CA-San Francisco,,Yes,3,NA,NA,10228.0,9213.0,23479.0

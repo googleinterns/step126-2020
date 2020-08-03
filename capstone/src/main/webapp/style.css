@@ -58,7 +58,7 @@ h1 {
 
 h2 {
   margin: 0;
-  padding 0.5rem;
+  padding: 0.5rem;
   font-size: 1.25rem;
   color: white;
 }
@@ -232,9 +232,12 @@ ul {
 #map-key {
   cursor: pointer;
   position: absolute;
-  bottom: 15%;
+  top: 30%;
+  left: 60%;
   z-index: 5;
+  background-color: #19B3B1;
   padding: 5px;
+  border: double 5px;
   text-align: center;
   font-family: "Oswald", sans-serif;
   line-height: 30px;
@@ -243,22 +246,6 @@ ul {
   border: double;
   border-radius: 5px;
     color: white;
-}
-
-#map-cloud {
-  position: absolute;
-  top: 10%;
-  left: 52%;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  width: 27%;
-  height: 70%;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: "Raleway", sans-serif;
-  line-height: 30px;
-  padding-left: 10px;
 }
 
 /* The Modal (background) */

@@ -1,0 +1,10 @@
+User ID,Time (UTC),Survey Completion,Publisher Category,Gender,Age,Geography,Weight,Question #1 Answer,Question #2 Answer,Question #3 Synonym Group,Question #3 Raw Response,Response Time #1 (ms),Response Time #2 (ms),Response Time #3 (ms)
+1154540731,2020-07-24 22:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,No,4,I have friends who are honorable officers. They do not work for the DHS,I have friends who are honorable officers. They do not work for the DHS,5770.0,4730.0,150120.0
+1516122361,2020-07-27 19:00:00,Complete,News,Female,25-34,US-WEST-CA-San Francisco,,No,4,no,no,21826.0,6560.0,22448.0
+1591158765,2020-07-27 02:00:00,Complete,News,Male,55-64,US-WEST-CA-San Francisco,,No,4,Police here are generally responsible.,Police here are generally responsible.,195642.0,5094.0,19929.0
+1814401729,2020-07-24 21:00:00,Complete,News,Female,45-54,US-WEST-CA-San Francisco,,No,3,They seem to be against people,They seem to be against people,71262.0,4976.0,21032.0
+1831202946,2020-07-22 20:00:00,Complete,News,Female,35-44,US-WEST-CA-San Francisco,,No,1,n/a,n/a,30094.0,3074.0,3995.0
+1918735970,2020-07-26 18:00:00,Complete,News,Male,25-34,US-WEST-CA-San Francisco,,No,3,no thanks,no thanks,40756.0,4166.0,8651.0
+1975370375,2020-07-27 01:00:00,Complete,News,Male,65+,US-WEST-CA-San Francisco,,No,3,THERE,THERE,19592.0,8216.0,7142.0
+2146027745,2020-07-24 20:00:00,Complete,News,Female,65+,US-WEST-CA-San Francisco,,No,5,"Media focuses on the few and not on the dedicated, who represent the many.","Media focuses on the few and not on the dedicated, who represent the many.",9253.0,4874.0,31193.0
+634801284,2020-07-26 18:00:00,Complete,News,Male,45-54,US-WEST-CA-San Francisco,,No,4,Great officers in our neighborhood,Great officers in our neighborhood,4764.0,4850.0,62946.0
