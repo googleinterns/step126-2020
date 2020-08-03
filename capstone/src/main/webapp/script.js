@@ -44,7 +44,7 @@ function createMap() {
   cityLimit.setMap(map);
 
 
-  //buttons leading to stats page and showing wordcloud
+  // buttons leading to stats page and showing wordcloud
   const wcControlDiv = document.createElement('div');
   wordcloudControl(wcControlDiv, map);
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(wcControlDiv);
@@ -56,7 +56,7 @@ function createMap() {
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(statsControlDiv);
   statsControlDiv.addEventListener('click', showStats);
 
-  //button for centering map
+  // button for centering map
   const centerControlDiv = document.createElement('div');
   centerControl(centerControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER].push(centerControlDiv);
