@@ -19,7 +19,7 @@ let precinct = 'SF';
 
 google.charts.load('current', {packages: ['corechart']});
 google.charts.setOnLoadCallback(loadCharts);
-
+// zooms and centers map to SF, draws city boarder and creates 5 buttons
 function createMap() {
   const map = new google.maps.Map(
       document.getElementById('map-container'),
@@ -43,7 +43,8 @@ function createMap() {
 
   cityLimit.setMap(map);
 
-  //* *buttons leading to stats page and showing wordcloud */
+
+  // buttons leading to stats page and showing wordcloud
   const wcControlDiv = document.createElement('div');
   wordcloudControl(wcControlDiv, map);
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(wcControlDiv);
@@ -55,17 +56,17 @@ function createMap() {
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(statsControlDiv);
   statsControlDiv.addEventListener('click', showStats);
 
-  //* *button for centering map*/
+  // button for centering map
   const centerControlDiv = document.createElement('div');
   centerControl(centerControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER].push(centerControlDiv);
 
-  //* *button for zipcode data layer */
+  // button for zipcode data layer
   const zipControlDiv = document.createElement('div');
   zipControl(zipControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER].push(zipControlDiv);
 
-  //* *button for zipcode data layer */
+  // button for zipcode data layer
   const precinctControlDiv = document.createElement('div');
   precinctControl(precinctControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER]
@@ -93,27 +94,27 @@ function wordcloudControl(wordcloudControlDiv, map) {
 }
 
 function centerControl(controlDiv, map) {
-  //* *button creation and positioning*/
+  // button creation and positioning
   const controlUI = document.createElement('div');
   controlUI.classList.add('button');
   controlUI.title = 'Click to recenter the map';
   controlDiv.appendChild(controlUI);
 
-  //* *css for interior of all buttons*/
+  // css for interior of all buttons
   const text = document.createElement('div');
   text.innerHTML = 'Center Map';
   controlUI.appendChild(text);
 
-  //* *button functionality */
+  // button functionality
   controlUI.addEventListener('click', function() {
     map.setCenter({lat: 37.7749, lng: -122.4194});
     map.setZoom(12);
   });
 }
-
+// button that shows or hides zip code data layer on map
 let zipClicked = false;
 function zipControl(controlDiv, map) {
-  //* *adding zipcode overlay*/
+  // adding zipcode overlay
   const zipcodeLayer = new google.maps.Data({map: map});
   zipcodeLayer.loadGeoJson('zipcode-data.json');
   zipcodeLayer.setStyle({fillColor: '#C698A0',
@@ -126,18 +127,18 @@ function zipControl(controlDiv, map) {
       fillColor: '#19B3B1', fillOpacity: .7});
   });
 
-  //* *button creation and positioning*/
+  // button creation and positioning
   const controlUI = document.createElement('div');
   controlUI.classList.add('button');
   controlUI.title = 'Click to show San Fransisco zip codes';
   controlDiv.appendChild(controlUI);
 
-  //* *css for interior of all buttons*/
+  // css for interior of all buttons
   const text = document.createElement('div');
   text.innerHTML = 'Show Zipcodes';
   controlUI.appendChild(text);
 
-  //* *button functionality */
+  // button functionality
   controlUI.addEventListener('click', function() {
     zipClicked = !zipClicked;
     if (zipClicked) {
@@ -150,10 +151,10 @@ function zipControl(controlDiv, map) {
     }
   });
 }
-
+// button that shows ot hides police precincts on SF map
 let precinctButtonOn= false;
 function precinctControl(controlDiv, map) {
-  //* *adding precinct overlay */
+  // adding precinct overlay
   const precinctLayer = new google.maps.Data({map: map});
   precinctLayer.loadGeoJson('policePrecincts.geojson');
   // a function that uses color map to map, checks if button is clicked
@@ -170,20 +171,21 @@ function precinctControl(controlDiv, map) {
     document.getElementById('chart-title').textContent =
      precinct + ' Police Sentiment';
     loadCharts();
+    loadWordcloud();
     associationUpdateDisplay(precinct);
   });
-  //* *button creation and positioning*/
+  // button creation and positioning
   const dataUI = document.createElement('div');
   dataUI.classList.add('button');
   dataUI.title = 'Click to show San Fransisco precincts';
   controlDiv.appendChild(dataUI);
 
-  //* *css for interior of all buttons*/
+  // css for interior of all buttons
   const buttonText = document.createElement('div');
   buttonText.innerHTML = 'Show Precincts';
   dataUI.appendChild(buttonText);
 
-  //* *button functionality */
+  // button functionality
   dataUI.addEventListener('click', function() {
     precinctButtonOn = !precinctButtonOn;
     if (!precinctButtonOn) {
@@ -193,8 +195,10 @@ function precinctControl(controlDiv, map) {
       document.getElementById('chart-title').textContent =
         'Sentiment Percentages in ' + precinct;
       loadCharts();
+      loadWordcloud();
       associationUpdateDisplay('SF');
     } else {
+      precinctLayer.revertStyle();
       precinctLayer.setStyle({fillColor: '#CECDBC',
         fillOpacity: 0.9, visible: true});
       document.getElementById('map-key').style.display='block';
@@ -202,19 +206,12 @@ function precinctControl(controlDiv, map) {
     }
   });
 }
+// drawing sentiment on map by coloring precinct layer
 function drawCheckboxLayer() {
   if (mapAndSelection.selection == 'noneSelected') {
     alert('nothing yet');
   } else if (mapAndSelection.selection == 'sentimentCheck') {
-    const allPrecincts = ['Southern', 'Mission', 'Bayview',
-      'Tenderloin', 'Central', 'Ingleside', 'Taraval', 'Park',
-      'Northern', 'Richmond'];
-    const allPrecinctColors = new Map();
-    for (let i = 0; i < allPrecincts.length; i++) {
-      allPrecinctColors.set(
-          allPrecincts[i], averagePrecinctSentiment(allPrecincts[i]));
-    }
-    mapSentiment(allPrecinctColors);
+    mapSentiment();
   } else {
     alert('precinctLayer');
   }
@@ -326,32 +323,28 @@ function loadResponseChart(totalResponses, precinct) {
   chart.draw(stats, options);
 }
 
-function mapSentiment(colorMap) {
-  const precinctLayer = mapAndSelection.map;
-  for (const [precinctName, precinctColor] of colorMap) {
-    precinctLayer.revertStyle();
-    precinctLayer.setStyle({fillColor: '#CECDBC',
-      fillOpacity: 0.9});
-    precinctLayer.overrideStyle(precinctLayer.getFeatureById(
-        searchPrecinctsByDistrict(precinctName)),
-    {fillColor: precinctColor, fillOpacity: 0.9});
-  }
-}
-
-function searchPrecinctsByDistrict(desiredDistrict) {
-  mapAndSelection.map.forEachFeature( function(feature) {
-    if (feature.getProperty('district') == desiredDistrict) {
-      return feature.getProperty('id');
-    }
+function mapSentiment() {
+  mapAndSelection.map.forEach((feature) => {
+    getSentimentList(feature);
   });
 }
 
-async function averagePrecinctSentiment(policePrecinct) {
-  const response = await fetch('/load-data?precinct=' + policePrecinct);
-  const list = await response.json();
+// color precincts by sentement
+async function getSentimentList(district) {
+  const responsePromise =
+    await fetch('/load-data?precinct=' + district.getProperty('district'));
+  const list = await responsePromise.json();
+  const colors = averagePrecinctSentiment(list);
+  mapAndSelection.map.overrideStyle(
+      district, {fillColor: colors, fillOpacity: 0.7});
+}
+
+// **based on google survey question ratings 1-5 on police sentiment
+function averagePrecinctSentiment(list) {
   let sentimentCount = 0;
   for (let i = 0; i < list.length; i++) {
     const sentiment = list[i].score;
+    console.log(list[i].date);
     if (sentiment >= 0.5) {
       sentimentCount += 5;
     } else if (sentiment > 0.05) {
@@ -367,31 +360,63 @@ async function averagePrecinctSentiment(policePrecinct) {
   const sentimentAverage = sentimentCount/list.length;
   return getSentimentColor(sentimentAverage);
 }
-
+// colors precinct on map based on strong dislike to strong like
 function getSentimentColor(averageFeelings) {
+  let precinctColor = '#228B22';
   if (Math.round(averageFeelings) == 5) {
-    return '#165B33';
+    precinctColor = '#165B33';
   } else if (Math.round(averageFeelings) == 4) {
-    return '#146B3A';
+    precinctColor = '#146B3A';
   } else if (Math.round(averageFeelings) == 3) {
-    return '#F8B229';
+    precinctColor = '#F8B229';
   } else if (Math.round(averageFeelings) == 2) {
-    return '#EA4630';
+    precinctColor = '#EA4630';
   } else {
-    return '#BB2528';
+    precinctColor = '#BB2528';
   }
+  return precinctColor;
 }
-
+// global variable for precinctLayer data layer and checkbox selection
 const mapAndSelection = {};
+// following two functions are only used in index.html
 /* eslint-disable no-unused-vars */
+// unchecks boxes when new checkbox is checked
 function onlyOne(checkbox) {
   const checkboxes = document.getElementsByName('check');
   checkboxes.forEach((item) => {
-    if (item !== checkbox) item.checked = false;
+    if (item !== checkbox) {
+      item.checked = false;
+    }
   });
-  mapAndSelection.selection = checkbox.id;
-  drawCheckboxLayer();
+
+  if (mapAndSelection.selection == checkbox.id) {
+    mapAndSelection.selection = 'noneSelected';
+    resetMap();
+  } else {
+    mapAndSelection.selection = checkbox.id;
+    drawCheckboxLayer();
+  }
 }
+// goes to log in page if user is not logged in
+async function showStats() {
+  const logStatus = await fetch('/status');
+  const status = await logStatus.json();
+  if (status == true) {
+    window.location.replace('statistics.html');
+  } else {
+    window.location.replace('/login');
+  }
+}
+
+/* eslint-enable no-unused-vars */
+// erases precinct coloring after checkbox is unselected
+function resetMap() {
+  const precinctDataLayer = mapAndSelection.map;
+  precinctDataLayer.revertStyle();
+  precinctDataLayer.setStyle({fillColor: '#CECDBC',
+    fillOpacity: 0.9, visible: true});
+}
+
 /* eslint-enable no-unused-vars */
 
 const MAX_SIZE = 100;
@@ -456,15 +481,4 @@ function configModal() {
       modal.style.display = 'none';
     }
   };
-}
-
-//* *goes to log in page if user is not logged in */
-async function showStats() {
-  const logStatus = await fetch('/status');
-  const loggedIn = await logStatus.json();
-  if (loggedIn) {
-    window.location.href = 'statistics.html';
-  } else {
-    window.location = '/login';
-  }
 }
