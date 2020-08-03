@@ -482,14 +482,3 @@ function configModal() {
     }
   };
 }
-
-//* *goes to log in page if user is not logged in */
-async function showStats() {
-  const logStatus = await fetch('/status');
-  const loggedIn = await logStatus.json();
-  if (loggedIn) {
-    window.location.href = 'statistics.html';
-  } else {
-    window.location = '/login';
-  }
-}
