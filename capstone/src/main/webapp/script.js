@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /* global google */
-/* global WordCloud */ 
+/* global WordCloud */
 
 let precinct = 'SF';
 
@@ -75,19 +75,19 @@ function createMap() {
 }
 
 function wordcloudControl(wordcloudControlDiv, map) {
-  //button creation and positioning
+  // button creation and positioning
   const controlUI = document.createElement('div');
   controlUI.id = 'wordcloud-btn';
   controlUI.classList.add('button');
   controlUI.title = 'Click to show Word Cloud of top word associations';
   wordcloudControlDiv.appendChild(controlUI);
 
-  //css for interior of all buttons
+  // css for interior of all buttons
   const text = document.createElement('div');
   text.innerHTML = 'Show WordCloud';
   controlUI.appendChild(text);
 
-  //button functionality 
+  // button functionality
   controlUI.addEventListener('click', function() {
     configModal();
   });
@@ -331,15 +331,16 @@ function mapSentiment() {
 
 // color precincts by sentement
 async function getSentimentList(district) {
+  const passInVar = district.getProperty('district');
   const responsePromise =
-    await fetch('/load-data?precinct=' + district.getProperty('district'));
+    await fetch('/load-data?kind=Response&precinct=' + passInVar);
   const list = await responsePromise.json();
   const colors = averagePrecinctSentiment(list);
   mapAndSelection.map.overrideStyle(
       district, {fillColor: colors, fillOpacity: 0.7});
 }
 
-// based on google survey question ratings 1-5 on police sentiment
+// **based on google survey question ratings 1-5 on police sentiment
 function averagePrecinctSentiment(list) {
   let sentimentCount = 0;
   for (let i = 0; i < list.length; i++) {
@@ -461,7 +462,7 @@ async function loadWordcloud() {
 
 // configures and opens word cloud modal
 function configModal() {
-   // Get the map key
+  // Get the map key
   const key = document.getElementById('map-key');
 
   // Get the modal
