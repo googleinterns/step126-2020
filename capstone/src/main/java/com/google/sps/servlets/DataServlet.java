@@ -13,7 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/**
+ * Servlet that retreives entities from the ReadData class and adds them to data store if they are
+ * not already present
+ */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   @Override
@@ -25,19 +28,16 @@ public class DataServlet extends HttpServlet {
 
     for (int i = 0; i < allEntities.size(); i++) {
       Entity currentEntity = allEntities.get(i);
-      Entity inStore = null;
 
       try {
-        inStore = datastore.get(currentEntity.getKey());
+        datastore.get(currentEntity.getKey());
       } catch (EntityNotFoundException e) {
-        inStore = null;
+        continue;
       }
 
-      if (inStore != null) {
-        allEntities.remove(i);
+      allEntities.remove(i);
 
-        i -= 1;
-      }
+      i -= 1;
     }
 
     datastore.put(allEntities);

@@ -31,17 +31,18 @@ public class CloudNLPAssociation implements AutoCloseable {
    * @param entity the entity to be analyzed
    * @return an arraylist of the different entity sentiments in the entity
    */
-  private ArrayList<EntitySentiment> extractEntityMentions(Entity entity) {
+  private ArrayList<EntitySentiment> extractEntityMentions(Entity entity, AssociationInput input) {
     List<EntityMention> mentions = entity.getMentionsList();
-    ArrayList<EntitySentiment> res = new ArrayList<EntitySentiment>();
+    ArrayList<EntitySentiment> result = new ArrayList<EntitySentiment>();
     for (EntityMention mention : mentions) {
-      res.add(
+      result.add(
           new EntitySentiment(
               entity.getName(),
               mention.getSentiment().getMagnitude(),
-              mention.getSentiment().getScore()));
+              mention.getSentiment().getScore(),
+              input.getScopes()));
     }
-    return res;
+    return result;
   }
 
   /**
@@ -50,8 +51,9 @@ public class CloudNLPAssociation implements AutoCloseable {
    * @param message the messaged to be analyzed
    * @return an arraylist of all the entity sentiments in the message
    */
-  private ArrayList<EntitySentiment> entitySentimentAnalysis(String message) {
-    Document doc = Document.newBuilder().setContent(message).setType(Type.PLAIN_TEXT).build();
+  private ArrayList<EntitySentiment> entitySentimentAnalysis(AssociationInput input) {
+    Document doc =
+        Document.newBuilder().setContent(input.getMessage()).setType(Type.PLAIN_TEXT).build();
     AnalyzeEntitySentimentRequest request =
         AnalyzeEntitySentimentRequest.newBuilder()
             .setDocument(doc)
@@ -60,11 +62,11 @@ public class CloudNLPAssociation implements AutoCloseable {
     // detect entity sentiments in the given string
     AnalyzeEntitySentimentResponse response = language.analyzeEntitySentiment(request);
     List<Entity> entities = response.getEntitiesList();
-    ArrayList<EntitySentiment> res = new ArrayList<EntitySentiment>();
+    ArrayList<EntitySentiment> result = new ArrayList<EntitySentiment>();
     for (Entity entity : entities) {
-      res.addAll(extractEntityMentions(entity));
+      result.addAll(extractEntityMentions(entity, input));
     }
-    return res;
+    return result;
   }
 
   /**
@@ -73,12 +75,12 @@ public class CloudNLPAssociation implements AutoCloseable {
    * @param messages the open text to be analyzed
    * @return an arraylist of all the entity sentiments in the messages
    */
-  public ArrayList<EntitySentiment> analyzeAssociations(ArrayList<String> messages) {
-    ArrayList<EntitySentiment> res = new ArrayList<EntitySentiment>();
-    for (String message : messages) {
-      res.addAll(entitySentimentAnalysis(message));
+  public ArrayList<EntitySentiment> analyzeAssociations(ArrayList<AssociationInput> messages) {
+    ArrayList<EntitySentiment> result = new ArrayList<EntitySentiment>();
+    for (AssociationInput message : messages) {
+      result.addAll(entitySentimentAnalysis(message));
     }
-    return res;
+    return result;
   }
 
   /** Closes the language server and CloudNLPAssociations object */

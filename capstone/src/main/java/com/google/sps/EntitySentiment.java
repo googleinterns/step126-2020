@@ -1,5 +1,6 @@
 package com.google.sps;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 /** Represents data for sentiment around a word/phrase */
@@ -8,6 +9,7 @@ public class EntitySentiment {
   private String content;
   private float magnitude;
   private float sentiment;
+  private ArrayList<String> scopes;
 
   /**
    * Creates a new EntitySentiment object
@@ -20,6 +22,23 @@ public class EntitySentiment {
     this.content = content;
     this.magnitude = magnitude;
     this.sentiment = sentiment;
+    this.scopes = new ArrayList<String>();
+  }
+
+  /**
+   * Creates a new EntitySentiment object
+   *
+   * @param content the word/phrase the object refers to
+   * @param magnitude the importance of th entity in the text
+   * @param sentiment the sentiment associated with the entity
+   * @param scopes the scopes within this entity is valid
+   */
+  public EntitySentiment(
+      String content, float magnitude, float sentiment, ArrayList<String> scopes) {
+    this.content = content;
+    this.magnitude = magnitude;
+    this.sentiment = sentiment;
+    this.scopes = scopes;
   }
 
   /**
@@ -47,6 +66,15 @@ public class EntitySentiment {
    */
   public float getSentiment() {
     return sentiment;
+  }
+
+  /**
+   * Returns the scopes within this entity is valid
+   *
+   * @return scopes within which this entity is valid
+   */
+  public ArrayList<String> getScopes() {
+    return scopes;
   }
 
   /** Orders alphabetically by content */

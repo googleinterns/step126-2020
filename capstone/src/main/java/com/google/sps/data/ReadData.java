@@ -43,8 +43,7 @@ public class ReadData {
 
     File folder = new File("assets/");
 
-    File[] fileNames = folder.listFiles();
-    for (File file : fileNames) {
+    for (File file : folder.listFiles()) {
       entitiesFromFile(allEntities, file);
     }
 
@@ -70,7 +69,7 @@ public class ReadData {
     try {
       fileReader = new FileReader(file);
     } catch (FileNotFoundException e) {
-      System.out.println("No file found");
+      return;
     }
 
     BufferedReader reader = null;
@@ -152,6 +151,7 @@ public class ReadData {
           total++;
         }
 
+        // Store these properties in the hundreds to avoid precision errors
         if (total != 0) {
           entity.setProperty("averageHouseholdIncome", Math.round(sumIncome / total));
           entity.setProperty("crimeRate", Math.round(sumCrimeRate / total));

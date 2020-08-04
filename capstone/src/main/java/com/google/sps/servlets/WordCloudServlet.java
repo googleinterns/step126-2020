@@ -9,7 +9,7 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.QueryResultList;
 import com.google.gson.Gson;
 import com.google.sps.AssociationResult;
-import com.google.sps.data.AssociationData;
+import com.google.sps.data.WordcloudData;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -19,11 +19,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet to fetch association data with most positive and negative associations */
-@WebServlet("/associations")
-public class AssociationServlet extends HttpServlet {
+@WebServlet("/wordcloud")
+public class WordCloudServlet extends HttpServlet {
 
   private static final String OUTPUT_TYPE = "applications/json;";
-  public static final int MAX_ASSOCIATIONS = 3;
+
+  private static final float MAX_SIZE = 200f;
 
   private DatastoreService datastore;
 
@@ -35,43 +36,38 @@ public class AssociationServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(OUTPUT_TYPE);
 
+    FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
+
     String scope = request.getParameter("scope");
     if (scope == null) {
       scope = "SF";
     }
 
-    FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
-
-    Query posQuery =
-        new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.DESCENDING);
-    ArrayList<String> positive =
-        extractContent(datastore.prepare(posQuery).asQueryResultList(fetchOptions), scope);
-
-    Query negQuery =
+    Query query =
         new Query(AssociationResult.ENTITY_KIND).addSort("score", SortDirection.ASCENDING);
-    ArrayList<String> negative =
-        extractContent(datastore.prepare(negQuery).asQueryResultList(fetchOptions), scope);
+    ArrayList<WordcloudData> result =
+        extractContent(datastore.prepare(query).asQueryResultList(fetchOptions), scope);
 
-    AssociationData output = new AssociationData(positive, negative);
     Gson gson = new Gson();
-    response.getWriter().println(gson.toJson(output));
+    response.getWriter().println(gson.toJson(result));
   }
 
   /**
-   * Adds the names of the associations to the arraylist passed in
+   * Returns the word cloud values pairs
    *
    * @param query the entities to get the names from
-   * @return the arraylist to add the names of the entities to
+   * @return the arraylist of word cloud data
    */
-  private ArrayList<String> extractContent(QueryResultList<Entity> query, String scope) {
-    ArrayList<String> output = new ArrayList<String>();
+  private ArrayList<WordcloudData> extractContent(QueryResultList<Entity> query, String scope) {
+    if (query.size() == 0) return new ArrayList<WordcloudData>();
+    ArrayList<WordcloudData> output = new ArrayList<WordcloudData>();
     for (Entity entity : query) {
-      if (!scope.equals((String) entity.getProperty("scope"))) {
-        continue;
-      } else if (output.size() >= MAX_ASSOCIATIONS) {
-        break;
-      }
-      output.add((String) entity.getProperty("name"));
+      if (!scope.equals((String) entity.getProperty("scope"))
+          || (!(boolean) entity.getProperty("strong-sentiment"))) continue;
+      float weight = Math.abs((float) (double) entity.getProperty("weight"));
+      float gradient = (float) (double) entity.getProperty("average-sentiment");
+      String content = (String) entity.getProperty("name");
+      output.add(new WordcloudData(content, weight, gradient));
     }
     return output;
   }
