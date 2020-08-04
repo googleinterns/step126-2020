@@ -22,12 +22,27 @@ import javax.servlet.http.HttpServletResponse;
 public class LoadDataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    List<SurveyResponse> surveyResponses = new ArrayList<SurveyResponse>();
-    Query query = new Query("Response");
+    String kind = request.getParameter("kind");
+
+    Query query = new Query(kind);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-    String precinct = request.getParameter("precinct");
 
+    if (kind != null && kind.equals("Response")) {
+      getSurveyData(request, response, results);
+    }
+
+    if (kind != null && kind.equals("Predictions")) {
+      getPredictions(request, response, results);
+    }
+  }
+
+  public void getSurveyData(
+      HttpServletRequest request, HttpServletResponse response, PreparedQuery results)
+      throws IOException {
+    List<SurveyResponse> surveyResponses = new ArrayList<SurveyResponse>();
+
+    String precinct = request.getParameter("precinct");
     ArrayList<String> zipCodes = MapData.getZipCodes(precinct);
 
     for (Entity e : results.asIterable()) {
@@ -36,11 +51,11 @@ public class LoadDataServlet extends HttpServlet {
       if (precinct.equals("SF") || zipCodes.contains(zipCode)) {
         String id = (String) e.getProperty("id");
         Date date = (Date) e.getProperty("date");
-        String completion = (String) e.getProperty("completion");
+        String completion = (String) e.getProperty("completionStatus");
         String gender = (String) e.getProperty("gender");
         String ageRange = (String) e.getProperty("ageRange");
-        String answerOne = (String) e.getProperty("answerOne");
-        String answerTwo = (String) e.getProperty("answerTwo");
+        String answerOne = (String) e.getProperty("directExperience");
+        String answerTwo = (String) e.getProperty("rating");
         double score = (double) e.getProperty("score");
         long responseTimeOne = (long) e.getProperty("responseTimeOne");
         long responseTimeTwo = (long) e.getProperty("responseTimeTwo");
@@ -68,5 +83,32 @@ public class LoadDataServlet extends HttpServlet {
 
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(surveyResponses));
+  }
+
+  public void getPredictions(
+      HttpServletRequest request, HttpServletResponse response, PreparedQuery results)
+      throws IOException {
+    String directExperience = request.getParameter("directExperience");
+    String gender = request.getParameter("gender");
+    String ageRange = request.getParameter("ageRange");
+    float score = 0;
+
+    for (Entity e : results.asIterable()) {
+      String entityDirectExp = (String) e.getProperty("directExperience");
+      String entityGender = (String) e.getProperty("gender");
+      String entityAgeRange = (String) e.getProperty("ageRange");
+
+      if (entityGender.equals(gender)
+          && entityAgeRange.equals(ageRange)
+          && entityDirectExp.equals(directExperience)) {
+        score = (float) (double) e.getProperty("score");
+        break;
+      }
+    }
+
+    Gson gson = new Gson();
+
+    response.setContentType("application/json;");
+    response.getWriter().println(gson.toJson(score));
   }
 }

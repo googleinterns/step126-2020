@@ -247,7 +247,7 @@ async function postSurveyResponses() {
 }
 
 async function loadCharts() {
-  const response = await fetch('/load-data?precinct=' + precinct);
+  const response = await fetch('/load-data?kind=Response&precinct=' + precinct);
 
   sessionStorage.setItem('precinct', precinct);
 

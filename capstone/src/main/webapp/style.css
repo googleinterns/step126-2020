@@ -208,9 +208,37 @@ ul {
 }
 
 .prediction-panel {
-    height: 50vh;
-    margin: 24 auto;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  width:100vw;
+  height: 50vh;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+}
+
+.option-panel {
+  width: 100px;
+  margin-left: 64px;
+  margin-top: 16px;
+  display: inline-block;
+}
+
+select{
+  width: 150px;
+  height: 40px;
+  padding: 8px;
+  color: black;
+  position: relative;
+  flex-direction: column
+}
+
+.prediction-bar {
+  margin-left: 64px;
+  margin-right: 64px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  width: 50vw;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
 }
 
 .stats-grid {

@@ -2,10 +2,16 @@
 const precinctSelected = sessionStorage.getItem('precinct');
 
 google.charts.load('current', {packages: ['corechart']});
-google.charts.setOnLoadCallback(getSurveyResponses);
+google.charts.setOnLoadCallback(loadCharts);
+
+function loadCharts() {
+  getPrediction(null, '');
+  getSurveyResponses();
+}
 
 async function getSurveyResponses() {
-  const response = await fetch('/load-data?precinct=' + precinctSelected);
+  const response = await fetch('/load-data?kind=Response&precinct=' +
+                               precinctSelected);
   const list = await response.json(); // list of entities from datastore
 
   // Sentiment category for the user's survey response
@@ -106,7 +112,6 @@ async function getSurveyResponses() {
   responseTimeAverage['Response Three'] /= list.length;
 
   // Begin loading each of the charts with the necessary data
-  loadBubbleChart(days, scores, genders, responseTimesThree);
   loadCompletionPieChart(completionCount);
   loadResponseTimeAverageBarChart(responseTimeAverage);
   loadDirectExperiencePieChart(directExpCount);
@@ -118,32 +123,56 @@ async function getSurveyResponses() {
   loadAgePieChart(ageCount);
 }
 
-function loadBubbleChart(days, scores, genders, responseTimeSThree) {
-  const stats = new google.visualization.DataTable();
+// Default global values
+let directExperience = 'No';
+let gender = 'Male';
+let ageRange = '18-24';
 
-  stats.addColumn('string', 'ID');
-  stats.addColumn('number', 'Day in July');
-  stats.addColumn('number', 'Sentiment Score');
-  stats.addColumn('string', 'Gender');
-  stats.addColumn('number', 'Response time (in milliseconds)');
-
-  // All parameters are the same length
-  const listLength = days.length;
-  const res = 'Response #';
-
-  for (let i = 0; i < listLength; i++) {
-    stats.addRows([
-      [res + i.toString(10),
-        days[i], scores[i], genders[i], responseTimeSThree[i]],
-    ]);
+async function getPrediction(choice, category) {
+  if (category === 'gender') {
+    gender = choice.options[choice.selectedIndex].text;
+  } else if (category === 'ageRange') {
+    ageRange = choice.options[choice.selectedIndex].text;
+  } else if (category === 'directExperience') {
+    directExperience = choice.options[choice.selectedIndex].text;
   }
 
+  // Ensures values match those in data store
+  if (directExperience ==='Unknown') {
+    directExperience = 'NoResponse';
+  }
+
+  if (gender ==='Unknown') {
+    gender = 'UnknownGender';
+  }
+
+  if (ageRange ==='Unknown') {
+    ageRange = 'UnknownAge';
+  }
+
+  const response = await fetch('/load-data?kind=Predictions&gender=' +
+                               gender + '&ageRange=' + ageRange +
+                               '&directExperience=' + directExperience);
+  const score = await response.json(); // Predicted sentiment score
+
+  loadPredictionBar(score);
+}
+
+function loadPredictionBar(score) {
+  const stats = new google.visualization.DataTable();
+
+  stats.addColumn('string', 'Sentiment Towards Police');
+  stats.addColumn('number', 'Sentiment Score');
+  stats.addRows([
+    ['Prediction for Speciifed Values', score],
+  ]);
+
   const options = {
-    title: 'Correlation between sentiment, response time, gender, and days',
-    hAxis: {title: 'Day in July', minValue: 1, maxValue: 10},
-    vAxis: {title: 'Sentiment Score'},
-    bubble: {textStyle: {fontSize: 11}},
-    legend: 'left',
+    title: 'Sentiment Score Predictions',
+    legend: 'none',
+    vAxis: {title: 'Negative to Positive Sentiment',
+      minValue: -1, maxValue: 1},
+    colors: ['#0000FF'],
     animation: {
       startup: true,
       duration: 3000,
@@ -151,9 +180,9 @@ function loadBubbleChart(days, scores, genders, responseTimeSThree) {
     },
   };
 
-
-  const chart = new google.visualization.BubbleChart(
-      document.getElementById('prediction-panel'));
+  // Instantiate and draw the chart.
+  const chart = new google.visualization.ColumnChart(
+      document.getElementById('prediction-bar'));
   chart.draw(stats, options);
 }
 
@@ -324,7 +353,7 @@ function loadSentimentVResponseTimeScatterChart(responseTimes, scores) {
 
   const options = {
     title: 'Sentiment V. Response Time',
-    hAxis: {title: 'Response Time'},
+    hAxis: {title: 'Response Time', minValue: 0, maxValue: 50000},
     vAxis: {title: 'Sentiment Score', minValue: -1, maxValue: 1},
     legend: 'none',
   };
