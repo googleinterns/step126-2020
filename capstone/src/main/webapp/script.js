@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /* global google */
-/* global WordCloud */
+/* global WordCloud */ 
 
 let precinct = 'SF';
 
@@ -75,19 +75,19 @@ function createMap() {
 }
 
 function wordcloudControl(wordcloudControlDiv, map) {
-  //* *button creation and positioning*/
+  //button creation and positioning
   const controlUI = document.createElement('div');
   controlUI.id = 'wordcloud-btn';
   controlUI.classList.add('button');
   controlUI.title = 'Click to show Word Cloud of top word associations';
   wordcloudControlDiv.appendChild(controlUI);
 
-  //* *css for interior of all buttons*/
+  //css for interior of all buttons
   const text = document.createElement('div');
   text.innerHTML = 'Show WordCloud';
   controlUI.appendChild(text);
 
-  //* *button functionality */
+  //button functionality 
   controlUI.addEventListener('click', function() {
     configModal();
   });
@@ -339,7 +339,7 @@ async function getSentimentList(district) {
       district, {fillColor: colors, fillOpacity: 0.7});
 }
 
-// **based on google survey question ratings 1-5 on police sentiment
+// based on google survey question ratings 1-5 on police sentiment
 function averagePrecinctSentiment(list) {
   let sentimentCount = 0;
   for (let i = 0; i < list.length; i++) {
@@ -461,24 +461,30 @@ async function loadWordcloud() {
 
 // configures and opens word cloud modal
 function configModal() {
+   // Get the map key
+  const key = document.getElementById('map-key');
+
   // Get the modal
   const modal = document.getElementById('modal');
   // Get the <span> element that closes the modal
   const span = document.getElementById('modal-close');
 
   // When the user clicks the button, open the modal
+  key.style.display = 'none';
   modal.style.display = 'block';
   loadWordcloud();
 
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
     modal.style.display = 'none';
+    key.style.display = 'block';
   };
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = 'none';
+      key.style.display = 'block';
     }
   };
 }
