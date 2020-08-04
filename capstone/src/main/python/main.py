@@ -1,8 +1,8 @@
+from flask import Flask
+from google.cloud import datastore
+from sklearn.tree import DecisionTreeRegressor
 import numpy as np
 import pandas as pd
-from sklearn.tree import DecisionTreeRegressor
-from google.cloud import datastore
-from flask import Flask
 app = Flask(__name__)
 
 
@@ -17,23 +17,20 @@ def load_dataframe():
     datastore_client = datastore.Client()
     query = datastore_client.query(kind='Response')
     results = list(query.fetch())
-    size = len(results)
 
     # Create Data Frame from entities
-    directExperiences = []  # Experience with police (yes or no)
+    direct_experiences = []  # Experience with police (yes or no)
     genders = []
     ages = []
     scores = []
 
-    for i in range(0, size):
-        response = results[i]
-
-        directExperiences.append(response['directExperience'])
+    for response in results:
+        direct_experiences.append(response['directExperience'])
         genders.append(response['gender'])
         ages.append(response['ageRange'])
         scores.append(response['score'])
 
-    data_points = {'directExperience': directExperiences, 'gender': genders,
+    data_points = {'directExperience': direct_experiences, 'gender': genders,
                    'ageRange': ages, 'score': scores}
 
     df = pd.DataFrame(data_points, 
@@ -63,7 +60,7 @@ def train_model(df):
 # for each feature and returns an
 # encoded array that represents those ordered values
 # in a binary form (needed for regressor predict())
-def getEncodedArray(directExperience, gender, ageRange):
+def getEncodedArray(direct_experience, gender, ageRange):
     categories = {
        'No': 0,
        'NoResponse': 0,
@@ -80,7 +77,7 @@ def getEncodedArray(directExperience, gender, ageRange):
        'UnknownAge': 0,
     }
 
-    categories[directExperience] = 1
+    categories[direct_experience] = 1
     categories[gender] = 1
     categories[ageRange] = 1
     
@@ -103,10 +100,10 @@ def add_predictions(fit_regressor):
     
     counter = 0
     # Create and store an Entity for every combination
-    for directExperience in cat_directExp:
+    for direct_experience in cat_directExp:
         for gender in cat_genders:
             for ageRange in cat_ageRange:
-                x_encoded = [getEncodedArray(directExperience ,gender, ageRange)]
+                x_encoded = [getEncodedArray(direct_experience ,gender, ageRange)]
                 score = fit_regressor.predict(x_encoded)[0]
 
                 # Creates Entity
@@ -115,7 +112,7 @@ def add_predictions(fit_regressor):
                 entity_key = datastore_client.key(kind, name)
 
                 prediction_entity = datastore.Entity(key=entity_key)
-                prediction_entity['directExperience'] = directExperience
+                prediction_entity['directExperience'] = direct_experience
                 prediction_entity['gender'] = gender
                 prediction_entity['ageRange'] = ageRange
                 prediction_entity['score'] = score
