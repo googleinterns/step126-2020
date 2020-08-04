@@ -8,9 +8,11 @@ import java.util.Optional;
 public class AssociationResult {
 
   public static final String ENTITY_KIND = "AssociationResult";
+  public static final float SENTIMENT_THRESHOLD = 0.1f;
   private String content;
   private float score;
   private float weight;
+  private boolean strongSentiment;
   private Optional<Key> key;
 
   // epsilon for checking for float equality
@@ -22,12 +24,15 @@ public class AssociationResult {
    * @param content the word/phrase for which the result is for
    * @param score an initial score for the word/phrase from -1 (neg) to 1 (pos)
    * @param weight the weight of the sentiment
+   * @param strongSentiment whether there is strong sentiment associated with this word
    * @param key the key of the current result in datastore
    */
-  public AssociationResult(String content, float score, float weight, Key key) {
+  public AssociationResult(
+      String content, float score, float weight, boolean strongSentiment, Key key) {
     this.content = content;
     this.score = score;
     this.weight = weight;
+    this.strongSentiment = strongSentiment;
     this.key = Optional.of(key);
   }
 
@@ -37,12 +42,15 @@ public class AssociationResult {
    * @param content the word/phrase for which the result is for
    * @param score an intial score for the word/phrase from -1 (neg) to 1 (pos)
    * @param weight the weight of the sentiment
+   * @param strongSentiment whether there is an occurance of this entity with sentiment above the
+   *     threshold
    */
-  public AssociationResult(String content, float score, float weight) {
+  public AssociationResult(String content, float score, float weight, boolean strongSentiment) {
     this.content = content;
     this.score = score;
     this.weight = weight;
-    key = Optional.empty();
+    this.strongSentiment = strongSentiment;
+    this.key = Optional.empty();
   }
 
   /**
@@ -55,6 +63,7 @@ public class AssociationResult {
     score = entity.getMagnitude() * entity.getSentiment();
     weight = entity.getMagnitude();
     key = Optional.empty();
+    strongSentiment = Math.abs(score) > SENTIMENT_THRESHOLD;
   }
 
   /** @return the word/phrase that the score is for */
@@ -77,6 +86,17 @@ public class AssociationResult {
     return weight;
   }
 
+  /**
+   * Whether or not the result has had an instance of strong sentiment among the entities it is made
+   * up of (mixed sentiments that add to 0 with negative and positive sentiments canceling can still
+   * have individual strong sentiments)
+   *
+   * @return whether this association has strong sentiment
+   */
+  public boolean hasStrongSentiment() {
+    return strongSentiment;
+  }
+
   /** @return the location of the result in datastore (empty optional if none exists */
   public Optional<Key> getKey() {
     return key;
@@ -90,6 +110,7 @@ public class AssociationResult {
   public void updateResult(EntitySentiment entity) {
     score += entity.getMagnitude() * entity.getSentiment();
     weight += entity.getMagnitude();
+    strongSentiment = strongSentiment || (Math.abs(entity.getSentiment()) > SENTIMENT_THRESHOLD);
   }
 
   public static final Comparator<AssociationResult> ORDER_BY_SCORE =
@@ -102,7 +123,14 @@ public class AssociationResult {
 
   @Override
   public String toString() {
-    return content + "(" + Float.toString(score) + ")";
+    return content
+        + "("
+        + Float.toString(score)
+        + ", "
+        + Float.toString(weight)
+        + ", "
+        + Boolean.toString(strongSentiment)
+        + ")";
   }
 
   @Override
@@ -113,6 +141,7 @@ public class AssociationResult {
     AssociationResult x = (AssociationResult) obj;
     return content.equals(x.getContent())
         && (Math.abs(x.getScore() - score) < EPSILON)
-        && (Math.abs(x.getWeight() - weight) < EPSILON);
+        && (Math.abs(x.getWeight() - weight) < EPSILON)
+        && (x.hasStrongSentiment() == strongSentiment);
   }
 }
