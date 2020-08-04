@@ -26,6 +26,11 @@ h1 {
   font-family: "Oswald", sans-serif;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
 .content {
   position: absolute;
   bottom: 0px;
