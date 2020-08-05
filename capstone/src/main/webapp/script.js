@@ -23,7 +23,7 @@ google.charts.setOnLoadCallback(loadCharts);
 function createMap() {
   const map = new google.maps.Map(
       document.getElementById('map-container'),
-      {center: {lat: 37.762844, lng: -122.455289},
+      {center: {lat: 37.752748, lng: -122.436832},
         zoom: 12},
   );
 
@@ -65,6 +65,7 @@ function createMap() {
   const zipControlDiv = document.createElement('div');
   zipControl(zipControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER].push(zipControlDiv);
+  document.getElementById('info-box').style.display='none';
 
   // button for zipcode data layer
   const precinctControlDiv = document.createElement('div');
@@ -107,7 +108,7 @@ function centerControl(controlDiv, map) {
 
   // button functionality
   controlUI.addEventListener('click', function() {
-    map.setCenter({lat: 37.7749, lng: -122.4194});
+    map.setCenter({lat: 37.752748, lng: -122.436832});
     map.setZoom(12);
   });
 }
@@ -125,6 +126,14 @@ function zipControl(controlDiv, map) {
       fillOpacity: 0.9});
     zipcodeLayer.overrideStyle(event.feature, {
       fillColor: '#19B3B1', fillOpacity: .7});
+    const zip = event.feature.getProperty('id');
+    const precincts = getPrecincts(zip);
+    document.getElementById('zipcode').textContent =
+        'Zipcode: ' + zip;
+    document.getElementById('neighborhood').textContent =
+        'Neighborhood: ' + event.feature.getProperty('neighborhood');
+    document.getElementById('precincts').textContent =
+        'Associated Precinct(s): ' + precincts;
   });
 
   // button creation and positioning
@@ -145,9 +154,17 @@ function zipControl(controlDiv, map) {
       zipcodeLayer.revertStyle();
       zipcodeLayer.setStyle({fillColor: '#C698A0',
         fillOpacity: 0.9, visible: true});
+      document.getElementById('info-box').style.display='block';
     } else {
       zipcodeLayer.setStyle({fillColor: '#C698A0',
         fillOpacity: 0.9, visible: false});
+      document.getElementById('zipcode').textContent =
+            'Zipcode: none selected';
+      document.getElementById('neighborhood').textContent =
+            'Neighborhood: none selected';
+      document.getElementById('precincts').textContent =
+            'Associated Precinct: none selected';
+      document.getElementById('info-box').style.display='none';
     }
   });
 }
@@ -212,8 +229,14 @@ function drawCheckboxLayer() {
     alert('nothing yet');
   } else if (mapAndSelection.selection == 'sentimentCheck') {
     mapSentiment();
+  } else if (mapAndSelection.selection == 'dayCheck') {
+    const weekCheck = document.getElementById('weeks');
+    weekCheck.style.display = 'none';
+  } else if (mapAndSelection.selection == 'weekCheck') {
+    const dayCheck = document.getElementById('days');
+    dayCheck.style.display = 'none';
   } else {
-    alert('precinctLayer');
+    alert('draw checkbox unauthorized option');
   }
 }
 
@@ -345,7 +368,7 @@ function averagePrecinctSentiment(list) {
   let sentimentCount = 0;
   for (let i = 0; i < list.length; i++) {
     const sentiment = list[i].score;
-    console.log(list[i].date);
+    // console.log(list[i].date); get date and sort
     if (sentiment >= 0.5) {
       sentimentCount += 5;
     } else if (sentiment > 0.05) {
@@ -384,12 +407,14 @@ const mapAndSelection = {};
 // unchecks boxes when new checkbox is checked
 function onlyOne(checkbox) {
   const checkboxes = document.getElementsByName('check');
+  const weekCheck = document.getElementById('weeks');
+  const dayCheck = document.getElementById('days');
+
   checkboxes.forEach((item) => {
     if (item !== checkbox) {
       item.checked = false;
     }
   });
-
   if (mapAndSelection.selection == checkbox.id) {
     mapAndSelection.selection = 'noneSelected';
     resetMap();
@@ -416,6 +441,10 @@ function resetMap() {
   precinctDataLayer.revertStyle();
   precinctDataLayer.setStyle({fillColor: '#CECDBC',
     fillOpacity: 0.9, visible: true});
+  const weekCheck = document.getElementById('weeks');
+  const dayCheck = document.getElementById('days');
+  dayCheck.style.display = 'block';
+  weekCheck.style.display = 'block';
 }
 
 /* eslint-enable no-unused-vars */
@@ -488,4 +517,34 @@ function configModal() {
       key.style.display = 'block';
     }
   };
+}
+
+// helper function to display precinct when zipcode is clicked
+function getPrecincts(zipcode) {
+  const mapZipPrecinct = {};
+  mapZipPrecinct['94102'] = 'Northern and Tenderloin';
+  mapZipPrecinct['94103'] = 'Southern and Mission';
+  mapZipPrecinct['94105'] = 'Southern';
+  mapZipPrecinct['94107'] = 'Bayview and Southern';
+  mapZipPrecinct['94108'] = 'Central';
+  mapZipPrecinct['94109'] = 'Tenderloin, Central and Northern';
+  mapZipPrecinct['94110'] = 'Ingleside and Mission';
+  mapZipPrecinct['94111'] = 'Central';
+  mapZipPrecinct['94112'] = 'Ingleside and Taraval';
+  mapZipPrecinct['94114'] = 'Park and Mission';
+  mapZipPrecinct['94115'] = 'Northern, Richmond and Park';
+  mapZipPrecinct['94116'] = 'Taraval';
+  mapZipPrecinct['94117'] = 'Park and Northern';
+  mapZipPrecinct['94118'] = 'Richmond and Park';
+  mapZipPrecinct['94121'] = 'Richmond';
+  mapZipPrecinct['94122'] = 'Richmond, Taraval and Park';
+  mapZipPrecinct['94123'] = 'Northern';
+  mapZipPrecinct['94124'] = 'Bayview';
+  mapZipPrecinct['94127'] = 'Ingleside and Taraval';
+  mapZipPrecinct['94129'] = 'Richmond';
+  mapZipPrecinct['94131'] = 'Ingleside and Park';
+  mapZipPrecinct['94132'] = 'Taraval';
+  mapZipPrecinct['94133'] = 'Central';
+  mapZipPrecinct['94134'] = 'Ingleside and Bayview';
+  return mapZipPrecinct[zipcode];
 }

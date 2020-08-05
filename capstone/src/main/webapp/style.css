@@ -35,21 +35,14 @@ a {
   position: absolute;
   bottom: 0px;
   top: 5rem;
-  overflow: hidden;
+  overflow: scroll;
   width: 100%;
 }
 
 .container {
   margin: 0;
   padding: 0;
-  overflow: hidden;
-}
-
-.map {
-  height: 100%;
-  width: 70%;
-  background-color: #77dd77;
-  float: left;
+  overflow: scroll;
 }
 
 .right-stats-display {
@@ -76,7 +69,7 @@ a {
   border: black;
   border-width: thin;
   margin: 0;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .third-stats {
@@ -85,7 +78,7 @@ a {
   border: black;
   border-width: thin;
   margin: 0;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .clear {
@@ -196,6 +189,20 @@ ul {
   cursor: pointer;
   font-family: "Oswald", sans-serif;
 }
+.invertedButton {
+  background-color: white;
+  border: double;
+  border-radius: 5px;
+  color: #19B3B1;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: "Oswald", sans-serif;
+}
 
 /* Statistics page style rules */
 .stats-area {
@@ -258,7 +265,7 @@ select{
   cursor: pointer;
   position: absolute;
   top: 30%;
-  left: 60%;
+  left: 57%;
   z-index: 5;
   background-color: #19B3B1;
   padding: 5px;
@@ -267,10 +274,25 @@ select{
   font-family: "Oswald", sans-serif;
   line-height: 30px;
   padding-left: 10px;
-  background-color: #19B3B1;
-  border: double;
   border-radius: 5px;
     color: white;
+}
+
+#info-box {
+  cursor: pointer;
+  position: absolute;
+  top: 30%;
+  left: 57%;
+  z-index: 5;
+  background-color: white;
+  padding: 5px;
+  border: double 5px;
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  line-height: 30px;
+  padding-left: 10px;
+  border-radius: 5px;
+  color: #19B3B1;
 }
 
 /* The Modal (background) */
@@ -310,4 +332,11 @@ select{
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+#weeks {
+  display: block;
+}
+#days {
+  display: block;
 }
