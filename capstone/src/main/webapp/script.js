@@ -119,13 +119,13 @@ function zipControl(controlDiv, map) {
   const zipcodeLayer = new google.maps.Data({map: map});
   zipcodeLayer.loadGeoJson('zipcode-data.json');
   zipcodeLayer.setStyle({fillColor: '#C698A0',
-    fillOpacity: 0.9, visible: false});
+    fillOpacity: 0.8, visible: false});
   zipcodeLayer.addListener('click', function(event) {
     zipcodeLayer.revertStyle();
     zipcodeLayer.setStyle({fillColor: '#C698A0',
-      fillOpacity: 0.9});
+      fillOpacity: 0.8});
     zipcodeLayer.overrideStyle(event.feature, {
-      fillColor: '#19B3B1', fillOpacity: .7});
+      fillColor: '#19B3B1', fillOpacity: .8});
     const zip = event.feature.getProperty('id');
     const precincts = getPrecincts(zip);
     document.getElementById('zipcode').textContent =
@@ -153,11 +153,11 @@ function zipControl(controlDiv, map) {
     if (zipClicked) {
       zipcodeLayer.revertStyle();
       zipcodeLayer.setStyle({fillColor: '#C698A0',
-        fillOpacity: 0.9, visible: true});
+        fillOpacity: 0.8, visible: true});
       document.getElementById('info-box').style.display='block';
     } else {
       zipcodeLayer.setStyle({fillColor: '#C698A0',
-        fillOpacity: 0.9, visible: false});
+        fillOpacity: 0.8, visible: false});
       document.getElementById('zipcode').textContent =
             'Zipcode: none selected';
       document.getElementById('neighborhood').textContent =
@@ -175,15 +175,15 @@ function precinctControl(controlDiv, map) {
   const precinctLayer = new google.maps.Data({map: map});
   precinctLayer.loadGeoJson('policePrecincts.geojson');
   // a function that uses color map to map, checks if button is clicked
-  precinctLayer.setStyle({fillColor: '#A6B1F7',
-    fillOpacity: 0.9, visible: false});
+  precinctLayer.setStyle({fillColor: '#B31968',
+    fillOpacity: 0.8, visible: false});
   mapAndSelection.map = precinctLayer;
   precinctLayer.addListener('click', function(event) {
     precinctLayer.revertStyle();
-    precinctLayer.setStyle({fillColor: '#A6B1F7',
-      fillOpacity: 0.9});
+    precinctLayer.setStyle({fillColor: '#B31968',
+      fillOpacity: 0.8});
     precinctLayer.overrideStyle(event.feature, {
-      fillColor: '#19B3B1', fillOpacity: .7});
+      fillColor: '#19B3B1', fillOpacity: .8});
     precinct = event.feature.getProperty('district');
     document.getElementById('chart-title').textContent =
      precinct + ' Police Sentiment';
@@ -216,8 +216,8 @@ function precinctControl(controlDiv, map) {
       associationUpdateDisplay('SF');
     } else {
       precinctLayer.revertStyle();
-      precinctLayer.setStyle({fillColor: '#A6B1F7',
-        fillOpacity: 0.9, visible: true});
+      precinctLayer.setStyle({fillColor: '#B31968',
+        fillOpacity: 0.8, visible: true});
       document.getElementById('map-key').style.display='block';
       mapAndSelection.selection = 'noneSelected';
     }
@@ -443,8 +443,8 @@ async function showStats() {
 function resetMap() {
   const precinctDataLayer = mapAndSelection.map;
   precinctDataLayer.revertStyle();
-  precinctDataLayer.setStyle({fillColor: '#A6B1F7',
-    fillOpacity: 0.9, visible: true});
+  precinctDataLayer.setStyle({fillColor: '#B31968',
+    fillOpacity: 0.8, visible: true});
   const weekCheck = document.getElementById('weeks');
   const dayCheck = document.getElementById('days');
   dayCheck.style.display = 'block';
