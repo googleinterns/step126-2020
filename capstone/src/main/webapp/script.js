@@ -126,13 +126,14 @@ function zipControl(controlDiv, map) {
       fillOpacity: 0.9});
     zipcodeLayer.overrideStyle(event.feature, {
       fillColor: '#19B3B1', fillOpacity: .7});
+    const zip = event.feature.getProperty('id');
+    const precincts = getPrecincts(zip);
     document.getElementById('zipcode').textContent =
-        'Zipcode: ' + event.feature.getProperty('id');
+        'Zipcode: ' + zip;
     document.getElementById('neighborhood').textContent =
         'Neighborhood: ' + event.feature.getProperty('neighborhood');
     document.getElementById('precincts').textContent =
-        'Associated Precinct: ' + '';  
-
+        'Associated Precinct(s): ' + precincts;
   });
 
   // button creation and positioning
@@ -153,11 +154,17 @@ function zipControl(controlDiv, map) {
       zipcodeLayer.revertStyle();
       zipcodeLayer.setStyle({fillColor: '#C698A0',
         fillOpacity: 0.9, visible: true});
-        document.getElementById('info-box').style.display='block';
+      document.getElementById('info-box').style.display='block';
     } else {
       zipcodeLayer.setStyle({fillColor: '#C698A0',
         fillOpacity: 0.9, visible: false});
-        document.getElementById('info-box').style.display='none';
+      document.getElementById('zipcode').textContent =
+            'Zipcode: none selected';
+      document.getElementById('neighborhood').textContent =
+            'Neighborhood: none selected';
+      document.getElementById('precincts').textContent =
+            'Associated Precinct: none selected';
+      document.getElementById('info-box').style.display='none';
     }
   });
 }
@@ -223,10 +230,10 @@ function drawCheckboxLayer() {
   } else if (mapAndSelection.selection == 'sentimentCheck') {
     mapSentiment();
   } else if (mapAndSelection.selection == 'dayCheck') {
-    let weekCheck = document.getElementById('weeks');
+    const weekCheck = document.getElementById('weeks');
     weekCheck.style.display = 'none';
   } else if (mapAndSelection.selection == 'weekCheck') {
-    let dayCheck = document.getElementById('days');
+    const dayCheck = document.getElementById('days');
     dayCheck.style.display = 'none';
   } else {
     alert('draw checkbox unauthorized option');
@@ -361,7 +368,7 @@ function averagePrecinctSentiment(list) {
   let sentimentCount = 0;
   for (let i = 0; i < list.length; i++) {
     const sentiment = list[i].score;
-    //console.log(list[i].date);
+    // console.log(list[i].date); get date and sort
     if (sentiment >= 0.5) {
       sentimentCount += 5;
     } else if (sentiment > 0.05) {
@@ -411,8 +418,7 @@ function onlyOne(checkbox) {
   if (mapAndSelection.selection == checkbox.id) {
     mapAndSelection.selection = 'noneSelected';
     resetMap();
-  }
-  else{
+  } else {
     mapAndSelection.selection = checkbox.id;
     drawCheckboxLayer();
   }
@@ -513,8 +519,32 @@ function configModal() {
   };
 }
 
-function getOption(){
-    let e = document.getElementById("timeframe");
-    let strUser = e.options[e.selectedIndex].text;
-    console.log("strUser "+ strUser);
+// helper function to display precinct when zipcode is clicked
+function getPrecincts(zipcode) {
+  const mapZipPrecinct = {};
+  mapZipPrecinct['94102'] = 'Northern and Tenderloin';
+  mapZipPrecinct['94103'] = 'Southern and Mission';
+  mapZipPrecinct['94105'] = 'Southern';
+  mapZipPrecinct['94107'] = 'Bayview and Southern';
+  mapZipPrecinct['94108'] = 'Central';
+  mapZipPrecinct['94109'] = 'Tenderloin, Central and Northern';
+  mapZipPrecinct['94110'] = 'Ingleside and Mission';
+  mapZipPrecinct['94111'] = 'Central';
+  mapZipPrecinct['94112'] = 'Ingleside and Taraval';
+  mapZipPrecinct['94114'] = 'Park and Mission';
+  mapZipPrecinct['94115'] = 'Northern, Richmond and Park';
+  mapZipPrecinct['94116'] = 'Taraval';
+  mapZipPrecinct['94117'] = 'Park and Northern';
+  mapZipPrecinct['94118'] = 'Richmond and Park';
+  mapZipPrecinct['94121'] = 'Richmond';
+  mapZipPrecinct['94122'] = 'Richmond, Taraval and Park';
+  mapZipPrecinct['94123'] = 'Northern';
+  mapZipPrecinct['94124'] = 'Bayview';
+  mapZipPrecinct['94127'] = 'Ingleside and Taraval';
+  mapZipPrecinct['94129'] = 'Richmond';
+  mapZipPrecinct['94131'] = 'Ingleside and Park';
+  mapZipPrecinct['94132'] = 'Taraval';
+  mapZipPrecinct['94133'] = 'Central';
+  mapZipPrecinct['94134'] = 'Ingleside and Bayview';
+  return mapZipPrecinct[zipcode];
 }
