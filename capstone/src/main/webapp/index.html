@@ -22,14 +22,20 @@
       </div>
     </div>
     <div id="content" class="content">
+        <div id="info-box">
+            <h2 color="#19B3B1">Click on a zipcode to see associated police precincts</h2>
+            <p id="zipcode">Zipcode: none selected</p>
+            <p id="neighborhood">Neighborhood: none selected</p>
+            <p id="precincts">Associated Precinct: none selected</p>
+        </div>
       <div id="map-key">
-        <h2>Check to See Precinct Data</h2>
+        <h2>Click to See Precinct Data</h2>
         <input type="checkbox" id="sentimentCheck" name="check" onclick="onlyOne(this)">
         <label for="sentimentCheck">Show survey sentiments of July by police precinct</label><br>
         <input type="checkbox" id="weekCheck" name="check" onclick="onlyOne(this)">
         <label for="crimerateCheck">Show sentiment by week</label>
         <input type="checkbox" id="dayCheck" name="check" onclick="onlyOne(this)">
-        <label for="incomeCheck">Show sentiment by day</label><br/>
+        <label for="incomeCheck">Show sentiment by day</label><br>
         <label for="timeframes">Choose a timeframe:</label>
         <select name="timeframes" id="timeframe">
                 <option value="all" id="all">All</option>
@@ -73,7 +79,8 @@
                 <option value="thirty">July 30</option>
                 <option value="one3">July 31</option>
             </optgroup>
-        </select>
+        </select><br>
+        <button class='invertedButton' onclick="getOption">Map Sentiment</button>
       </div>
       <div id="map-container" class="container map"></div>
       <div id="stats" class="container right-stats-display">

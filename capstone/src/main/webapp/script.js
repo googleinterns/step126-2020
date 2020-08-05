@@ -23,7 +23,7 @@ google.charts.setOnLoadCallback(loadCharts);
 function createMap() {
   const map = new google.maps.Map(
       document.getElementById('map-container'),
-      {center: {lat: 37.762844, lng: -122.455289},
+      {center: {lat: 37.752748, lng: -122.436832},
         zoom: 12},
   );
 
@@ -65,6 +65,7 @@ function createMap() {
   const zipControlDiv = document.createElement('div');
   zipControl(zipControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_CENTER].push(zipControlDiv);
+  document.getElementById('info-box').style.display='none';
 
   // button for zipcode data layer
   const precinctControlDiv = document.createElement('div');
@@ -107,7 +108,7 @@ function centerControl(controlDiv, map) {
 
   // button functionality
   controlUI.addEventListener('click', function() {
-    map.setCenter({lat: 37.7749, lng: -122.4194});
+    map.setCenter({lat: 37.752748, lng: -122.436832});
     map.setZoom(12);
   });
 }
@@ -125,6 +126,13 @@ function zipControl(controlDiv, map) {
       fillOpacity: 0.9});
     zipcodeLayer.overrideStyle(event.feature, {
       fillColor: '#19B3B1', fillOpacity: .7});
+    document.getElementById('zipcode').textContent =
+        'Zipcode: ' + event.feature.getProperty('id');
+    document.getElementById('neighborhood').textContent =
+        'Neighborhood: ' + event.feature.getProperty('neighborhood');
+    document.getElementById('precincts').textContent =
+        'Associated Precinct: ' + '';  
+
   });
 
   // button creation and positioning
@@ -145,9 +153,11 @@ function zipControl(controlDiv, map) {
       zipcodeLayer.revertStyle();
       zipcodeLayer.setStyle({fillColor: '#C698A0',
         fillOpacity: 0.9, visible: true});
+        document.getElementById('info-box').style.display='block';
     } else {
       zipcodeLayer.setStyle({fillColor: '#C698A0',
         fillOpacity: 0.9, visible: false});
+        document.getElementById('info-box').style.display='none';
     }
   });
 }
@@ -501,4 +511,10 @@ function configModal() {
       key.style.display = 'block';
     }
   };
+}
+
+function getOption(){
+    let e = document.getElementById("timeframe");
+    let strUser = e.options[e.selectedIndex].text;
+    console.log("strUser "+ strUser);
 }
