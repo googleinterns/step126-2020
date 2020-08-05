@@ -519,6 +519,12 @@ function configModal() {
   };
 }
 
+function getOption() {
+  const e = document.getElementById('timeframe');
+  const strUser = e.options[e.selectedIndex].text;
+  console.log('strUser '+ strUser); // get drop down selegtkction W3 schools
+}
+
 // helper function to display precinct when zipcode is clicked
 function getPrecincts(zipcode) {
   const mapZipPrecinct = {};
