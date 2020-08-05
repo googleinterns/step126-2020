@@ -35,14 +35,14 @@ a {
   position: absolute;
   bottom: 0px;
   top: 5rem;
-  overflow: hidden;
+  overflow: scroll;
   width: 100%;
 }
 
 .container {
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .map {
@@ -76,7 +76,7 @@ a {
   border: black;
   border-width: thin;
   margin: 0;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .third-stats {
@@ -85,7 +85,7 @@ a {
   border: black;
   border-width: thin;
   margin: 0;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .clear {
@@ -258,7 +258,7 @@ select{
   cursor: pointer;
   position: absolute;
   top: 30%;
-  left: 60%;
+  left: 57%;
   z-index: 5;
   background-color: #19B3B1;
   padding: 5px;
@@ -310,4 +310,11 @@ select{
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+#weeks {
+  display: block;
+}
+#days {
+  display: block;
 }

@@ -212,8 +212,14 @@ function drawCheckboxLayer() {
     alert('nothing yet');
   } else if (mapAndSelection.selection == 'sentimentCheck') {
     mapSentiment();
+  } else if (mapAndSelection.selection == 'dayCheck') {
+    let weekCheck = document.getElementById('weeks');
+    weekCheck.style.display = 'none';
+  } else if (mapAndSelection.selection == 'weekCheck') {
+    let dayCheck = document.getElementById('days');
+    dayCheck.style.display = 'none';
   } else {
-    alert('precinctLayer');
+    alert('draw checkbox unauthorized option');
   }
 }
 
@@ -345,7 +351,7 @@ function averagePrecinctSentiment(list) {
   let sentimentCount = 0;
   for (let i = 0; i < list.length; i++) {
     const sentiment = list[i].score;
-    console.log(list[i].date);
+    //console.log(list[i].date);
     if (sentiment >= 0.5) {
       sentimentCount += 5;
     } else if (sentiment > 0.05) {
@@ -384,16 +390,19 @@ const mapAndSelection = {};
 // unchecks boxes when new checkbox is checked
 function onlyOne(checkbox) {
   const checkboxes = document.getElementsByName('check');
+  const weekCheck = document.getElementById('weeks');
+  const dayCheck = document.getElementById('days');
+
   checkboxes.forEach((item) => {
     if (item !== checkbox) {
       item.checked = false;
     }
   });
-
   if (mapAndSelection.selection == checkbox.id) {
     mapAndSelection.selection = 'noneSelected';
     resetMap();
-  } else {
+  }
+  else{
     mapAndSelection.selection = checkbox.id;
     drawCheckboxLayer();
   }
@@ -416,6 +425,10 @@ function resetMap() {
   precinctDataLayer.revertStyle();
   precinctDataLayer.setStyle({fillColor: '#CECDBC',
     fillOpacity: 0.9, visible: true});
+  const weekCheck = document.getElementById('weeks');
+  const dayCheck = document.getElementById('days');
+  dayCheck.style.display = 'block';
+  weekCheck.style.display = 'block';
 }
 
 /* eslint-enable no-unused-vars */

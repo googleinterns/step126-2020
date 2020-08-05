@@ -25,11 +25,55 @@
       <div id="map-key">
         <h2>Check to See Precinct Data</h2>
         <input type="checkbox" id="sentimentCheck" name="check" onclick="onlyOne(this)">
-        <label for="sentimentCheck">Show sentiment</label><br>
-        <input type="checkbox" id="crimerateCheck" name="check" onclick="onlyOne(this)">
-        <label for="crimerateCheck">Show crime rate</label><br>
-        <input type="checkbox" id="incomeCheck" name="check" onclick="onlyOne(this)">
-        <label for="incomeCheck">Show household incomes</label><br><br>
+        <label for="sentimentCheck">Show survey sentiments of July by police precinct</label><br>
+        <input type="checkbox" id="weekCheck" name="check" onclick="onlyOne(this)">
+        <label for="crimerateCheck">Show sentiment by week</label>
+        <input type="checkbox" id="dayCheck" name="check" onclick="onlyOne(this)">
+        <label for="incomeCheck">Show sentiment by day</label><br/>
+        <label for="timeframes">Choose a timeframe:</label>
+        <select name="timeframes" id="timeframe">
+                <option value="all" id="all">All</option>
+            <optgroup label="Weeks" id="weeks">
+                <option value="Week1">July 1-7</option>
+                <option value="Week2">July 8-14</option>
+                <option value="Week3">July 15-21</option>
+                <option value="Week4">July 22-28</option>
+                <option value="Week4">July 29-31</option>
+                </optgroup>
+                <optgroup label="Days" id="days">
+                <option value="one">July 1</option>
+                <option value="two">July 2</option>
+                <option value="three">July 3</option>
+                <option value="four">July 4</option>
+                <option value="five">July 5</option>
+                <option value="six">July 6</option>
+                <option value="seven">July 7</option>
+                <option value="eight">July 8</option>
+                <option value="nine">July 9</option>
+                <option value="ten">July 10</option>
+                <option value="eleven">July 11</option>
+                <option value="twelve">July 12</option>
+                <option value="teen3">July 13</option>
+                <option value="teen4">July 14</option>
+                <option value="teen5">July 15</option>
+                <option value="teen6">July 16</option>
+                <option value="teen7">July 17</option>
+                <option value="teen8">July 18</option>
+                <option value="teen9">July 19</option>
+                <option value="twenty">July 20</option>
+                <option value="one2">July 21</option>
+                <option value="two2">July 22</option>
+                <option value="three2">July 23</option>
+                <option value="four2">July 24</option>
+                <option value="five2">July 25</option>
+                <option value="six2">July 26</option>
+                <option value="seven2">July 27</option>
+                <option value="eight2">July 28</option>
+                <option value="nine2">July 29</option>
+                <option value="thirty">July 30</option>
+                <option value="one3">July 31</option>
+            </optgroup>
+        </select>
       </div>
       <div id="map-container" class="container map"></div>
       <div id="stats" class="container right-stats-display">
