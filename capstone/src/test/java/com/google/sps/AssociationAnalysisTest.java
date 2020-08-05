@@ -9,9 +9,8 @@ import com.google.sps.EntitySentiment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.Test;
-import org.mockito.Mockito;
 
-public class AssociationAnalysisTest extends Mockito {
+public class AssociationAnalysisTest {
 
   @Test
   public void testEmpty() throws Exception {

@@ -75,19 +75,19 @@ function createMap() {
 }
 
 function wordcloudControl(wordcloudControlDiv, map) {
-  //* *button creation and positioning*/
+  // button creation and positioning
   const controlUI = document.createElement('div');
   controlUI.id = 'wordcloud-btn';
   controlUI.classList.add('button');
   controlUI.title = 'Click to show Word Cloud of top word associations';
   wordcloudControlDiv.appendChild(controlUI);
 
-  //* *css for interior of all buttons*/
+  // css for interior of all buttons
   const text = document.createElement('div');
   text.innerHTML = 'Show WordCloud';
   controlUI.appendChild(text);
 
-  //* *button functionality */
+  // button functionality
   controlUI.addEventListener('click', function() {
     configModal();
   });
@@ -331,8 +331,9 @@ function mapSentiment() {
 
 // color precincts by sentement
 async function getSentimentList(district) {
+  const passInVar = district.getProperty('district');
   const responsePromise =
-    await fetch('/load-data?precinct=' + district.getProperty('district'));
+    await fetch('/load-data?kind=Response&precinct=' + passInVar);
   const list = await responsePromise.json();
   const colors = averagePrecinctSentiment(list);
   mapAndSelection.map.overrideStyle(
@@ -461,24 +462,30 @@ async function loadWordcloud() {
 
 // configures and opens word cloud modal
 function configModal() {
+  // Get the map key
+  const key = document.getElementById('map-key');
+
   // Get the modal
   const modal = document.getElementById('modal');
   // Get the <span> element that closes the modal
   const span = document.getElementById('modal-close');
 
   // When the user clicks the button, open the modal
+  key.style.display = 'none';
   modal.style.display = 'block';
   loadWordcloud();
 
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
     modal.style.display = 'none';
+    key.style.display = 'block';
   };
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = 'none';
+      key.style.display = 'block';
     }
   };
 }
