@@ -175,12 +175,12 @@ function precinctControl(controlDiv, map) {
   const precinctLayer = new google.maps.Data({map: map});
   precinctLayer.loadGeoJson('policePrecincts.geojson');
   // a function that uses color map to map, checks if button is clicked
-  precinctLayer.setStyle({fillColor: '#CECDBC',
+  precinctLayer.setStyle({fillColor: '#A6B1F7',
     fillOpacity: 0.9, visible: false});
   mapAndSelection.map = precinctLayer;
   precinctLayer.addListener('click', function(event) {
     precinctLayer.revertStyle();
-    precinctLayer.setStyle({fillColor: '#CECDBC',
+    precinctLayer.setStyle({fillColor: '#A6B1F7',
       fillOpacity: 0.9});
     precinctLayer.overrideStyle(event.feature, {
       fillColor: '#19B3B1', fillOpacity: .7});
@@ -194,7 +194,7 @@ function precinctControl(controlDiv, map) {
   // button creation and positioning
   const dataUI = document.createElement('div');
   dataUI.classList.add('button');
-  dataUI.title = 'Click to show San Fransisco precincts';
+  dataUI.title = 'Click to show San Fransisco police precincts';
   controlDiv.appendChild(dataUI);
 
   // css for interior of all buttons
@@ -216,28 +216,12 @@ function precinctControl(controlDiv, map) {
       associationUpdateDisplay('SF');
     } else {
       precinctLayer.revertStyle();
-      precinctLayer.setStyle({fillColor: '#CECDBC',
+      precinctLayer.setStyle({fillColor: '#A6B1F7',
         fillOpacity: 0.9, visible: true});
       document.getElementById('map-key').style.display='block';
       mapAndSelection.selection = 'noneSelected';
     }
   });
-}
-// drawing sentiment on map by coloring precinct layer
-function drawCheckboxLayer() {
-  if (mapAndSelection.selection == 'noneSelected') {
-    alert('nothing yet');
-  } else if (mapAndSelection.selection == 'sentimentCheck') {
-    mapSentiment();
-  } else if (mapAndSelection.selection == 'dayCheck') {
-    const weekCheck = document.getElementById('weeks');
-    weekCheck.style.display = 'none';
-  } else if (mapAndSelection.selection == 'weekCheck') {
-    const dayCheck = document.getElementById('days');
-    dayCheck.style.display = 'none';
-  } else {
-    alert('draw checkbox unauthorized option');
-  }
 }
 
 async function associationUpdateDisplay(scope) {
@@ -346,19 +330,20 @@ function loadResponseChart(totalResponses, precinct) {
   chart.draw(stats, options);
 }
 
-function mapSentiment() {
+function mapSentiment(timeframe) {
   mapAndSelection.map.forEach((feature) => {
-    getSentimentList(feature);
+    getSentimentList(feature, timeframe);
   });
 }
 
 // color precincts by sentement
-async function getSentimentList(district) {
+async function getSentimentList(district, timeframe) {
   const passInVar = district.getProperty('district');
   const responsePromise =
-    await fetch('/load-data?kind=Response&precinct=' + passInVar);
+  await fetch('/load-data?kind=Response&precinct=' + passInVar);
   const list = await responsePromise.json();
-  const colors = averagePrecinctSentiment(list);
+  const dataPoints = getSublist(list, timeframe); // returns sublist
+  const colors = averagePrecinctSentiment(dataPoints);
   mapAndSelection.map.overrideStyle(
       district, {fillColor: colors, fillOpacity: 0.7});
 }
@@ -368,7 +353,6 @@ function averagePrecinctSentiment(list) {
   let sentimentCount = 0;
   for (let i = 0; i < list.length; i++) {
     const sentiment = list[i].score;
-    // console.log(list[i].date); get date and sort
     if (sentiment >= 0.5) {
       sentimentCount += 5;
     } else if (sentiment > 0.05) {
@@ -382,6 +366,7 @@ function averagePrecinctSentiment(list) {
     }
   }
   const sentimentAverage = sentimentCount/list.length;
+  console.log(sentimentAverage);
   return getSentimentColor(sentimentAverage);
 }
 // colors precinct on map based on strong dislike to strong like
@@ -402,14 +387,15 @@ function getSentimentColor(averageFeelings) {
 }
 // global variable for precinctLayer data layer and checkbox selection
 const mapAndSelection = {};
-// following two functions are only used in index.html
+// following three functions are only used in index.html
 /* eslint-disable no-unused-vars */
 // unchecks boxes when new checkbox is checked
 function onlyOne(checkbox) {
   const checkboxes = document.getElementsByName('check');
   const weekCheck = document.getElementById('weeks');
   const dayCheck = document.getElementById('days');
-
+  weekCheck.style.display = 'none';
+  dayCheck.style.display = 'none';
   checkboxes.forEach((item) => {
     if (item !== checkbox) {
       item.checked = false;
@@ -420,7 +406,26 @@ function onlyOne(checkbox) {
     resetMap();
   } else {
     mapAndSelection.selection = checkbox.id;
-    drawCheckboxLayer();
+    if (mapAndSelection.selection=='weekCheck') {
+      weekCheck.style.display = 'block';
+    }
+    if (mapAndSelection.selection=='dayCheck') {
+      dayCheck.style.display = 'block';
+    }
+  }
+}
+// drawing sentiment on map by coloring precinct layer
+function drawCheckboxLayer() {
+  if (mapAndSelection.selection == 'noneSelected') {
+    alert('Please check a box before mapping sentiment');
+  } else if (mapAndSelection.selection == 'sentimentCheck') {
+    mapSentiment('All');
+  } else if (mapAndSelection.selection == 'dayCheck') {
+    mapSentiment(getOption());
+  } else if (mapAndSelection.selection == 'weekCheck') {
+    mapSentiment(getOption());
+  } else {
+    alert('draw checkbox unauthorized option');
   }
 }
 // goes to log in page if user is not logged in
@@ -433,13 +438,12 @@ async function showStats() {
     window.location.replace('/login');
   }
 }
-
 /* eslint-enable no-unused-vars */
 // erases precinct coloring after checkbox is unselected
 function resetMap() {
   const precinctDataLayer = mapAndSelection.map;
   precinctDataLayer.revertStyle();
-  precinctDataLayer.setStyle({fillColor: '#CECDBC',
+  precinctDataLayer.setStyle({fillColor: '#A6B1F7',
     fillOpacity: 0.9, visible: true});
   const weekCheck = document.getElementById('weeks');
   const dayCheck = document.getElementById('days');
@@ -519,12 +523,6 @@ function configModal() {
   };
 }
 
-function getOption() {
-  const e = document.getElementById('timeframe');
-  const strUser = e.options[e.selectedIndex].text;
-  console.log('strUser '+ strUser); // get drop down selegtkction W3 schools
-}
-
 // helper function to display precinct when zipcode is clicked
 function getPrecincts(zipcode) {
   const mapZipPrecinct = {};
@@ -553,4 +551,327 @@ function getPrecincts(zipcode) {
   mapZipPrecinct['94133'] = 'Central';
   mapZipPrecinct['94134'] = 'Ingleside and Bayview';
   return mapZipPrecinct[zipcode];
+}
+
+// returns selected option from dropdown
+function getOption() {
+  const timeframes = document.getElementById('timeframe');
+  const timeframe = timeframes.options[timeframes.selectedIndex].text;
+  return timeframe;
+}
+
+function getSublist(list, timeframe) {
+  const sublist = [];
+  if (timeframe == 'All') {
+    list.forEach((response) => {
+      sublist.push(response);
+    });
+    return sublist;
+  } else if (timeframe == 'July 1-7') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 1,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 2,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 3,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 4,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 5,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 6,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 7,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 1') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 1,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 2') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 2,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 3') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 3,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 4') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 4,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 5') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 5,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 6') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 6,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 7') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 7,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 8-14') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 8,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 9,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 10,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 11,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 12,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 13,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 14,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 8') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 8,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 9') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 9,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 10') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 10,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 11') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 11,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 12') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 12,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 13') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 13,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 14') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 14,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 15-21') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 15,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 16,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 17,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 18,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 19,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 20,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 21,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 15') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 15,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 16') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 16,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 17') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 17,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 18') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 18,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 19') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 19,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 20') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 20,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 21') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 21,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 22-28') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 22,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 23,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 24,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 25,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 26,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 27,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 28,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 22') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 22,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 23') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 23,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 24') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 24,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 25') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 25,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 26') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 26,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 27') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 27,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 28') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 28,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 29-31') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 29,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 30,')) {
+        sublist.push(response);
+      } else if (response.date.includes('Jul 31,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 29') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 29,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 30') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 30,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else if (timeframe == 'July 31') {
+    list.forEach((response) => {
+      if (response.date.includes('Jul 31,')) {
+        sublist.push(response);
+      }
+    });
+    return sublist;
+  } else {
+    alert('Unauthorized timeframe');
+  }
 }
