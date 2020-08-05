@@ -84,4 +84,3 @@ public class MapData {
     return result;
   }
 }
-

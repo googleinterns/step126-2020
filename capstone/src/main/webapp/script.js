@@ -373,15 +373,15 @@ function averagePrecinctSentiment(list) {
 function getSentimentColor(averageFeelings) {
   let precinctColor = '#228B22';
   if (Math.round(averageFeelings) == 5) {
-    precinctColor = '#165B33';
+    precinctColor = '#3366CC';
   } else if (Math.round(averageFeelings) == 4) {
-    precinctColor = '#146B3A';
+    precinctColor = '#DC3912';
   } else if (Math.round(averageFeelings) == 3) {
-    precinctColor = '#F8B229';
+    precinctColor = '#FF9900';
   } else if (Math.round(averageFeelings) == 2) {
-    precinctColor = '#EA4630';
+    precinctColor = '#109618';
   } else {
-    precinctColor = '#BB2528';
+    precinctColor = '#990099';
   }
   return precinctColor;
 }
