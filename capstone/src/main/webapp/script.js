@@ -175,12 +175,12 @@ function precinctControl(controlDiv, map) {
   const precinctLayer = new google.maps.Data({map: map});
   precinctLayer.loadGeoJson('policePrecincts.geojson');
   // a function that uses color map to map, checks if button is clicked
-  precinctLayer.setStyle({fillColor: '#B31968',
+  precinctLayer.setStyle({fillColor: '#99CCCC',
     fillOpacity: 0.8, visible: false});
   mapAndSelection.map = precinctLayer;
   precinctLayer.addListener('click', function(event) {
     precinctLayer.revertStyle();
-    precinctLayer.setStyle({fillColor: '#B31968',
+    precinctLayer.setStyle({fillColor: '#99CCCC',
       fillOpacity: 0.8});
     precinctLayer.overrideStyle(event.feature, {
       fillColor: '#19B3B1', fillOpacity: .8});
@@ -216,7 +216,7 @@ function precinctControl(controlDiv, map) {
       associationUpdateDisplay('SF');
     } else {
       precinctLayer.revertStyle();
-      precinctLayer.setStyle({fillColor: '#B31968',
+      precinctLayer.setStyle({fillColor: '#99CCCC',
         fillOpacity: 0.8, visible: true});
       document.getElementById('map-key').style.display='block';
       mapAndSelection.selection = 'noneSelected';
@@ -443,7 +443,7 @@ async function showStats() {
 function resetMap() {
   const precinctDataLayer = mapAndSelection.map;
   precinctDataLayer.revertStyle();
-  precinctDataLayer.setStyle({fillColor: '#B31968',
+  precinctDataLayer.setStyle({fillColor: '#99CCCC',
     fillOpacity: 0.8, visible: true});
   const weekCheck = document.getElementById('weeks');
   const dayCheck = document.getElementById('days');
@@ -495,8 +495,9 @@ async function loadWordcloud() {
 
 // configures and opens word cloud modal
 function configModal() {
-  // Get the map key
+  // Get the map key and info box
   const key = document.getElementById('map-key');
+  const info = document.getElementById('info-box');
 
   // Get the modal
   const modal = document.getElementById('modal');
@@ -506,12 +507,14 @@ function configModal() {
   // When the user clicks the button, open the modal
   key.style.display = 'none';
   modal.style.display = 'block';
+  info.style.display = 'none';
   loadWordcloud();
 
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
     modal.style.display = 'none';
     key.style.display = 'block';
+    info.style.display = 'block';
   };
 
   // When the user clicks anywhere outside of the modal, close it
