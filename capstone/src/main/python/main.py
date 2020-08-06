@@ -65,7 +65,7 @@ def train_model(df):
 # for each feature and returns an
 # encoded array that represents those ordered values
 # in a binary form (needed for regressor predict())
-def getEncodedArray(direct_experience, gender, ageRange):
+def get_encoded_array(direct_experience, gender, ageRange):
     categories = {
         'No': 0,
         'NoResponse': 0,
@@ -98,18 +98,18 @@ def add_predictions(fit_regressor):
     datastore_client = datastore.Client()
 
     # Categories for each feature
-    cat_directExp = ['No', 'NoResponse', 'Yes']
+    cat_direct_exp = ['No', 'NoResponse', 'Yes']
     cat_genders = ['Female', 'Male', 'UnknownGender']
-    cat_ageRange = ['18-24', '25-34', '35-44', '45-54',
+    cat_age_range = ['18-24', '25-34', '35-44', '45-54',
                     '55-64', '65plus', 'UnknownAge']
 
     counter = 0
     # Create and store an Entity for every combination
-    for direct_experience in cat_directExp:
+    for direct_experience in cat_direct_exp:
         for gender in cat_genders:
-            for ageRange in cat_ageRange:
+            for ageRange in cat_age_range:
                 x_encoded = [
-                    getEncodedArray(
+                    get_encoded_array(
                         direct_experience,
                         gender,
                         ageRange)]
