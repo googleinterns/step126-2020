@@ -15,7 +15,7 @@ to average sentiment). You can view these results for the entirety of SF or a sp
 
 3. Statistics and predictions
 
-Fetches from the Google Surveys API, transforms data for GCp Datastore, and visualizes analysis through
+Fetches from the Google Surveys API, transforms data for GCP Datastore, and visualizes analysis through
 the Google Charts API. This feature also runs a decision tree regression model on the survey results to get predicted
 sentiment scores for users based on their gender, age group, and whether they had a direct experience with the
 police or not. The program for regression analysis was written in Python with the Flask framework. Using crom jobs and
@@ -51,6 +51,13 @@ are enabled on the cloud project.
 `mvn package appengine:run` to run the project on the local server.
 
 Additional instructions for deploying the python service:
+1. Ensure that you have the requirement.txt file set up with 
+all the relevant dependencies. Do pip freeze to get the dependencies
+2. Set up a new app.yaml file with the service name, runtime, static files or
+script specified
+3. Keep these files along with your source code in a separate directory
+4. Deploy the separate service using gcloud app deploy --project [PROJECT_ID]
+5. (Optional) Include a cron.yaml file with the schedule field specified
 
 
 TODO
