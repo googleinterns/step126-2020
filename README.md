@@ -4,7 +4,7 @@
 A web application that displays opinions over time surrounding the police and law enforcement.
 
 ## Features
-1. Opinions by location
+1. Map with data layers
 
 2. Positive and negative word associations
 
@@ -15,12 +15,21 @@ to average sentiment). You can view these results for the entirety of SF or a sp
 
 3. Statistics and predictions
 
+Fetches from the Google Surveys API, transforms data for GCp Datastore, and visualizes analysis through
+the Google Charts API. This feature also runs a decision tree regression model on the survey results to get predicted
+sentiment scores for users based on their gender, age group, and whether they had a direct experience with the
+police or not. The program for regression analysis was written in Python with the Flask framework. Using crom jobs and
+a separate python service on GAE, new prediction results can be automatically generated for new survey responses.
+There is a statistics page with survey-specific details such as response time and completion,
+age and gender break down, and sentiment percentages for each precinct. 
+
 ## Tools and Technologies
 Some of the tools that will be used to build this portfolio are
 * HTML
 * CSS
 * Javascript
 * Java
+* Python
 
 ## APIs
 The following APIs were used
