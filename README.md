@@ -7,6 +7,7 @@ A web application that displays opinions over time surrounding the police and la
 1. Opinions by location
 
 2. Positive and negative word associations
+
 The positive and negative associations of words within open text responses were analyzed using 
 CloudNLP. The top positive and negative associations were displayed along with a wordcloud 
 displaying all results (with size corresponding to prominence in the text and color corresponding
@@ -41,6 +42,8 @@ are enabled on the cloud project.
 `mvn package appengine:run` to run the project on the local server.
 
 Additional instructions for deploying the python service:
+
+
 TODO
 
 ## GitHub Checks
