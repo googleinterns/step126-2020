@@ -59,9 +59,6 @@ script specified
 4. Deploy the separate service using gcloud app deploy --project [PROJECT_ID]
 5. (Optional) Include a cron.yaml file with the schedule field specified
 
-
-TODO
-
 ## GitHub Checks
 This repository runs checks on every pull request and commit. You can run these
 locally from the root directory of the project.
