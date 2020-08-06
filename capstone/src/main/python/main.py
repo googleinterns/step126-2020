@@ -101,31 +101,28 @@ def add_predictions(fit_regressor):
     cat_direct_exp = ['No', 'NoResponse', 'Yes']
     cat_genders = ['Female', 'Male', 'UnknownGender']
     cat_age_range = ['18-24', '25-34', '35-44', '45-54',
-                    '55-64', '65plus', 'UnknownAge']
+                     '55-64', '65plus', 'UnknownAge']
 
-    counter = 0
     # Create and store an Entity for every combination
     for direct_experience in cat_direct_exp:
         for gender in cat_genders:
-            for ageRange in cat_age_range:
+            for age_range in cat_age_range:
                 x_encoded = [
                     get_encoded_array(
                         direct_experience,
                         gender,
-                        ageRange)]
+                        age_range)]
                 score = fit_regressor.predict(x_encoded)[0]
 
                 # Creates Entity
                 kind = 'Predictions'
-                name = 'prediction' + str(counter)
+                name = 'prediction_' + direct_experience + "_" + gender + "_" + age_range
                 entity_key = datastore_client.key(kind, name)
 
                 prediction_entity = datastore.Entity(key=entity_key)
                 prediction_entity['directExperience'] = direct_experience
                 prediction_entity['gender'] = gender
-                prediction_entity['ageRange'] = ageRange
+                prediction_entity['ageRange'] = age_range
                 prediction_entity['score'] = score
 
                 datastore_client.put(prediction_entity)
-
-                counter += 1

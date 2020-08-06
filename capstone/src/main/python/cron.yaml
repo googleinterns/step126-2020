@@ -1,5 +1,5 @@
 cron:
 - description: "Perform regression analysis on data"
   url: /regression-analysis
-  schedule: every 24 hours
+  schedule: every 72 hours
   target: pythonservice
