@@ -37,6 +37,7 @@ The following APIs were used
 * Google Charts API
 * CloudNLP (https://cloud.google.com/natural-language)
 * Wordcloud2 (https://www.npmjs.com/package/wordcloud2)
+* SciKit-Learn
 
 ## Deploying the project
 
