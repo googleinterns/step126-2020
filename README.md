@@ -38,6 +38,7 @@ The following APIs were used
 * CloudNLP (https://cloud.google.com/natural-language)
 * Wordcloud2 (https://www.npmjs.com/package/wordcloud2)
 * SciKit-Learn
+* Google Surveys API
 
 ## Deploying the project
 
