@@ -116,7 +116,7 @@ def add_predictions(fit_regressor):
 
                 # Creates Entity
                 kind = 'Predictions'
-                name = 'prediction_' + direct_experience + "_" + gender + "_" + age_range
+                name = 'prediction_' + direct_experience + '_' + gender + '_' + age_range
                 entity_key = datastore_client.key(kind, name)
 
                 prediction_entity = datastore.Entity(key=entity_key)
