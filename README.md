@@ -5,6 +5,12 @@ A web application that displays opinions over time surrounding the police and la
 
 ## Features
 1. Map with data layers
+This feature uses government database json files to draw lines seperating zip codes and police
+precincts in two seperate data layers, and integrates features below based on user click in Map API.
+On the zip code layer it displays the zip code, neighborhood, and associated police precincts for user
+reference and on the precinct layer it allows sentiment mapping by using analysis done on survey responses
+seperated by date received and zip code association. Map API includes buttons opening seperate pages for
+detailed statistics analysis and word cloud based on strong negative and positive associations also.
 
 2. Positive and negative word associations
 
