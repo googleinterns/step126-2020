@@ -33,11 +33,16 @@ def load_dataframe():
     data_points = {'directExperience': direct_experiences, 'gender': genders,
                    'ageRange': ages, 'score': scores}
 
-    df = pd.DataFrame(data_points, 
-                      columns=['directExperience', 'gender', 'ageRange', 'score'])
+    df = pd.DataFrame(
+        data_points,
+        columns=[
+            'directExperience',
+            'gender',
+            'ageRange',
+            'score'])
 
     return df
- 
+
 
 def train_model(df):
     x = df[['directExperience', 'gender', 'ageRange']]
@@ -60,32 +65,32 @@ def train_model(df):
 # for each feature and returns an
 # encoded array that represents those ordered values
 # in a binary form (needed for regressor predict())
-def getEncodedArray(direct_experience, gender, ageRange):
+def get_encoded_array(direct_experience, gender, ageRange):
     categories = {
-       'No': 0,
-       'NoResponse': 0,
-       'Yes': 0,
-       'Female': 0,
-       'Male': 0,
-       'UnknownGender': 0,
-       '18-24': 0,
-       '25-34': 0,
-       '35-44': 0,
-       '45-54': 0,
-       '55-64': 0,
-       '65plus': 0,
-       'UnknownAge': 0,
+        'No': 0,
+        'NoResponse': 0,
+        'Yes': 0,
+        'Female': 0,
+        'Male': 0,
+        'UnknownGender': 0,
+        '18-24': 0,
+        '25-34': 0,
+        '35-44': 0,
+        '45-54': 0,
+        '55-64': 0,
+        '65plus': 0,
+        'UnknownAge': 0,
     }
 
     categories[direct_experience] = 1
     categories[gender] = 1
     categories[ageRange] = 1
-    
+
     encoded_array = []
 
     for key, value in categories.items():
         encoded_array.append(value)
-    
+
     return encoded_array
 
 
@@ -93,31 +98,31 @@ def add_predictions(fit_regressor):
     datastore_client = datastore.Client()
 
     # Categories for each feature
-    cat_directExp = ['No', 'NoResponse', 'Yes']
+    cat_direct_exp = ['No', 'NoResponse', 'Yes']
     cat_genders = ['Female', 'Male', 'UnknownGender']
-    cat_ageRange = ['18-24', '25-34', '35-44', '45-54',
-                    '55-64', '65plus', 'UnknownAge']
-    
-    counter = 0
+    cat_age_range = ['18-24', '25-34', '35-44', '45-54',
+                     '55-64', '65plus', 'UnknownAge']
+
     # Create and store an Entity for every combination
-    for direct_experience in cat_directExp:
+    for direct_experience in cat_direct_exp:
         for gender in cat_genders:
-            for ageRange in cat_ageRange:
-                x_encoded = [getEncodedArray(direct_experience ,gender, ageRange)]
+            for age_range in cat_age_range:
+                x_encoded = [
+                    get_encoded_array(
+                        direct_experience,
+                        gender,
+                        age_range)]
                 score = fit_regressor.predict(x_encoded)[0]
 
                 # Creates Entity
                 kind = 'Predictions'
-                name = 'prediction' + str(counter)
+                name = 'prediction_' + direct_experience + '_' + gender + '_' + age_range
                 entity_key = datastore_client.key(kind, name)
 
                 prediction_entity = datastore.Entity(key=entity_key)
                 prediction_entity['directExperience'] = direct_experience
                 prediction_entity['gender'] = gender
-                prediction_entity['ageRange'] = ageRange
+                prediction_entity['ageRange'] = age_range
                 prediction_entity['score'] = score
-                
-                datastore_client.put(prediction_entity)
 
-                counter += 1
-    
+                datastore_client.put(prediction_entity)

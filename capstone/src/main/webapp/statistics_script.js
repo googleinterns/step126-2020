@@ -124,9 +124,9 @@ async function getSurveyResponses() {
 }
 
 // Default global values
-let directExperience = 'No';
-let gender = 'Male';
-let ageRange = '18-24';
+let directExperience = 'Unknown';
+let gender = 'Unknown';
+let ageRange = 'Unknown';
 
 async function getPrediction(choice, category) {
   if (category === 'gender') {
