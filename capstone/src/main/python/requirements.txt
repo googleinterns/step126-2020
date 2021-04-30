@@ -53,7 +53,7 @@ pytz==2020.1
 PyYAML==5.3.1
 requests==2.24.0
 rope==0.17.0
-rsa==4.6
+rsa==4.7
 scikit-learn==0.23.1
 scipy==1.5.2
 six==1.15.0
