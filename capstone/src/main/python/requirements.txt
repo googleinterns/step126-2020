@@ -59,7 +59,7 @@ scipy==1.5.2
 six==1.15.0
 sqlparse==0.2.4
 threadpoolctl==2.1.0
-ujson==1.35
+ujson==5.4.0
 uritemplate==3.0.1
 urllib3==1.25.10
 virtualenv==20.0.28
