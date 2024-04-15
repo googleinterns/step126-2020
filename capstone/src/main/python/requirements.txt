@@ -57,7 +57,7 @@ rsa==4.6
 scikit-learn==0.23.1
 scipy==1.5.2
 six==1.15.0
-sqlparse==0.2.4
+sqlparse==0.5.0
 threadpoolctl==2.1.0
 ujson==1.35
 uritemplate==3.0.1
