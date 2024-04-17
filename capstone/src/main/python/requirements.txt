@@ -20,7 +20,7 @@ google-resumable-media==0.7.0
 googleapis-common-protos==1.52.0
 grpc-google-iam-v1==0.12.3
 grpcio==1.30.0
-gunicorn==20.0.4
+gunicorn==22.0.0
 h5py==2.10.0
 httplib2==0.18.1
 humanize==2.5.0
