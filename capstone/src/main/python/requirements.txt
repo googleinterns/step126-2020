@@ -62,5 +62,5 @@ threadpoolctl==2.1.0
 ujson==1.35
 uritemplate==3.0.1
 urllib3==1.25.10
-virtualenv==20.0.28
+virtualenv==20.26.6
 
