@@ -1,7 +1,7 @@
 flake8==3.8.3
 Flask==1.1.2
 Flask-PyMongo==2.3.0
-future==0.18.2
+future==1.0.0
 gast==0.3.3
 google-api-core==1.22.0
 google-api-python-client==1.10.0
