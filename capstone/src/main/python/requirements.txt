@@ -34,7 +34,7 @@ jedi==0.17.2
 Jinja2==2.11.2
 joblib==0.16.0
 lazy-object-proxy==1.4.3
-Markdown==3.2.2
+Markdown==3.8.1
 MarkupSafe==1.1.1
 mccabe==0.6.1
 mssql-cli==1.0.0
