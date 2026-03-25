@@ -51,7 +51,7 @@ python-jsonrpc-server==0.3.4
 python-language-server==0.34.1
 pytz==2020.1
 PyYAML==5.3.1
-requests==2.24.0
+requests==2.33.0
 rope==0.17.0
 rsa==4.6
 scikit-learn==0.23.1
